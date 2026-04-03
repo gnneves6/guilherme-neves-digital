@@ -11,6 +11,7 @@ const laws = [
     tagline: "Energy is the currency of performance.",
     detail:
       "Without adequate energy availability, everything else breaks down — decision-making, recovery, adaptation, intensity. Fueling isn't about eating more. It's about eating enough, at the right times, to sustain the demands of training and competition. This is the foundation.",
+    practical: "Match energy intake to training load. Periodise carbohydrate availability. Never under-fuel on high-demand days.",
   },
   {
     number: "02",
@@ -18,6 +19,7 @@ const laws = [
     tagline: "Daily habits build or break the athlete.",
     detail:
       "Performance nutrition isn't a match-day intervention — it's a daily operating system. The habits athletes build around sleep, hydration, meal structure and consistency across the week are what create a resilient base. You can't out-supplement a broken routine.",
+    practical: "Establish consistent meal timing. Build weekly nutrition rhythms. Create accountability through simple tracking.",
   },
   {
     number: "03",
@@ -25,6 +27,7 @@ const laws = [
     tagline: "Recovery prepares the next performance.",
     detail:
       "What happens in the 2–4 hours after training or competition determines how quickly the body adapts and how prepared the athlete is for the next session. Recovery nutrition — protein timing, carbohydrate replenishment, hydration — is a non-negotiable system, not an afterthought.",
+    practical: "Protein within 30–60 min post-session. Replenish glycogen. Rehydrate with structure, not guesswork.",
   },
   {
     number: "04",
@@ -32,6 +35,7 @@ const laws = [
     tagline: "Hydration supports physical and cognitive output.",
     detail:
       "Even mild dehydration impairs reaction time, concentration and physical capacity. Hydration monitoring and structured intake protocols should be as habitual as warm-ups. It's one of the simplest, most impactful systems to get right — and one of the most commonly neglected.",
+    practical: "Monitor body weight changes. Use structured hydration protocols. Adapt intake to climate and session intensity.",
   },
   {
     number: "05",
@@ -39,6 +43,7 @@ const laws = [
     tagline: "Competition is not the place to experiment.",
     detail:
       "Every nutrition strategy — from match-day meals to supplement use to hydration plans — must be tested in training before it's used in competition. The match is the exam, not the practice session. If it hasn't been rehearsed, it doesn't belong on game day.",
+    practical: "Rehearse match-day meals in training weeks. Trial supplements before competition. Build a proven pre-match routine.",
   },
 ];
 
@@ -136,10 +141,14 @@ const FuelLaws = () => {
                         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pb-10 md:pl-20">
+                        <div className="pb-10 md:pl-20 space-y-4">
                           <p className="text-body-lg max-w-xl">
                             {law.detail}
                           </p>
+                          <div className="border-l-2 border-border pl-4">
+                            <p className="text-caption text-[10px] mb-1">In Practice</p>
+                            <p className="text-body text-sm">{law.practical}</p>
+                          </div>
                         </div>
                       </motion.div>
                     )}

@@ -14,7 +14,7 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:hello@guilhermeneves.com?subject=${encodeURIComponent(formData.subject || `Contact from ${formData.name}`)}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.name} (${formData.email})`;
+    window.location.href = `mailto:gnneves6@gmail.com?subject=${encodeURIComponent(formData.subject || `Contact from ${formData.name}`)}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.name} (${formData.email})`;
     setSubmitted(true);
   };
 
@@ -131,19 +131,27 @@ const Contact = () => {
               <div className="space-y-4">
                 <p className="text-caption">Email</p>
                 <a
-                  href="mailto:hello@guilhermeneves.com"
+                  href="mailto:gnneves6@gmail.com"
                   className="text-body-lg link-underline hover:text-foreground transition-colors"
                 >
-                  hello@guilhermeneves.com
+                  gnneves6@gmail.com
+                </a>
+              </div>
+              <div className="space-y-4">
+                <p className="text-caption">Phone</p>
+                <a
+                  href="tel:+351936071216"
+                  className="text-body-lg link-underline hover:text-foreground transition-colors"
+                >
+                  +351 936 071 216
                 </a>
               </div>
               <div className="space-y-4">
                 <p className="text-caption">Social</p>
                 <div className="flex flex-col gap-3">
                   {[
-                    { label: "LinkedIn", href: "https://linkedin.com" },
-                    { label: "Instagram", href: "https://instagram.com" },
-                    { label: "Linktree", href: "https://linktr.ee" },
+                    { label: "LinkedIn", href: "https://www.linkedin.com/in/guilhermeneves28" },
+                    { label: "Linktree", href: "https://linktr.ee/Guilherme_Neves" },
                   ].map((link) => (
                     <a
                       key={link.label}
@@ -160,7 +168,7 @@ const Contact = () => {
               </div>
               <div className="space-y-4">
                 <p className="text-caption">Location</p>
-                <p className="text-body-lg">Porto, Portugal</p>
+                <p className="text-body-lg">Porto, Portugal · Brussels, Belgium</p>
                 <p className="text-body text-sm">Open to international opportunities.</p>
               </div>
             </div>
