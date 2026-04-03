@@ -8,25 +8,31 @@ import portraitImg from "@/assets/guilherme-portrait.jpg";
 const experiences = [
   {
     name: "RSC Anderlecht",
-    role: "Performance Nutrition",
+    role: "Performance Nutrition Intern",
     location: "Brussels, Belgium",
-    period: "2024",
-    description: "Belgian Pro League — Applied nutrition within an elite football academy environment.",
+    period: "2026",
+    description: "Belgian Pro League — Curricular internship in performance nutrition within an elite football environment.",
   },
   {
     name: "Leça FC",
-    role: "Sports Nutritionist",
+    role: "First Team Performance Nutrition",
     location: "Porto, Portugal",
-    period: "2023 – 2024",
-    description: "Portuguese football — Practical nutrition systems for a competitive club environment.",
+    period: "2025",
+    description: "Portuguese football — Building and delivering practical nutrition systems for a competitive first-team environment.",
   },
   {
     name: "Run4Excellence",
-    role: "Performance Nutrition",
+    role: "Performance Nutrition | Health & Performance",
     location: "Porto, Portugal",
-    period: "2023",
-    description: "Endurance performance — Fueling strategies for distance athletes and structured training.",
+    period: "2025",
+    description: "Endurance performance — Applied nutrition and health strategies for distance athletes and structured training.",
   },
+];
+
+const additionalExposure = [
+  { name: "FC Porto B & U19", type: "Observational Experience", date: "Apr 2025" },
+  { name: "Gil Vicente FC", type: "Observational Experience", date: "Aug 2025" },
+  { name: "USC Paredes", type: "Observational Experience", date: "Nov 2025" },
 ];
 
 const valuePillars = [
@@ -34,33 +40,39 @@ const valuePillars = [
     title: "Athlete Education & Behaviour",
     description:
       "Turning complex nutrition science into clear, actionable knowledge athletes actually use in daily life and competition.",
-    icon: "→",
   },
   {
-    title: "Fueling, Recovery & Hydration Systems",
+    title: "Matchday Nutrition Structure",
     description:
-      "Building practical protocols that integrate seamlessly into training schedules and match-day routines.",
-    icon: "→",
+      "Building practical protocols that integrate seamlessly into match-day routines — from pre-match fueling to post-match recovery.",
   },
   {
     title: "Monitoring, Reporting & Practical Tools",
     description:
-      "Creating useful tracking systems and resources that support staff decisions and athlete accountability.",
-    icon: "→",
+      "Creating useful tracking systems, anthropometric monitoring and resources that support staff decisions and athlete accountability.",
   },
   {
-    title: "Team Nutrition Culture & Applied Resources",
+    title: "Team Nutrition Culture",
     description:
-      "Developing environments where good nutrition becomes a natural part of how a team operates and performs.",
-    icon: "→",
+      "Developing environments where good nutrition becomes a natural part of how a team operates, trains and performs together.",
+  },
+  {
+    title: "Fueling & Recovery Systems",
+    description:
+      "Designing repeatable fueling, recovery and hydration protocols that survive the complexity of real training weeks.",
+  },
+  {
+    title: "Hydration & Supplementation",
+    description:
+      "Structuring evidence-based hydration and supplementation frameworks tailored to sport demands and individual athlete needs.",
   },
 ];
 
 const workCategories = [
-  { name: "Educational Systems", count: "4 projects" },
-  { name: "Applied Club Resources", count: "3 projects" },
-  { name: "Mini Classes / Applied Insights", count: "5 sessions" },
-  { name: "Performance Visuals / Guides", count: "6 resources" },
+  { name: "The ABC of Football Nutrition", count: "Educational series" },
+  { name: "Mini Classes", count: "Applied insights" },
+  { name: "GN Fuel Laws", count: "Framework" },
+  { name: "Club Strategies & Resources", count: "Applied tools" },
 ];
 
 const fuelLaws = [
@@ -76,7 +88,6 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section className="section-padding flex items-center min-h-[90vh] relative overflow-hidden">
-        {/* Atmospheric background */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-background/80 z-10" />
           <img
@@ -100,9 +111,9 @@ const Index = () => {
               </Reveal>
               <Reveal delay={0.25}>
                 <p className="text-body-lg max-w-2xl mt-6 md:mt-8">
-                  I build educational tools, applied resources and athlete-centered
-                  systems that turn nutrition and performance knowledge into clear,
-                  usable action.
+                  I build practical nutrition systems, educational tools and applied
+                  resources designed to improve clarity, adherence and performance
+                  in real sporting environments.
                 </p>
               </Reveal>
               <Reveal delay={0.4}>
@@ -164,9 +175,10 @@ const Index = () => {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="text-body-lg max-w-2xl mt-6">
-                  A performance-focused professional building practical systems,
-                  educational resources and applied tools for athletes, clubs and
-                  performance environments.
+                  A 21-year-old final-year Nutrition Sciences student at FCNAUP,
+                  currently completing a curricular internship in Performance Nutrition
+                  at RSC Anderlecht. Building practical systems, educational resources
+                  and applied tools for athletes, clubs and performance environments.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
@@ -225,7 +237,7 @@ const Index = () => {
                         <h3 className="font-display text-xl md:text-2xl font-medium text-foreground group-hover:text-olive-light transition-colors duration-500">
                           {exp.name}
                         </h3>
-                        <span className="hidden md:inline-block text-caption text-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <span className="text-caption text-[10px]">
                           {exp.period}
                         </span>
                       </div>
@@ -239,11 +251,20 @@ const Index = () => {
               </Reveal>
             ))}
           </div>
+
+          {/* Additional Exposure */}
           <Reveal delay={0.3}>
-            <p className="text-body text-sm mt-8 italic">
-              Additional practical and observational exposure across competitive
-              sport and performance settings.
-            </p>
+            <div className="mt-10">
+              <p className="text-caption text-[10px] mb-5">Additional Observational Exposure</p>
+              <div className="flex flex-wrap gap-x-8 gap-y-3">
+                {additionalExposure.map((item) => (
+                  <div key={item.name} className="flex items-center gap-3">
+                    <span className="font-display text-sm font-medium text-muted-foreground">{item.name}</span>
+                    <span className="text-[10px] text-muted-foreground/50">{item.date}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -258,23 +279,20 @@ const Index = () => {
           <Reveal>
             <p className="text-caption mb-6">Where I Add Value</p>
           </Reveal>
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 mt-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
             {valuePillars.map((pillar, i) => (
-              <Reveal key={pillar.title} delay={i * 0.1}>
+              <Reveal key={pillar.title} delay={i * 0.08}>
                 <motion.div
-                  className="p-8 md:p-10 border border-border/60 group cursor-default transition-all duration-500 hover:border-foreground/20 hover:bg-card relative overflow-hidden"
+                  className="p-8 border border-border/60 group cursor-default transition-all duration-500 hover:border-foreground/20 hover:bg-card relative overflow-hidden h-full"
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.3 }}
                 >
                   <div className="absolute top-0 left-0 w-0 h-px bg-foreground/30 group-hover:w-full transition-all duration-700" />
                   <p className="text-caption text-xs mb-4">0{i + 1}</p>
-                  <h3 className="font-display text-lg md:text-xl font-medium text-foreground mb-3">
+                  <h3 className="font-display text-lg font-medium text-foreground mb-3">
                     {pillar.title}
                   </h3>
                   <p className="text-body text-sm">{pillar.description}</p>
-                  <span className="inline-block mt-5 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-500">
-                    {pillar.icon}
-                  </span>
                 </motion.div>
               </Reveal>
             ))}

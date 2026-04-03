@@ -4,6 +4,22 @@ import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import portraitImg from "@/assets/guilherme-portrait.jpg";
 
+const certifications = [
+  "ISAK Level 1 — Certified Anthropometrist",
+  "Sports Nutrition & Supplementation — Challenges for Athletes in the Next Decade",
+  "Nutrition in Football: From Men to Women",
+  "Muscle Mass & Physical Function Assessment",
+  "Nutrition in Wound Healing",
+  "Youthpass Certificate — Erasmus+ Project, Italy",
+];
+
+const awards = [
+  { title: "Sports Student Award", org: "FCNAUP", year: "2025" },
+  { title: "Breakthrough of the Year", org: "AEFCNAUP", year: "2023/24" },
+  { title: "Mentorship Program Student Award", org: "FCNAUP", year: "" },
+  { title: "Academic Merit Awards", org: "Colégio Luso-Francês", year: "2014–2022" },
+];
+
 const About = () => {
   return (
     <Layout>
@@ -22,16 +38,23 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.25}>
                 <p className="text-body-lg max-w-2xl mt-8">
-                  I work at the intersection of sport, nutrition science and practical
-                  education — building systems that help athletes and performance
-                  environments operate with clarity, consistency and real-world impact.
+                  I am a 21-year-old final-year Nutrition Sciences student at FCNAUP
+                  (University of Porto), currently completing my curricular internship
+                  in Performance Nutrition at RSC Anderlecht.
                 </p>
               </Reveal>
               <Reveal delay={0.35}>
                 <p className="text-body max-w-2xl mt-4">
-                  Trained at the Faculty of Nutrition and Food Sciences at the University of Porto (FCNAUP),
-                  with applied experience across professional football, endurance sport and
-                  club performance environments in Portugal and Belgium.
+                  My work sits at the intersection of science, sport and real-life application.
+                  I am especially interested in football environments, where nutrition must go
+                  beyond theory and become something athletes can actually use in training,
+                  competition and recovery.
+                </p>
+              </Reveal>
+              <Reveal delay={0.45}>
+                <p className="text-body max-w-2xl mt-4">
+                  Having lived sport from the inside across multiple disciplines, I approach
+                  nutrition as a performance tool built on clarity, consistency, adaptation and trust.
                 </p>
               </Reveal>
             </div>
@@ -50,7 +73,7 @@ const About = () => {
                   />
                 </div>
                 <div className="absolute -bottom-3 -left-3 bg-background px-3 py-1.5">
-                  <p className="text-caption text-[10px]">Guilherme Neves</p>
+                  <p className="text-caption text-[10px]">Guilherme Neves — Porto / Brussels</p>
                 </div>
               </div>
             </Reveal>
@@ -175,6 +198,68 @@ const About = () => {
               ))}
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <div className="section-padding max-content">
+        <div className="divider" />
+      </div>
+
+      {/* Education & Credentials */}
+      <section className="section-padding section-spacing">
+        <div className="max-content">
+          <Reveal>
+            <p className="text-caption mb-6">Education</p>
+          </Reveal>
+          <div className="grid md:grid-cols-2 gap-16 mt-8">
+            <Reveal delay={0.1}>
+              <div className="space-y-8">
+                <div className="space-y-2">
+                  <h3 className="font-display text-lg font-medium text-foreground">BSc in Nutrition Sciences</h3>
+                  <p className="text-body text-sm">FCNAUP — University of Porto</p>
+                  <p className="text-caption text-[10px] font-normal">2022–2026 · Final-year student</p>
+                  <p className="text-body text-sm mt-2">Curricular internship at RSC Anderlecht: Feb–Jun 2026</p>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-display text-lg font-medium text-foreground">Erasmus+ Mobility Project</h3>
+                  <p className="text-body text-sm">Sicily, Italy</p>
+                  <p className="text-caption text-[10px] font-normal">May 2024</p>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-display text-lg font-medium text-foreground">Sciences & Technology (12th)</h3>
+                  <p className="text-body text-sm">Colégio Luso-Francês</p>
+                </div>
+              </div>
+            </Reveal>
+            <div>
+              <Reveal delay={0.15}>
+                <div className="mb-10">
+                  <p className="text-caption text-xs mb-5">Awards</p>
+                  <div className="space-y-4">
+                    {awards.map((award) => (
+                      <div key={award.title} className="flex items-baseline justify-between gap-4 py-2 border-b border-border/40">
+                        <div>
+                          <p className="font-display text-sm font-medium text-foreground">{award.title}</p>
+                          <p className="text-[11px] text-muted-foreground mt-0.5">{award.org}</p>
+                        </div>
+                        {award.year && <span className="text-caption text-[10px] shrink-0">{award.year}</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <div>
+                  <p className="text-caption text-xs mb-5">Certifications</p>
+                  <div className="space-y-3">
+                    {certifications.map((cert) => (
+                      <p key={cert} className="text-body text-sm py-1.5 border-b border-border/30">{cert}</p>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 

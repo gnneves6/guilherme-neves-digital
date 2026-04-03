@@ -10,8 +10,11 @@ const Footer = () => {
               Guilherme Neves
             </p>
             <p className="text-body text-sm">
-              Practical performance systems for sport. Building educational tools,
-              applied resources and athlete-centered systems.
+              Practical nutrition systems, educational tools and applied resources
+              for real sporting environments.
+            </p>
+            <p className="text-caption text-[10px] font-normal mt-4">
+              Porto, Portugal · Brussels, Belgium
             </p>
           </div>
 
@@ -41,13 +44,13 @@ const Footer = () => {
               <p className="text-caption text-xs">Connect</p>
               <div className="flex flex-col gap-2.5">
                 <a
-                  href="mailto:hello@guilhermeneves.com"
+                  href="mailto:gnneves6@gmail.com"
                   className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"
                 >
                   Email
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/guilhermeneves28"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"
@@ -55,12 +58,12 @@ const Footer = () => {
                   LinkedIn
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://linktr.ee/Guilherme_Neves"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"
                 >
-                  Instagram
+                  Linktree
                 </a>
               </div>
             </div>
@@ -73,7 +76,7 @@ const Footer = () => {
             © {new Date().getFullYear()} Guilherme Neves. All rights reserved.
           </p>
           <p className="text-body text-xs">
-            Porto, Portugal
+            Athlete by nature. Nutritionist by purpose.
           </p>
         </div>
       </div>

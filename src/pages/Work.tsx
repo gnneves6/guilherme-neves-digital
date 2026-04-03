@@ -9,8 +9,8 @@ import workPreview3 from "@/assets/work-preview-3.jpg";
 
 const categories = [
   "All",
-  "Educational Systems",
-  "Applied Club Resources",
+  "Educational Series",
+  "Club Strategies",
   "Mini Classes",
   "Performance Visuals",
   "In Development",
@@ -18,24 +18,40 @@ const categories = [
 
 const projects = [
   {
-    title: "Match-Day Fueling Protocol",
-    category: "Educational Systems",
+    title: "The ABC of Football Nutrition",
+    category: "Educational Series",
     description:
-      "A structured match-day nutrition guide for professional football environments, covering pre-match, half-time and post-match fueling strategies.",
+      "A foundational educational series breaking down the core principles of football nutrition into clear, accessible content for athletes and staff.",
     image: workPreview1,
     status: "Complete",
   },
   {
-    title: "Weekly Nutrition Periodisation Planner",
-    category: "Applied Club Resources",
+    title: "GN Fuel Laws — Framework & System",
+    category: "Educational Series",
     description:
-      "An applied planning tool that maps nutrition periodisation to weekly training load, helping athletes and staff align fueling with demand.",
+      "A practical five-law framework that turns nutrition knowledge into repeatable performance behaviour. The backbone of applied education.",
+    image: null,
+    status: "Complete",
+  },
+  {
+    title: "Matchday Nutrition Protocol",
+    category: "Club Strategies",
+    description:
+      "A structured match-day nutrition guide for professional football environments — pre-match, half-time and post-match fueling strategies.",
     image: workPreview2,
     status: "Complete",
   },
   {
+    title: "Weekly Nutrition Periodisation Planner",
+    category: "Club Strategies",
+    description:
+      "An applied planning tool mapping nutrition periodisation to weekly training load, helping athletes and staff align fueling with demand.",
+    image: null,
+    status: "Complete",
+  },
+  {
     title: "Hydration Monitoring & Reporting System",
-    category: "Applied Club Resources",
+    category: "Club Strategies",
     description:
       "A practical reporting tool for tracking athlete hydration markers across training and competition cycles.",
     image: null,
@@ -45,12 +61,12 @@ const projects = [
     title: "Recovery Nutrition Quick Guide",
     category: "Performance Visuals",
     description:
-      "A concise, visual guide designed for locker-room use — covering the essentials of post-training and post-match recovery nutrition.",
+      "A concise visual guide designed for locker-room use — covering the essentials of post-training and post-match recovery nutrition.",
     image: workPreview3,
     status: "Complete",
   },
   {
-    title: "Athlete Education Mini-Class: Fueling Basics",
+    title: "Mini Class: Fueling Basics",
     category: "Mini Classes",
     description:
       "A focused education session designed to be delivered to squads, covering the core behaviours around daily fueling for performance.",
@@ -58,7 +74,7 @@ const projects = [
     status: "Complete",
   },
   {
-    title: "Athlete Education Mini-Class: Game-Day Nutrition",
+    title: "Mini Class: Game-Day Nutrition",
     category: "Mini Classes",
     description:
       "A practical session on what, when and how to eat around competition. Designed for delivery in team environments.",
@@ -67,25 +83,25 @@ const projects = [
   },
   {
     title: "Supplement Decision Framework",
-    category: "Educational Systems",
+    category: "Performance Visuals",
     description:
       "A clear, evidence-based decision tool to help athletes and practitioners navigate supplement choices with practical criteria.",
     image: null,
     status: "Complete",
   },
   {
-    title: "Pre-Season Nutrition Toolkit",
+    title: "Applied Reports & Practical Resources",
     category: "In Development",
     description:
-      "A comprehensive resource for pre-season nutrition planning, athlete onboarding and baseline assessment. Currently in development.",
+      "A growing collection of anthropometric reports, monitoring templates and practical resources for performance departments.",
     image: null,
     status: "In Progress",
   },
   {
-    title: "Travel Nutrition Protocol",
+    title: "Pre-Season Nutrition Toolkit",
     category: "In Development",
     description:
-      "A practical guide for maintaining nutrition standards during travel days, away matches and international competition schedules.",
+      "A comprehensive resource for pre-season nutrition planning, athlete onboarding and baseline assessment.",
     image: null,
     status: "In Progress",
   },
@@ -114,6 +130,19 @@ const Work = () => {
               A curated selection of projects, resources and systems built for
               athletes, clubs and performance environments. Each piece is designed
               to close the gap between knowledge and practice.
+            </p>
+          </Reveal>
+          <Reveal delay={0.3}>
+            <p className="text-body max-w-xl mt-3">
+              For the full portfolio, visit{" "}
+              <a
+                href="https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline hover:text-foreground transition-colors"
+              >
+                my Notion workspace →
+              </a>
             </p>
           </Reveal>
         </div>
@@ -165,7 +194,6 @@ const Work = () => {
                   className="py-10 border-b border-border group cursor-pointer"
                 >
                   <div className="flex flex-col md:flex-row gap-6 md:gap-10">
-                    {/* Image preview */}
                     {project.image && (
                       <div className="w-full md:w-48 lg:w-56 shrink-0 overflow-hidden">
                         <motion.img
