@@ -4,19 +4,20 @@ const Footer = () => {
   return (
     <footer className="section-padding border-t border-border">
       <div className="max-content py-16 md:py-20">
-        <div className="flex flex-col md:flex-row justify-between gap-10">
-          <div className="space-y-3">
+        <div className="flex flex-col md:flex-row justify-between gap-12">
+          <div className="space-y-3 max-w-sm">
             <p className="font-display text-lg font-semibold text-foreground">
               Guilherme Neves
             </p>
-            <p className="text-body text-sm max-w-xs">
-              Athlete by nature. Nutritionist by purpose.
+            <p className="text-body text-sm">
+              Practical performance systems for sport. Building educational tools,
+              applied resources and athlete-centered systems.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-10 md:gap-16">
+          <div className="flex flex-col sm:flex-row gap-12 md:gap-16">
             <div className="space-y-4">
-              <p className="text-caption">Navigate</p>
+              <p className="text-caption text-xs">Navigate</p>
               <div className="flex flex-col gap-2.5">
                 {[
                   { label: "Home", path: "/" },
@@ -37,7 +38,7 @@ const Footer = () => {
             </div>
 
             <div className="space-y-4">
-              <p className="text-caption">Connect</p>
+              <p className="text-caption text-xs">Connect</p>
               <div className="flex flex-col gap-2.5">
                 <a
                   href="mailto:hello@guilhermeneves.com"
@@ -67,9 +68,14 @@ const Footer = () => {
         </div>
 
         <div className="divider mt-12 mb-6" />
-        <p className="text-body text-xs">
-          © {new Date().getFullYear()} Guilherme Neves. All rights reserved.
-        </p>
+        <div className="flex flex-col sm:flex-row justify-between gap-2">
+          <p className="text-body text-xs">
+            © {new Date().getFullYear()} Guilherme Neves. All rights reserved.
+          </p>
+          <p className="text-body text-xs">
+            Porto, Portugal
+          </p>
+        </div>
       </div>
     </footer>
   );

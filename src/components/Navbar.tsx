@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,11 +12,29 @@ const navItems = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="bg-background/90 backdrop-blur-md border-b border-border/50">
+      <motion.div
+        className={`border-b transition-colors duration-500 ${
+          scrolled
+            ? "bg-background/95 backdrop-blur-md border-border/50"
+            : "bg-background/80 backdrop-blur-sm border-transparent"
+        }`}
+      >
         <nav className="section-padding max-content flex items-center justify-between h-16 md:h-20">
           <Link
             to="/"
@@ -31,13 +49,20 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`link-underline text-sm font-body tracking-wide transition-colors duration-300 ${
+                className={`relative text-sm font-body tracking-wide transition-colors duration-300 ${
                   location.pathname === item.path
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {item.label}
+                {location.pathname === item.path && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-foreground"
+                    transition={{ duration: 0.3 }}
+                  />
+                )}
               </Link>
             ))}
           </div>
@@ -65,7 +90,7 @@ const Navbar = () => {
             />
           </button>
         </nav>
-      </div>
+      </motion.div>
 
       {/* Mobile menu */}
       <AnimatePresence>
@@ -75,7 +100,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="md:hidden bg-background/95 backdrop-blur-md border-b border-border overflow-hidden"
+            className="md:hidden bg-background/98 backdrop-blur-md border-b border-border overflow-hidden"
           >
             <div className="section-padding py-8 flex flex-col gap-6">
               {navItems.map((item, i) => (
