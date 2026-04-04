@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
 import portraitImg from "@/assets/guilherme-portrait.jpg";
+import logoAnderlecht from "@/assets/logo-anderlecht.png";
+import logoLeca from "@/assets/logo-leca.png";
+import logoR4E from "@/assets/logo-run4excellence.png";
 
 const experiences = [
   {
@@ -12,6 +16,7 @@ const experiences = [
     location: "Brussels, Belgium",
     period: "2026",
     description: "Belgian Pro League — Curricular internship in performance nutrition within an elite football environment.",
+    logo: logoAnderlecht,
   },
   {
     name: "Leça FC",
@@ -19,6 +24,7 @@ const experiences = [
     location: "Porto, Portugal",
     period: "2025",
     description: "Portuguese football — Building and delivering practical nutrition systems for a competitive first-team environment.",
+    logo: logoLeca,
   },
   {
     name: "Run4Excellence",
@@ -26,6 +32,7 @@ const experiences = [
     location: "Porto, Portugal",
     period: "2025",
     description: "Endurance performance — Applied nutrition and health strategies for distance athletes and structured training.",
+    logo: logoR4E,
   },
 ];
 
@@ -84,21 +91,77 @@ const fuelLaws = [
 ];
 
 const Index = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroImageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const heroImageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const heroOverlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.8, 0.92]);
+  const heroTextY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
   return (
     <Layout>
-      {/* Hero */}
-      <section className="section-padding flex items-center min-h-[90vh] relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-background/80 z-10" />
-          <img
+      {/* Hero — Tunnel to Clarity */}
+      <section
+        ref={heroRef}
+        className="section-padding flex items-center min-h-[90vh] relative overflow-hidden"
+      >
+        {/* Atmospheric background with parallax */}
+        <motion.div className="absolute inset-0 z-0" style={{ y: heroImageY }}>
+          <motion.div
+            className="absolute inset-0 bg-background z-10"
+            style={{ opacity: heroOverlayOpacity }}
+          />
+          <motion.img
             src={heroAtmosphere}
             alt=""
-            className="absolute right-0 top-0 w-full h-full object-cover opacity-[0.12]"
+            className="absolute right-0 top-0 w-full h-full object-cover"
+            style={{ scale: heroImageScale }}
           />
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent z-10" />
+          {/* Cinematic vignette layers */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/40 via-transparent to-background" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-background/60 via-transparent to-background/30" />
+        </motion.div>
+
+        {/* Subtle grid/line overlay for depth */}
+        <div className="absolute inset-0 z-10 opacity-[0.03]">
+          <div
+            className="w-full h-full"
+            style={{
+              backgroundImage:
+                "linear-gradient(hsl(var(--foreground)) 1px, transparent 1px)",
+              backgroundSize: "1px 80px",
+            }}
+          />
         </div>
 
-        <div className="max-content w-full relative z-20">
+        {/* Converging perspective lines */}
+        <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-0 left-1/2 w-px h-full origin-top"
+            style={{
+              background: "linear-gradient(to bottom, transparent, hsl(var(--foreground) / 0.04), transparent)",
+              rotate: "-8deg",
+              translateX: "-200px",
+            }}
+          />
+          <motion.div
+            className="absolute top-0 left-1/2 w-px h-full origin-top"
+            style={{
+              background: "linear-gradient(to bottom, transparent, hsl(var(--foreground) / 0.03), transparent)",
+              rotate: "6deg",
+              translateX: "150px",
+            }}
+          />
+        </div>
+
+        <motion.div
+          className="max-content w-full relative z-20"
+          style={{ y: heroTextY }}
+        >
           <div className="grid lg:grid-cols-[1fr,auto] gap-12 items-center">
             <div>
               <Reveal>
@@ -134,7 +197,10 @@ const Index = () => {
               </Reveal>
             </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Bottom fade for smooth transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20" />
       </section>
 
       {/* Credibility Strip */}
@@ -217,7 +283,7 @@ const Index = () => {
         <div className="divider" />
       </div>
 
-      {/* Selected Experience */}
+      {/* Selected Experience — with club logos */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
@@ -227,11 +293,27 @@ const Index = () => {
             {experiences.map((exp, i) => (
               <Reveal key={exp.name} delay={i * 0.1}>
                 <motion.div
-                  className="py-8 md:py-10 border-b border-border group cursor-default"
+                  className="py-8 md:py-10 border-b border-border group cursor-default relative overflow-hidden"
                   whileHover={{ x: 4 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                  {/* Club logo watermark behind */}
+                  <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <img
+                      src={exp.logo}
+                      alt=""
+                      className="w-20 h-20 md:w-28 md:h-28 object-contain opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-700"
+                      style={{
+                        maskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
+                        WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 70%)",
+                      }}
+                      loading="lazy"
+                      width={112}
+                      height={112}
+                    />
+                  </div>
+
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 relative z-10">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-1">
                         <h3 className="font-display text-xl md:text-2xl font-medium text-foreground group-hover:text-olive-light transition-colors duration-500">
