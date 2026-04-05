@@ -74,8 +74,18 @@ const expansions = [
 const FuelLaws = () => {
   const [activeLaw, setActiveLaw] = useState<string | null>(null);
   const [hoveredLaw, setHoveredLaw] = useState<string | null>(null);
+  const [exploredLaws, setExploredLaws] = useState<Set<string>>(new Set());
+
+  const handleLawClick = (num: string) => {
+    const isActive = activeLaw === num;
+    setActiveLaw(isActive ? null : num);
+    if (!isActive) {
+      setExploredLaws((prev) => new Set(prev).add(num));
+    }
+  };
 
   const activeIndex = laws.findIndex((l) => l.number === activeLaw);
+  const progressPercent = (exploredLaws.size / laws.length) * 100;
 
   return (
     <Layout>
