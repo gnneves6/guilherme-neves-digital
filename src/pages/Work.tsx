@@ -178,15 +178,15 @@ const Work = () => {
       <section className="section-padding py-10">
         <div className="max-content">
           <Reveal>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 text-xs font-display tracking-wide transition-all duration-300 border ${
+                  className={`px-4 py-2 text-[11px] font-display tracking-wider uppercase transition-all duration-500 border ${
                     activeCategory === cat
                       ? "bg-foreground text-background border-foreground"
-                      : "bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground"
+                      : "bg-transparent text-muted-foreground/60 border-border/50 hover:border-foreground/25 hover:text-foreground"
                   }`}
                 >
                   {cat}
@@ -203,10 +203,10 @@ const Work = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
               className="space-y-0"
             >
               {filtered.map((project, i) => {
@@ -219,44 +219,48 @@ const Work = () => {
                     key={project.title}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{
-                      opacity: isReceded ? 0.45 : 1,
+                      opacity: isReceded ? 0.35 : 1,
                       y: 0,
                     }}
-                    transition={{ duration: 0.5, delay: i * 0.05 }}
-                    className="py-10 border-b border-border group cursor-pointer relative"
+                    transition={{ duration: 0.6, delay: i * 0.04 }}
+                    className="py-10 md:py-12 border-b border-border/40 group cursor-pointer relative"
                     onMouseEnter={() => setHoveredProject(project.title)}
                     onMouseLeave={() => setHoveredProject(null)}
                   >
                     {/* Active indicator line */}
                     <motion.div
-                      className="absolute left-0 top-0 bottom-0 w-[2px] bg-foreground/30"
+                      className="absolute left-0 top-0 bottom-0 w-[2px] bg-foreground/20"
                       initial={{ scaleY: 0 }}
                       animate={{ scaleY: isHovered ? 1 : 0 }}
-                      transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                       style={{ originY: 0 }}
                     />
 
                     <div className="flex flex-col md:flex-row gap-6 md:gap-10">
                       {/* Image with premium hover */}
                       {project.image && (
-                        <div className="w-full md:w-48 lg:w-56 shrink-0 overflow-hidden relative">
+                        <div className="w-full md:w-44 lg:w-52 shrink-0 overflow-hidden relative">
                           <motion.img
                             src={project.image}
                             alt={project.title}
                             className="w-full aspect-[4/3] object-cover"
                             loading="lazy"
-                            width={224}
-                            height={168}
+                            width={208}
+                            height={156}
                             animate={{
-                              filter: isHovered ? "grayscale(0%)" : "grayscale(30%)",
-                              scale: isHovered ? 1.04 : 1,
+                              filter: isHovered ? "grayscale(0%) contrast(1.05)" : "grayscale(40%) contrast(1)",
+                              scale: isHovered ? 1.05 : 1,
                             }}
-                            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
                           />
-                          {/* Subtle overlay that lifts on hover */}
+                          {/* Tonal overlay */}
                           <motion.div
-                            className="absolute inset-0 bg-background/10"
-                            animate={{ opacity: isHovered ? 0 : 1 }}
+                            className="absolute inset-0"
+                            animate={{
+                              background: isHovered
+                                ? "transparent"
+                                : "hsl(var(--background) / 0.08)",
+                            }}
                             transition={{ duration: 0.5 }}
                           />
                         </div>
@@ -265,21 +269,21 @@ const Work = () => {
                       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 flex-1">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <p className="text-caption text-xs">{project.category}</p>
+                            <p className="text-caption text-[10px] opacity-50">{project.category}</p>
                             {project.status === "In Progress" && (
-                              <span className="text-[10px] px-2 py-0.5 border border-border text-muted-foreground font-display tracking-wider">
+                              <span className="text-[10px] px-2 py-0.5 border border-border/50 text-muted-foreground/50 font-display tracking-wider">
                                 IN PROGRESS
                               </span>
                             )}
                           </div>
                           <motion.h3
-                            className="font-display text-xl md:text-2xl font-medium text-foreground transition-colors duration-500"
+                            className="font-display text-xl md:text-2xl font-medium transition-colors duration-600"
                             animate={{
                               color: isHovered
                                 ? "hsl(155, 12%, 40%)"
                                 : "hsl(var(--foreground))",
                             }}
-                            transition={{ duration: 0.4 }}
+                            transition={{ duration: 0.5 }}
                           >
                             {project.title}
                           </motion.h3>
@@ -289,16 +293,16 @@ const Work = () => {
                             {isHovered && (
                               <motion.div
                                 className="flex gap-4 mt-2"
-                                initial={{ opacity: 0, y: 4 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 4 }}
-                                transition={{ duration: 0.3 }}
+                                initial={{ opacity: 0, y: 6, height: 0 }}
+                                animate={{ opacity: 1, y: 0, height: "auto" }}
+                                exit={{ opacity: 0, y: 6, height: 0 }}
+                                transition={{ duration: 0.35 }}
                               >
-                                <span className="text-[10px] font-display tracking-wider uppercase text-muted-foreground/60">
+                                <span className="text-[10px] font-display tracking-wider uppercase text-muted-foreground/50">
                                   {project.audience}
                                 </span>
-                                <span className="text-[10px] text-muted-foreground/30">·</span>
-                                <span className="text-[10px] font-display tracking-wider uppercase text-muted-foreground/60">
+                                <span className="text-[10px] text-muted-foreground/25">·</span>
+                                <span className="text-[10px] font-display tracking-wider uppercase text-muted-foreground/50">
                                   {project.format}
                                 </span>
                               </motion.div>
@@ -307,16 +311,18 @@ const Work = () => {
                         </div>
 
                         <div className="md:text-right max-w-sm">
-                          <p className="text-body text-sm">{project.description}</p>
+                          <p className="text-body text-sm opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                            {project.description}
+                          </p>
                           <motion.span
-                            className="inline-block mt-3 text-xs text-muted-foreground transition-colors duration-300"
+                            className="inline-block mt-3 text-xs text-muted-foreground/40 transition-all duration-500"
                             animate={{
                               x: isHovered ? 4 : 0,
                               color: isHovered
                                 ? "hsl(var(--foreground))"
-                                : "hsl(var(--muted-foreground))",
+                                : "hsl(var(--muted-foreground) / 0.4)",
                             }}
-                            transition={{ duration: 0.3 }}
+                            transition={{ duration: 0.4 }}
                           >
                             View project →
                           </motion.span>
@@ -345,7 +351,7 @@ const Work = () => {
           <Reveal delay={0.1}>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center mt-8 px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+              className="group inline-flex items-center justify-center mt-8 px-12 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
             >
               Get in Touch
             </Link>
