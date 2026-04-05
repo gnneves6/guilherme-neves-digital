@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
