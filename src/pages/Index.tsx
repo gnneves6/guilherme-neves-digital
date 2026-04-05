@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
@@ -114,7 +114,206 @@ const ChapterSection = ({
   );
 };
 
+/* ═══ Environments Stack Card Carousel ═══ */
+const EnvironmentsSection = () => {
+  const [focusedIndex, setFocusedIndex] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  return (
+    <ChapterSection>
+      <section className="section-padding section-spacing" ref={sectionRef}>
+        <div className="max-content">
+          <Reveal>
+            <p className="text-caption mb-4">Selected Experience</p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-body-lg max-w-lg mb-14">
+              Environments that shaped the work.
+            </p>
+          </Reveal>
+
+          {/* Stack Card Carousel */}
+          <div className="relative">
+            {/* Navigation dots */}
+            <div className="flex items-center gap-3 mb-10">
+              {experiences.map((exp, i) => (
+                <button
+                  key={exp.name}
+                  onClick={() => setFocusedIndex(i)}
+                  className="group flex items-center gap-2"
+                >
+                  <motion.div
+                    className="h-1 rounded-full transition-colors duration-500"
+                    animate={{
+                      width: focusedIndex === i ? 32 : 8,
+                      backgroundColor: focusedIndex === i
+                        ? "hsl(var(--foreground))"
+                        : "hsl(var(--foreground) / 0.15)",
+                    }}
+                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                  />
+                </button>
+              ))}
+              <span className="text-[10px] text-muted-foreground/40 font-display tracking-widest uppercase ml-2">
+                {String(focusedIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* Stacked cards */}
+            <div className="relative h-[420px] md:h-[360px]">
+              <AnimatePresence mode="popLayout">
+                {experiences.map((exp, i) => {
+                  const offset = i - focusedIndex;
+                  const isFocused = i === focusedIndex;
+                  const isVisible = Math.abs(offset) <= 2;
+
+                  if (!isVisible) return null;
+
+                  return (
+                    <motion.div
+                      key={exp.name}
+                      className="absolute inset-0 cursor-pointer"
+                      onClick={() => setFocusedIndex(i)}
+                      initial={{ opacity: 0, scale: 0.9, x: 100 }}
+                      animate={{
+                        opacity: isFocused ? 1 : Math.max(0.15, 0.5 - Math.abs(offset) * 0.2),
+                        scale: isFocused ? 1 : 1 - Math.abs(offset) * 0.06,
+                        x: offset * 60,
+                        y: Math.abs(offset) * 8,
+                        zIndex: 10 - Math.abs(offset),
+                        filter: isFocused ? "blur(0px)" : `blur(${Math.abs(offset) * 2}px)`,
+                      }}
+                      exit={{ opacity: 0, scale: 0.9, x: -100 }}
+                      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+                      style={{ transformOrigin: "center center" }}
+                    >
+                      <div
+                        className={`relative h-full border transition-colors duration-700 overflow-hidden ${
+                          isFocused ? "border-border/60 bg-card" : "border-border/20 bg-card/50"
+                        }`}
+                      >
+                        {/* Club logo — large watermark behind the name */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                          <motion.img
+                            src={exp.logo}
+                            alt=""
+                            className="w-[280px] h-[280px] md:w-[340px] md:h-[340px] object-contain"
+                            animate={{
+                              opacity: isFocused ? 0.07 : 0.025,
+                              scale: isFocused ? 1.05 : 0.95,
+                            }}
+                            transition={{ duration: 0.8 }}
+                            style={{
+                              filter: "grayscale(100%)",
+                              maskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
+                              WebkitMaskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
+                            }}
+                          />
+                        </div>
+
+                        {/* Content */}
+                        <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12">
+                          <div>
+                            <div className="flex items-center justify-between mb-6">
+                              <span className="text-caption text-[10px] opacity-50">{exp.period}</span>
+                              <span className="text-[10px] text-muted-foreground/30 font-display tracking-widest uppercase">
+                                {exp.location}
+                              </span>
+                            </div>
+
+                            <motion.h3
+                              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight"
+                              animate={{
+                                color: isFocused
+                                  ? "hsl(var(--foreground))"
+                                  : "hsl(var(--foreground) / 0.4)",
+                              }}
+                              transition={{ duration: 0.5 }}
+                            >
+                              {exp.name}
+                            </motion.h3>
+
+                            <motion.p
+                              className="text-caption text-[10px] md:text-xs font-normal mt-3"
+                              animate={{ opacity: isFocused ? 0.7 : 0.3 }}
+                              transition={{ duration: 0.5 }}
+                            >
+                              {exp.role}
+                            </motion.p>
+                          </div>
+
+                          <motion.p
+                            className="text-body text-sm max-w-md"
+                            animate={{ opacity: isFocused ? 0.75 : 0 }}
+                            transition={{ duration: 0.5, delay: isFocused ? 0.15 : 0 }}
+                          >
+                            {exp.description}
+                          </motion.p>
+                        </div>
+
+                        {/* Bottom accent line */}
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-[2px] bg-primary/40"
+                          animate={{ width: isFocused ? "100%" : "0%" }}
+                          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+
+            {/* Navigation arrows */}
+            <div className="flex items-center gap-4 mt-8">
+              <button
+                onClick={() => setFocusedIndex(Math.max(0, focusedIndex - 1))}
+                disabled={focusedIndex === 0}
+                className="font-display text-xs tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-300 disabled:opacity-20 disabled:cursor-not-allowed"
+              >
+                ← Prev
+              </button>
+              <div className="flex-1" />
+              <button
+                onClick={() => setFocusedIndex(Math.min(experiences.length - 1, focusedIndex + 1))}
+                disabled={focusedIndex === experiences.length - 1}
+                className="font-display text-xs tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-300 disabled:opacity-20 disabled:cursor-not-allowed"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+
+          {/* Additional Exposure */}
+          <Reveal delay={0.4}>
+            <div className="mt-16 pt-10 border-t border-border/30">
+              <p className="text-caption text-[10px] mb-5">Additional Observational Exposure</p>
+              <div className="flex flex-wrap gap-x-10 gap-y-3">
+                {additionalExposure.map((item, i) => (
+                  <motion.div
+                    key={item.name}
+                    className="flex items-center gap-3"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * i }}
+                  >
+                    <span className="font-display text-sm font-medium text-muted-foreground/70">{item.name}</span>
+                    <span className="text-[10px] text-muted-foreground/35">{item.date}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </ChapterSection>
+  );
+};
+
 const Index = () => {
+  const [focusedExpIndex, setFocusedExpIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -345,105 +544,8 @@ const Index = () => {
         <div className="divider" />
       </div>
 
-      {/* ═══ CHAPTER 3: ENVIRONMENTS ═══ */}
-      <ChapterSection>
-        <section className="section-padding section-spacing">
-          <div className="max-content">
-            <Reveal>
-              <p className="text-caption mb-4">Selected Experience</p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="text-body-lg max-w-lg mb-12">
-                Environments that shaped the work.
-              </p>
-            </Reveal>
-            <div className="space-y-0">
-              {experiences.map((exp, i) => (
-                <Reveal key={exp.name} delay={i * 0.12}>
-                  <motion.div
-                    className="py-10 md:py-14 border-b border-border/60 group cursor-default relative overflow-hidden"
-                    whileHover={{ x: 6 }}
-                    transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    {/* Club logo watermark */}
-                    <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <motion.img
-                        src={exp.logo}
-                        alt=""
-                        className="w-24 h-24 md:w-32 md:h-32 object-contain"
-                        loading="lazy"
-                        width={128}
-                        height={128}
-                        initial={{ opacity: 0.04 }}
-                        whileInView={{ opacity: 0.06 }}
-                        viewport={{ once: true }}
-                        style={{
-                          maskImage: "radial-gradient(ellipse at center, black 20%, transparent 75%)",
-                          WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 75%)",
-                          filter: "grayscale(100%)",
-                        }}
-                      />
-                    </div>
-
-                    {/* Active line accent */}
-                    <div className="absolute left-0 top-0 bottom-0 w-0 group-hover:w-[2px] bg-foreground/25 transition-all duration-500" />
-
-                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
-                      <div className="flex-1">
-                        <div className="flex items-baseline gap-5 mb-2">
-                          <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-medium text-foreground group-hover:text-olive-light transition-colors duration-600">
-                            {exp.name}
-                          </h3>
-                          <span className="text-caption text-[10px] opacity-50">
-                            {exp.period}
-                          </span>
-                        </div>
-                        <p className="text-caption text-[10px] md:text-xs font-normal">
-                          {exp.role}
-                        </p>
-                        <motion.p
-                          className="text-[10px] text-muted-foreground/40 mt-1 font-display tracking-wider"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 + i * 0.1 }}
-                        >
-                          {exp.location}
-                        </motion.p>
-                      </div>
-                      <p className="text-body text-sm max-w-sm opacity-70 group-hover:opacity-100 transition-opacity duration-500">
-                        {exp.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-
-            {/* Additional Exposure */}
-            <Reveal delay={0.4}>
-              <div className="mt-12">
-                <p className="text-caption text-[10px] mb-5">Additional Observational Exposure</p>
-                <div className="flex flex-wrap gap-x-10 gap-y-3">
-                  {additionalExposure.map((item, i) => (
-                    <motion.div
-                      key={item.name}
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 * i }}
-                    >
-                      <span className="font-display text-sm font-medium text-muted-foreground/70">{item.name}</span>
-                      <span className="text-[10px] text-muted-foreground/35">{item.date}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-      </ChapterSection>
+      {/* ═══ CHAPTER 3: ENVIRONMENTS — Stack Card Carousel ═══ */}
+      <EnvironmentsSection />
 
       <div className="section-padding max-content">
         <div className="divider" />

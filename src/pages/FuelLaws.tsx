@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
@@ -74,8 +74,18 @@ const expansions = [
 const FuelLaws = () => {
   const [activeLaw, setActiveLaw] = useState<string | null>(null);
   const [hoveredLaw, setHoveredLaw] = useState<string | null>(null);
+  const [exploredLaws, setExploredLaws] = useState<Set<string>>(new Set());
+
+  const handleLawClick = (num: string) => {
+    const isActive = activeLaw === num;
+    setActiveLaw(isActive ? null : num);
+    if (!isActive) {
+      setExploredLaws((prev) => new Set(prev).add(num));
+    }
+  };
 
   const activeIndex = laws.findIndex((l) => l.number === activeLaw);
+  const progressPercent = (exploredLaws.size / laws.length) * 100;
 
   return (
     <Layout>
@@ -108,7 +118,7 @@ const FuelLaws = () => {
               {laws.map((law, i) => (
                 <div key={law.number} className="flex items-center gap-2">
                   <motion.button
-                    onClick={() => setActiveLaw(activeLaw === law.number ? null : law.number)}
+                    onClick={() => handleLawClick(law.number)}
                     className="relative flex items-center justify-center"
                     whileHover={{ scale: 1.3 }}
                     transition={{ duration: 0.2 }}
@@ -119,12 +129,13 @@ const FuelLaws = () => {
                         backgroundColor:
                           activeLaw === law.number
                             ? `hsl(${law.color})`
-                            : "hsl(var(--foreground) / 0.15)",
+                            : exploredLaws.has(law.number)
+                              ? "hsl(var(--foreground) / 0.35)"
+                              : "hsl(var(--foreground) / 0.15)",
                         scale: activeLaw === law.number ? 1.4 : 1,
                       }}
                       transition={{ duration: 0.4 }}
                     />
-                    {/* Active ring */}
                     {activeLaw === law.number && (
                       <motion.div
                         className="absolute w-5 h-5 rounded-full border"
@@ -155,6 +166,40 @@ const FuelLaws = () => {
               </span>
             </div>
           </Reveal>
+
+          {/* Performance Bar */}
+          <Reveal delay={0.5}>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="flex-1 h-[3px] bg-border/40 rounded-full overflow-hidden relative">
+                <motion.div
+                  className="absolute inset-y-0 left-0 rounded-full"
+                  style={{ background: "linear-gradient(90deg, hsl(155 18% 25%), hsl(155 8% 45%))" }}
+                  animate={{ width: `${progressPercent}%` }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                />
+              </div>
+              <motion.span
+                className="text-[10px] font-display tracking-widest uppercase text-muted-foreground/50 tabular-nums min-w-[52px] text-right"
+                animate={{ color: progressPercent === 100 ? "hsl(155 18% 25%)" : "hsl(var(--muted-foreground) / 0.5)" }}
+              >
+                {exploredLaws.size}/{laws.length}
+              </motion.span>
+            </div>
+            <AnimatePresence>
+              {progressPercent === 100 && (
+                <motion.p
+                  className="text-[10px] font-display tracking-wider uppercase mt-3"
+                  style={{ color: "hsl(155 18% 25%)" }}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 0.7, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Framework complete ✓
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </Reveal>
         </div>
       </section>
 
@@ -180,7 +225,7 @@ const FuelLaws = () => {
                 <Reveal key={law.number} delay={i * 0.08}>
                   <motion.div
                     className="border-b border-border/50 cursor-pointer relative overflow-hidden"
-                    onClick={() => setActiveLaw(isActive ? null : law.number)}
+                    onClick={() => handleLawClick(law.number)}
                     onMouseEnter={() => setHoveredLaw(law.number)}
                     onMouseLeave={() => setHoveredLaw(null)}
                     animate={{
