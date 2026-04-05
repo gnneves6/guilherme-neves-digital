@@ -312,7 +312,8 @@ const EnvironmentsSection = () => {
   );
 };
 
-
+const Index = () => {
+  const [focusedExpIndex, setFocusedExpIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
