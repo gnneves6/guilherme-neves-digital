@@ -225,7 +225,7 @@ const FuelLaws = () => {
                 <Reveal key={law.number} delay={i * 0.08}>
                   <motion.div
                     className="border-b border-border/50 cursor-pointer relative overflow-hidden"
-                    onClick={() => setActiveLaw(isActive ? null : law.number)}
+                    onClick={() => handleLawClick(law.number)}
                     onMouseEnter={() => setHoveredLaw(law.number)}
                     onMouseLeave={() => setHoveredLaw(null)}
                     animate={{
