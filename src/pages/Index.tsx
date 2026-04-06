@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useMotionValueEvent } from "framer-motion";
 import { useRef, useState } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
@@ -114,198 +114,231 @@ const ChapterSection = ({
   );
 };
 
-/* ═══ Environments Stack Card Carousel ═══ */
+/* ═══ Horizontal Scroll-Pinned Environments ═══ */
 const EnvironmentsSection = () => {
-  const [focusedIndex, setFocusedIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Map scroll progress to active index
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    // Use middle 70% of scroll for transitions (skip first/last 15%)
+    const adjusted = Math.max(0, Math.min(1, (v - 0.15) / 0.7));
+    const idx = Math.min(experiences.length - 1, Math.floor(adjusted * experiences.length));
+    setActiveIndex(idx);
+  });
 
   return (
-    <ChapterSection>
-      <section className="section-padding section-spacing" ref={sectionRef}>
-        <div className="max-content">
-          <Reveal>
-            <p className="text-caption mb-4">Selected Experience</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-body-lg max-w-lg mb-14">
-              Environments that shaped the work.
-            </p>
-          </Reveal>
+    <div
+      ref={sectionRef}
+      // Height = viewport heights per card + padding
+      style={{ height: `${(experiences.length + 1) * 100}vh` }}
+    >
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        <div className="section-padding w-full">
+          <div className="max-content">
+            {/* Header */}
+            <div className="mb-8 md:mb-12">
+              <p className="text-caption mb-3">Selected Experience</p>
+              <p className="text-body-lg max-w-lg">
+                Environments that shaped the work.
+              </p>
+            </div>
 
-          {/* Stack Card Carousel */}
-          <div className="relative">
-            {/* Navigation dots */}
-            <div className="flex items-center gap-3 mb-10">
-              {experiences.map((exp, i) => (
-                <button
-                  key={exp.name}
-                  onClick={() => setFocusedIndex(i)}
-                  className="group flex items-center gap-2"
-                >
+            {/* Horizontal card track */}
+            <div className="relative h-[380px] md:h-[420px]">
+              {experiences.map((exp, i) => {
+                const offset = i - activeIndex;
+                const isFocused = i === activeIndex;
+
+                return (
                   <motion.div
-                    className="h-1 rounded-full transition-colors duration-500"
+                    key={exp.name}
+                    className="absolute inset-0"
                     animate={{
-                      width: focusedIndex === i ? 32 : 8,
-                      backgroundColor: focusedIndex === i
-                        ? "hsl(var(--foreground))"
-                        : "hsl(var(--foreground) / 0.15)",
+                      x: `${offset * 105}%`,
+                      scale: isFocused ? 1 : 0.82,
+                      opacity: isFocused ? 1 : Math.abs(offset) <= 1 ? 0.25 : 0,
+                      filter: isFocused ? "blur(0px)" : `blur(${Math.min(Math.abs(offset) * 4, 8)}px)`,
+                      zIndex: 10 - Math.abs(offset),
                     }}
-                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                  />
-                </button>
+                    transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    <div
+                      className={`h-full border transition-colors duration-700 overflow-hidden relative ${
+                        isFocused ? "border-border/60 bg-card" : "border-border/20 bg-card/30"
+                      }`}
+                    >
+                      {/* Club logo watermark */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                        <motion.img
+                          src={exp.logo}
+                          alt=""
+                          className="w-[260px] h-[260px] md:w-[320px] md:h-[320px] object-contain"
+                          animate={{
+                            opacity: isFocused ? 0.06 : 0.02,
+                            scale: isFocused ? 1.08 : 0.9,
+                          }}
+                          transition={{ duration: 0.8 }}
+                          style={{
+                            filter: "grayscale(100%)",
+                            maskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
+                            WebkitMaskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
+                          }}
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12">
+                        <div>
+                          <div className="flex items-center justify-between mb-6">
+                            <span className="text-caption text-[10px] opacity-50">{exp.period}</span>
+                            <span className="text-[10px] text-muted-foreground/30 font-display tracking-widest uppercase">
+                              {exp.location}
+                            </span>
+                          </div>
+                          <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-foreground">
+                            {exp.name}
+                          </h3>
+                          <p className="text-caption text-[10px] md:text-xs font-normal mt-3 opacity-60">
+                            {exp.role}
+                          </p>
+                        </div>
+                        <motion.p
+                          className="text-body text-sm max-w-md"
+                          animate={{ opacity: isFocused ? 0.75 : 0 }}
+                          transition={{ duration: 0.5, delay: isFocused ? 0.2 : 0 }}
+                        >
+                          {exp.description}
+                        </motion.p>
+                      </div>
+
+                      {/* Bottom accent */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-[2px] bg-primary/40"
+                        animate={{ width: isFocused ? "100%" : "0%" }}
+                        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                      />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Progress indicators */}
+            <div className="flex items-center gap-3 mt-8">
+              {experiences.map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="h-1 rounded-full"
+                  animate={{
+                    width: activeIndex === i ? 32 : 8,
+                    backgroundColor: activeIndex === i
+                      ? "hsl(var(--foreground))"
+                      : "hsl(var(--foreground) / 0.15)",
+                  }}
+                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                />
               ))}
               <span className="text-[10px] text-muted-foreground/40 font-display tracking-widest uppercase ml-2">
-                {String(focusedIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
               </span>
             </div>
 
-            {/* Stacked cards */}
-            <div className="relative h-[420px] md:h-[360px]">
-              <AnimatePresence mode="popLayout">
-                {experiences.map((exp, i) => {
-                  const offset = i - focusedIndex;
-                  const isFocused = i === focusedIndex;
-                  const isVisible = Math.abs(offset) <= 2;
-
-                  if (!isVisible) return null;
-
-                  return (
-                    <motion.div
-                      key={exp.name}
-                      className="absolute inset-0 cursor-pointer"
-                      onClick={() => setFocusedIndex(i)}
-                      initial={{ opacity: 0, scale: 0.9, x: 100 }}
-                      animate={{
-                        opacity: isFocused ? 1 : Math.max(0.15, 0.5 - Math.abs(offset) * 0.2),
-                        scale: isFocused ? 1 : 1 - Math.abs(offset) * 0.06,
-                        x: offset * 60,
-                        y: Math.abs(offset) * 8,
-                        zIndex: 10 - Math.abs(offset),
-                        filter: isFocused ? "blur(0px)" : `blur(${Math.abs(offset) * 2}px)`,
-                      }}
-                      exit={{ opacity: 0, scale: 0.9, x: -100 }}
-                      transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-                      style={{ transformOrigin: "center center" }}
-                    >
-                      <div
-                        className={`relative h-full border transition-colors duration-700 overflow-hidden ${
-                          isFocused ? "border-border/60 bg-card" : "border-border/20 bg-card/50"
-                        }`}
-                      >
-                        {/* Club logo — large watermark behind the name */}
-                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                          <motion.img
-                            src={exp.logo}
-                            alt=""
-                            className="w-[280px] h-[280px] md:w-[340px] md:h-[340px] object-contain"
-                            animate={{
-                              opacity: isFocused ? 0.07 : 0.025,
-                              scale: isFocused ? 1.05 : 0.95,
-                            }}
-                            transition={{ duration: 0.8 }}
-                            style={{
-                              filter: "grayscale(100%)",
-                              maskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
-                              WebkitMaskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
-                            }}
-                          />
-                        </div>
-
-                        {/* Content */}
-                        <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12">
-                          <div>
-                            <div className="flex items-center justify-between mb-6">
-                              <span className="text-caption text-[10px] opacity-50">{exp.period}</span>
-                              <span className="text-[10px] text-muted-foreground/30 font-display tracking-widest uppercase">
-                                {exp.location}
-                              </span>
-                            </div>
-
-                            <motion.h3
-                              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight"
-                              animate={{
-                                color: isFocused
-                                  ? "hsl(var(--foreground))"
-                                  : "hsl(var(--foreground) / 0.4)",
-                              }}
-                              transition={{ duration: 0.5 }}
-                            >
-                              {exp.name}
-                            </motion.h3>
-
-                            <motion.p
-                              className="text-caption text-[10px] md:text-xs font-normal mt-3"
-                              animate={{ opacity: isFocused ? 0.7 : 0.3 }}
-                              transition={{ duration: 0.5 }}
-                            >
-                              {exp.role}
-                            </motion.p>
-                          </div>
-
-                          <motion.p
-                            className="text-body text-sm max-w-md"
-                            animate={{ opacity: isFocused ? 0.75 : 0 }}
-                            transition={{ duration: 0.5, delay: isFocused ? 0.15 : 0 }}
-                          >
-                            {exp.description}
-                          </motion.p>
-                        </div>
-
-                        {/* Bottom accent line */}
-                        <motion.div
-                          className="absolute bottom-0 left-0 h-[2px] bg-primary/40"
-                          animate={{ width: isFocused ? "100%" : "0%" }}
-                          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                        />
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
-
-            {/* Navigation arrows */}
-            <div className="flex items-center gap-4 mt-8">
-              <button
-                onClick={() => setFocusedIndex(Math.max(0, focusedIndex - 1))}
-                disabled={focusedIndex === 0}
-                className="font-display text-xs tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-300 disabled:opacity-20 disabled:cursor-not-allowed"
-              >
-                ← Prev
-              </button>
-              <div className="flex-1" />
-              <button
-                onClick={() => setFocusedIndex(Math.min(experiences.length - 1, focusedIndex + 1))}
-                disabled={focusedIndex === experiences.length - 1}
-                className="font-display text-xs tracking-widest uppercase text-muted-foreground/40 hover:text-foreground transition-colors duration-300 disabled:opacity-20 disabled:cursor-not-allowed"
-              >
-                Next →
-              </button>
-            </div>
-          </div>
-
-          {/* Additional Exposure */}
-          <Reveal delay={0.4}>
-            <div className="mt-16 pt-10 border-t border-border/30">
-              <p className="text-caption text-[10px] mb-5">Additional Observational Exposure</p>
-              <div className="flex flex-wrap gap-x-10 gap-y-3">
-                {additionalExposure.map((item, i) => (
-                  <motion.div
-                    key={item.name}
-                    className="flex items-center gap-3"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 * i }}
-                  >
+            {/* Additional Exposure */}
+            <div className="mt-12 pt-8 border-t border-border/30">
+              <p className="text-caption text-[10px] mb-4">Additional Observational Exposure</p>
+              <div className="flex flex-wrap gap-x-10 gap-y-2">
+                {additionalExposure.map((item) => (
+                  <div key={item.name} className="flex items-center gap-3">
                     <span className="font-display text-sm font-medium text-muted-foreground/70">{item.name}</span>
                     <span className="text-[10px] text-muted-foreground/35">{item.date}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ═══ Value Cards with Depth Hover ═══ */
+const ValueSection = () => {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  return (
+    <ChapterSection>
+      <section className="section-padding section-spacing">
+        <div className="max-content">
+          <Reveal>
+            <p className="text-caption mb-4">Where I Add Value</p>
           </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-body-lg max-w-lg mb-14">
+              Structured components of a practical nutrition system.
+            </p>
+          </Reveal>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
+            {valuePillars.map((pillar, i) => {
+              const isHovered = hoveredIdx === i;
+              const hasHover = hoveredIdx !== null;
+              const isReceded = hasHover && !isHovered;
+
+              return (
+                <Reveal key={pillar.title} delay={i * 0.06}>
+                  <motion.div
+                    className="p-8 md:p-10 bg-background cursor-default relative overflow-hidden h-full"
+                    onMouseEnter={() => setHoveredIdx(i)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                    animate={{
+                      y: isHovered ? -6 : 0,
+                      scale: isHovered ? 1.02 : isReceded ? 0.97 : 1,
+                      opacity: isReceded ? 0.4 : 1,
+                      backgroundColor: isHovered
+                        ? "hsl(var(--card))"
+                        : "hsl(var(--background))",
+                    }}
+                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                    style={{
+                      boxShadow: isHovered
+                        ? "0 20px 50px -12px hsl(var(--foreground) / 0.08)"
+                        : "none",
+                    }}
+                  >
+                    {/* Top accent line */}
+                    <motion.div
+                      className="absolute top-0 left-0 right-0 h-px bg-foreground/20"
+                      animate={{ scaleX: isHovered ? 1 : 0 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      style={{ transformOrigin: "left" }}
+                    />
+                    <p className="text-caption text-[10px] mb-5 opacity-40">
+                      0{i + 1}
+                    </p>
+                    <h3 className="font-display text-base md:text-lg font-medium text-foreground mb-3">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-body text-sm opacity-70">
+                      {pillar.description}
+                    </p>
+                    <motion.span
+                      className="block mt-5 text-[10px] tracking-widest uppercase text-muted-foreground/30"
+                      animate={{ x: isHovered ? 4 : 0, opacity: isHovered ? 0.7 : 0.3 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      →
+                    </motion.span>
+                  </motion.div>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
     </ChapterSection>
@@ -313,7 +346,6 @@ const EnvironmentsSection = () => {
 };
 
 const Index = () => {
-  const [focusedExpIndex, setFocusedExpIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -342,7 +374,6 @@ const Index = () => {
             className="absolute inset-0 w-full h-[120%] object-cover"
             style={{ scale: heroImageScale }}
           />
-          {/* Primary darkness overlay */}
           <motion.div
             className="absolute inset-0 z-10"
             style={{
@@ -350,7 +381,6 @@ const Index = () => {
               background: "hsl(var(--background))",
             }}
           />
-          {/* Cinematic vignette — radial fade */}
           <div
             className="absolute inset-0 z-10"
             style={{
@@ -358,9 +388,7 @@ const Index = () => {
                 "radial-gradient(ellipse 80% 70% at 30% 50%, transparent 0%, hsl(var(--background)) 100%)",
             }}
           />
-          {/* Bottom gradient for seamless section transition */}
           <div className="absolute bottom-0 left-0 right-0 h-48 z-10 bg-gradient-to-t from-background via-background/80 to-transparent" />
-          {/* Side atmosphere */}
           <div className="absolute inset-0 z-10 bg-gradient-to-r from-background/70 via-transparent to-background/50" />
         </motion.div>
 
@@ -453,7 +481,7 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* ═══ CHAPTER 2: PRESENCE — Credibility Strip ═══ */}
+      {/* ═══ CHAPTER 2: WORLDVIEW — Credibility Strip ═══ */}
       <ChapterSection>
         <section className="section-padding py-10 border-y border-border/30">
           <div className="max-content">
@@ -477,7 +505,7 @@ const Index = () => {
         </section>
       </ChapterSection>
 
-      {/* ═══ CHAPTER 2b: PRESENCE — Identity with Portrait ═══ */}
+      {/* ═══ CHAPTER 3: PRESENCE — Identity with Portrait ═══ */}
       <ChapterSection>
         <section className="section-padding section-spacing">
           <div className="max-content">
@@ -523,7 +551,6 @@ const Index = () => {
                       style={{ filter: "grayscale(15%) contrast(1.05)" }}
                     />
                   </div>
-                  {/* Editorial label */}
                   <motion.div
                     className="absolute -bottom-3 -left-3 bg-background px-4 py-2 border border-border/50"
                     initial={{ opacity: 0, x: -10 }}
@@ -544,64 +571,21 @@ const Index = () => {
         <div className="divider" />
       </div>
 
-      {/* ═══ CHAPTER 3: ENVIRONMENTS — Stack Card Carousel ═══ */}
+      {/* ═══ CHAPTER 4: ENVIRONMENTS — Horizontal Scroll Pinned ═══ */}
       <EnvironmentsSection />
 
       <div className="section-padding max-content">
         <div className="divider" />
       </div>
 
-      {/* ═══ CHAPTER 4: VALUE ═══ */}
-      <ChapterSection>
-        <section className="section-padding section-spacing">
-          <div className="max-content">
-            <Reveal>
-              <p className="text-caption mb-4">Where I Add Value</p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="text-body-lg max-w-lg mb-14">
-                Structured components of a practical nutrition system.
-              </p>
-            </Reveal>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
-              {valuePillars.map((pillar, i) => (
-                <Reveal key={pillar.title} delay={i * 0.06}>
-                  <motion.div
-                    className="p-8 md:p-10 bg-background group cursor-default transition-all duration-600 hover:bg-card relative overflow-hidden h-full"
-                    whileHover={{ y: -3 }}
-                    transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    {/* Top accent line */}
-                    <div className="absolute top-0 left-0 right-0 h-px">
-                      <div className="w-0 h-full bg-foreground/20 group-hover:w-full transition-all duration-700 ease-out" />
-                    </div>
-                    <p className="text-caption text-[10px] mb-5 opacity-40 group-hover:opacity-70 transition-opacity duration-500">
-                      0{i + 1}
-                    </p>
-                    <h3 className="font-display text-base md:text-lg font-medium text-foreground mb-3 group-hover:text-olive-light transition-colors duration-500">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-body text-sm opacity-70 group-hover:opacity-100 transition-opacity duration-500">
-                      {pillar.description}
-                    </p>
-                    <motion.span
-                      className="block mt-5 text-[10px] tracking-widest uppercase text-muted-foreground/30 group-hover:text-muted-foreground/60 transition-all duration-500"
-                    >
-                      →
-                    </motion.span>
-                  </motion.div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      </ChapterSection>
+      {/* ═══ CHAPTER 5: VALUE — Depth Hover Cards ═══ */}
+      <ValueSection />
 
       <div className="section-padding max-content">
         <div className="divider" />
       </div>
 
-      {/* ═══ CHAPTER 5: PROOF — Selected Work ═══ */}
+      {/* ═══ CHAPTER 6: PROOF — Selected Work ═══ */}
       <ChapterSection>
         <section className="section-padding section-spacing">
           <div className="max-content">
@@ -658,7 +642,7 @@ const Index = () => {
         <div className="divider" />
       </div>
 
-      {/* ═══ CHAPTER 6: FRAMEWORK — Fuel Laws Preview ═══ */}
+      {/* ═══ CHAPTER 7: FRAMEWORK — Fuel Laws Preview ═══ */}
       <ChapterSection>
         <section className="section-padding section-spacing">
           <div className="max-content">
@@ -681,7 +665,6 @@ const Index = () => {
                     to="/fuel-laws"
                     className="flex items-center gap-6 md:gap-10 py-6 border-b border-border/40 group transition-all duration-500 hover:pl-3 relative"
                   >
-                    {/* Hover accent */}
                     <div className="absolute left-0 top-0 bottom-0 w-0 group-hover:w-[2px] bg-primary/40 transition-all duration-500" />
                     <span className="text-caption text-[10px] w-8 opacity-40">{law.number}</span>
                     <span className="font-display text-lg md:text-xl font-medium text-foreground group-hover:text-olive-light transition-colors duration-500">
@@ -710,9 +693,9 @@ const Index = () => {
         <div className="divider" />
       </div>
 
-      {/* ═══ CHAPTER 7: INVITATION ═══ */}
+      {/* ═══ CHAPTER 8: INVITATION ═══ */}
       <ChapterSection>
-        <section className="section-padding section-spacing">
+        <section className="section-padding py-32 md:py-40">
           <div className="max-content text-center">
             <Reveal>
               <h2 className="text-headline max-w-2xl mx-auto">

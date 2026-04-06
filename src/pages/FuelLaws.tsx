@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 
@@ -84,11 +84,11 @@ const FuelLaws = () => {
     }
   };
 
-  const activeIndex = laws.findIndex((l) => l.number === activeLaw);
   const progressPercent = (exploredLaws.size / laws.length) * 100;
 
   return (
     <Layout>
+      {/* Header */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
@@ -111,95 +111,6 @@ const FuelLaws = () => {
               can approach nutrition with clarity and consistency.
             </p>
           </Reveal>
-
-          {/* System cycle — connected dots */}
-          <Reveal delay={0.4}>
-            <div className="flex items-center gap-2 mt-12">
-              {laws.map((law, i) => (
-                <div key={law.number} className="flex items-center gap-2">
-                  <motion.button
-                    onClick={() => handleLawClick(law.number)}
-                    className="relative flex items-center justify-center"
-                    whileHover={{ scale: 1.3 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <motion.div
-                      className="w-2.5 h-2.5 rounded-full transition-colors duration-500"
-                      animate={{
-                        backgroundColor:
-                          activeLaw === law.number
-                            ? `hsl(${law.color})`
-                            : exploredLaws.has(law.number)
-                              ? "hsl(var(--foreground) / 0.35)"
-                              : "hsl(var(--foreground) / 0.15)",
-                        scale: activeLaw === law.number ? 1.4 : 1,
-                      }}
-                      transition={{ duration: 0.4 }}
-                    />
-                    {activeLaw === law.number && (
-                      <motion.div
-                        className="absolute w-5 h-5 rounded-full border"
-                        style={{ borderColor: `hsl(${law.color} / 0.3)` }}
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
-                  </motion.button>
-                  {i < laws.length - 1 && (
-                    <motion.div
-                      className="w-6 md:w-10 h-px"
-                      animate={{
-                        backgroundColor:
-                          activeIndex >= 0 && i >= Math.min(activeIndex, i) && i < Math.max(activeIndex, laws.length)
-                            ? "hsl(var(--foreground) / 0.15)"
-                            : "hsl(var(--foreground) / 0.08)",
-                      }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  )}
-                </div>
-              ))}
-              <span className="text-[10px] text-muted-foreground/40 ml-3 font-display tracking-widest uppercase">
-                Cycle
-              </span>
-            </div>
-          </Reveal>
-
-          {/* Performance Bar */}
-          <Reveal delay={0.5}>
-            <div className="mt-8 flex items-center gap-4">
-              <div className="flex-1 h-[3px] bg-border/40 rounded-full overflow-hidden relative">
-                <motion.div
-                  className="absolute inset-y-0 left-0 rounded-full"
-                  style={{ background: "linear-gradient(90deg, hsl(155 18% 25%), hsl(155 8% 45%))" }}
-                  animate={{ width: `${progressPercent}%` }}
-                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                />
-              </div>
-              <motion.span
-                className="text-[10px] font-display tracking-widest uppercase text-muted-foreground/50 tabular-nums min-w-[52px] text-right"
-                animate={{ color: progressPercent === 100 ? "hsl(155 18% 25%)" : "hsl(var(--muted-foreground) / 0.5)" }}
-              >
-                {exploredLaws.size}/{laws.length}
-              </motion.span>
-            </div>
-            <AnimatePresence>
-              {progressPercent === 100 && (
-                <motion.p
-                  className="text-[10px] font-display tracking-wider uppercase mt-3"
-                  style={{ color: "hsl(155 18% 25%)" }}
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 0.7, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  Framework complete ✓
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </Reveal>
         </div>
       </section>
 
@@ -207,145 +118,238 @@ const FuelLaws = () => {
         <div className="divider" />
       </div>
 
-      {/* The Five Laws — Framework Reveal */}
+      {/* ═══ Unified Framework System ═══ */}
       <section className="section-padding section-spacing">
         <div className="max-content">
-          <Reveal>
-            <p className="text-caption mb-12">The Five Laws</p>
-          </Reveal>
-          <div className="space-y-0">
-            {laws.map((law, i) => {
-              const isActive = activeLaw === law.number;
-              const isHovered = hoveredLaw === law.number;
-              const hasActiveOrHover = activeLaw !== null || hoveredLaw !== null;
-              const isFocused = isActive || isHovered;
-              const isReceded = hasActiveOrHover && !isFocused;
+          <div className="grid lg:grid-cols-[1fr,280px] gap-12 lg:gap-20">
+            {/* Laws — Main column */}
+            <div>
+              <Reveal>
+                <p className="text-caption mb-12">The Five Laws</p>
+              </Reveal>
+              <div className="space-y-0">
+                {laws.map((law, i) => {
+                  const isActive = activeLaw === law.number;
+                  const isHovered = hoveredLaw === law.number;
+                  const hasActiveOrHover = activeLaw !== null || hoveredLaw !== null;
+                  const isFocused = isActive || isHovered;
+                  const isReceded = hasActiveOrHover && !isFocused;
 
-              return (
-                <Reveal key={law.number} delay={i * 0.08}>
-                  <motion.div
-                    className="border-b border-border/50 cursor-pointer relative overflow-hidden"
-                    onClick={() => handleLawClick(law.number)}
-                    onMouseEnter={() => setHoveredLaw(law.number)}
-                    onMouseLeave={() => setHoveredLaw(null)}
-                    animate={{
-                      opacity: isReceded ? 0.35 : 1,
-                    }}
-                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    {/* Accent bar */}
-                    <motion.div
-                      className="absolute left-0 top-0 bottom-0 w-[2px]"
-                      style={{ background: `hsl(${law.color})` }}
-                      initial={{ scaleY: 0 }}
-                      animate={{ scaleY: isActive ? 1 : 0 }}
-                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                      layoutId={`accent-${law.number}`}
-                    />
+                  return (
+                    <Reveal key={law.number} delay={i * 0.08}>
+                      <motion.div
+                        className="border-b border-border/50 cursor-pointer relative overflow-hidden"
+                        onClick={() => handleLawClick(law.number)}
+                        onMouseEnter={() => setHoveredLaw(law.number)}
+                        onMouseLeave={() => setHoveredLaw(null)}
+                        animate={{
+                          opacity: isReceded ? 0.35 : 1,
+                        }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      >
+                        {/* Accent bar */}
+                        <motion.div
+                          className="absolute left-0 top-0 bottom-0 w-[2px]"
+                          style={{ background: `hsl(${law.color})` }}
+                          initial={{ scaleY: 0 }}
+                          animate={{ scaleY: isActive ? 1 : 0 }}
+                          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                        />
 
-                    {/* Subtle background glow on active */}
-                    <motion.div
-                      className="absolute inset-0 pointer-events-none"
-                      animate={{
-                        background: isActive
-                          ? `linear-gradient(90deg, hsl(${law.color} / 0.04), transparent 40%)`
-                          : "transparent",
-                      }}
-                      transition={{ duration: 0.5 }}
-                    />
-
-                    <div className="py-10 md:py-14 relative z-10">
-                      <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-10">
-                        <motion.span
-                          className="text-caption text-[10px] w-10 shrink-0 opacity-40"
-                          animate={{ x: isActive ? 8 : 0, opacity: isActive ? 0.8 : 0.4 }}
-                          transition={{ duration: 0.4 }}
-                        >
-                          {law.number}
-                        </motion.span>
-                        <motion.h3
-                          className="font-display text-2xl md:text-3xl font-semibold"
+                        {/* Subtle glow */}
+                        <motion.div
+                          className="absolute inset-0 pointer-events-none"
                           animate={{
-                            x: isActive ? 8 : 0,
-                            color: isFocused
-                              ? `hsl(${law.color})`
-                              : "hsl(var(--foreground))",
+                            background: isActive
+                              ? `linear-gradient(90deg, hsl(${law.color} / 0.04), transparent 40%)`
+                              : "transparent",
                           }}
                           transition={{ duration: 0.5 }}
-                        >
-                          {law.title}
-                        </motion.h3>
-                        <motion.span
-                          className="md:ml-auto text-body text-sm md:text-right max-w-xs"
-                          animate={{ opacity: isReceded ? 0.4 : 0.7 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          {law.tagline}
-                        </motion.span>
-                        <motion.span
-                          className="hidden md:inline-block text-muted-foreground/40 text-lg font-light"
-                          animate={{ rotate: isActive ? 45 : 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          +
-                        </motion.span>
-                      </div>
-                    </div>
+                        />
 
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pb-12 md:pl-20 space-y-6">
-                            <motion.p
-                              className="text-body-lg max-w-xl"
-                              initial={{ y: 12, opacity: 0 }}
-                              animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: 0.12, duration: 0.5 }}
+                        <div className="py-10 md:py-14 relative z-10">
+                          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-10">
+                            <motion.span
+                              className="text-caption text-[10px] w-10 shrink-0 opacity-40"
+                              animate={{ x: isActive ? 8 : 0, opacity: isActive ? 0.8 : 0.4 }}
+                              transition={{ duration: 0.4 }}
                             >
-                              {law.detail}
-                            </motion.p>
-                            <motion.div
-                              className="border-l-2 pl-5 py-1"
-                              style={{ borderColor: `hsl(${law.color})` }}
-                              initial={{ y: 12, opacity: 0 }}
-                              animate={{ y: 0, opacity: 1 }}
-                              transition={{ delay: 0.22, duration: 0.5 }}
+                              {law.number}
+                            </motion.span>
+                            <motion.h3
+                              className="font-display text-2xl md:text-3xl font-semibold"
+                              animate={{
+                                x: isActive ? 8 : 0,
+                                color: isFocused
+                                  ? `hsl(${law.color})`
+                                  : "hsl(var(--foreground))",
+                              }}
+                              transition={{ duration: 0.5 }}
                             >
-                              <p className="text-caption text-[10px] mb-2">In Practice</p>
-                              <p className="text-body text-sm">{law.practical}</p>
-                            </motion.div>
-
-                            {/* Next law navigation */}
-                            {i < laws.length - 1 && (
-                              <motion.button
-                                className="flex items-center gap-2 text-[11px] font-display tracking-wider uppercase text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors mt-3 group"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setActiveLaw(laws[i + 1].number);
-                                }}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.35 }}
-                              >
-                                <span className="group-hover:translate-x-1 transition-transform duration-300">
-                                  Next → {laws[i + 1].title}
-                                </span>
-                              </motion.button>
-                            )}
+                              {law.title}
+                            </motion.h3>
+                            <motion.span
+                              className="md:ml-auto text-body text-sm md:text-right max-w-xs"
+                              animate={{ opacity: isReceded ? 0.4 : 0.7 }}
+                              transition={{ duration: 0.5 }}
+                            >
+                              {law.tagline}
+                            </motion.span>
+                            <motion.span
+                              className="hidden md:inline-block text-muted-foreground/40 text-lg font-light"
+                              animate={{ rotate: isActive ? 45 : 0 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              +
+                            </motion.span>
                           </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                </Reveal>
-              );
-            })}
+                        </div>
+
+                        <AnimatePresence>
+                          {isActive && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pb-12 md:pl-20 space-y-6">
+                                <motion.p
+                                  className="text-body-lg max-w-xl"
+                                  initial={{ y: 12, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  transition={{ delay: 0.12, duration: 0.5 }}
+                                >
+                                  {law.detail}
+                                </motion.p>
+                                <motion.div
+                                  className="border-l-2 pl-5 py-1"
+                                  style={{ borderColor: `hsl(${law.color})` }}
+                                  initial={{ y: 12, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  transition={{ delay: 0.22, duration: 0.5 }}
+                                >
+                                  <p className="text-caption text-[10px] mb-2">In Practice</p>
+                                  <p className="text-body text-sm">{law.practical}</p>
+                                </motion.div>
+
+                                {/* Next law navigation */}
+                                {i < laws.length - 1 && (
+                                  <motion.button
+                                    className="flex items-center gap-2 text-[11px] font-display tracking-wider uppercase text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors mt-3 group"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setActiveLaw(laws[i + 1].number);
+                                      setExploredLaws((prev) => new Set(prev).add(laws[i + 1].number));
+                                    }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.35 }}
+                                  >
+                                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                                      Next → {laws[i + 1].title}
+                                    </span>
+                                  </motion.button>
+                                )}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+                    </Reveal>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Sidebar — Cycle + Performance Bar (always visible alongside laws) */}
+            <div className="lg:sticky lg:top-28 lg:self-start space-y-10">
+              {/* Vertical cycle */}
+              <div>
+                <p className="text-caption text-[10px] mb-6">System Cycle</p>
+                <div className="flex flex-row lg:flex-col items-center lg:items-start gap-0">
+                  {laws.map((law, i) => {
+                    const isActive = activeLaw === law.number;
+                    const isExplored = exploredLaws.has(law.number);
+
+                    return (
+                      <div key={law.number} className="flex flex-row lg:flex-col items-center lg:items-start">
+                        <motion.button
+                          className="flex items-center gap-3 py-2 lg:py-3 group"
+                          onClick={() => handleLawClick(law.number)}
+                          whileHover={{ x: 4 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <motion.div
+                            className="w-2.5 h-2.5 rounded-full shrink-0"
+                            animate={{
+                              backgroundColor: isActive
+                                ? `hsl(${law.color})`
+                                : isExplored
+                                  ? "hsl(var(--foreground) / 0.4)"
+                                  : "hsl(var(--foreground) / 0.12)",
+                              scale: isActive ? 1.5 : 1,
+                            }}
+                            transition={{ duration: 0.4 }}
+                          />
+                          {isActive && (
+                            <motion.div
+                              className="absolute w-5 h-5 rounded-full border"
+                              style={{ borderColor: `hsl(${law.color} / 0.3)` }}
+                              initial={{ scale: 0, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          )}
+                          <span className="hidden lg:inline text-[11px] font-display tracking-wider uppercase text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors">
+                            {law.title}
+                          </span>
+                        </motion.button>
+                        {i < laws.length - 1 && (
+                          <div className="w-4 lg:w-px h-px lg:h-4 bg-border/40 lg:ml-[5px] mx-1 lg:mx-0" />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Performance bar */}
+              <div>
+                <p className="text-caption text-[10px] mb-3">Performance</p>
+                <div className="flex lg:flex-col items-center lg:items-stretch gap-3">
+                  <div className="flex-1 lg:flex-none h-[3px] lg:h-[3px] w-full bg-border/40 rounded-full overflow-hidden relative">
+                    <motion.div
+                      className="absolute inset-y-0 left-0 rounded-full"
+                      style={{ background: "linear-gradient(90deg, hsl(155 18% 25%), hsl(155 8% 45%))" }}
+                      animate={{ width: `${progressPercent}%` }}
+                      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                  </div>
+                  <motion.span
+                    className="text-[10px] font-display tracking-widest uppercase text-muted-foreground/50 tabular-nums"
+                    animate={{ color: progressPercent === 100 ? "hsl(155 18% 25%)" : "hsl(var(--muted-foreground) / 0.5)" }}
+                  >
+                    {exploredLaws.size}/{laws.length}
+                  </motion.span>
+                </div>
+                <AnimatePresence>
+                  {progressPercent === 100 && (
+                    <motion.p
+                      className="text-[10px] font-display tracking-wider uppercase mt-3"
+                      style={{ color: "hsl(155 18% 25%)" }}
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 0.7, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      Framework complete ✓
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -395,7 +399,7 @@ const FuelLaws = () => {
       <div className="section-padding max-content">
         <div className="divider" />
       </div>
-      <section className="section-padding section-spacing">
+      <section className="section-padding py-32 md:py-40">
         <div className="max-content text-center">
           <Reveal>
             <h2 className="text-headline max-w-lg mx-auto">
