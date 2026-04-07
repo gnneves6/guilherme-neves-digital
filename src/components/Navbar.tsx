@@ -14,6 +14,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  // Dark hero mode: on homepage, navbar starts transparent with light text
+  const inDarkHero = isHome && !scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -21,7 +25,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -29,16 +32,24 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <motion.div
-        className={`border-b transition-colors duration-500 ${
-          scrolled
-            ? "bg-background/95 backdrop-blur-md border-border/50"
-            : "bg-background/80 backdrop-blur-sm border-transparent"
-        }`}
+        className="border-b transition-all duration-500"
+        animate={{
+          backgroundColor: scrolled
+            ? "hsl(var(--background) / 0.95)"
+            : "transparent",
+          borderColor: scrolled
+            ? "hsl(var(--border) / 0.5)"
+            : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
+        }}
+        transition={{ duration: 0.4 }}
       >
         <nav className="section-padding max-content flex items-center justify-between h-16 md:h-20">
           <Link
             to="/"
-            className="font-display text-lg md:text-xl font-semibold tracking-tight text-foreground"
+            className={`font-display text-lg md:text-xl font-semibold tracking-tight transition-colors duration-500 ${
+              inDarkHero ? "text-[hsl(var(--ivory))]" : "text-foreground"
+            }`}
           >
             Guilherme Neves
           </Link>
@@ -51,15 +62,19 @@ const Navbar = () => {
                 to={item.path}
                 className={`relative text-sm font-body tracking-wide transition-colors duration-300 ${
                   location.pathname === item.path
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? inDarkHero ? "text-[hsl(var(--ivory))]" : "text-foreground"
+                    : inDarkHero
+                      ? "text-[hsl(var(--ivory)/0.5)] hover:text-[hsl(var(--ivory)/0.9)]"
+                      : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {item.label}
                 {location.pathname === item.path && (
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-foreground"
+                    className={`absolute -bottom-1 left-0 right-0 h-px ${
+                      inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"
+                    }`}
                     transition={{ duration: 0.3 }}
                   />
                 )}
@@ -74,17 +89,17 @@ const Navbar = () => {
             aria-label="Toggle menu"
           >
             <motion.span
-              className="block w-6 h-px bg-foreground origin-center"
+              className={`block w-6 h-px origin-center ${inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"}`}
               animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
             />
             <motion.span
-              className="block w-6 h-px bg-foreground"
+              className={`block w-6 h-px ${inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"}`}
               animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
               transition={{ duration: 0.2 }}
             />
             <motion.span
-              className="block w-6 h-px bg-foreground origin-center"
+              className={`block w-6 h-px origin-center ${inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"}`}
               animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
             />
