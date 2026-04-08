@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useVel
 import { useRef, useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
+import MannequinTorso from "@/components/MannequinTorso";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
 import portraitImg from "@/assets/guilherme-portrait.jpg";
 import logoAnderlecht from "@/assets/logo-anderlecht.png";
@@ -216,7 +217,7 @@ const ChapterSection = ({
   );
 };
 
-/* ═══ Horizontal Scroll-Pinned Environments ═══ */
+/* ═══ FIFA-Style Club Selection with 3D Mannequin ═══ */
 const EnvironmentsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -232,130 +233,148 @@ const EnvironmentsSection = () => {
     setActiveIndex(idx);
   });
 
+  const activeExp = experiences[activeIndex];
+
   return (
     <div ref={sectionRef} style={{ height: `${(experiences.length + 1) * 100}vh` }}>
       <div className="sticky top-0 h-screen flex items-center overflow-hidden section-dark">
-        <div className="section-padding w-full">
+        {/* Background color wash from active club */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          animate={{
+            background: `radial-gradient(ellipse 80% 70% at 50% 50%, ${activeExp.kitColors.primary}12 0%, transparent 70%)`,
+          }}
+          transition={{ duration: 1.2 }}
+        />
+
+        <div className="section-padding w-full relative z-10">
           <div className="max-content">
-            <div className="mb-8 md:mb-12">
+            {/* Header */}
+            <div className="mb-6 md:mb-10">
               <p className="text-caption mb-3">Selected Experience</p>
-              <p className="text-body-lg max-w-lg">
-                Environments that shaped the work.
-              </p>
             </div>
 
-            <div className="relative h-[380px] md:h-[420px]">
-              {experiences.map((exp, i) => {
-                const offset = i - activeIndex;
-                const isFocused = i === activeIndex;
-
-                return (
-                  <motion.div
-                    key={exp.name}
-                    className="absolute inset-0"
-                    animate={{
-                      x: `${offset * 105}%`,
-                      scale: isFocused ? 1 : 0.82,
-                      opacity: isFocused ? 1 : Math.abs(offset) <= 1 ? 0.25 : 0,
-                      filter: isFocused ? "blur(0px)" : `blur(${Math.min(Math.abs(offset) * 4, 8)}px)`,
-                      zIndex: 10 - Math.abs(offset),
-                    }}
-                    transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    <div
-                      className={`h-full border transition-colors duration-700 overflow-hidden relative ${
-                        isFocused
-                          ? "border-[hsl(var(--ivory)/0.12)] bg-[hsl(var(--charcoal))]"
-                          : "border-[hsl(var(--ivory)/0.04)] bg-[hsl(var(--charcoal-deep))]"
-                      }`}
+            {/* Main FIFA-style layout: info left, mannequin center, details right */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_280px_1fr] lg:grid-cols-[1fr_340px_1fr] gap-4 md:gap-8 items-center min-h-[420px] md:min-h-[480px]">
+              
+              {/* Left panel — Club identity */}
+              <div className="flex flex-col justify-center order-2 md:order-1">
+                {experiences.map((exp, i) => {
+                  const isFocused = i === activeIndex;
+                  return (
+                    <motion.div
+                      key={exp.name}
+                      className="overflow-hidden"
+                      animate={{
+                        height: isFocused ? "auto" : 0,
+                        opacity: isFocused ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                     >
-                      {/* Club logo watermark */}
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                        <motion.img
-                          src={exp.logo}
-                          alt=""
-                          className="w-[260px] h-[260px] md:w-[320px] md:h-[320px] object-contain"
-                          animate={{
-                            opacity: isFocused ? 0.08 : 0.02,
-                            scale: isFocused ? 1.08 : 0.9,
-                          }}
-                          transition={{ duration: 0.8 }}
-                          style={{
-                            filter: "grayscale(100%) brightness(2)",
-                            maskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
-                            WebkitMaskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
-                          }}
-                        />
-                      </div>
-
-                      {/* Editorial jersey silhouette */}
-                      <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <JerseySilhouette
-                          primaryColor={exp.kitColors.primary}
-                          secondaryColor={exp.kitColors.secondary}
-                          accentColor={exp.kitColors.accent}
-                          isFocused={isFocused}
-                        />
-                      </div>
-
-                      <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12">
-                        <div>
-                          <div className="flex items-center justify-between mb-6">
-                            <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                              {exp.period}
-                            </span>
-                            <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.2)]">
-                              {exp.location}
-                            </span>
-                          </div>
-                          <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-[hsl(var(--ivory))]">
+                      <div className="py-2">
+                        <motion.div
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ duration: 0.5, delay: 0.1 }}
+                        >
+                          <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.3)]">
+                            {exp.period} — {exp.location}
+                          </span>
+                          <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight text-[hsl(var(--ivory))] mt-3">
                             {exp.name}
                           </h3>
                           <p className="text-[10px] md:text-xs tracking-widest uppercase font-display mt-3 text-[hsl(var(--ivory)/0.4)]">
                             {exp.role}
                           </p>
-                        </div>
-                        <motion.p
-                          className="text-sm max-w-md leading-relaxed text-[hsl(var(--ivory)/0.55)]"
-                          animate={{ opacity: isFocused ? 1 : 0 }}
-                          transition={{ duration: 0.5, delay: isFocused ? 0.2 : 0 }}
-                        >
-                          {exp.description}
-                        </motion.p>
+                          <p className="text-sm max-w-sm leading-relaxed text-[hsl(var(--ivory)/0.5)] mt-5">
+                            {exp.description}
+                          </p>
+                        </motion.div>
                       </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
 
-                      <motion.div
-                        className="absolute bottom-0 left-0 h-[2px]"
-                        style={{ background: "hsl(var(--olive-light))" }}
-                        animate={{ width: isFocused ? "100%" : "0%" }}
-                        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                      />
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+              {/* Center — 3D Mannequin (fixed position) */}
+              <div className="relative order-1 md:order-2 h-[300px] md:h-[420px] lg:h-[480px]">
+                {/* Club logo watermark behind mannequin */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <motion.img
+                    src={activeExp.logo}
+                    alt=""
+                    className="w-[180px] h-[180px] md:w-[240px] md:h-[240px] object-contain"
+                    animate={{ opacity: 0.06, scale: 1.1 }}
+                    transition={{ duration: 0.8 }}
+                    style={{
+                      filter: "grayscale(100%) brightness(2)",
+                      maskImage: "radial-gradient(ellipse at center, black 20%, transparent 65%)",
+                      WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 65%)",
+                    }}
+                  />
+                </div>
 
-            <div className="flex items-center gap-3 mt-8">
-              {experiences.map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="h-1 rounded-full"
-                  animate={{
-                    width: activeIndex === i ? 32 : 8,
-                    backgroundColor: activeIndex === i
-                      ? "hsl(var(--ivory))"
-                      : "hsl(var(--ivory) / 0.15)",
-                  }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                {/* 3D Canvas */}
+                <MannequinTorso
+                  primaryColor={activeExp.kitColors.primary}
+                  secondaryColor={activeExp.kitColors.secondary}
+                  accentColor={activeExp.kitColors.accent}
                 />
-              ))}
-              <span className="text-[10px] font-display tracking-widest uppercase ml-2 text-[hsl(var(--ivory)/0.3)]">
-                {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
-              </span>
+
+                {/* Mannequin pedestal line */}
+                <motion.div
+                  className="absolute bottom-8 left-1/2 -translate-x-1/2 h-px"
+                  style={{ background: `${activeExp.kitColors.primary}30` }}
+                  animate={{ width: 120 }}
+                  transition={{ duration: 0.8 }}
+                />
+              </div>
+
+              {/* Right panel — Club number & additional info */}
+              <div className="flex flex-col justify-center items-start md:items-end text-left md:text-right order-3">
+                {/* Big club index number */}
+                <motion.span
+                  className="font-display text-[80px] md:text-[120px] lg:text-[160px] font-bold leading-none"
+                  style={{ color: `${activeExp.kitColors.primary}15` }}
+                  key={activeIndex}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  {String(activeIndex + 1).padStart(2, "0")}
+                </motion.span>
+
+                {/* Progress indicator */}
+                <div className="flex items-center gap-3 mt-4">
+                  {experiences.map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="rounded-full"
+                      animate={{
+                        width: activeIndex === i ? 28 : 6,
+                        height: 6,
+                        backgroundColor: activeIndex === i
+                          ? activeExp.kitColors.primary
+                          : "hsl(var(--ivory) / 0.12)",
+                      }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                  ))}
+                </div>
+
+                {/* Scroll hint */}
+                <motion.p
+                  className="text-[9px] tracking-[0.3em] uppercase font-display mt-6 text-[hsl(var(--ivory)/0.2)]"
+                  animate={{ opacity: [0.2, 0.5, 0.2] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  Scroll to explore
+                </motion.p>
+              </div>
             </div>
 
-            <div className="mt-12 pt-8" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
+            {/* Bottom — Additional exposure */}
+            <div className="mt-10 pt-6" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
               <p className="text-[10px] tracking-widest uppercase font-display mb-4 text-[hsl(var(--ivory)/0.3)]">
                 Additional Observational Exposure
               </p>
