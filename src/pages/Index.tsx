@@ -473,7 +473,7 @@ const Index = () => {
 
   return (
     <Layout>
-      <div ref={pageRef}>
+      <div ref={pageRef} style={{ filter: velocityBlur > 0.3 ? `blur(${velocityBlur * 0.5}px)` : "none", transition: "filter 0.15s ease-out" }}>
         {/* ═══ CHAPTER 1: ENTRY — Dark Cinematic World ═══ */}
         <section
           ref={heroRef}
