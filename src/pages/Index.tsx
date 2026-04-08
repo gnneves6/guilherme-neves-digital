@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useVel
 import { useRef, useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
+import MannequinTorso from "@/components/MannequinTorso";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
 import portraitImg from "@/assets/guilherme-portrait.jpg";
 import logoAnderlecht from "@/assets/logo-anderlecht.png";
