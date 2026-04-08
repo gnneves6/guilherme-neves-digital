@@ -164,8 +164,6 @@
     background-size: 128px 128px;
     mix-blend-mode: multiply;
   }
-}
-
   /* Dark cinematic section */
   .section-dark {
     background: hsl(var(--charcoal-deep));
