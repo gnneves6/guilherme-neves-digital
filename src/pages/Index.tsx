@@ -288,6 +288,16 @@ const EnvironmentsSection = () => {
                         />
                       </div>
 
+                      {/* Editorial jersey silhouette */}
+                      <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <JerseySilhouette
+                          primaryColor={exp.kitColors.primary}
+                          secondaryColor={exp.kitColors.secondary}
+                          accentColor={exp.kitColors.accent}
+                          isFocused={isFocused}
+                        />
+                      </div>
+
                       <div className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12">
                         <div>
                           <div className="flex items-center justify-between mb-6">
