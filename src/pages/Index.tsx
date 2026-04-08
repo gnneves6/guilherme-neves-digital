@@ -454,6 +454,9 @@ const Index = () => {
     offset: ["start start", "end start"],
   });
 
+  // Scroll velocity blur
+  const velocityBlur = useScrollVelocityBlur();
+
   // Hero parallax transforms
   const heroImageY = useTransform(heroScroll, [0, 1], ["0%", "35%"]);
   const heroImageScale = useTransform(heroScroll, [0, 1], [1.1, 1.3]);
