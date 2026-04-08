@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useInView, useMotionValueEvent } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useVelocity, useSpring } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
@@ -17,6 +17,7 @@ const experiences = [
     period: "2026",
     description: "Belgian Pro League — Curricular internship in performance nutrition within an elite football environment.",
     logo: logoAnderlecht,
+    kitColors: { primary: "#7B68AE", secondary: "#FFFFFF", accent: "#7B68AE" },
   },
   {
     name: "Leça FC",
@@ -25,6 +26,7 @@ const experiences = [
     period: "2025",
     description: "Portuguese football — Building and delivering practical nutrition systems for a competitive first-team environment.",
     logo: logoLeca,
+    kitColors: { primary: "#1A3A6B", secondary: "#FFFFFF", accent: "#C4A853" },
   },
   {
     name: "Run4Excellence",
@@ -33,6 +35,7 @@ const experiences = [
     period: "2025",
     description: "Endurance performance — Applied nutrition and health strategies for distance athletes and structured training.",
     logo: logoR4E,
+    kitColors: { primary: "#2D8C4E", secondary: "#FFFFFF", accent: "#F5A623" },
   },
 ];
 
@@ -83,6 +86,87 @@ const fuelLaws = [
   { number: "04", title: "Hydrate to Dominate", desc: "Hydration supports physical and cognitive output." },
   { number: "05", title: "Test Before the Game", desc: "Competition is not the place to experiment." },
 ];
+
+/* ═══ Editorial Jersey Silhouette ═══ */
+const JerseySilhouette = ({
+  primaryColor,
+  secondaryColor,
+  accentColor,
+  isFocused,
+}: {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  isFocused: boolean;
+}) => (
+  <motion.svg
+    viewBox="0 0 200 220"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-[180px] h-[200px] md:w-[220px] md:h-[240px]"
+    animate={{
+      opacity: isFocused ? 0.18 : 0.04,
+      scale: isFocused ? 1 : 0.85,
+      rotate: isFocused ? 0 : -3,
+    }}
+    transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+  >
+    {/* Jersey body */}
+    <motion.path
+      d="M60 50 L40 65 L25 55 L10 75 L30 95 L35 80 L35 200 L165 200 L165 80 L170 95 L190 75 L175 55 L160 65 L140 50 L120 35 L80 35 Z"
+      animate={{ fill: primaryColor }}
+      transition={{ duration: 0.6 }}
+      stroke={secondaryColor}
+      strokeWidth="1.5"
+      strokeOpacity="0.3"
+    />
+    {/* Collar */}
+    <motion.path
+      d="M80 35 Q100 48 120 35"
+      stroke={secondaryColor}
+      strokeWidth="2"
+      strokeOpacity="0.5"
+      fill="none"
+    />
+    {/* Center line detail */}
+    <motion.line
+      x1="100" y1="50" x2="100" y2="180"
+      stroke={secondaryColor}
+      strokeWidth="0.5"
+      strokeOpacity="0.15"
+    />
+    {/* Sleeve edges */}
+    <motion.path
+      d="M35 80 L35 200"
+      stroke={accentColor}
+      strokeWidth="1"
+      strokeOpacity="0.2"
+    />
+    <motion.path
+      d="M165 80 L165 200"
+      stroke={accentColor}
+      strokeWidth="1"
+      strokeOpacity="0.2"
+    />
+  </motion.svg>
+);
+
+/* ═══ Scroll Velocity Hook ═══ */
+const useScrollVelocityBlur = () => {
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 300 });
+  const [blurAmount, setBlurAmount] = useState(0);
+
+  useMotionValueEvent(smoothVelocity, "change", (v) => {
+    const absV = Math.abs(v);
+    // Map velocity to blur: 0-2000px/s → 0-3px blur
+    const blur = Math.min(absV / 700, 3);
+    setBlurAmount(blur);
+  });
+
+  return blurAmount;
+};
 
 /* ═══ Parallax Atmospheric Layer ═══ */
 const AtmosphericOrb = ({
@@ -201,6 +285,16 @@ const EnvironmentsSection = () => {
                             maskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
                             WebkitMaskImage: "radial-gradient(ellipse at center, black 15%, transparent 70%)",
                           }}
+                        />
+                      </div>
+
+                      {/* Editorial jersey silhouette */}
+                      <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <JerseySilhouette
+                          primaryColor={exp.kitColors.primary}
+                          secondaryColor={exp.kitColors.secondary}
+                          accentColor={exp.kitColors.accent}
+                          isFocused={isFocused}
                         />
                       </div>
 
@@ -360,6 +454,9 @@ const Index = () => {
     offset: ["start start", "end start"],
   });
 
+  // Scroll velocity blur
+  const velocityBlur = useScrollVelocityBlur();
+
   // Hero parallax transforms
   const heroImageY = useTransform(heroScroll, [0, 1], ["0%", "35%"]);
   const heroImageScale = useTransform(heroScroll, [0, 1], [1.1, 1.3]);
@@ -376,7 +473,7 @@ const Index = () => {
 
   return (
     <Layout>
-      <div ref={pageRef}>
+      <div ref={pageRef} style={{ filter: velocityBlur > 0.3 ? `blur(${velocityBlur * 0.5}px)` : "none", transition: "filter 0.15s ease-out" }}>
         {/* ═══ CHAPTER 1: ENTRY — Dark Cinematic World ═══ */}
         <section
           ref={heroRef}
