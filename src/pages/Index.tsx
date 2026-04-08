@@ -17,6 +17,7 @@ const experiences = [
     period: "2026",
     description: "Belgian Pro League — Curricular internship in performance nutrition within an elite football environment.",
     logo: logoAnderlecht,
+    kitColors: { primary: "#7B68AE", secondary: "#FFFFFF", accent: "#7B68AE" },
   },
   {
     name: "Leça FC",
@@ -25,6 +26,7 @@ const experiences = [
     period: "2025",
     description: "Portuguese football — Building and delivering practical nutrition systems for a competitive first-team environment.",
     logo: logoLeca,
+    kitColors: { primary: "#1A3A6B", secondary: "#FFFFFF", accent: "#C4A853" },
   },
   {
     name: "Run4Excellence",
@@ -33,6 +35,7 @@ const experiences = [
     period: "2025",
     description: "Endurance performance — Applied nutrition and health strategies for distance athletes and structured training.",
     logo: logoR4E,
+    kitColors: { primary: "#2D8C4E", secondary: "#FFFFFF", accent: "#F5A623" },
   },
 ];
 
