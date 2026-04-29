@@ -9,22 +9,41 @@ const InvitationSection = () => {
           <p className="text-caption mb-6">Invitation</p>
         </Reveal>
         <Reveal delay={0.1}>
-          <h2 className="text-headline max-w-2xl mx-auto">
-            Let's build performance environments<br className="hidden md:block" /> that hold under pressure.
+          <h2 className="text-headline max-w-3xl mx-auto">
+            If you are building a performance environment<br className="hidden md:block" /> where clarity matters, let's talk.
           </h2>
         </Reveal>
         <Reveal delay={0.25}>
-          <p className="text-body-lg max-w-md mx-auto mt-5">
-            Open to meaningful opportunities in performance, education and applied sport nutrition.
+          <p className="text-body-lg max-w-lg mx-auto mt-5">
+            Open to meaningful opportunities, collaborations and applied sport
+            performance projects.
           </p>
         </Reveal>
         <Reveal delay={0.4}>
-          <Link
-            to="/contact"
-            className="group inline-flex items-center justify-center mt-12 px-12 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
-          >
-            Start a Conversation
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-12">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+            >
+              Contact
+            </Link>
+            <a
+              href="/cv-guilherme-neves.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
+            >
+              View CV
+            </a>
+            <a
+              href="https://www.linkedin.com/in/guilherme-neves"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
+            >
+              LinkedIn
+            </a>
+          </div>
         </Reveal>
       </div>
     </section>

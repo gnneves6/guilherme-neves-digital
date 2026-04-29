@@ -3,12 +3,12 @@ import { useState } from "react";
 import Reveal from "@/components/Reveal";
 
 const components = [
-  { title: "Education", desc: "Translating science into knowledge athletes actually use." },
-  { title: "Fueling", desc: "Practical matchday and training-week fueling protocols." },
-  { title: "Recovery", desc: "Repeatable structures that prepare the next performance." },
-  { title: "Hydration", desc: "Evidence-based hydration tailored to sport demand." },
-  { title: "Monitoring", desc: "Anthropometry, tracking and reporting that informs decisions." },
-  { title: "Culture", desc: "Building team environments where nutrition becomes natural." },
+  { title: "Education", desc: "Turning complex nutrition into clear behaviours athletes can repeat." },
+  { title: "Fueling", desc: "Structuring energy before key sessions, matches and demanding weeks." },
+  { title: "Recovery", desc: "Building post-training and post-match routines that prepare the next output." },
+  { title: "Hydration", desc: "Making fluid and electrolyte strategy practical, visible and adaptable." },
+  { title: "Monitoring", desc: "Translating measurements and reports into useful decisions." },
+  { title: "Culture", desc: "Helping nutrition become part of how a team operates, not an extra task." },
 ];
 
 const SystemComponentsSection = () => {
