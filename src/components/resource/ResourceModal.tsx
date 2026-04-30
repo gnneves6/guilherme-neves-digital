@@ -59,9 +59,9 @@ const samplePages: Record<string, string[]> = {
     "Flexible substitutions",
   ],
   "abc-of-football-nutrition": [
-    "A — The Foundation Plate",
-    "B — Hydration & Timing",
-    "C — Recovery & Adaptation",
+    "A — Athlete Fuel = Performance",
+    "B — Build Your Base",
+    "C — Care About Recovery",
   ],
 };
 
@@ -259,22 +259,40 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
 
                 {artefact.ctaType === "view-sample" && (
                   <div className="mt-6 space-y-4">
-                    <div className="grid grid-cols-3 gap-2">
-                      {pages.map((label, n) => (
-                        <div
-                          key={n}
-                          className="aspect-[3/4] flex flex-col items-center justify-center gap-2 text-center px-2 rounded-sm"
-                          style={{ background: "hsl(var(--charcoal) / 0.04)", border: "1px solid hsl(var(--charcoal) / 0.08)" }}
-                        >
-                          <span className="text-[8px] tracking-[0.25em] uppercase font-display opacity-30">
-                            {String(n + 1).padStart(2, "0")}
-                          </span>
-                          <span className="text-[9px] tracking-wide leading-snug font-display opacity-50">
-                            {label}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    {artefact.previewImages && artefact.previewImages.length > 0 ? (
+                      <div className="grid grid-cols-3 gap-2">
+                        {artefact.previewImages.map((src, n) => (
+                          <div
+                            key={n}
+                            className="aspect-[3/4] overflow-hidden rounded-sm"
+                            style={{ border: "1px solid hsl(var(--charcoal) / 0.08)" }}
+                          >
+                            <img
+                              src={src}
+                              alt={pages[n] ?? `Preview ${n + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-3 gap-2">
+                        {pages.map((label, n) => (
+                          <div
+                            key={n}
+                            className="aspect-[3/4] flex flex-col items-center justify-center gap-2 text-center px-2 rounded-sm"
+                            style={{ background: "hsl(var(--charcoal) / 0.04)", border: "1px solid hsl(var(--charcoal) / 0.08)" }}
+                          >
+                            <span className="text-[8px] tracking-[0.25em] uppercase font-display opacity-30">
+                              {String(n + 1).padStart(2, "0")}
+                            </span>
+                            <span className="text-[9px] tracking-wide leading-snug font-display opacity-50">
+                              {label}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     {artefact.notionUrl && (
                       <a
                         href={artefact.notionUrl}
