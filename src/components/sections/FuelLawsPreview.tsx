@@ -97,6 +97,12 @@ const FuelLawsPreview = () => {
                 </div>
               </div>
 
+              {/* Loop arrow */}
+              <div className="flex items-center gap-2 mt-2 ml-1">
+                <span className="text-muted-foreground/25 text-xs">↺</span>
+                <span className="font-display text-[10px] tracking-wide text-muted-foreground/25">Back to Fuel</span>
+              </div>
+
               {/* Active law microcopy */}
               <div className="mt-10 min-h-[80px]">
                 <AnimatePresence mode="wait">
@@ -108,13 +114,22 @@ const FuelLawsPreview = () => {
                     transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                   >
                      <p className="text-[10px] tracking-[0.35em] uppercase font-display opacity-50">
-                      {active < 5 ? `Law 0${active + 1}` : "The Loop"}
+                      Law 0{active + 1}
                      </p>
                     <p className="font-display text-xl md:text-2xl font-medium mt-2 leading-snug max-w-md">
                       {laws[active].micro}
                     </p>
                   </motion.div>
                 </AnimatePresence>
+
+                <div className="mt-6 pt-4 border-t border-border/30">
+                  <p className="text-[10px] tracking-[0.35em] uppercase font-display opacity-35">
+                    The Loop
+                  </p>
+                  <p className="text-body text-xs opacity-50 mt-1">
+                    Repeat, refine, adapt. Discipline is a cycle, not an event.
+                  </p>
+                </div>
               </div>
 
               {/* Progress dots */}
