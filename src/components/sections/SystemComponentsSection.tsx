@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
-import { AnimatePresence } from "framer-motion";
 
 const stages = [
   { title: "Assess", desc: "Understand the athlete, context, routine, needs and constraints." },
@@ -16,87 +15,72 @@ const SystemComponentsSection = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="section-padding section-spacing">
+    <section className="section-padding py-16 md:py-20">
       <div className="max-content">
         <Reveal>
-          <p className="text-caption mb-4">Operating System</p>
+          <p className="text-caption mb-3">Operating System</p>
         </Reveal>
         <Reveal delay={0.1}>
-          <h2 className="text-headline max-w-2xl mb-4">
+          <h2 className="font-display text-xl md:text-2xl font-semibold text-foreground max-w-2xl mb-2">
             Performance Nutrition Operating System.
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="text-body-lg max-w-lg mb-14">
+          <p className="text-body text-sm max-w-lg mb-8 opacity-65">
             From context to behaviour. From knowledge to repeatable action.
           </p>
         </Reveal>
 
-        {/* Flow indicator */}
         <Reveal delay={0.25}>
-          <div className="hidden md:flex items-center gap-3 mb-6 text-[10px] tracking-[0.3em] uppercase font-display opacity-40">
-            {stages.map((s, i) => (
-              <span key={s.title} className="flex items-center gap-3">
-                {s.title}
-                {i < stages.length - 1 && <span>→</span>}
-              </span>
-            ))}
+          <div className="flex flex-wrap items-start gap-y-4">
+            {stages.map((s, i) => {
+              const isHovered = hoveredIdx === i;
+              return (
+                <div key={s.title} className="flex items-center">
+                  <div
+                    className="relative cursor-default"
+                    onMouseEnter={() => setHoveredIdx(i)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                  >
+                    <motion.span
+                      className="font-display text-sm md:text-base font-medium tracking-wide"
+                      animate={{
+                        opacity: hoveredIdx !== null && !isHovered ? 0.35 : 1,
+                        color: isHovered ? "hsl(var(--olive-light))" : "hsl(var(--foreground))",
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {s.title}
+                    </motion.span>
+                    <AnimatePresence>
+                      {isHovered && (
+                        <motion.div
+                          className="absolute top-full left-0 mt-3 w-56 md:w-64 z-10"
+                          initial={{ opacity: 0, y: -4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
+                          transition={{ duration: 0.25 }}
+                        >
+                          <div className="p-4 border border-border/50 bg-background shadow-lg">
+                            <p className="text-[10px] tracking-[0.25em] uppercase font-display opacity-40 mb-1.5">
+                              0{i + 1} — {s.title}
+                            </p>
+                            <p className="text-body text-xs leading-relaxed opacity-75">
+                              {s.desc}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  {i < stages.length - 1 && (
+                    <span className="mx-2 md:mx-3 text-muted-foreground/30 text-xs select-none">→</span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </Reveal>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
-          {stages.map((c, i) => {
-            const isHovered = hoveredIdx === i;
-            const isReceded = hoveredIdx !== null && !isHovered;
-
-            return (
-              <Reveal key={c.title} delay={i * 0.05}>
-                <motion.div
-                  className="p-8 md:p-10 bg-background cursor-default relative overflow-hidden h-full"
-                  onMouseEnter={() => setHoveredIdx(i)}
-                  onMouseLeave={() => setHoveredIdx(null)}
-                  animate={{
-                    y: isHovered ? -4 : 0,
-                    scale: isHovered ? 1.015 : isReceded ? 0.985 : 1,
-                    opacity: isReceded ? 0.55 : 1,
-                  }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                  style={{
-                    boxShadow: isHovered
-                      ? "0 24px 60px -16px hsl(var(--foreground) / 0.1)"
-                      : "none",
-                  }}
-                >
-                  <motion.div
-                    className="absolute top-0 left-0 right-0 h-px"
-                    style={{ background: "hsl(var(--olive) / 0.6)", transformOrigin: "left" }}
-                    animate={{ scaleX: isHovered ? 1 : 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  />
-                  <div className="flex items-baseline justify-between mb-5">
-                    <p className="text-caption text-[10px] opacity-40">
-                      0{i + 1} — Stage
-                    </p>
-                    {i < stages.length - 1 && (
-                      <span className="text-[10px] opacity-30 font-display">→ {stages[i + 1].title}</span>
-                    )}
-                  </div>
-                  <h3 className="font-display text-lg md:text-xl font-medium text-foreground mb-3">
-                    {c.title}
-                  </h3>
-                  <p className="text-body text-sm opacity-70">{c.desc}</p>
-                  <motion.p
-                    className="text-[10px] tracking-widest uppercase font-display mt-4 opacity-0"
-                    animate={{ opacity: isHovered ? 0.4 : 0 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    e.g. {c.example}
-                  </motion.p>
-                </motion.div>
-              </Reveal>
-            );
-          })}
-        </div>
       </div>
     </section>
   );
