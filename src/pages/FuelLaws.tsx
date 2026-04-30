@@ -373,11 +373,10 @@ const FuelLaws = () => {
           <div className="grid sm:grid-cols-2 gap-px bg-border/40">
             {expansions.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.08}>
-                <motion.div
-                  className="p-8 md:p-10 bg-background transition-all duration-600 hover:bg-card group relative overflow-hidden"
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.4 }}
-                >
+                 <motion.div
+                   className="p-8 md:p-10 bg-background transition-all duration-600 hover:bg-card/50 group relative overflow-hidden cursor-default"
+                   transition={{ duration: 0.4 }}
+                 >
                   <div className="absolute top-0 left-0 right-0 h-px">
                     <div className="w-0 h-full bg-foreground/20 group-hover:w-full transition-all duration-700 ease-out" />
                   </div>

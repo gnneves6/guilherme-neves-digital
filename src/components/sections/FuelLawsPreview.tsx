@@ -32,7 +32,7 @@ const FuelLawsPreview = () => {
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-headline max-w-md">
-                Six laws.<br />One repeatable cycle.
+                Five laws.<br />One repeatable cycle.
               </h2>
             </Reveal>
             <Reveal delay={0.25}>
@@ -108,9 +108,9 @@ const FuelLawsPreview = () => {
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                   >
-                    <p className="text-[10px] tracking-[0.35em] uppercase font-display opacity-50">
-                      Law 0{active + 1}
-                    </p>
+                     <p className="text-[10px] tracking-[0.35em] uppercase font-display opacity-50">
+                      {active < 5 ? `Law 0${active + 1}` : "The Loop"}
+                     </p>
                     <p className="font-display text-xl md:text-2xl font-medium mt-2 leading-snug max-w-md">
                       {laws[active].micro}
                     </p>
