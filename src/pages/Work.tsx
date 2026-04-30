@@ -73,9 +73,9 @@ const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number })
 type Filter =
   | "All"
   | ArtefactStatus
-  | "Educational"
+  | "Education"
   | "Tools"
-  | "Club / Team Systems"
+  | "Club Systems"
   | "Frameworks";
 
 const filters: Filter[] = [
@@ -83,20 +83,20 @@ const filters: Filter[] = [
   "Public",
   "Protected",
   "In Development",
-  "Educational",
+  "Education",
   "Tools",
-  "Club / Team Systems",
+  "Club Systems",
   "Frameworks",
 ];
 
 const matches = (a: Artefact, f: Filter) => {
   if (f === "All") return true;
-  if (f === "Public" || f === "Protected" || f === "In Development" || f === "Future Product")
+  if (f === "Public" || f === "Protected" || f === "In Development")
     return a.status === f;
-  if (f === "Educational") return a.category === "Educational Series";
+  if (f === "Education") return a.category === "Educational Series";
   if (f === "Tools")
     return a.category === "Applied Tool" || a.category === "Interactive Tool" || a.category === "FuelOps Tool";
-  if (f === "Club / Team Systems")
+  if (f === "Club Systems")
     return a.category === "Matchday System" || a.category === "Team Report" || a.category === "Athlete Resource";
   if (f === "Frameworks") return a.category === "Framework";
   return true;
@@ -110,11 +110,7 @@ const Work = () => {
   const filtered = useMemo(() => artefacts.filter((a) => matches(a, active)), [active]);
 
   const handleCardClick = (a: Artefact) => {
-    if (a.ctaType === "view" && a.externalUrl) {
-      window.open(a.externalUrl, "_blank", "noopener,noreferrer");
-    } else {
-      setOpen(a);
-    }
+    setOpen(a);
   };
 
   return (
@@ -160,6 +156,7 @@ const Work = () => {
           <Reveal>
             <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
               {(["Public", "Protected", "In Development", "Future Product"] as ArtefactStatus[]).map((s) => (
+              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
                 <div key={s} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusMeta[s].dot }} />
                   <span className="text-[10px] tracking-[0.25em] uppercase font-display opacity-55">
