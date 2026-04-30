@@ -9,7 +9,6 @@ const laws = [
   { title: "Recover",  micro: "The next session starts now." },
   { title: "Hydrate",  micro: "Flow supports body and brain." },
   { title: "Test",     micro: "No experiments on game day." },
-  { title: "Repeat",   micro: "Discipline is a cycle, not an event." },
 ];
 
 const FuelLawsPreview = () => {
