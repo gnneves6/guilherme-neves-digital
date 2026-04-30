@@ -58,6 +58,11 @@ const samplePages: Record<string, string[]> = {
     "Protein options",
     "Flexible substitutions",
   ],
+  "abc-of-football-nutrition": [
+    "A — The Foundation Plate",
+    "B — Hydration & Timing",
+    "C — Recovery & Adaptation",
+  ],
 };
 
 const ResourceModal = ({ artefact, onClose }: Props) => {
