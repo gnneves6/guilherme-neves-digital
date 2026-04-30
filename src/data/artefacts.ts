@@ -51,11 +51,11 @@ export const artefacts: Artefact[] = [
     description:
       "A visual educational series translating football nutrition principles into simple, memorable lessons.",
     whatItProves: "Athlete-facing education and simple communication.",
-    ctaLabel: "View",
-    ctaType: "view",
-    externalUrl:
-      LINKS.NOTION_PORTFOLIO_URL,
+    ctaLabel: "View Preview",
+    ctaType: "view-sample",
+    notionUrl: "https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa",
     featured: true,
+    previewType: "gallery",
   },
   {
     slug: "md-1-fuel-system",
@@ -69,6 +69,7 @@ export const artefacts: Artefact[] = [
     ctaLabel: "View Sample",
     ctaType: "view-sample",
     featured: true,
+    previewType: "documentMockup",
   },
   {
     slug: "athlete-equivalent-bank",
@@ -82,6 +83,7 @@ export const artefacts: Artefact[] = [
     ctaLabel: "View Sample",
     ctaType: "view-sample",
     featured: true,
+    previewType: "single",
   },
   {
     slug: "matchday-timeline",
