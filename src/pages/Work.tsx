@@ -171,6 +171,21 @@ const Work = () => {
               ))}
             </div>
           </Reveal>
+      {/* Status legend */}
+      <section className="section-padding pt-10">
+        <div className="max-content">
+          <Reveal>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
+              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
+                <div key={s} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusMeta[s].dot }} />
+                  <span className="text-[10px] tracking-[0.25em] uppercase font-display opacity-55">
+                    {s}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
 
           <Reveal delay={0.1}>
             <div className="flex flex-wrap gap-2">
