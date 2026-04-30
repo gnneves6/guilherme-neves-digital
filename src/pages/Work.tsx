@@ -160,6 +160,9 @@ const Work = () => {
               {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
               {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
                 <div key={s} className="flex items-center gap-2">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
+              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
+                <div key={s} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusMeta[s].dot }} />
                   <span className="text-[10px] tracking-[0.25em] uppercase font-display opacity-55">
                     {s}
