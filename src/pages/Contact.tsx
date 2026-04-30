@@ -195,7 +195,6 @@ const Contact = () => {
               </div>
               <div className="space-y-4">
                 <p className="text-caption">Location</p>
-                <p className="text-body-lg">Porto, Portugal · Brussels, Belgium</p>
                 <p className="text-body-lg">From Porto, Portugal · Currently in Brussels, Belgium</p>
                 <p className="text-body text-sm">Open to international opportunities.</p>
               </div>
