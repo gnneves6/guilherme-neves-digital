@@ -23,6 +23,53 @@ const previewColors: Record<PreviewType, string> = {
   documentMockup: "hsl(35, 22%, 38%)",
 };
 
+const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number }) => {
+  const pt = getPreviewType(artefact.status, artefact.category);
+  return (
+    <div className="aspect-[16/9] relative overflow-hidden" style={{ background: previewColors[pt] }}>
+      {pt === "blurredProtected" && (
+        <div className="absolute inset-0 backdrop-blur-[2px] flex items-center justify-center">
+          <div className="space-y-1.5 text-center opacity-30">
+            <div className="w-8 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
+            <span className="text-[8px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory))]">Protected</span>
+            <div className="w-8 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
+          </div>
+        </div>
+      )}
+      {pt === "documentMockup" && (
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="w-full max-w-[60%] space-y-2 opacity-20">
+            <div className="h-1 w-3/4 rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-1 w-full rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-1 w-2/3 rounded" style={{ background: "hsl(var(--ivory))" }} />
+          </div>
+        </div>
+      )}
+      {pt === "toolMockup" && (
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="w-full max-w-[70%] opacity-15">
+            <div className="border rounded-sm p-3 space-y-2" style={{ borderColor: "hsl(var(--ivory) / 0.4)" }}>
+              <div className="h-1 w-1/3 rounded" style={{ background: "hsl(var(--ivory))" }} />
+              <div className="flex gap-2">
+                <div className="h-6 flex-1 rounded-sm" style={{ background: "hsl(var(--ivory) / 0.15)" }} />
+                <div className="h-6 flex-1 rounded-sm" style={{ background: "hsl(var(--ivory) / 0.1)" }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="absolute inset-0 flex flex-col justify-between p-5">
+        <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.55)]">
+          {artefact.category}
+        </span>
+        <span className="font-display text-5xl md:text-6xl font-bold leading-none text-[hsl(var(--ivory)/0.18)]">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+    </div>
+  );
+};
+
 type Filter =
   | "All"
   | ArtefactStatus
@@ -62,6 +109,14 @@ const Work = () => {
 
   const filtered = useMemo(() => artefacts.filter((a) => matches(a, active)), [active]);
 
+  const handleCardClick = (a: Artefact) => {
+    if (a.ctaType === "view" && a.externalUrl) {
+      window.open(a.externalUrl, "_blank", "noopener,noreferrer");
+    } else {
+      setOpen(a);
+    }
+  };
+
   return (
     <Layout>
       <section className="section-padding section-spacing">
@@ -83,7 +138,7 @@ const Work = () => {
             <p className="text-body max-w-xl mt-3">
               The complete archive lives in{" "}
               <a
-                href="https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa"
+                href={LINKS.NOTION_PORTFOLIO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-underline hover:text-foreground transition-colors"
@@ -156,28 +211,7 @@ const Work = () => {
                 return (
                   <motion.button
                     key={a.slug}
-                    onClick={() => setOpen(a)}
-                    onMouseEnter={() => setHovered(a.slug)}
-                  <motion.button
-                    key={a.slug}
-                    onClick={() => {
-                      if (a.ctaType === "view" && a.externalUrl) {
-                        window.open(a.externalUrl, "_blank", "noopener,noreferrer");
-                      } else {
-                        setOpen(a);
-                      }
-                    }}
-                    onMouseEnter={() => setHovered(a.slug)}
-                return (
-                  <motion.button
-                    key={a.slug}
-                    onClick={() => {
-                      if (a.ctaType === "view" && a.externalUrl) {
-                        window.open(a.externalUrl, "_blank", "noopener,noreferrer");
-                      } else {
-                        setOpen(a);
-                      }
-                    }}
+                    onClick={() => handleCardClick(a)}
                     onMouseEnter={() => setHovered(a.slug)}
                     onMouseLeave={() => setHovered(null)}
                     initial={{ opacity: 0, y: 20 }}
@@ -192,103 +226,7 @@ const Work = () => {
                       transition={{ duration: 0.5 }}
                     />
 
-                    {/* Editorial preview header */}
-                    <div
-                      className="aspect-[16/9] relative overflow-hidden"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, hsl(var(--charcoal-deep)) 0%, hsl(var(--charcoal)) 100%)",
-                      }}
-                    >
-                      <div
-                        className="absolute inset-0 opacity-25"
-                        style={{
-                          backgroundImage:
-                            "linear-gradient(45deg, transparent 0%, transparent 49%, hsl(var(--ivory)/0.25) 49%, hsl(var(--ivory)/0.25) 51%, transparent 51%)",
-                          backgroundSize: "10px 10px",
-                        }}
-                      />
-                      <div className="absolute inset-0 flex flex-col justify-between p-5">
-                        <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.55)]">
-                          {a.category}
-                        </span>
-                        <span className="font-display text-5xl md:text-6xl font-bold leading-none text-[hsl(var(--ivory)/0.18)]">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                      </div>
-                    </div>
-                return (
-                return (
-                  <motion.button
-                    key={a.slug}
-                    onClick={() => {
-                      if (a.ctaType === "view" && a.externalUrl) {
-                        window.open(a.externalUrl, "_blank", "noopener,noreferrer");
-                      } else {
-                        setOpen(a);
-                      }
-                    }}
-                    onMouseEnter={() => setHovered(a.slug)}
-                    onMouseLeave={() => setHovered(null)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isReceded ? 0.4 : 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.04 }}
-                    className="group block w-full text-left bg-background relative overflow-hidden"
-                  >
-                    <motion.div
-                      className="absolute top-0 left-0 right-0 h-px"
-                      style={{ background: "hsl(var(--olive) / 0.6)", transformOrigin: "left" }}
-                      animate={{ scaleX: isHovered ? 1 : 0 }}
-                      transition={{ duration: 0.5 }}
-                    />
-
-                    {/* Preview */}
-                    {(() => {
-                      const pt = getPreviewType(a.status, a.category);
-                      return (
-                        <div className="aspect-[16/9] relative overflow-hidden" style={{ background: previewColors[pt] }}>
-                          {pt === "blurredProtected" && (
-                            <div className="absolute inset-0 backdrop-blur-[2px] flex items-center justify-center">
-                              <div className="space-y-1.5 text-center opacity-30">
-                                <div className="w-8 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
-                                <span className="text-[8px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory))]">Protected</span>
-                                <div className="w-8 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
-                              </div>
-                            </div>
-                          )}
-                          {pt === "documentMockup" && (
-                            <div className="absolute inset-0 flex items-center justify-center p-6">
-                              <div className="w-full max-w-[60%] space-y-2 opacity-20">
-                                <div className="h-1 w-3/4 rounded" style={{ background: "hsl(var(--ivory))" }} />
-                                <div className="h-1 w-full rounded" style={{ background: "hsl(var(--ivory))" }} />
-                                <div className="h-1 w-2/3 rounded" style={{ background: "hsl(var(--ivory))" }} />
-                              </div>
-                            </div>
-                          )}
-                          {pt === "toolMockup" && (
-                            <div className="absolute inset-0 flex items-center justify-center p-6">
-                              <div className="w-full max-w-[70%] opacity-15">
-                                <div className="border rounded-sm p-3 space-y-2" style={{ borderColor: "hsl(var(--ivory) / 0.4)" }}>
-                                  <div className="h-1 w-1/3 rounded" style={{ background: "hsl(var(--ivory))" }} />
-                                  <div className="flex gap-2">
-                                    <div className="h-6 flex-1 rounded-sm" style={{ background: "hsl(var(--ivory) / 0.15)" }} />
-                                    <div className="h-6 flex-1 rounded-sm" style={{ background: "hsl(var(--ivory) / 0.1)" }} />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                          <div className="absolute inset-0 flex flex-col justify-between p-5">
-                            <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.55)]">
-                              {a.category}
-                            </span>
-                            <span className="font-display text-5xl md:text-6xl font-bold leading-none text-[hsl(var(--ivory)/0.18)]">
-                              {String(i + 1).padStart(2, "0")}
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })()}
+                    <CardPreview artefact={a} index={i} />
 
                     <div className="p-7">
                       <div className="flex items-center justify-between mb-4">
