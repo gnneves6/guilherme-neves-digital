@@ -109,10 +109,6 @@ const Work = () => {
 
   const filtered = useMemo(() => artefacts.filter((a) => matches(a, active)), [active]);
 
-  const handleCardClick = (a: Artefact) => {
-    setOpen(a);
-  };
-
   return (
     <Layout>
       <section className="section-padding section-spacing">
@@ -150,28 +146,6 @@ const Work = () => {
         <div className="divider" />
       </div>
 
-      {/* Status legend */}
-      <section className="section-padding pt-10">
-        <div className="max-content">
-          <Reveal>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
-              {(["Public", "Protected", "In Development", "Future Product"] as ArtefactStatus[]).map((s) => (
-              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
-              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
-              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
-                <div key={s} className="flex items-center gap-2">
-            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
-              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
-                <div key={s} className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusMeta[s].dot }} />
-                  <span className="text-[10px] tracking-[0.25em] uppercase font-display opacity-55">
-                    {s}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-      <section className="section-padding pt-10">
       {/* Status legend */}
       <section className="section-padding pt-10">
         <div className="max-content">
@@ -229,7 +203,7 @@ const Work = () => {
                 return (
                   <motion.button
                     key={a.slug}
-                    onClick={() => handleCardClick(a)}
+                    onClick={() => setOpen(a)}
                     onMouseEnter={() => setHovered(a.slug)}
                     onMouseLeave={() => setHovered(null)}
                     initial={{ opacity: 0, y: 20 }}
