@@ -5,6 +5,23 @@ import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import ResourceModal from "@/components/resource/ResourceModal";
 import { artefacts, statusMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
+import { LINKS } from "@/data/links";
+
+type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup";
+
+const getPreviewType = (status: ArtefactStatus, category: string): PreviewType => {
+  if (status === "Protected") return "blurredProtected";
+  if (category === "Interactive Tool" || category === "FuelOps Tool") return "toolMockup";
+  if (category === "Educational Series" || category === "Matchday System" || category === "Applied Tool") return "documentMockup";
+  return "editorialPlaceholder";
+};
+
+const previewColors: Record<PreviewType, string> = {
+  editorialPlaceholder: "hsl(155, 18%, 22%)",
+  blurredProtected: "hsl(220, 14%, 18%)",
+  toolMockup: "hsl(40, 28%, 28%)",
+  documentMockup: "hsl(35, 22%, 38%)",
+};
 
 type Filter =
   | "All"
@@ -140,6 +157,16 @@ const Work = () => {
                   <motion.button
                     key={a.slug}
                     onClick={() => setOpen(a)}
+                    onMouseEnter={() => setHovered(a.slug)}
+                  <motion.button
+                    key={a.slug}
+                    onClick={() => {
+                      if (a.ctaType === "view" && a.externalUrl) {
+                        window.open(a.externalUrl, "_blank", "noopener,noreferrer");
+                      } else {
+                        setOpen(a);
+                      }
+                    }}
                     onMouseEnter={() => setHovered(a.slug)}
                     onMouseLeave={() => setHovered(null)}
                     initial={{ opacity: 0, y: 20 }}
