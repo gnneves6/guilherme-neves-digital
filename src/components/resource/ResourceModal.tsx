@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import ImageLightbox from "./ImageLightbox";
 import type { Artefact } from "@/data/artefacts";
 import { statusMeta } from "@/data/artefacts";
 import { supabase } from "@/integrations/supabase/client";
@@ -72,10 +73,11 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
   const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (artefact) {
-      setName(""); setEmail(""); setMessage(""); setConsent(false); setSubmitted(false); setLoading(false);
+      setName(""); setEmail(""); setMessage(""); setConsent(false); setSubmitted(false); setLoading(false); setLightboxIndex(null);
       document.body.style.overflow = "hidden";
       const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
       window.addEventListener("keydown", onKey);
@@ -264,13 +266,14 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                         {artefact.previewImages.map((src, n) => (
                           <div
                             key={n}
-                            className="aspect-[3/4] overflow-hidden rounded-sm"
+                            className="aspect-[3/4] overflow-hidden rounded-sm cursor-pointer group"
                             style={{ border: "1px solid hsl(var(--charcoal) / 0.08)" }}
+                            onClick={() => setLightboxIndex(n)}
                           >
                             <img
                               src={src}
                               alt={pages[n] ?? `Preview ${n + 1}`}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                           </div>
                         ))}
@@ -346,6 +349,14 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                 )}
 
               </div>
+
+              {lightboxIndex !== null && artefact.previewImages && artefact.previewImages.length > 0 && (
+                <ImageLightbox
+                  images={artefact.previewImages}
+                  initialIndex={lightboxIndex}
+                  onClose={() => setLightboxIndex(null)}
+                />
+              )}
             </motion.div>
           </motion.div>
         );
