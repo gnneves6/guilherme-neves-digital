@@ -4,5 +4,5 @@ export const LINKS = {
   LINKEDIN_URL: "https://www.linkedin.com/in/guilhermeneves28/",
   EMAIL: "gnneves6@gmail.com",
   LINKTREE_URL: "https://linktr.ee/Guilherme_Neves",
-  NOTION_PORTFOLIO_URL: "https://tr.ee/I5W49TTjsn",
+  NOTION_PORTFOLIO_URL: "https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa",
 } as const;
