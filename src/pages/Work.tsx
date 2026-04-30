@@ -218,6 +218,7 @@ const Work = () => {
                       </div>
                     </div>
                 return (
+                return (
                   <motion.button
                     key={a.slug}
                     onClick={() => {
