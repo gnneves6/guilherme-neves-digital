@@ -259,6 +259,11 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
 
                 {artefact.ctaType === "view-sample" && (
                   <div className="mt-6 grid grid-cols-3 gap-2">
+                    {artefact.previewImage && (
+                      <div className="col-span-3 mb-2">
+                        <img src={artefact.previewImage} alt={artefact.previewAlt || artefact.title} className="w-full rounded-sm" />
+                      </div>
+                    )}
                     {pages.map((label, n) => (
                       <div
                         key={n}
@@ -274,6 +279,17 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                       </div>
                     ))}
                   </div>
+                  {artefact.notionUrl && (
+                    <a
+                      href={artefact.notionUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-4 block w-full py-3 text-xs tracking-widest uppercase font-display font-medium text-center transition-all hover:tracking-[0.25em]"
+                      style={{ background: "hsl(var(--charcoal-deep))", color: "hsl(var(--ivory))" }}
+                    >
+                      View full portfolio in Notion →
+                    </a>
+                  )}
                 )}
 
                 {artefact.ctaType === "protected" && (
@@ -313,6 +329,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                     Sample link coming soon.
                   </div>
                 )}
+
               </div>
             </motion.div>
           </motion.div>
