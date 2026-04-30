@@ -116,11 +116,7 @@ const SelectedArtefactsSection = () => {
           {featuredArtefacts.map((a, i) => {
             const s = statusMeta[a.status];
             const handleClick = () => {
-              if (a.ctaType === "view" && a.externalUrl) {
-                window.open(a.externalUrl, "_blank", "noopener,noreferrer");
-              } else {
-                setOpen(a);
-              }
+              setOpen(a);
             };
             return (
               <Reveal key={a.slug} delay={i * 0.06}>

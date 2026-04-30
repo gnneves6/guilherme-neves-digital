@@ -1,6 +1,6 @@
 import { LINKS } from "@/data/links";
 
-export type ArtefactStatus = "Public" | "Protected" | "In Development" | "Future Product";
+export type ArtefactStatus = "Public" | "Protected" | "In Development";
 export type ArtefactCategory =
   | "Educational Series"
   | "Matchday System"
@@ -31,6 +31,10 @@ export interface Artefact {
   ctaType: CtaType;
   externalUrl?: string;
   featured?: boolean;       // shown on homepage
+  previewImage?: string;
+  previewImages?: string[];
+  previewAlt?: string;
+  previewType?: "single" | "gallery" | "blurred" | "toolMockup" | "documentMockup";
 }
 
 export const artefacts: Artefact[] = [
@@ -93,12 +97,12 @@ export const artefacts: Artefact[] = [
     title: "Matchday Snack Bag Agent",
     category: "FuelOps Tool",
     type: "FuelOps Tool",
-    status: "Future Product",
+    status: "In Development",
     description:
       "A practical agent designed to turn match context into snack bag suggestions, checklists and preparation routines.",
     whatItProves: "AI-enabled performance operations thinking.",
     ctaLabel: "Get Early Access",
-    ctaType: "early-access",
+    ctaType: "waitlist",
     featured: true,
   },
   {
@@ -149,5 +153,4 @@ export const statusMeta: Record<
   Public: { dot: "hsl(var(--olive-light))", label: "Public" },
   Protected: { dot: "hsl(35, 28%, 62%)", label: "Protected" },
   "In Development": { dot: "hsl(40, 55%, 60%)", label: "In Development" },
-  "Future Product": { dot: "hsl(var(--ivory) / 0.45)", label: "Future Product" },
 };
