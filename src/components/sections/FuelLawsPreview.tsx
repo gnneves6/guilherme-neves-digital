@@ -1,21 +1,38 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 
-const cycle = ["Fuel", "Build", "Recover", "Hydrate", "Test", "Repeat"];
+const laws = [
+  { title: "Fuel",     micro: "Energy before output." },
+  { title: "Build",    micro: "Daily base before detail." },
+  { title: "Recover",  micro: "The next session starts now." },
+  { title: "Hydrate",  micro: "Flow supports body and brain." },
+  { title: "Test",     micro: "No experiments on game day." },
+  { title: "Repeat",   micro: "Discipline is a cycle, not an event." },
+];
 
 const FuelLawsPreview = () => {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => setActive((a) => (a + 1) % laws.length), 2800);
+    return () => clearInterval(id);
+  }, [paused]);
+
   return (
     <section className="section-padding section-spacing">
       <div className="max-content">
-        <div className="grid md:grid-cols-[1fr,1.2fr] gap-12 md:gap-20 items-center">
+        <div className="grid md:grid-cols-[0.9fr,1.3fr] gap-12 md:gap-20 items-start">
           <div>
             <Reveal>
               <p className="text-caption mb-4">GN Fuel Laws</p>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-headline max-w-md">
-                Five laws.<br />One repeatable cycle.
+                Six laws.<br />One repeatable cycle.
               </h2>
             </Reveal>
             <Reveal delay={0.25}>
@@ -34,43 +51,86 @@ const FuelLawsPreview = () => {
             </Reveal>
           </div>
 
-          {/* Cycle */}
+          {/* Living cycle */}
           <Reveal delay={0.2} direction="right">
-            <div className="relative py-8">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-6 justify-center md:justify-end">
-                {cycle.map((step, i) => (
-                  <div key={step + i} className="flex items-center gap-4">
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: i * 0.08 }}
-                      className="relative group"
-                    >
-                      <span className="font-display text-base md:text-lg font-medium text-foreground tracking-tight">
-                        {step}
-                      </span>
-                      <motion.span
-                        className="absolute -bottom-1 left-0 right-0 h-px origin-left"
-                        style={{ background: "hsl(var(--olive-light))" }}
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7, delay: i * 0.08 + 0.2 }}
-                      />
-                    </motion.div>
-                    {i < cycle.length - 1 && (
-                      <motion.span
-                        className="text-muted-foreground/40 text-xs"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.08 + 0.4 }}
-                      >
-                        →
-                      </motion.span>
-                    )}
-                  </div>
+            <div
+              className="relative py-6"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
+              {/* Sequence line */}
+              <div className="relative">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-3 md:gap-x-4">
+                  {laws.map((law, i) => {
+                    const isActive = i === active;
+                    return (
+                      <div key={law.title} className="flex items-center gap-2 md:gap-4">
+                        <button
+                          onClick={() => { setActive(i); setPaused(true); }}
+                          onMouseEnter={() => setActive(i)}
+                          className="relative group focus:outline-none"
+                          aria-label={`Activate ${law.title}`}
+                        >
+                          <motion.span
+                            className="font-display font-medium tracking-tight"
+                            animate={{
+                              opacity: isActive ? 1 : 0.32,
+                              fontSize: isActive ? "1.65rem" : "1.05rem",
+                              color: isActive ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
+                            }}
+                            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                          >
+                            {law.title}
+                          </motion.span>
+                          <motion.span
+                            className="absolute -bottom-1 left-0 right-0 h-px origin-left"
+                            style={{ background: "hsl(var(--olive))" }}
+                            animate={{ scaleX: isActive ? 1 : 0 }}
+                            transition={{ duration: 0.5 }}
+                          />
+                        </button>
+                        {i < laws.length - 1 && (
+                          <span className="text-muted-foreground/30 text-xs">→</span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Active law microcopy */}
+              <div className="mt-10 min-h-[80px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    <p className="text-[10px] tracking-[0.35em] uppercase font-display opacity-50">
+                      Law 0{active + 1}
+                    </p>
+                    <p className="font-display text-xl md:text-2xl font-medium mt-2 leading-snug max-w-md">
+                      {laws[active].micro}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Progress dots */}
+              <div className="flex gap-2 mt-8">
+                {laws.map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="h-px"
+                    animate={{
+                      width: i === active ? 32 : 12,
+                      opacity: i === active ? 1 : 0.25,
+                    }}
+                    style={{ background: "hsl(var(--foreground))" }}
+                    transition={{ duration: 0.5 }}
+                  />
                 ))}
               </div>
             </div>
