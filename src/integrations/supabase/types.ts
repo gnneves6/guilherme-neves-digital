@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          source_page: string | null
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          source_page?: string | null
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          source_page?: string | null
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      resource_interest: {
+        Row: {
+          consent: boolean
+          created_at: string
+          email: string
+          id: string
+          interest_type: string
+          message_optional: string | null
+          name: string
+          resource_slug: string
+          resource_title: string
+          source_page: string | null
+        }
+        Insert: {
+          consent?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          interest_type: string
+          message_optional?: string | null
+          name: string
+          resource_slug: string
+          resource_title: string
+          source_page?: string | null
+        }
+        Update: {
+          consent?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          interest_type?: string
+          message_optional?: string | null
+          name?: string
+          resource_slug?: string
+          resource_title?: string
+          source_page?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
