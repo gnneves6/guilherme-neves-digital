@@ -1,4 +1,8 @@
 export type ArtefactStatus = "Public" | "Protected" | "In Development";
+import abcA from "@/assets/previews/abc-a-athlete-fuel-performance.png";
+import abcB from "@/assets/previews/abc-b-build-your-base.png";
+import abcC from "@/assets/previews/abc-c-care-about-recovery.png";
+
 export type ArtefactCategory =
   | "Educational Series"
   | "Matchday System"
@@ -54,6 +58,7 @@ export const artefacts: Artefact[] = [
     notionUrl: "https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa",
     featured: true,
     previewType: "gallery",
+    previewImages: [abcA, abcB, abcC],
   },
   {
     slug: "md-1-fuel-system",
