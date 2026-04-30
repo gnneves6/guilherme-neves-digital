@@ -1,163 +1,70 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
-import workPreview1 from "@/assets/work-preview-1.jpg";
-import workPreview2 from "@/assets/work-preview-2.jpg";
-import workPreview3 from "@/assets/work-preview-3.jpg";
+import ResourceModal from "@/components/resource/ResourceModal";
+import { artefacts, statusMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
 
-const categories = [
+type Filter =
+  | "All"
+  | ArtefactStatus
+  | "Educational"
+  | "Tools"
+  | "Club / Team Systems"
+  | "Frameworks";
+
+const filters: Filter[] = [
   "All",
-  "Educational Series",
-  "Club Strategies",
-  "Mini Classes",
-  "Performance Visuals",
+  "Public",
+  "Protected",
   "In Development",
+  "Educational",
+  "Tools",
+  "Club / Team Systems",
+  "Frameworks",
 ];
 
-const projects = [
-  {
-    title: "The ABC of Football Nutrition",
-    category: "Educational Series",
-    description:
-      "A foundational educational series breaking down the core principles of football nutrition into clear, accessible content for athletes and staff.",
-    image: workPreview1,
-    status: "Complete",
-    audience: "Athletes & Staff",
-    format: "Visual Series",
-  },
-  {
-    title: "GN Fuel Laws — Framework & System",
-    category: "Educational Series",
-    description:
-      "A practical five-law framework that turns nutrition knowledge into repeatable performance behaviour. The backbone of applied education.",
-    image: null,
-    status: "Complete",
-    audience: "Athletes & Practitioners",
-    format: "Framework",
-  },
-  {
-    title: "Matchday Nutrition Protocol",
-    category: "Club Strategies",
-    description:
-      "A structured match-day nutrition guide for professional football environments — pre-match, half-time and post-match fueling strategies.",
-    image: workPreview2,
-    status: "Complete",
-    audience: "Performance Staff",
-    format: "Protocol Document",
-  },
-  {
-    title: "Weekly Nutrition Periodisation Planner",
-    category: "Club Strategies",
-    description:
-      "An applied planning tool mapping nutrition periodisation to weekly training load, helping athletes and staff align fueling with demand.",
-    image: null,
-    status: "Complete",
-    audience: "Performance Staff",
-    format: "Planning Tool",
-  },
-  {
-    title: "Hydration Monitoring & Reporting System",
-    category: "Club Strategies",
-    description:
-      "A practical reporting tool for tracking athlete hydration markers across training and competition cycles.",
-    image: null,
-    status: "Complete",
-    audience: "Performance Department",
-    format: "Reporting System",
-  },
-  {
-    title: "Recovery Nutrition Quick Guide",
-    category: "Performance Visuals",
-    description:
-      "A concise visual guide designed for locker-room use — covering the essentials of post-training and post-match recovery nutrition.",
-    image: workPreview3,
-    status: "Complete",
-    audience: "Athletes",
-    format: "Visual Guide",
-  },
-  {
-    title: "Mini Class: Fueling Basics",
-    category: "Mini Classes",
-    description:
-      "A focused education session designed to be delivered to squads, covering the core behaviours around daily fueling for performance.",
-    image: null,
-    status: "Complete",
-    audience: "Squad / Team",
-    format: "Presentation",
-  },
-  {
-    title: "Mini Class: Game-Day Nutrition",
-    category: "Mini Classes",
-    description:
-      "A practical session on what, when and how to eat around competition. Designed for delivery in team environments.",
-    image: null,
-    status: "Complete",
-    audience: "Squad / Team",
-    format: "Presentation",
-  },
-  {
-    title: "Supplement Decision Framework",
-    category: "Performance Visuals",
-    description:
-      "A clear, evidence-based decision tool to help athletes and practitioners navigate supplement choices with practical criteria.",
-    image: null,
-    status: "Complete",
-    audience: "Athletes & Practitioners",
-    format: "Decision Tool",
-  },
-  {
-    title: "Applied Reports & Practical Resources",
-    category: "In Development",
-    description:
-      "A growing collection of anthropometric reports, monitoring templates and practical resources for performance departments.",
-    image: null,
-    status: "In Progress",
-    audience: "Performance Departments",
-    format: "Resource Collection",
-  },
-  {
-    title: "Pre-Season Nutrition Toolkit",
-    category: "In Development",
-    description:
-      "A comprehensive resource for pre-season nutrition planning, athlete onboarding and baseline assessment.",
-    image: null,
-    status: "In Progress",
-    audience: "Performance Staff",
-    format: "Toolkit",
-  },
-];
+const matches = (a: Artefact, f: Filter) => {
+  if (f === "All") return true;
+  if (f === "Public" || f === "Protected" || f === "In Development" || f === "Future Product")
+    return a.status === f;
+  if (f === "Educational") return a.category === "Educational Series";
+  if (f === "Tools")
+    return a.category === "Applied Tool" || a.category === "Interactive Tool" || a.category === "FuelOps Tool";
+  if (f === "Club / Team Systems")
+    return a.category === "Matchday System" || a.category === "Team Report" || a.category === "Athlete Resource";
+  if (f === "Frameworks") return a.category === "Framework";
+  return true;
+};
 
 const Work = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [active, setActive] = useState<Filter>("All");
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [open, setOpen] = useState<Artefact | null>(null);
 
-  const filtered =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+  const filtered = useMemo(() => artefacts.filter((a) => matches(a, active)), [active]);
 
   return (
     <Layout>
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Work</p>
+            <p className="text-caption mb-6">Resource Vault</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">Selected work.</h1>
+            <h1 className="text-display max-w-4xl">Selected proof. Protected depth.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-6">
-              A curated selection of projects, resources and systems built for
-              athletes, clubs and performance environments. Each piece is designed
-              to close the gap between knowledge and practice.
+              A curated archive of applied resources, frameworks and tools.
+              Public artefacts are open. Protected work exists as proof —
+              accessible on request. In-development tools accept early interest.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
             <p className="text-body max-w-xl mt-3">
-              For the full portfolio, visit{" "}
+              The complete archive lives in{" "}
               <a
                 href="https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa"
                 target="_blank"
@@ -175,21 +82,35 @@ const Work = () => {
         <div className="divider" />
       </div>
 
-      <section className="section-padding py-10">
+      {/* Status legend */}
+      <section className="section-padding pt-10">
         <div className="max-content">
           <Reveal>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
+              {(["Public", "Protected", "In Development", "Future Product"] as ArtefactStatus[]).map((s) => (
+                <div key={s} className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusMeta[s].dot }} />
+                  <span className="text-[10px] tracking-[0.25em] uppercase font-display opacity-55">
+                    {s}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
             <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => (
+              {filters.map((f) => (
                 <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  key={f}
+                  onClick={() => setActive(f)}
                   className={`px-4 py-2 text-[11px] font-display tracking-wider uppercase transition-all duration-500 border ${
-                    activeCategory === cat
+                    active === f
                       ? "bg-foreground text-background border-foreground"
                       : "bg-transparent text-muted-foreground/60 border-border/50 hover:border-foreground/25 hover:text-foreground"
                   }`}
                 >
-                  {cat}
+                  {f}
                 </button>
               ))}
             </div>
@@ -197,143 +118,107 @@ const Work = () => {
         </div>
       </section>
 
-      {/* Proof in Motion — Project Cards */}
-      <section className="section-padding pb-32">
+      {/* Vault grid */}
+      <section className="section-padding py-16">
         <div className="max-content">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeCategory}
+              key={active}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="space-y-0"
+              transition={{ duration: 0.4 }}
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50"
             >
-              {filtered.map((project, i) => {
-                const isHovered = hoveredProject === project.title;
-                const hasHover = hoveredProject !== null;
+              {filtered.map((a, i) => {
+                const isHovered = hovered === a.slug;
+                const hasHover = hovered !== null;
                 const isReceded = hasHover && !isHovered;
+                const s = statusMeta[a.status];
 
                 return (
-                  <motion.div
-                    key={project.title}
+                  <motion.button
+                    key={a.slug}
+                    onClick={() => setOpen(a)}
+                    onMouseEnter={() => setHovered(a.slug)}
+                    onMouseLeave={() => setHovered(null)}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: isReceded ? 0.35 : 1,
-                      y: 0,
-                    }}
-                    transition={{ duration: 0.6, delay: i * 0.04 }}
-                    className="py-10 md:py-12 border-b border-border/40 group cursor-pointer relative"
-                    onMouseEnter={() => setHoveredProject(project.title)}
-                    onMouseLeave={() => setHoveredProject(null)}
+                    animate={{ opacity: isReceded ? 0.4 : 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.04 }}
+                    className="group block w-full text-left bg-background relative overflow-hidden"
                   >
-                    {/* Active indicator line */}
                     <motion.div
-                      className="absolute left-0 top-0 bottom-0 w-[2px] bg-foreground/20"
-                      initial={{ scaleY: 0 }}
-                      animate={{ scaleY: isHovered ? 1 : 0 }}
-                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                      style={{ originY: 0 }}
+                      className="absolute top-0 left-0 right-0 h-px"
+                      style={{ background: "hsl(var(--olive) / 0.6)", transformOrigin: "left" }}
+                      animate={{ scaleX: isHovered ? 1 : 0 }}
+                      transition={{ duration: 0.5 }}
                     />
 
-                    <div className="flex flex-col md:flex-row gap-6 md:gap-10">
-                      {/* Image with premium hover */}
-                      {project.image && (
-                        <div className="w-full md:w-44 lg:w-52 shrink-0 overflow-hidden relative">
-                          <motion.img
-                            src={project.image}
-                            alt={project.title}
-                            className="w-full aspect-[4/3] object-cover"
-                            loading="lazy"
-                            width={208}
-                            height={156}
-                            animate={{
-                              filter: isHovered ? "grayscale(0%) contrast(1.05)" : "grayscale(40%) contrast(1)",
-                              scale: isHovered ? 1.05 : 1,
-                            }}
-                            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-                          />
-                          {/* Tonal overlay */}
-                          <motion.div
-                            className="absolute inset-0"
-                            animate={{
-                              background: isHovered
-                                ? "transparent"
-                                : "hsl(var(--background) / 0.08)",
-                            }}
-                            transition={{ duration: 0.5 }}
-                          />
-                        </div>
-                      )}
-
-                      <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 flex-1">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <p className="text-caption text-[10px] opacity-50">{project.category}</p>
-                            {project.status === "In Progress" && (
-                              <span className="text-[10px] px-2 py-0.5 border border-border/50 text-muted-foreground/50 font-display tracking-wider">
-                                IN PROGRESS
-                              </span>
-                            )}
-                          </div>
-                          <motion.h3
-                            className="font-display text-xl md:text-2xl font-medium transition-colors duration-600"
-                            animate={{
-                              color: isHovered
-                                ? "hsl(155, 12%, 40%)"
-                                : "hsl(var(--foreground))",
-                            }}
-                            transition={{ duration: 0.5 }}
-                          >
-                            {project.title}
-                          </motion.h3>
-
-                          {/* Context metadata — revealed on hover */}
-                          <AnimatePresence>
-                            {isHovered && (
-                              <motion.div
-                                className="flex gap-4 mt-2"
-                                initial={{ opacity: 0, y: 6, height: 0 }}
-                                animate={{ opacity: 1, y: 0, height: "auto" }}
-                                exit={{ opacity: 0, y: 6, height: 0 }}
-                                transition={{ duration: 0.35 }}
-                              >
-                                <span className="text-[10px] font-display tracking-wider uppercase text-muted-foreground/50">
-                                  {project.audience}
-                                </span>
-                                <span className="text-[10px] text-muted-foreground/25">·</span>
-                                <span className="text-[10px] font-display tracking-wider uppercase text-muted-foreground/50">
-                                  {project.format}
-                                </span>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-
-                        <div className="md:text-right max-w-sm">
-                          <p className="text-body text-sm opacity-60 group-hover:opacity-100 transition-opacity duration-500">
-                            {project.description}
-                          </p>
-                          <motion.span
-                            className="inline-block mt-3 text-xs text-muted-foreground/40 transition-all duration-500"
-                            animate={{
-                              x: isHovered ? 4 : 0,
-                              color: isHovered
-                                ? "hsl(var(--foreground))"
-                                : "hsl(var(--muted-foreground) / 0.4)",
-                            }}
-                            transition={{ duration: 0.4 }}
-                          >
-                            View project →
-                          </motion.span>
-                        </div>
+                    {/* Editorial preview header */}
+                    <div
+                      className="aspect-[16/9] relative overflow-hidden"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, hsl(var(--charcoal-deep)) 0%, hsl(var(--charcoal)) 100%)",
+                      }}
+                    >
+                      <div
+                        className="absolute inset-0 opacity-25"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(45deg, transparent 0%, transparent 49%, hsl(var(--ivory)/0.25) 49%, hsl(var(--ivory)/0.25) 51%, transparent 51%)",
+                          backgroundSize: "10px 10px",
+                        }}
+                      />
+                      <div className="absolute inset-0 flex flex-col justify-between p-5">
+                        <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.55)]">
+                          {a.category}
+                        </span>
+                        <span className="font-display text-5xl md:text-6xl font-bold leading-none text-[hsl(var(--ivory)/0.18)]">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
                       </div>
                     </div>
-                  </motion.div>
+
+                    <div className="p-7">
+                      <div className="flex items-center justify-between mb-4">
+                        <p className="text-[10px] tracking-widest uppercase font-display text-muted-foreground/50">
+                          {a.type}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
+                          <span className="text-[9px] tracking-[0.25em] uppercase font-display opacity-60">
+                            {s.label}
+                          </span>
+                        </div>
+                      </div>
+                      <h3 className="font-display text-lg md:text-xl font-medium leading-snug">
+                        {a.title}
+                      </h3>
+                      <p className="text-sm mt-3 leading-relaxed opacity-65">{a.description}</p>
+
+                      <div className="mt-5 pt-5 border-t border-border/50">
+                        <p className="text-[10px] tracking-widest uppercase font-display opacity-40 mb-1">
+                          Proves
+                        </p>
+                        <p className="text-xs opacity-70">{a.whatItProves}</p>
+                      </div>
+
+                      <span className="inline-block mt-5 text-xs opacity-65 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-500">
+                        {a.ctaLabel} →
+                      </span>
+                    </div>
+                  </motion.button>
                 );
               })}
             </motion.div>
           </AnimatePresence>
+
+          {filtered.length === 0 && (
+            <p className="text-center text-sm opacity-50 py-20">
+              No artefacts in this filter yet.
+            </p>
+          )}
         </div>
       </section>
 
@@ -345,7 +230,8 @@ const Work = () => {
         <div className="max-content text-center">
           <Reveal>
             <p className="text-body-lg max-w-md mx-auto">
-              Interested in collaborating on applied performance nutrition projects?
+              Building a performance environment? Some of these resources are
+              shared on request.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
@@ -358,6 +244,8 @@ const Work = () => {
           </Reveal>
         </div>
       </section>
+
+      <ResourceModal artefact={open} onClose={() => setOpen(null)} />
     </Layout>
   );
 };
