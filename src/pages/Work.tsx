@@ -168,6 +168,17 @@ const Work = () => {
                       }
                     }}
                     onMouseEnter={() => setHovered(a.slug)}
+                return (
+                  <motion.button
+                    key={a.slug}
+                    onClick={() => {
+                      if (a.ctaType === "view" && a.externalUrl) {
+                        window.open(a.externalUrl, "_blank", "noopener,noreferrer");
+                      } else {
+                        setOpen(a);
+                      }
+                    }}
+                    onMouseEnter={() => setHovered(a.slug)}
                     onMouseLeave={() => setHovered(null)}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: isReceded ? 0.4 : 1, y: 0 }}
