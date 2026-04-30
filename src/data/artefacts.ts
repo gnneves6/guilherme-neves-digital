@@ -35,6 +35,10 @@ export interface Artefact {
   previewImages?: string[];
   previewAlt?: string;
   previewType?: "single" | "gallery" | "blurred" | "toolMockup" | "documentMockup";
+  fileUrl?: string;
+  notionUrl?: string;
+  isProtected?: boolean;
+  isDownloadable?: boolean;
 }
 
 export const artefacts: Artefact[] = [
