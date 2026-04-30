@@ -4,11 +4,31 @@ import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 
 const laws = [
-  { title: "Fuel",     micro: "Energy before output." },
-  { title: "Build",    micro: "Daily base before detail." },
-  { title: "Recover",  micro: "The next session starts now." },
-  { title: "Hydrate",  micro: "Flow supports body and brain." },
-  { title: "Test",     micro: "No experiments on game day." },
+  {
+    title: "Fuel",
+    micro: "Energy before output.",
+    detail: "Every session, every match, every travel day — energy availability is the first decision. Without fuel, nothing else works.",
+  },
+  {
+    title: "Build",
+    micro: "Daily base before detail.",
+    detail: "Consistent daily structure beats any supplement or trend. Build meals around protein, carbohydrates and real food — then refine.",
+  },
+  {
+    title: "Recover",
+    micro: "The next session starts now.",
+    detail: "Recovery nutrition is not optional. The window after training is where adaptation happens — protein, carbohydrates, hydration, timing.",
+  },
+  {
+    title: "Hydrate",
+    micro: "Flow supports body and brain.",
+    detail: "Hydration affects cognition, thermoregulation, and performance before it affects thirst. Build habits, not reactions.",
+  },
+  {
+    title: "Test",
+    micro: "No experiments on game day.",
+    detail: "Every strategy must be tested in training first. Matchday is for execution, not improvisation. Trust what has been rehearsed.",
+  },
 ];
 
 const FuelLawsPreview = () => {
@@ -118,6 +138,9 @@ const FuelLawsPreview = () => {
                      </p>
                     <p className="font-display text-xl md:text-2xl font-medium mt-2 leading-snug max-w-md">
                       {laws[active].micro}
+                    </p>
+                    <p className="text-body text-sm mt-3 opacity-55 leading-relaxed max-w-md">
+                      {laws[active].detail}
                     </p>
                   </motion.div>
                 </AnimatePresence>
