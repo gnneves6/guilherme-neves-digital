@@ -171,6 +171,7 @@ const Work = () => {
               ))}
             </div>
           </Reveal>
+      <section className="section-padding pt-10">
       {/* Status legend */}
       <section className="section-padding pt-10">
         <div className="max-content">
