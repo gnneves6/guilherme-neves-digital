@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import type { Artefact } from "@/data/artefacts";
 import { statusMeta } from "@/data/artefacts";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Props {
   artefact: Artefact | null;
@@ -98,14 +99,15 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
       source_page: window.location.pathname,
     };
 
-    // TODO: Replace with supabase.from('resource_interest').insert(payload)
     try {
-      const existing = JSON.parse(localStorage.getItem("resource_interest") || "[]");
-      localStorage.setItem("resource_interest", JSON.stringify([...existing, payload]));
-    } catch {/* ignore */}
-
-    setLoading(false);
-    setSubmitted(true);
+      const { error: dbError } = await supabase.from('resource_interest').insert(payload);
+      if (dbError) throw dbError;
+      setSubmitted(true);
+    } catch {
+      setSubmitted(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -288,15 +290,17 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                 )}
 
                 {artefact.ctaType === "view" && artefact.externalUrl && (
-                  <a
-                    href={artefact.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block mt-6 w-full py-3 text-xs tracking-widest uppercase font-display font-medium text-center transition-all hover:tracking-[0.25em]"
-                    style={{ background: "hsl(var(--charcoal-deep))", color: "hsl(var(--ivory))" }}
-                  >
-                    Open Resource →
-                  </a>
+                  <div className="mt-6 space-y-2">
+                    <a
+                      href={artefact.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-3 text-xs tracking-widest uppercase font-display font-medium text-center transition-all hover:tracking-[0.25em]"
+                      style={{ background: "hsl(var(--charcoal-deep))", color: "hsl(var(--ivory))" }}
+                    >
+                      View full portfolio in Notion →
+                    </a>
+                  </div>
                 )}
 
                 {artefact.ctaType === "view" && !artefact.externalUrl && (
