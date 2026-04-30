@@ -1,5 +1,3 @@
-import { LINKS } from "@/data/links";
-
 export type ArtefactStatus = "Public" | "Protected" | "In Development";
 export type ArtefactCategory =
   | "Educational Series"
