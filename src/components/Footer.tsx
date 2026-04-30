@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { LINKS } from "@/data/links";
 
 const Footer = () => {
   return (
@@ -44,13 +45,13 @@ const Footer = () => {
               <p className="text-caption text-xs">Connect</p>
               <div className="flex flex-col gap-2.5">
                 <a
-                  href="mailto:gnneves6@gmail.com"
+                  href={`mailto:${LINKS.EMAIL}`}
                   className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"
                 >
                   Email
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/guilhermeneves28"
+                  href={LINKS.LINKEDIN_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"
@@ -58,7 +59,7 @@ const Footer = () => {
                   LinkedIn
                 </a>
                 <a
-                  href="https://linktr.ee/Guilherme_Neves"
+                  href={LINKS.LINKTREE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"

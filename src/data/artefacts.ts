@@ -1,3 +1,5 @@
+import { LINKS } from "@/data/links";
+
 export type ArtefactStatus = "Public" | "Protected" | "In Development" | "Future Product";
 export type ArtefactCategory =
   | "Educational Series"
@@ -44,7 +46,7 @@ export const artefacts: Artefact[] = [
     ctaLabel: "View",
     ctaType: "view",
     externalUrl:
-      "https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa",
+      LINKS.NOTION_PORTFOLIO_URL,
     featured: true,
   },
   {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
+import { LINKS } from "@/data/links";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,11 +12,34 @@ const Contact = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:gnneves6@gmail.com?subject=${encodeURIComponent(formData.subject || `Contact from ${formData.name}`)}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.name} (${formData.email})`;
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    const payload = {
+      created_at: new Date().toISOString(),
+      name: formData.name.trim().slice(0, 100),
+      email: formData.email.trim().slice(0, 255),
+      subject: formData.subject.trim().slice(0, 200),
+      message: formData.message.trim().slice(0, 2000),
+      source_page: "contact",
+    };
+
+    // Backend-ready: when Supabase is connected, replace localStorage with insert to contact_messages table
+    // TODO: Replace with supabase.from('contact_messages').insert(payload)
+    try {
+      const existing = JSON.parse(localStorage.getItem("contact_messages") || "[]");
+      localStorage.setItem("contact_messages", JSON.stringify([...existing, payload]));
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -113,13 +137,17 @@ const Contact = () => {
                     placeholder="Tell me about your project or opportunity..."
                   />
                 </div>
+                {error && (
+                  <p className="text-sm" style={{ color: "hsl(0, 60%, 55%)" }}>{error}</p>
+                )}
                 <motion.button
                   type="submit"
-                  className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={loading}
+                  className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85 disabled:opacity-50"
+                  whileHover={loading ? {} : { y: -1 }}
+                  whileTap={loading ? {} : { scale: 0.98 }}
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </motion.button>
               </form>
             )}
@@ -131,10 +159,10 @@ const Contact = () => {
               <div className="space-y-4">
                 <p className="text-caption">Email</p>
                 <a
-                  href="mailto:gnneves6@gmail.com"
+                  href={`mailto:${LINKS.EMAIL}`}
                   className="text-body-lg link-underline hover:text-foreground transition-colors"
                 >
-                  gnneves6@gmail.com
+                  {LINKS.EMAIL}
                 </a>
               </div>
               <div className="space-y-4">
@@ -150,8 +178,8 @@ const Contact = () => {
                 <p className="text-caption">Social</p>
                 <div className="flex flex-col gap-3">
                   {[
-                    { label: "LinkedIn", href: "https://www.linkedin.com/in/guilhermeneves28" },
-                    { label: "Linktree", href: "https://linktr.ee/Guilherme_Neves" },
+                    { label: "LinkedIn", href: LINKS.LINKEDIN_URL },
+                    { label: "Linktree", href: LINKS.LINKTREE_URL },
                   ].map((link) => (
                     <a
                       key={link.label}

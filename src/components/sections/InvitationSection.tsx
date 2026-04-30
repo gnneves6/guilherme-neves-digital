@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Reveal from "@/components/Reveal";
+import { LINKS } from "@/data/links";
 
 const InvitationSection = () => {
   return (
@@ -28,7 +29,7 @@ const InvitationSection = () => {
               Contact
             </Link>
             <a
-              href="/cv-guilherme-neves.pdf"
+              href={LINKS.CV_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
@@ -36,7 +37,7 @@ const InvitationSection = () => {
               View CV
             </a>
             <a
-              href="https://www.linkedin.com/in/guilherme-neves"
+              href={LINKS.LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
