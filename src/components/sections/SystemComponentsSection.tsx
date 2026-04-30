@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import { AnimatePresence } from "framer-motion";
 
 const stages = [
-  { title: "Assess", desc: "Understand the athlete, context, routine, needs and constraints.", example: "Athlete context, routines, constraints" },
-  { title: "Translate", desc: "Turn science, data and feedback into simple practical language.", example: "Science into practical language" },
-  { title: "Structure", desc: "Build fueling, hydration, recovery and matchday routines that fit real environments.", example: "Matchday, hydration, recovery routines" },
-  { title: "Monitor", desc: "Track progress, adherence, body composition, feedback and practical signals.", example: "Body composition, adherence, feedback" },
-  { title: "Educate", desc: "Build athlete autonomy, literacy and confidence through clear resources.", example: "Resources, mini-classes, athlete autonomy" },
-  { title: "Embed", desc: "Make nutrition part of the team culture, not an extra task.", example: "Nutrition into team culture" },
+  { title: "Assess", desc: "Understand the athlete, context, routine, needs and constraints." },
+  { title: "Translate", desc: "Turn science, data and feedback into simple practical language." },
+  { title: "Structure", desc: "Build fueling, hydration, recovery and matchday routines that fit real environments." },
+  { title: "Monitor", desc: "Track progress, adherence, body composition, feedback and practical signals." },
+  { title: "Educate", desc: "Build athlete autonomy, literacy and confidence through clear resources." },
+  { title: "Embed", desc: "Make nutrition part of the team culture, not an extra task." },
 ];
 
 const SystemComponentsSection = () => {
