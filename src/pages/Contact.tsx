@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import { LINKS } from "@/data/links";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,11 +30,9 @@ const Contact = () => {
       source_page: "contact",
     };
 
-    // Backend-ready: when Supabase is connected, replace localStorage with insert to contact_messages table
-    // TODO: Replace with supabase.from('contact_messages').insert(payload)
     try {
-      const existing = JSON.parse(localStorage.getItem("contact_messages") || "[]");
-      localStorage.setItem("contact_messages", JSON.stringify([...existing, payload]));
+      const { error: dbError } = await supabase.from('contact_messages').insert(payload);
+      if (dbError) throw dbError;
       setSubmitted(true);
     } catch {
       setError("Something went wrong. Please try again.");
@@ -197,6 +196,7 @@ const Contact = () => {
               <div className="space-y-4">
                 <p className="text-caption">Location</p>
                 <p className="text-body-lg">Porto, Portugal · Brussels, Belgium</p>
+                <p className="text-body-lg">From Porto, Portugal · Currently in Brussels, Belgium</p>
                 <p className="text-body text-sm">Open to international opportunities.</p>
               </div>
             </div>
