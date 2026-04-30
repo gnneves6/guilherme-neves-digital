@@ -3,31 +3,66 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import ResourceModal from "@/components/resource/ResourceModal";
-import { featuredArtefacts, statusMeta, type Artefact } from "@/data/artefacts";
+import { featuredArtefacts, statusMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
+
+// Preview type system
+type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup";
+
+const getPreviewType = (status: ArtefactStatus, category: string): PreviewType => {
+  if (status === "Protected") return "blurredProtected";
+  if (category === "Interactive Tool" || category === "FuelOps Tool") return "toolMockup";
+  if (category === "Educational Series" || category === "Matchday System" || category === "Applied Tool") return "documentMockup";
+  return "editorialPlaceholder";
+};
+
+const previewColors: Record<PreviewType, string> = {
+  editorialPlaceholder: "hsl(155, 18%, 22%)",
+  blurredProtected: "hsl(220, 14%, 18%)",
+  toolMockup: "hsl(40, 28%, 28%)",
+  documentMockup: "hsl(35, 22%, 38%)",
+};
 
 const ArtefactPreview = ({ artefact, index }: { artefact: Artefact; index: number }) => {
-  // Editorial placeholder — intentional, never empty
-  const colors = [
-    "hsl(155, 18%, 22%)",
-    "hsl(35, 22%, 38%)",
-    "hsl(220, 14%, 18%)",
-    "hsl(40, 28%, 28%)",
-    "hsl(155, 12%, 30%)",
-    "hsl(220, 10%, 22%)",
-  ];
+  const previewType = getPreviewType(artefact.status, artefact.category);
+  const bg = previewColors[previewType];
+
   return (
-    <div
-      className="relative aspect-[16/9] overflow-hidden"
-      style={{ background: colors[index % colors.length] }}
-    >
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, transparent 0%, transparent 49%, hsl(var(--ivory)/0.4) 49%, hsl(var(--ivory)/0.4) 51%, transparent 51%)",
-          backgroundSize: "8px 8px",
-        }}
-      />
+    <div className="relative aspect-[16/9] overflow-hidden" style={{ background: bg }}>
+      {previewType === "blurredProtected" && (
+        <div className="absolute inset-0 backdrop-blur-[2px] flex items-center justify-center">
+          <div className="space-y-1.5 text-center opacity-30">
+            <div className="w-8 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
+            <span className="text-[8px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory))]">Protected</span>
+            <div className="w-8 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
+          </div>
+        </div>
+      )}
+      {previewType === "documentMockup" && (
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="w-full max-w-[60%] space-y-2 opacity-20">
+            <div className="h-1 w-3/4 rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-1 w-full rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-1 w-2/3 rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-px w-full mt-3" style={{ background: "hsl(var(--ivory) / 0.3)" }} />
+            <div className="h-1 w-5/6 rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-1 w-1/2 rounded" style={{ background: "hsl(var(--ivory))" }} />
+          </div>
+        </div>
+      )}
+      {previewType === "toolMockup" && (
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="w-full max-w-[70%] opacity-15">
+            <div className="border rounded-sm p-3 space-y-2" style={{ borderColor: "hsl(var(--ivory) / 0.4)" }}>
+              <div className="h-1 w-1/3 rounded" style={{ background: "hsl(var(--ivory))" }} />
+              <div className="flex gap-2">
+                <div className="h-6 flex-1 rounded-sm" style={{ background: "hsl(var(--ivory) / 0.15)" }} />
+                <div className="h-6 flex-1 rounded-sm" style={{ background: "hsl(var(--ivory) / 0.1)" }} />
+              </div>
+              <div className="h-1 w-1/2 rounded" style={{ background: "hsl(var(--ivory))" }} />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="absolute inset-0 flex flex-col justify-between p-5">
         <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.5)]">
           {artefact.category}
@@ -80,10 +115,17 @@ const SelectedArtefactsSection = () => {
         >
           {featuredArtefacts.map((a, i) => {
             const s = statusMeta[a.status];
+            const handleClick = () => {
+              if (a.ctaType === "view" && a.externalUrl) {
+                window.open(a.externalUrl, "_blank", "noopener,noreferrer");
+              } else {
+                setOpen(a);
+              }
+            };
             return (
               <Reveal key={a.slug} delay={i * 0.06}>
                 <motion.button
-                  onClick={() => setOpen(a)}
+                  onClick={handleClick}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                   className="block w-full text-left group relative overflow-hidden h-full"
