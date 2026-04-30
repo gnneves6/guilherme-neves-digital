@@ -7,12 +7,14 @@ import ResourceModal from "@/components/resource/ResourceModal";
 import { artefacts, statusMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
 import { LINKS } from "@/data/links";
 
-type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup";
+type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup" | "tableMockup" | "seriesMockup";
 
 const getPreviewType = (status: ArtefactStatus, category: string): PreviewType => {
   if (status === "Protected") return "blurredProtected";
   if (category === "Interactive Tool" || category === "FuelOps Tool") return "toolMockup";
-  if (category === "Educational Series" || category === "Matchday System" || category === "Applied Tool") return "documentMockup";
+  if (category === "Educational Series") return "seriesMockup";
+  if (category === "Matchday System" || category === "Framework") return "documentMockup";
+  if (category === "Applied Tool" || category === "Athlete Resource") return "tableMockup";
   return "editorialPlaceholder";
 };
 
@@ -21,6 +23,8 @@ const previewColors: Record<PreviewType, string> = {
   blurredProtected: "hsl(220, 14%, 18%)",
   toolMockup: "hsl(40, 28%, 28%)",
   documentMockup: "hsl(35, 22%, 38%)",
+  tableMockup: "hsl(155, 15%, 25%)",
+  seriesMockup: "hsl(30, 20%, 30%)",
 };
 
 const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number }) => {
@@ -39,9 +43,11 @@ const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number })
       {pt === "documentMockup" && (
         <div className="absolute inset-0 flex items-center justify-center p-6">
           <div className="w-full max-w-[60%] space-y-2 opacity-20">
-            <div className="h-1 w-3/4 rounded" style={{ background: "hsl(var(--ivory))" }} />
-            <div className="h-1 w-full rounded" style={{ background: "hsl(var(--ivory))" }} />
-            <div className="h-1 w-2/3 rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-1.5 w-1/2 rounded" style={{ background: "hsl(var(--ivory))" }} />
+            <div className="h-px w-full mt-1" style={{ background: "hsl(var(--ivory) / 0.3)" }} />
+            <div className="h-1 w-full rounded" style={{ background: "hsl(var(--ivory) / 0.7)" }} />
+            <div className="h-1 w-5/6 rounded" style={{ background: "hsl(var(--ivory) / 0.7)" }} />
+            <div className="h-1 w-2/3 rounded" style={{ background: "hsl(var(--ivory) / 0.7)" }} />
           </div>
         </div>
       )}
@@ -55,6 +61,44 @@ const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number })
                 <div className="h-6 flex-1 rounded-sm" style={{ background: "hsl(var(--ivory) / 0.1)" }} />
               </div>
             </div>
+          </div>
+        </div>
+      )}
+      {pt === "tableMockup" && (
+        <div className="absolute inset-0 flex items-center justify-center p-6">
+          <div className="w-full max-w-[70%] opacity-15">
+            <div className="space-y-1.5">
+              <div className="flex gap-3">
+                <div className="h-1 w-1/4 rounded" style={{ background: "hsl(var(--ivory))" }} />
+                <div className="h-1 w-1/4 rounded" style={{ background: "hsl(var(--ivory))" }} />
+                <div className="h-1 w-1/4 rounded" style={{ background: "hsl(var(--ivory))" }} />
+              </div>
+              <div className="h-px w-full" style={{ background: "hsl(var(--ivory) / 0.5)" }} />
+              {[1, 2, 3].map((r) => (
+                <div key={r} className="flex gap-3">
+                  <div className="h-1 w-1/4 rounded" style={{ background: "hsl(var(--ivory) / 0.6)" }} />
+                  <div className="h-1 w-1/4 rounded" style={{ background: "hsl(var(--ivory) / 0.4)" }} />
+                  <div className="h-1 w-1/4 rounded" style={{ background: "hsl(var(--ivory) / 0.4)" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+      {pt === "seriesMockup" && (
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+          <div className="flex gap-2 opacity-[0.18]">
+            {["A", "B", "C"].map((letter) => (
+              <div
+                key={letter}
+                className="w-12 h-16 md:w-14 md:h-20 rounded-sm flex items-center justify-center border"
+                style={{ borderColor: "hsl(var(--ivory) / 0.3)", background: "hsl(var(--ivory) / 0.05)" }}
+              >
+                <span className="font-display text-lg md:text-xl font-bold" style={{ color: "hsl(var(--ivory) / 0.6)" }}>
+                  {letter}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       )}

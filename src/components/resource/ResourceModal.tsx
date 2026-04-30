@@ -58,6 +58,11 @@ const samplePages: Record<string, string[]> = {
     "Protein options",
     "Flexible substitutions",
   ],
+  "abc-of-football-nutrition": [
+    "A — The Foundation Plate",
+    "B — Hydration & Timing",
+    "C — Recovery & Adaptation",
+  ],
 };
 
 const ResourceModal = ({ artefact, onClose }: Props) => {
@@ -253,21 +258,34 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                 )}
 
                 {artefact.ctaType === "view-sample" && (
-                  <div className="mt-6 grid grid-cols-3 gap-2">
-                    {pages.map((label, n) => (
-                      <div
-                        key={n}
-                        className="aspect-[3/4] flex flex-col items-center justify-center gap-2 text-center px-2"
-                        style={{ background: "hsl(var(--charcoal) / 0.04)", border: "1px solid hsl(var(--charcoal) / 0.08)" }}
+                  <div className="mt-6 space-y-4">
+                    <div className="grid grid-cols-3 gap-2">
+                      {pages.map((label, n) => (
+                        <div
+                          key={n}
+                          className="aspect-[3/4] flex flex-col items-center justify-center gap-2 text-center px-2 rounded-sm"
+                          style={{ background: "hsl(var(--charcoal) / 0.04)", border: "1px solid hsl(var(--charcoal) / 0.08)" }}
+                        >
+                          <span className="text-[8px] tracking-[0.25em] uppercase font-display opacity-30">
+                            {String(n + 1).padStart(2, "0")}
+                          </span>
+                          <span className="text-[9px] tracking-wide leading-snug font-display opacity-50">
+                            {label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    {artefact.notionUrl && (
+                      <a
+                        href={artefact.notionUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full py-3 text-xs tracking-widest uppercase font-display font-medium text-center transition-all hover:tracking-[0.25em]"
+                        style={{ background: "hsl(var(--charcoal-deep))", color: "hsl(var(--ivory))" }}
                       >
-                        <span className="text-[8px] tracking-[0.25em] uppercase font-display opacity-30">
-                          {String(n + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-[9px] tracking-wide leading-snug font-display opacity-50">
-                          {label}
-                        </span>
-                      </div>
-                    ))}
+                        View full portfolio in Notion →
+                      </a>
+                    )}
                   </div>
                 )}
 
@@ -308,6 +326,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                     Sample link coming soon.
                   </div>
                 )}
+
               </div>
             </motion.div>
           </motion.div>

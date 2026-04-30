@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,7 +16,14 @@ const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
-  // Dark hero mode: on homepage, navbar starts transparent with light text
+  const handleHomeClick = useCallback((e: React.MouseEvent) => {
+    if (isHome) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [isHome]);
+
+  // Dark hero mode
   const inDarkHero = isHome && !scrolled;
 
   useEffect(() => {
@@ -47,6 +54,7 @@ const Navbar = () => {
         <nav className="section-padding max-content flex items-center justify-between h-16 md:h-20">
           <Link
             to="/"
+            onClick={handleHomeClick}
             className={`font-display text-lg md:text-xl font-semibold tracking-tight transition-colors duration-500 ${
               inDarkHero ? "text-[hsl(var(--ivory))]" : "text-foreground"
             }`}
@@ -60,6 +68,7 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={item.path === "/" ? handleHomeClick : undefined}
                 className={`relative text-sm font-body tracking-wide transition-colors duration-300 ${
                   location.pathname === item.path
                     ? inDarkHero ? "text-[hsl(var(--ivory))]" : "text-foreground"
