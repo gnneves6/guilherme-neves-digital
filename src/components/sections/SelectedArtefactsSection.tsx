@@ -1,57 +1,48 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import ResourceModal from "@/components/resource/ResourceModal";
+import { featuredArtefacts, statusMeta, type Artefact } from "@/data/artefacts";
 
-type Status = "Public" | "Private" | "Protected";
-
-const artefacts: {
-  title: string;
-  type: string;
-  description: string;
-  status: Status;
-  cta: string;
-  href?: string;
-}[] = [
-  {
-    title: "MD-1 Fuel System",
-    type: "Matchday Protocol",
-    description: "Practical matchday-minus-one structure for carbohydrate loading, hydration and familiar meals.",
-    status: "Public",
-    cta: "View",
-    href: "/work",
-  },
-  {
-    title: "Athlete Equivalent Bank",
-    type: "Applied Tool",
-    description: "A food substitution system helping athletes adapt meals without losing structure.",
-    status: "Public",
-    cta: "Learn more",
-    href: "/work",
-  },
-  {
-    title: "Individual Athlete Nutrition Orientation",
-    type: "Case Study",
-    description: "A real-world athlete plan translating body composition goals, training demands and daily habits into action.",
-    status: "Private",
-    cta: "Available on request",
-    href: "/contact",
-  },
-  {
-    title: "Private Team Monitoring Report",
-    type: "Confidential Reporting",
-    description: "Protected proof of team-level monitoring and reporting. Confidential — file not shown publicly.",
-    status: "Protected",
-    cta: "Protected",
-  },
-];
-
-const statusStyle: Record<Status, { dot: string; text: string }> = {
-  Public: { dot: "bg-[hsl(var(--olive-light))]", text: "text-[hsl(var(--ivory)/0.7)]" },
-  Private: { dot: "bg-[hsl(35,30%,60%)]", text: "text-[hsl(var(--ivory)/0.55)]" },
-  Protected: { dot: "bg-[hsl(var(--ivory)/0.3)]", text: "text-[hsl(var(--ivory)/0.4)]" },
+const ArtefactPreview = ({ artefact, index }: { artefact: Artefact; index: number }) => {
+  // Editorial placeholder — intentional, never empty
+  const colors = [
+    "hsl(155, 18%, 22%)",
+    "hsl(35, 22%, 38%)",
+    "hsl(220, 14%, 18%)",
+    "hsl(40, 28%, 28%)",
+    "hsl(155, 12%, 30%)",
+    "hsl(220, 10%, 22%)",
+  ];
+  return (
+    <div
+      className="relative aspect-[16/9] overflow-hidden"
+      style={{ background: colors[index % colors.length] }}
+    >
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "linear-gradient(135deg, transparent 0%, transparent 49%, hsl(var(--ivory)/0.4) 49%, hsl(var(--ivory)/0.4) 51%, transparent 51%)",
+          backgroundSize: "8px 8px",
+        }}
+      />
+      <div className="absolute inset-0 flex flex-col justify-between p-5">
+        <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.5)]">
+          {artefact.category}
+        </span>
+        <span className="font-display text-5xl md:text-6xl font-bold leading-none text-[hsl(var(--ivory)/0.12)]">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+    </div>
+  );
 };
 
 const SelectedArtefactsSection = () => {
+  const [open, setOpen] = useState<Artefact | null>(null);
+
   return (
     <section className="section-padding section-spacing section-dark">
       <div className="max-content">
@@ -65,61 +56,64 @@ const SelectedArtefactsSection = () => {
                 Real systems, applied in real environments.
               </h2>
             </Reveal>
+            <Reveal delay={0.18}>
+              <p className="text-sm md:text-base mt-5 max-w-lg" style={{ color: "hsl(var(--ivory) / 0.55)" }}>
+                Curated proof — public previews, protected work and tools in development.
+                Enough to trust. Enough to want more.
+              </p>
+            </Reveal>
           </div>
           <Reveal delay={0.2}>
             <Link
               to="/work"
               className="text-sm link-underline font-display tracking-wide whitespace-nowrap"
-              style={{ color: "hsl(var(--ivory) / 0.65)" }}
+              style={{ color: "hsl(var(--ivory) / 0.7)" }}
             >
-              View all work →
+              Open Resource Vault →
             </Link>
           </Reveal>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-px" style={{ background: "hsl(var(--ivory) / 0.06)" }}>
-          {artefacts.map((a, i) => {
-            const isProtected = a.status === "Protected";
-            const Wrapper: any = a.href && !isProtected ? Link : "div";
-            const wrapperProps = a.href && !isProtected ? { to: a.href } : {};
-            const s = statusStyle[a.status];
-
+        <div
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px"
+          style={{ background: "hsl(var(--ivory) / 0.06)" }}
+        >
+          {featuredArtefacts.map((a, i) => {
+            const s = statusMeta[a.status];
             return (
-              <Reveal key={a.title} delay={i * 0.08}>
-                <motion.div
-                  whileHover={!isProtected ? { y: -4 } : undefined}
+              <Reveal key={a.slug} delay={i * 0.06}>
+                <motion.button
+                  onClick={() => setOpen(a)}
+                  whileHover={{ y: -4 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="h-full"
+                  className="block w-full text-left group relative overflow-hidden h-full"
+                  style={{ background: "hsl(var(--charcoal-deep))" }}
                 >
-                  <Wrapper
-                    {...wrapperProps}
-                    className={`block p-8 md:p-10 group relative overflow-hidden h-full ${
-                      isProtected ? "cursor-default" : "cursor-pointer"
-                    }`}
-                    style={{ background: "hsl(var(--charcoal-deep))" }}
-                  >
-                    <div className="absolute top-0 left-0 right-0 h-px overflow-hidden">
-                      <div
-                        className="w-0 h-full group-hover:w-full transition-all duration-700 ease-out"
-                        style={{ background: "hsl(var(--ivory) / 0.18)" }}
-                      />
-                    </div>
+                  <div className="absolute top-0 left-0 right-0 h-px z-10 overflow-hidden">
+                    <div
+                      className="w-0 h-full group-hover:w-full transition-all duration-700 ease-out"
+                      style={{ background: "hsl(var(--ivory) / 0.22)" }}
+                    />
+                  </div>
 
-                    <div className="flex items-center justify-between mb-5">
-                      <p className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.3)]">
-                        0{i + 1} — {a.type}
+                  <ArtefactPreview artefact={a} index={i} />
+
+                  <div className="p-7 md:p-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
+                        {a.type}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
-                        <span className={`text-[9px] tracking-[0.25em] uppercase font-display ${s.text}`}>
-                          {a.status}
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
+                        <span className="text-[9px] tracking-[0.25em] uppercase font-display text-[hsl(var(--ivory)/0.55)]">
+                          {s.label}
                         </span>
                       </div>
                     </div>
 
                     <h3
-                      className="font-display text-xl md:text-2xl font-medium leading-snug"
-                      style={{ color: "hsl(var(--ivory) / 0.92)" }}
+                      className="font-display text-lg md:text-xl font-medium leading-snug"
+                      style={{ color: "hsl(var(--ivory) / 0.95)" }}
                     >
                       {a.title}
                     </h3>
@@ -128,20 +122,20 @@ const SelectedArtefactsSection = () => {
                     </p>
 
                     <span
-                      className={`inline-block mt-6 text-xs ${
-                        isProtected ? "opacity-30" : "opacity-50 group-hover:opacity-90 group-hover:translate-x-2"
-                      } transition-all duration-500`}
-                      style={{ color: "hsl(var(--ivory) / 0.7)" }}
+                      className="inline-block mt-6 text-xs opacity-60 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-500"
+                      style={{ color: "hsl(var(--ivory) / 0.85)" }}
                     >
-                      {a.cta} {!isProtected && "→"}
+                      {a.ctaLabel} →
                     </span>
-                  </Wrapper>
-                </motion.div>
+                  </div>
+                </motion.button>
               </Reveal>
             );
           })}
         </div>
       </div>
+
+      <ResourceModal artefact={open} onClose={() => setOpen(null)} />
     </section>
   );
 };

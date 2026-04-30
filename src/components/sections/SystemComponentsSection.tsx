@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
 
-const components = [
-  { title: "Education", desc: "Turning complex nutrition into clear behaviours athletes can repeat." },
-  { title: "Fueling", desc: "Structuring energy before key sessions, matches and demanding weeks." },
-  { title: "Recovery", desc: "Building post-training and post-match routines that prepare the next output." },
-  { title: "Hydration", desc: "Making fluid and electrolyte strategy practical, visible and adaptable." },
-  { title: "Monitoring", desc: "Translating measurements and reports into useful decisions." },
-  { title: "Culture", desc: "Helping nutrition become part of how a team operates, not an extra task." },
+const stages = [
+  { title: "Assess", desc: "Understand the athlete, context, routine, needs and constraints." },
+  { title: "Translate", desc: "Turn science, data and feedback into simple practical language." },
+  { title: "Structure", desc: "Build fueling, hydration, recovery and matchday routines that fit real environments." },
+  { title: "Monitor", desc: "Track progress, adherence, body composition, feedback and practical signals." },
+  { title: "Educate", desc: "Build athlete autonomy, literacy and confidence through clear resources." },
+  { title: "Embed", desc: "Make nutrition part of the team culture, not an extra task." },
 ];
 
 const SystemComponentsSection = () => {
@@ -18,21 +18,33 @@ const SystemComponentsSection = () => {
     <section className="section-padding section-spacing">
       <div className="max-content">
         <Reveal>
-          <p className="text-caption mb-4">System Components</p>
+          <p className="text-caption mb-4">Operating System</p>
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="text-headline max-w-2xl mb-4">
-            One applied system. Six components.
+            Performance Nutrition Operating System.
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="text-body-lg max-w-lg mb-14">
-            Not isolated services — interconnected parts of a single performance system.
+            From context to behaviour. From knowledge to repeatable action.
           </p>
         </Reveal>
 
+        {/* Flow indicator */}
+        <Reveal delay={0.25}>
+          <div className="hidden md:flex items-center gap-3 mb-6 text-[10px] tracking-[0.3em] uppercase font-display opacity-40">
+            {stages.map((s, i) => (
+              <span key={s.title} className="flex items-center gap-3">
+                {s.title}
+                {i < stages.length - 1 && <span>→</span>}
+              </span>
+            ))}
+          </div>
+        </Reveal>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
-          {components.map((c, i) => {
+          {stages.map((c, i) => {
             const isHovered = hoveredIdx === i;
             const isReceded = hoveredIdx !== null && !isHovered;
 
@@ -44,8 +56,8 @@ const SystemComponentsSection = () => {
                   onMouseLeave={() => setHoveredIdx(null)}
                   animate={{
                     y: isHovered ? -4 : 0,
-                    scale: isHovered ? 1.015 : isReceded ? 0.98 : 1,
-                    opacity: isReceded ? 0.45 : 1,
+                    scale: isHovered ? 1.015 : isReceded ? 0.985 : 1,
+                    opacity: isReceded ? 0.55 : 1,
                   }}
                   transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                   style={{
@@ -55,12 +67,19 @@ const SystemComponentsSection = () => {
                   }}
                 >
                   <motion.div
-                    className="absolute top-0 left-0 right-0 h-px bg-foreground/25"
+                    className="absolute top-0 left-0 right-0 h-px"
+                    style={{ background: "hsl(var(--olive) / 0.6)", transformOrigin: "left" }}
                     animate={{ scaleX: isHovered ? 1 : 0 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    style={{ transformOrigin: "left" }}
                   />
-                  <p className="text-caption text-[10px] mb-5 opacity-40">0{i + 1}</p>
+                  <div className="flex items-baseline justify-between mb-5">
+                    <p className="text-caption text-[10px] opacity-40">
+                      0{i + 1} — Stage
+                    </p>
+                    {i < stages.length - 1 && (
+                      <span className="text-[10px] opacity-30 font-display">→ {stages[i + 1].title}</span>
+                    )}
+                  </div>
                   <h3 className="font-display text-lg md:text-xl font-medium text-foreground mb-3">
                     {c.title}
                   </h3>
