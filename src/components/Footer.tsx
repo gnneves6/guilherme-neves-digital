@@ -15,7 +15,7 @@ const Footer = () => {
               for real sporting environments.
             </p>
             <p className="text-caption text-[10px] font-normal mt-4">
-              Porto, Portugal · Brussels, Belgium
+              From Porto, Portugal · Currently in Brussels, Belgium
             </p>
           </div>
 
