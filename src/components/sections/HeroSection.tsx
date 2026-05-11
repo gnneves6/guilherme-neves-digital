@@ -91,18 +91,18 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Guilherme Neves — Performance Nutrition
+            Guilherme Neves — Applied Performance Nutrition
           </motion.p>
           <motion.h1
-            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.02] tracking-tight"
+            className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold leading-[1.02] tracking-tight"
             style={{ color: "hsl(var(--ivory))" }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35 }}
           >
-            Practical football nutrition systems{" "}
-            <span className="italic font-light" style={{ color: "hsl(var(--ivory) / 0.7)" }}>
-              for real performance environments
+            Build{" "}
+            <span className="italic font-light" style={{ color: "hsl(var(--ivory) / 0.75)" }}>
+              from within
             </span>
             .
           </motion.h1>
@@ -113,8 +113,17 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
           >
-            Applied performance nutrition across elite, academy and development environments —
-            combining science, education and systems thinking.
+            Applied performance nutrition systems for athletes, teams and performance
+            environments — rooted in football, built for real-world use.
+          </motion.p>
+          <motion.p
+            className="text-xs md:text-sm tracking-[0.18em] uppercase font-display mt-5 md:mt-6"
+            style={{ color: "hsl(var(--ivory) / 0.4)" }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.65 }}
+          >
+            Athlete by nature. Nutritionist by purpose.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-14"
