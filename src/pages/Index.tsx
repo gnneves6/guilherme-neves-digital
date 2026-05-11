@@ -4,6 +4,7 @@ import ManifestoSection from "@/components/sections/ManifestoSection";
 import IdentitySection from "@/components/sections/IdentitySection";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import SystemComponentsSection from "@/components/sections/SystemComponentsSection";
+import CollaborationAreasSection from "@/components/sections/CollaborationAreasSection";
 import FuelLawsPreview from "@/components/sections/FuelLawsPreview";
 import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSection";
 import InvitationSection from "@/components/sections/InvitationSection";
@@ -40,13 +41,18 @@ const Index = () => {
 
       <Divider />
 
-      {/* 6 — GN Fuel Laws Preview */}
+      {/* 6 — Collaboration Areas */}
+      <CollaborationAreasSection />
+
+      <Divider />
+
+      {/* 7 — GN Fuel Laws Preview */}
       <FuelLawsPreview />
 
-      {/* 7 — Selected Artefacts */}
+      {/* 8 — Selected Artefacts */}
       <SelectedArtefactsSection />
 
-      {/* 8 — Invitation */}
+      {/* 9 — Invitation */}
       <InvitationSection />
     </Layout>
   );

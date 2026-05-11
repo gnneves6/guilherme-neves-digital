@@ -132,13 +132,13 @@ const SelectedArtefactsSection = () => {
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-[hsl(var(--ivory))] max-w-xl">
-                Real systems, applied in real environments.
+                Selected proof. Protected depth. Tools in development.
               </h2>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="text-sm md:text-base mt-5 max-w-lg" style={{ color: "hsl(var(--ivory) / 0.55)" }}>
-                Curated proof — public previews, protected work and tools in development.
-                Enough to trust. Enough to want more.
+                Public resources show clarity. Protected casework shows depth.
+                Tools show where this is going next.
               </p>
             </Reveal>
           </div>

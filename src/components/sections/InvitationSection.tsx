@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Reveal from "@/components/Reveal";
-import { LINKS } from "@/data/links";
 
 const InvitationSection = () => {
   return (
@@ -16,8 +15,8 @@ const InvitationSection = () => {
         </Reveal>
         <Reveal delay={0.25}>
           <p className="text-body-lg max-w-lg mx-auto mt-5">
-            Open to meaningful opportunities, collaborations and applied sport
-            performance projects.
+            Open to clubs, academies, performance staff and collaborators building
+            environments where applied nutrition matters.
           </p>
         </Reveal>
         <Reveal delay={0.4}>
@@ -26,24 +25,20 @@ const InvitationSection = () => {
               to="/contact"
               className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
             >
-              Contact
+              Start a Conversation
             </Link>
-            <a
-              href={LINKS.CV_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/work"
               className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
             >
-              View CV
-            </a>
-            <a
-              href={LINKS.LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              View Resource Vault
+            </Link>
+            <Link
+              to="/work#fuelops-ai"
               className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
             >
-              LinkedIn
-            </a>
+              Join FuelOps Early Access
+            </Link>
           </div>
         </Reveal>
       </div>
