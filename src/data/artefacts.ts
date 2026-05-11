@@ -103,7 +103,7 @@ export const artefacts: Artefact[] = [
     whatItProves: "Evidence filtering and clear staff/athlete communication.",
     ctaLabel: "View Sample",
     ctaType: "view-sample",
-    featured: true,
+    featured: false,
     previewType: "documentMockup",
   },
   {
@@ -210,7 +210,7 @@ export const artefacts: Artefact[] = [
     whatItProves: "Individual translation from context to behaviour, in real environments.",
     ctaLabel: "Request Access",
     ctaType: "request-access",
-    featured: false,
+    featured: true,
   },
   {
     slug: "team-monitoring-report",
