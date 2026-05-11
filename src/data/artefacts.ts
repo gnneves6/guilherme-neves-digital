@@ -171,7 +171,7 @@ export const artefacts: Artefact[] = [
     whatItProves: "Where applied nutrition meets performance operations and AI.",
     ctaLabel: "Get Early Access",
     ctaType: "waitlist",
-    featured: true,
+    featured: false,
   },
   {
     slug: "fuel-laws-playbook",
