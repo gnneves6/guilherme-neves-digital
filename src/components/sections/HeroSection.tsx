@@ -94,14 +94,17 @@ const HeroSection = () => {
             Guilherme Neves — Performance Nutrition
           </motion.p>
           <motion.h1
-            className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold leading-[0.98] tracking-tight"
+            className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.02] tracking-tight"
             style={{ color: "hsl(var(--ivory))" }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35 }}
           >
-            Build from{" "}
-            <span className="italic font-light" style={{ color: "hsl(var(--ivory) / 0.7)" }}>within</span>.
+            Practical football nutrition systems{" "}
+            <span className="italic font-light" style={{ color: "hsl(var(--ivory) / 0.7)" }}>
+              for real performance environments
+            </span>
+            .
           </motion.h1>
           <motion.p
             className="text-base md:text-lg leading-relaxed max-w-xl mt-6 md:mt-8"
@@ -110,8 +113,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
           >
-            Practical performance systems for athletes, clubs and environments
-            that need clarity under pressure.
+            Applied performance nutrition across elite, academy and development environments —
+            combining science, education and systems thinking.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-14"
@@ -124,7 +127,7 @@ const HeroSection = () => {
               className="group inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
               style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
             >
-              Explore the Work
+              Explore the Resource Vault
             </Link>
             <Link
               to="/contact"
