@@ -100,7 +100,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.35 }}
           >
-            Build{" "}
+            Built{" "}
             <span className="italic font-light" style={{ color: "hsl(var(--ivory) / 0.75)" }}>
               from within
             </span>
@@ -114,7 +114,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.55 }}
           >
             Applied performance nutrition systems for athletes, teams and performance
-            environments — rooted in football, built for real-world use.
+            environments — shaped by lived sport, rooted in football and built for real-world use.
           </motion.p>
           <motion.p
             className="text-xs md:text-sm tracking-[0.18em] uppercase font-display mt-5 md:mt-6"
