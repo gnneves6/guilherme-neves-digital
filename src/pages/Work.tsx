@@ -4,7 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import Reveal from "@/components/Reveal";
 import ResourceModal from "@/components/resource/ResourceModal";
-import { artefacts, statusMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
+import {
+  artefacts,
+  statusMeta,
+  groupMeta,
+  groupOrder,
+  type Artefact,
+  type ArtefactStatus,
+  type ArtefactGroup,
+} from "@/data/artefacts";
 import { LINKS } from "@/data/links";
 
 type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup" | "tableMockup" | "seriesMockup";
@@ -114,44 +122,82 @@ const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number })
   );
 };
 
-type Filter =
-  | "All"
-  | ArtefactStatus
-  | "Education"
-  | "Tools"
-  | "Club Systems"
-  | "Frameworks";
+type Filter = "All" | ArtefactGroup;
 
-const filters: Filter[] = [
-  "All",
-  "Public",
-  "Protected",
-  "In Development",
-  "Education",
-  "Tools",
-  "Club Systems",
-  "Frameworks",
-];
+const filters: Filter[] = ["All", ...groupOrder];
 
-const matches = (a: Artefact, f: Filter) => {
-  if (f === "All") return true;
-  if (f === "Public" || f === "Protected" || f === "In Development")
-    return a.status === f;
-  if (f === "Education") return a.category === "Educational Series";
-  if (f === "Tools")
-    return a.category === "Applied Tool" || a.category === "Interactive Tool" || a.category === "FuelOps Tool";
-  if (f === "Club Systems")
-    return a.category === "Matchday System" || a.category === "Team Report" || a.category === "Athlete Resource";
-  if (f === "Frameworks") return a.category === "Framework";
-  return true;
-};
+const filterLabel = (f: Filter) => (f === "All" ? "All" : groupMeta[f].label);
 
 const Work = () => {
   const [active, setActive] = useState<Filter>("All");
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState<Artefact | null>(null);
 
-  const filtered = useMemo(() => artefacts.filter((a) => matches(a, active)), [active]);
+  const visibleGroups = useMemo<ArtefactGroup[]>(
+    () => (active === "All" ? groupOrder : [active]),
+    [active]
+  );
+
+  const grouped = useMemo(() => {
+    const map = {} as Record<ArtefactGroup, Artefact[]>;
+    for (const g of groupOrder) map[g] = [];
+    for (const a of artefacts) map[a.group].push(a);
+    return map;
+  }, []);
+
+  const renderCard = (a: Artefact, i: number) => {
+    const isHovered = hovered === a.slug;
+    const hasHover = hovered !== null;
+    const isReceded = hasHover && !isHovered;
+    const s = statusMeta[a.status];
+    const g = groupMeta[a.group];
+
+    return (
+      <motion.button
+        key={a.slug}
+        onClick={() => setOpen(a)}
+        onMouseEnter={() => setHovered(a.slug)}
+        onMouseLeave={() => setHovered(null)}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: isReceded ? 0.4 : 1, y: 0 }}
+        transition={{ duration: 0.5, delay: i * 0.04 }}
+        className="group block w-full text-left bg-background relative overflow-hidden"
+      >
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-px z-10"
+          style={{ background: "hsl(var(--olive) / 0.6)", transformOrigin: "left" }}
+          animate={{ scaleX: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+        />
+
+        <CardPreview artefact={a} index={i} />
+
+        <div className="p-7">
+          <div className="flex items-center justify-between mb-4 gap-3">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: g.dot }} />
+              <span className="text-[9px] tracking-[0.25em] uppercase font-display opacity-65">
+                {g.short}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
+              <span className="text-[9px] tracking-[0.25em] uppercase font-display opacity-55">
+                {s.label}
+              </span>
+            </div>
+          </div>
+          <h3 className="font-display text-lg md:text-xl font-medium leading-snug">
+            {a.title}
+          </h3>
+          <p className="text-sm mt-3 leading-relaxed opacity-65">{a.description}</p>
+          <span className="inline-block mt-5 text-xs opacity-65 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-500">
+            {a.ctaLabel} →
+          </span>
+        </div>
+      </motion.button>
+    );
+  };
 
   return (
     <Layout>
@@ -190,7 +236,7 @@ const Work = () => {
         <div className="divider" />
       </div>
 
-      {/* Status legend */}
+      {/* Group + status legend & filters */}
       <section className="section-padding pt-10">
         <div className="max-content">
           <Reveal>
@@ -218,7 +264,7 @@ const Work = () => {
                       : "bg-transparent text-muted-foreground/60 border-border/50 hover:border-foreground/25 hover:text-foreground"
                   }`}
                 >
-                  {f}
+                  {filterLabel(f)}
                 </button>
               ))}
             </div>
@@ -226,9 +272,9 @@ const Work = () => {
         </div>
       </section>
 
-      {/* Vault grid */}
+      {/* Vault — grouped */}
       <section className="section-padding py-16">
-        <div className="max-content">
+        <div className="max-content space-y-20">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -236,73 +282,41 @@ const Work = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4 }}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50"
+              className="space-y-20"
             >
-              {filtered.map((a, i) => {
-                const isHovered = hovered === a.slug;
-                const hasHover = hovered !== null;
-                const isReceded = hasHover && !isHovered;
-                const s = statusMeta[a.status];
-
+              {visibleGroups.map((gKey) => {
+                const g = groupMeta[gKey];
+                const items = grouped[gKey];
+                if (items.length === 0) return null;
                 return (
-                  <motion.button
-                    key={a.slug}
-                    onClick={() => setOpen(a)}
-                    onMouseEnter={() => setHovered(a.slug)}
-                    onMouseLeave={() => setHovered(null)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isReceded ? 0.4 : 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.04 }}
-                    className="group block w-full text-left bg-background relative overflow-hidden"
+                  <section
+                    key={gKey}
+                    id={g.anchor}
+                    className="scroll-mt-24"
+                    aria-labelledby={`${g.anchor}-title`}
                   >
-                    <motion.div
-                      className="absolute top-0 left-0 right-0 h-px"
-                      style={{ background: "hsl(var(--olive) / 0.6)", transformOrigin: "left" }}
-                      animate={{ scaleX: isHovered ? 1 : 0 }}
-                      transition={{ duration: 0.5 }}
-                    />
-
-                    <CardPreview artefact={a} index={i} />
-
-                    <div className="p-7">
-                      <div className="flex items-center justify-between mb-4">
-                        <p className="text-[10px] tracking-widest uppercase font-display text-muted-foreground/50">
-                          {a.type}
-                        </p>
-                        <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
-                          <span className="text-[9px] tracking-[0.25em] uppercase font-display opacity-60">
-                            {s.label}
-                          </span>
-                        </div>
+                    <div className="flex items-baseline justify-between mb-6 gap-4 flex-wrap">
+                      <div className="flex items-baseline gap-3">
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: g.dot }} />
+                        <h2
+                          id={`${g.anchor}-title`}
+                          className="font-display text-xl md:text-2xl font-medium"
+                        >
+                          {g.label}
+                        </h2>
                       </div>
-                      <h3 className="font-display text-lg md:text-xl font-medium leading-snug">
-                        {a.title}
-                      </h3>
-                      <p className="text-sm mt-3 leading-relaxed opacity-65">{a.description}</p>
-
-                      <div className="mt-5 pt-5 border-t border-border/50">
-                        <p className="text-[10px] tracking-widest uppercase font-display opacity-40 mb-1">
-                          Proves
-                        </p>
-                        <p className="text-xs opacity-70">{a.whatItProves}</p>
-                      </div>
-
-                      <span className="inline-block mt-5 text-xs opacity-65 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-500">
-                        {a.ctaLabel} →
-                      </span>
+                      <p className="text-xs md:text-sm opacity-60 max-w-md">
+                        {g.description}
+                      </p>
                     </div>
-                  </motion.button>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
+                      {items.map((a, i) => renderCard(a, i))}
+                    </div>
+                  </section>
                 );
               })}
             </motion.div>
           </AnimatePresence>
-
-          {filtered.length === 0 && (
-            <p className="text-center text-sm opacity-50 py-20">
-              No artefacts in this filter yet.
-            </p>
-          )}
         </div>
       </section>
 
