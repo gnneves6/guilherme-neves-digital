@@ -12,6 +12,9 @@ export const experiences = [
     location: "Brussels, Belgium",
     period: "2026",
     chapter: "Elite football taught me that nutrition must be clear enough to survive pressure.",
+    context: "Elite first-team football environment",
+    focus: ["Hydration", "Matchday fueling", "Scientific reviews", "Athlete & staff education"],
+    seasonNote: "During a season marked by a cup-final run and European qualification race.",
     logo: logoAnderlecht,
     kitColors: { primary: "#7B68AE", secondary: "#FFFFFF", accent: "#7B68AE" },
   },
@@ -21,6 +24,9 @@ export const experiences = [
     location: "Porto, Portugal",
     period: "2025",
     chapter: "Senior football turned theory into daily decisions, monitoring and accountability.",
+    context: "Senior first-team football environment",
+    focus: ["Body composition", "Matchweek routines", "Athlete education", "Practical fueling"],
+    seasonNote: "Inside a competitive promotion-stage campaign.",
     logo: logoLeca,
     kitColors: { primary: "#1A3A6B", secondary: "#FFFFFF", accent: "#C4A853" },
   },
@@ -30,6 +36,9 @@ export const experiences = [
     location: "Porto, Portugal",
     period: "2025",
     chapter: "Performance is broader than football: training, recovery, health and consistency.",
+    context: "Human-performance environment beyond football",
+    focus: ["Health", "Habits", "Endurance", "Recovery", "Long-term development"],
+    seasonNote: null,
     logo: logoR4E,
     kitColors: { primary: "#2D8C4E", secondary: "#FFFFFF", accent: "#F5A623" },
   },
@@ -96,9 +105,27 @@ const EnvironmentsSection = () => {
                 <p className="text-[10px] tracking-widest uppercase font-display mt-2 text-[hsl(var(--ivory)/0.4)]">
                   {exp.role}
                 </p>
+                <p className="text-xs text-[hsl(var(--ivory)/0.5)] mt-3">
+                  {exp.context}
+                </p>
+                <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
+                  {exp.focus.map((f) => (
+                    <span
+                      key={f}
+                      className="text-[10px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.55)]"
+                    >
+                      · {f}
+                    </span>
+                  ))}
+                </div>
                 <p className="text-sm leading-relaxed text-[hsl(var(--ivory)/0.65)] mt-4 italic">
                   “{exp.chapter}”
                 </p>
+                {exp.seasonNote && (
+                  <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3">
+                    {exp.seasonNote}
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -165,9 +192,27 @@ const EnvironmentsSection = () => {
                             <p className="text-xs tracking-widest uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)]">
                               {exp.role}
                             </p>
+                            <p className="text-sm text-[hsl(var(--ivory)/0.6)] mt-3 max-w-md">
+                              {exp.context}
+                            </p>
+                            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 max-w-md">
+                              {exp.focus.map((f) => (
+                                <span
+                                  key={f}
+                                  className="text-[10px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.55)]"
+                                >
+                                  · {f}
+                                </span>
+                              ))}
+                            </div>
                             <p className="font-display text-base lg:text-lg italic max-w-md leading-relaxed text-[hsl(var(--ivory)/0.7)] mt-6">
                               “{exp.chapter}”
                             </p>
+                            {exp.seasonNote && (
+                              <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3 max-w-md">
+                                {exp.seasonNote}
+                              </p>
+                            )}
                           </motion.div>
                         </div>
                       </motion.div>

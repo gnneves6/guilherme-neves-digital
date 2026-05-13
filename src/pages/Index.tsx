@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/sections/HeroSection";
-import ManifestoSection from "@/components/sections/ManifestoSection";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
+import FromWithinBridge from "@/components/sections/FromWithinBridge";
 import SystemComponentsSection from "@/components/sections/SystemComponentsSection";
 import CollaborationAreasSection from "@/components/sections/CollaborationAreasSection";
 import FuelLawsPreview from "@/components/sections/FuelLawsPreview";
@@ -20,16 +20,16 @@ const Index = () => {
       {/* 1 — Entry */}
       <HeroSection />
 
-      {/* 2 — Selected Artefacts (proof first) */}
-      <SelectedArtefactsSection />
+      {/* 2 — Selected Environments (interactive credibility) */}
+      <EnvironmentsSection />
 
-      {/* 3 — Manifesto (worldview + compact identity line) */}
-      <ManifestoSection />
+      {/* 3 — From Within Bridge (meaning) */}
+      <FromWithinBridge />
 
       <Divider />
 
-      {/* 4 — Selected Environments */}
-      <EnvironmentsSection />
+      {/* 4 — Selected Artefacts (proof of the story) */}
+      <SelectedArtefactsSection />
 
       <Divider />
 
