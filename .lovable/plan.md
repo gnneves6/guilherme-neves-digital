@@ -1,142 +1,216 @@
 
-# Strategic Refinement Plan — Identity, Hero & Curated Vault
+# UX & Information Architecture Refinement — Plan Only
 
-This is a positioning + curation pass only. No backend, no DB, no lightbox, no auth, no payments, no domain/email work. Existing systems stay intact.
+Goal: make the site feel less like a beautiful archive and more like a strategic launch hub. Reduce, connect, group. Keep the editorial calm.
 
 ---
 
-## 1. Recommended final hero copy
+## A) What currently feels too long, text-heavy, or too spaced
 
-**Eyebrow**
-`Guilherme Neves — Applied Performance Nutrition`
+- **Pre-value distance**: visitor hits Hero → Manifesto → Identity → Environments before seeing a single concrete artefact. That's ~3 long scrolls of philosophy before proof.
+- **Manifesto + Identity + Collaboration Areas** repeat the "rooted in football, applied broadly" idea three times in different words.
+- **Dividers + section-padding** create luxurious whitespace, but on a 922px viewport it reads as slow.
+- **Artefact cards** show title + type + description + "Proves" line + status + CTA — too many text layers competing.
+- **/work filters**: many flat filter chips (type/status/access) without visual grouping → marketplace feel.
+- **EnvironmentsSection** mannequin metaphor is poetic but doesn't communicate role/period/output.
+- **CollaborationAreasSection** is pure prose — no link out to proof.
 
-**Headline (H1)**
-`Build from within.`
+---
 
-Short, memorable, ownable. It becomes the brand signature *and* the H1. Functional clarity is moved into the subheadline, where it belongs.
+## B) Sections to compress or reorder
 
-**Subheadline**
-`Applied performance nutrition systems for athletes, teams and performance environments — rooted in football, built for real-world use.`
+- Compress: Manifesto (trim to 2 short stanzas), Identity (merge "Athlete by nature" line into Hero micro-line, drop the standalone section OR shrink to a single editorial quote band).
+- Move "Proves" copy off cards → into modal.
+- Reduce Divider frequency; let section background tone do the separating.
+- Keep Fuel Laws Preview small — it's already a good rhythm break.
 
-**Supporting micro-line (optional, under subheadline, smaller)**
-`Athlete by nature. Nutritionist by purpose.`
-Used as a quiet identity stamp, not as a CTA.
+---
 
-**CTAs (unchanged)**
-- Primary: `Explore the Resource Vault` → `/work`
-- Secondary: `Start a Conversation` → `/contact`
-
-## 2. "Build from within." — headline or signature?
-
-Use it as **both, but anchored as the H1**.
-- It is short enough to function as the memorable signature line everywhere (footer, OG image, social).
-- The subheadline carries the functional "what this is" message, so the H1 doesn't need to.
-- This avoids the current problem where the H1 reads like a tagline + descriptor stitched together.
-
-## 3. Balancing broader positioning with football specificity
-
-Three rules:
-1. **Top-level brand language = broad.** Hero, manifesto headline, meta tags, footer use *Applied Performance Nutrition & Sport Systems / athletes, teams and performance environments*.
-2. **Proof layer = football.** Environments section, artefact descriptions, case copy stay football-led — that's the credibility.
-3. **Bridge sentence everywhere there's risk of feeling football-only:** *"Rooted in football. Built for any high-performance environment."*
-
-This keeps the brand expandable to other sports, federations, and FuelOps AI without diluting the proof.
-
-## 4. Recommended homepage section order
-
-Minimal change from current — only one rename and one tone shift:
+## C) Recommended homepage order
 
 ```
-1. Hero                          (new copy)
-2. Manifesto                     (light copy tune to broaden language)
-3. Identity                      (unchanged)
-4. Selected Environments         (unchanged — football-led proof)
-5. System Components             (unchanged)
-6. Collaboration Areas           (kept, retoned — see §5)
-7. GN Fuel Laws Preview          (unchanged)
-8. Selected Artefacts (curated)  (reduced to 6, see §6)
-9. Invitation                    (unchanged)
+1. Hero ("Built from within.")
+2. Selected Artefacts (6)              ← surface concrete value early
+3. Manifesto (compressed, 2 stanzas)
+4. Selected Environments (rebuilt, see H)
+5. System Components (Operating System)
+6. Collaboration Areas (with links to work, see G)
+7. Fuel Laws Preview
+8. Invitation
 ```
 
-No reshuffle, no new sections, no removal — protects velocity and credits.
+Removed/folded: standalone Identity section → its line lives in Hero + a quiet quote inside Manifesto.
 
-## 5. Collaboration Areas — own component or embedded?
+Rationale: proof at scroll 2, story at scroll 3, depth after. Story still wins, but value is visible immediately.
 
-**Keep as its own component**, but retone it so it reads as *engagement areas* rather than a services menu.
+---
 
-Specific changes (copy only, no structural change):
-- Section eyebrow: `Where I Can Help` → `Areas of Engagement`
-- Section H2: keep, but broaden — `Collaboration areas for athletes, teams and performance environments.`
-- Reword Area 01 from "Football Nutrition Systems Review" → `Performance Nutrition Systems Review` (football proof remains in the description).
-- No prices, no "book", no service-y verbs. Keep the "01–04" numbering.
+## D) Resource Vault grouping (/work)
 
-It stays its own file (`CollaborationAreasSection.tsx`) — embedding it would crowd the page and weaken the premium feel.
+Replace flat filters with **4 named groups + All**:
 
-## 6. Recommended homepage featured artefacts (set `featured: true`)
+1. **Public Resources** — ABC, education guides, mini-classes
+2. **Practical Systems** — MD-1, Equivalent Bank, Atlas, frameworks
+3. **Tools & Product Lab** — Matchday Fuel, FuelOps AI, in-development tools
+4. **Protected Casework** — Team Monitoring Report, anonymised proofs
 
-Exactly **6 cards**, in this order:
+Layout options (recommend **Option B**):
+- A) Single grid + 5 filter chips (All + 4 groups)
+- **B) Grouped sections**: each group has its own heading, short one-liner, and a 2–4 card row. "All" view collapses to one filtered grid. ← clearest, most premium, least marketplace.
 
-1. The ABC of Football Nutrition  *(public proof, only one with real previews)*
-2. MD-1 Fuel System  *(matchday system depth)*
-3. Athlete Equivalent Bank  *(applied tool)*
-4. Matchday Timeline  *(in-development tool)*
-5. FuelOps AI  *(ecosystem gateway)*
-6. Individual Athlete Nutrition Orientation  *(one Protected Depth card, blurred — signals casework exists)*
+Drop secondary filters (status, access). Show status only as a small chip on the card itself.
 
-This satisfies "selected proof, protected depth, tools in development" in a single 2×3 grid.
+---
 
-## 7. Artefacts that stay only on `/work` (not featured)
+## E) Filter / chip / color logic
 
-- Supplementation in Elite Football
-- Why Players Cramp at 80 Minutes?
-- Athlete's Food Pyramid
-- Hydration Monitoring Tool
-- Matchday Snack Bag Agent
-- GN Fuel Laws Playbook
-- Private Team Monitoring Report
+One **group chip** + one **status chip** per card. That's it.
 
-They remain in `/work` so the vault stays rich, but the homepage stays curated.
+Group color tokens (add to `index.css`, all derived from existing olive/ivory palette — muted, no neon):
 
-## 8. Resources to delay / hide / de-emphasize until real previews exist
+| Group | Token suggestion | Feel |
+|---|---|---|
+| Public Resources | `--group-public` — soft ivory/sand | open, educational |
+| Practical Systems | `--group-systems` — deep olive | applied, structural |
+| Tools & Product Lab | `--group-tools` — warm graphite + thin accent | technical, alive |
+| Protected Casework | `--group-protected` — charcoal + lock glyph | discreet, serious |
+| Product Direction (FuelOps) | `--group-product` — olive→graphite gradient hairline | forward-facing |
 
-No removals. Only de-emphasis:
-- Items still using mockup placeholders are **kept off the homepage** (handled by §7).
-- `/work` keeps them visible because the variety reinforces ecosystem breadth.
-- When you upload real previews for *MD-1*, *Athlete Equivalent Bank*, *Supplementation*, we revisit featuring or swapping.
+Status chip (orthogonal): `Public` · `Protected` · `In Development` · `Early Access` — outline style, neutral foreground, never colored loud.
 
-No artefact should be hidden outright — protected/in-development states are part of the narrative.
+Legend: one quiet line above the grid, not a panel.
 
-## 9. Files to edit if approved
+---
 
-Tight scope, all presentation:
+## F) Card simplification
 
-- `src/components/sections/HeroSection.tsx` — new eyebrow, H1 (`Build from within.`), subheadline, optional micro-line.
-- `src/components/sections/ManifestoSection.tsx` — small copy tune to broaden language (review only; edit only if narrow).
-- `src/components/sections/CollaborationAreasSection.tsx` — eyebrow, H2, Area 01 title.
-- `src/data/artefacts.ts` — flip `featured` flags to match §6 / §7. No schema changes, no removals.
-- `src/components/Footer.tsx` — add `Build from within.` as the signature line if not already present (check before editing).
-- `index.html` — meta `<title>` and description aligned to broader positioning.
+Current card layers → target:
 
-**Not touched:** `ResourceModal.tsx`, `ImageLightbox.tsx`, all DB / Supabase code, `Contact.tsx` form logic, `client.ts`, payments, auth, Shopify, connectors, supabase config.
+```
+[ preview visual                    ]
+[ group-chip       status-chip      ]
+[ Title (display font)              ]
+[ One-line description              ]
+[ CTA (text link with arrow)        ]
+```
 
-## 10. Risks / tradeoffs
+Move into modal: "Proves", long description, methodology notes, related links.
+Hover: subtle lift + reveal CTA underline. No extra text on hover.
 
-- **Broader positioning could dilute the football-expert signal** if the proof layer isn't kept football-heavy. Mitigated by §3 rule 2.
-- **"Build from within." is poetic, not descriptive.** Mitigated by a clear functional subheadline directly beneath it.
-- **Reducing featured artefacts to 6** removes some surface area for SEO/discovery on `/`. Mitigated by `/work` carrying the full vault and a strong "Open Resource Vault →" link.
-- **Renaming Area 01** loses one explicit "football" mention up high — acceptable given hero subheadline still says "rooted in football".
-- **Copy-only changes are cheap on credits**, low regression risk; only HeroSection has motion logic to preserve.
+---
 
-## 11. Minimal implementation plan (after approval)
+## G) Collaboration Areas → linked to work
 
-Single focused build pass, ~5 file edits, no migrations, no new components:
+Each area gets one quiet inline link (text + arrow, no button). Mapping:
 
-1. Update `HeroSection.tsx` copy (eyebrow, H1, subheadline, micro-line). Keep all motion / parallax untouched.
-2. Update `index.html` `<title>` and `<meta name="description">` to the broader positioning.
-3. Update `CollaborationAreasSection.tsx` eyebrow, H2, and Area 01 title.
-4. Light copy review on `ManifestoSection.tsx` — only edit if it currently reads football-only.
-5. In `src/data/artefacts.ts`, set `featured` = true only for the 6 items in §6; everything else `featured: false`. No interface changes.
-6. Verify `Footer.tsx` carries `Build from within.` as the signature; add if missing.
-7. Quick visual QA on `/`, `/work`, `/contact` at mobile + desktop. No DB/edge work.
+| Area | Links to |
+|---|---|
+| Performance Nutrition Systems Review | /work#protected-casework → Team Monitoring Report |
+| Education & Behaviour Change | /work#public-resources → ABC, guides |
+| Applied Frameworks for Teams & Athletes | /work#practical-systems → Atlas, Equivalent Bank, MD-1 |
+| Monitoring, Reporting & Practical Tools | /work#tools-product-lab → Matchday Fuel, FuelOps |
 
-Estimated change surface: ~5 files, copy + flags only. No risk to working systems.
+CTA copy: `See related work →` (one variant, consistent). No "Request access" here — that lives in modals.
+
+---
+
+## H) Selected Environments — replace mannequin
+
+Recommended: **editorial environment cards in a 2-column staggered list** (not timeline, not logo strip).
+
+Each card:
+- Role (e.g. "Performance Nutritionist")
+- Period (e.g. "2022 – 2024")
+- Context (1 line: setting/level, no club name if sensitive)
+- Contribution (2–3 short bullets: what I built/delivered)
+- Selected outputs (link chip → an artefact in the Vault, when safe)
+
+Avoid: club-result claims, logos unless cleared, mannequin metaphor.
+Keep: muted dividers, generous type, no images required to ship.
+
+Mannequin component can be retired or moved to About as a single quiet visual.
+
+---
+
+## I) Atlas preview strategy (future, not now)
+
+Keep current placeholder. When assets arrive, target preview structure:
+
+```
+[ atlas-cover.jpg — full bleed left ]
+[ atlas-sample-01.jpg — one readable spread, right ]
+[ atlas-blurred-spread.jpg — locked, with lock glyph ]
+[ Status: In Development · Premium Resource ]
+[ CTA: Join Early Access  →  (writes to resource_interest) ]
+```
+
+Rules: no full PDF, no public download, no payment, no price. One CTA only.
+
+---
+
+## J) Real assets to prepare next
+
+Priority order:
+
+1. `atlas-cover.jpg` (1600×2000, portrait, print-grade)
+2. `atlas-sample-01.jpg` (one spread, readable)
+3. `atlas-blurred-spread.jpg` (the same spread or another, blurred)
+4. `matchday-fuel-ui.jpg` (tool mockup or screen)
+5. `team-monitoring-anon.jpg` (anonymised chart/report visual)
+6. `fuelops-teaser.jpg` (product system teaser, abstract OK)
+7. Optional: `atlas-mobile-preview.jpg`, environment context photos (non-club)
+
+All ≤ 400KB, JPG, sRGB.
+
+---
+
+## K) Files / components I would edit (if approved)
+
+- `src/pages/Index.tsx` — reorder sections, drop one Divider, possibly remove `IdentitySection`.
+- `src/components/sections/HeroSection.tsx` — absorb the "Athlete by nature…" micro-line (already there).
+- `src/components/sections/ManifestoSection.tsx` — trim copy; optional inline quote from Identity.
+- `src/components/sections/IdentitySection.tsx` — likely retire (or shrink to a quote band).
+- `src/components/sections/EnvironmentsSection.tsx` — replace mannequin with editorial cards.
+- `src/components/sections/CollaborationAreasSection.tsx` — add one `See related work →` link per area, mapped to /work anchors.
+- `src/components/sections/SelectedArtefactsSection.tsx` — simplify card (remove "Proves" from face, keep status chip, add group chip).
+- `src/pages/Work.tsx` — switch from flat filters to grouped sections + 5-chip filter (All + 4 groups), add anchor IDs.
+- `src/data/artefacts.ts` — add `group` field ("public" | "systems" | "tools" | "protected" | "product") to each artefact.
+- `src/index.css` — add `--group-*` tokens (HSL, derived from existing palette).
+- `src/components/resource/ResourceModal.tsx` — surface the "Proves" copy and long description here.
+- `src/components/MannequinTorso.tsx` — retire or move to About.
+
+No DB, auth, payments, email, Shopify, or connector changes. ABC lightbox untouched. All form flows untouched.
+
+---
+
+## L) Minimal safe implementation plan (when approved)
+
+Three small passes, each independently shippable:
+
+**Pass 1 — IA & rhythm (low risk)**
+- Reorder `Index.tsx`, retire/shrink Identity, trim Manifesto.
+- Add anchor IDs in `/work` (no logic change yet).
+- Add `See related work →` links in Collaboration Areas.
+
+**Pass 2 — Card & Vault simplification (medium risk)**
+- Add `group` field to artefacts.
+- Add `--group-*` tokens.
+- Simplify card face (move "Proves" into modal).
+- Convert /work filters to All + 4 group chips, render as grouped sections.
+
+**Pass 3 — Environments rebuild (medium risk, content-dependent)**
+- Replace mannequin with editorial environment cards using existing copy I already have approved.
+- Retire `MannequinTorso` from homepage; keep file for possible About reuse.
+
+Atlas preview waits for assets — no code in this sprint.
+
+---
+
+## Risks & tradeoffs
+
+- Removing Identity loses one "soul" beat — mitigate by keeping the micro-line in Hero and a single quote in Manifesto.
+- Grouped Vault sections are longer than a single filtered grid — mitigate with tight 2–4 cards per group on first paint.
+- Adding a `group` field touches every artefact entry — mechanical, but must be complete or filters break.
+- Retiring the mannequin is a strong identity change — confirm before Pass 3.
+
+Awaiting your approval (and which of the 3 passes to start with) before any code changes.
