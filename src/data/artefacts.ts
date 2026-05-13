@@ -17,6 +17,8 @@ export type ArtefactCategory =
   | "Monitoring Tool"
   | "Product";
 
+export type ArtefactGroup = "public" | "systems" | "tools" | "protected";
+
 export type CtaType =
   | "view"            // open external URL
   | "view-sample"     // open sample preview modal
@@ -29,6 +31,7 @@ export interface Artefact {
   slug: string;
   title: string;
   category: ArtefactCategory;
+  group: ArtefactGroup;
   type: string;             // human-readable subtype
   status: ArtefactStatus;
   description: string;
@@ -52,6 +55,7 @@ export const artefacts: Artefact[] = [
     slug: "abc-of-football-nutrition",
     title: "The ABC of Football Nutrition",
     category: "Educational Series",
+    group: "public",
     type: "Athlete-facing Education",
     status: "Public",
     description:
@@ -68,6 +72,7 @@ export const artefacts: Artefact[] = [
     slug: "md-1-fuel-system",
     title: "MD-1 Fuel System",
     category: "Matchday System",
+    group: "systems",
     type: "Matchday Protocol",
     status: "Public",
     description:
@@ -82,6 +87,7 @@ export const artefacts: Artefact[] = [
     slug: "athlete-equivalent-bank",
     title: "Athlete Equivalent Bank",
     category: "Applied Tool",
+    group: "systems",
     type: "Practical Food System",
     status: "Public",
     description:
@@ -96,6 +102,7 @@ export const artefacts: Artefact[] = [
     slug: "football-nutrition-atlas",
     title: "The Football Nutrition Atlas",
     category: "Product",
+    group: "systems",
     type: "Premium Resource · In Development",
     status: "In Development",
     description:
@@ -110,6 +117,7 @@ export const artefacts: Artefact[] = [
     slug: "supplementation-elite-football",
     title: "Supplementation in Elite Football",
     category: "Visual Guide",
+    group: "public",
     type: "Applied Visual Guide",
     status: "Public",
     description:
@@ -124,6 +132,7 @@ export const artefacts: Artefact[] = [
     slug: "why-players-cramp",
     title: "Why Players Cramp at 80 Minutes?",
     category: "Mini-Class",
+    group: "public",
     type: "Educational Mini-Class",
     status: "Public",
     description:
@@ -138,6 +147,7 @@ export const artefacts: Artefact[] = [
     slug: "athletes-food-pyramid",
     title: "Athlete's Food Pyramid",
     category: "Visual Guide",
+    group: "public",
     type: "Foundational Visual Guide",
     status: "Public",
     description:
@@ -152,6 +162,7 @@ export const artefacts: Artefact[] = [
     slug: "matchday-fuel",
     title: "Matchday Fuel",
     category: "Interactive Tool",
+    group: "tools",
     type: "Football Matchday Fueling System · In Development",
     status: "In Development",
     description:
@@ -165,6 +176,7 @@ export const artefacts: Artefact[] = [
     slug: "hydration-monitoring",
     title: "Hydration Monitoring Tool",
     category: "Monitoring Tool",
+    group: "tools",
     type: "Monitoring Tool · In Development",
     status: "In Development",
     description:
@@ -178,6 +190,7 @@ export const artefacts: Artefact[] = [
     slug: "snack-bag-agent",
     title: "Matchday Snack Bag Agent",
     category: "FuelOps Tool",
+    group: "tools",
     type: "FuelOps Prototype · In Development",
     status: "In Development",
     description:
@@ -191,6 +204,7 @@ export const artefacts: Artefact[] = [
     slug: "fuel-laws-playbook",
     title: "GN Fuel Laws Playbook",
     category: "Framework",
+    group: "systems",
     type: "Applied Framework · In Development",
     status: "In Development",
     description:
@@ -204,6 +218,7 @@ export const artefacts: Artefact[] = [
     slug: "fuelops-ai",
     title: "FuelOps AI",
     category: "Product",
+    group: "tools",
     type: "Performance Nutrition Product · Private Beta",
     status: "In Development",
     description:
@@ -217,6 +232,7 @@ export const artefacts: Artefact[] = [
     slug: "athlete-orientation",
     title: "Individual Athlete Nutrition Orientation",
     category: "Athlete Resource",
+    group: "protected",
     type: "Protected Casework",
     status: "Protected",
     description:
@@ -230,6 +246,7 @@ export const artefacts: Artefact[] = [
     slug: "team-monitoring-report",
     title: "Protected Team Monitoring Report",
     category: "Team Report",
+    group: "protected",
     type: "Protected Team Casework",
     status: "Protected",
     description:
@@ -251,3 +268,39 @@ export const statusMeta: Record<
   Protected: { dot: "hsl(35, 28%, 62%)", label: "Protected" },
   "In Development": { dot: "hsl(40, 55%, 60%)", label: "In Development" },
 };
+
+export const groupMeta: Record<
+  ArtefactGroup,
+  { label: string; short: string; anchor: string; dot: string; description: string }
+> = {
+  public: {
+    label: "Public Resources",
+    short: "Public",
+    anchor: "public-resources",
+    dot: "hsl(155, 14%, 42%)",
+    description: "Educational guides, mini-classes and open learning resources.",
+  },
+  systems: {
+    label: "Practical Systems",
+    short: "Systems",
+    anchor: "practical-systems",
+    dot: "hsl(35, 24%, 52%)",
+    description: "Applied frameworks and systems built for real performance environments.",
+  },
+  tools: {
+    label: "Tools & Product Lab",
+    short: "Tools",
+    anchor: "tools-product-lab",
+    dot: "hsl(40, 38%, 58%)",
+    description: "Interactive tools, agents and in-development products — including FuelOps.",
+  },
+  protected: {
+    label: "Protected Casework",
+    short: "Protected",
+    anchor: "protected-casework",
+    dot: "hsl(220, 8%, 52%)",
+    description: "Confidential athlete, team and staff-facing work — shown as proof.",
+  },
+};
+
+export const groupOrder: ArtefactGroup[] = ["public", "systems", "tools", "protected"];

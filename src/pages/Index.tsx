@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/sections/HeroSection";
 import ManifestoSection from "@/components/sections/ManifestoSection";
-import IdentitySection from "@/components/sections/IdentitySection";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import SystemComponentsSection from "@/components/sections/SystemComponentsSection";
 import CollaborationAreasSection from "@/components/sections/CollaborationAreasSection";
@@ -21,13 +20,11 @@ const Index = () => {
       {/* 1 — Entry */}
       <HeroSection />
 
-      {/* 2 — Worldview / Manifesto */}
+      {/* 2 — Selected Artefacts (proof first) */}
+      <SelectedArtefactsSection />
+
+      {/* 3 — Manifesto (worldview + compact identity line) */}
       <ManifestoSection />
-
-      <Divider />
-
-      {/* 3 — Identity / Presence */}
-      <IdentitySection />
 
       <Divider />
 
@@ -44,15 +41,10 @@ const Index = () => {
       {/* 6 — Collaboration Areas */}
       <CollaborationAreasSection />
 
-      <Divider />
-
       {/* 7 — GN Fuel Laws Preview */}
       <FuelLawsPreview />
 
-      {/* 8 — Selected Artefacts */}
-      <SelectedArtefactsSection />
-
-      {/* 9 — Invitation */}
+      {/* 8 — Invitation */}
       <InvitationSection />
     </Layout>
   );

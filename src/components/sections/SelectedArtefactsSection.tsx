@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import ResourceModal from "@/components/resource/ResourceModal";
-import { featuredArtefacts, statusMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
+import { featuredArtefacts, statusMeta, groupMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
 
 // Preview type system
 type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup" | "tableMockup" | "seriesMockup";
@@ -159,6 +159,7 @@ const SelectedArtefactsSection = () => {
         >
           {featuredArtefacts.map((a, i) => {
             const s = statusMeta[a.status];
+            const g = groupMeta[a.group];
             const handleClick = () => {
               setOpen(a);
             };
@@ -181,13 +182,16 @@ const SelectedArtefactsSection = () => {
                   <ArtefactPreview artefact={a} index={i} />
 
                   <div className="p-7 md:p-8">
-                    <div className="flex items-center justify-between mb-4">
-                      <p className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                        {a.type}
-                      </p>
+                    <div className="flex items-center justify-between mb-4 gap-3">
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: g.dot }} />
+                        <span className="text-[9px] tracking-[0.25em] uppercase font-display text-[hsl(var(--ivory)/0.6)]">
+                          {g.short}
+                        </span>
+                      </div>
                       <div className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
-                        <span className="text-[9px] tracking-[0.25em] uppercase font-display text-[hsl(var(--ivory)/0.55)]">
+                        <span className="text-[9px] tracking-[0.25em] uppercase font-display text-[hsl(var(--ivory)/0.5)]">
                           {s.label}
                         </span>
                       </div>

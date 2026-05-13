@@ -6,21 +6,25 @@ const areas = [
     num: "01",
     title: "Performance Nutrition Systems Review",
     desc: "Identifying gaps in nutrition strategy, education, routines and practical implementation across clubs, academies and performance environments — with football as the primary proof environment.",
+    anchor: "protected-casework",
   },
   {
     num: "02",
     title: "Education & Behaviour Change Resources",
     desc: "Building athlete-facing resources that turn nutrition science into behaviours athletes can actually repeat.",
+    anchor: "public-resources",
   },
   {
     num: "03",
     title: "Applied Frameworks for Teams & Athletes",
     desc: "Practical frameworks, protocols and tools for matchday, recovery, hydration, supplementation and daily routines.",
+    anchor: "practical-systems",
   },
   {
     num: "04",
     title: "Monitoring, Reporting & Practical Tools",
     desc: "Tracking systems, reporting structures and visual tools that support staff decisions and athlete accountability.",
+    anchor: "tools-product-lab",
   },
 ];
 
@@ -71,6 +75,12 @@ const CollaborationAreasSection = () => {
                   {a.title}
                 </h3>
                 <p className="text-body text-sm mt-4 leading-relaxed opacity-80">{a.desc}</p>
+                <Link
+                  to={`/work#${a.anchor}`}
+                  className="inline-block mt-6 text-xs font-display tracking-wide opacity-60 hover:opacity-100 transition-opacity link-underline"
+                >
+                  See related work →
+                </Link>
               </div>
             </Reveal>
           ))}
