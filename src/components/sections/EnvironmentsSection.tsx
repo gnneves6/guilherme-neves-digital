@@ -105,9 +105,27 @@ const EnvironmentsSection = () => {
                 <p className="text-[10px] tracking-widest uppercase font-display mt-2 text-[hsl(var(--ivory)/0.4)]">
                   {exp.role}
                 </p>
+                <p className="text-xs text-[hsl(var(--ivory)/0.5)] mt-3">
+                  {exp.context}
+                </p>
+                <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
+                  {exp.focus.map((f) => (
+                    <span
+                      key={f}
+                      className="text-[10px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.55)]"
+                    >
+                      · {f}
+                    </span>
+                  ))}
+                </div>
                 <p className="text-sm leading-relaxed text-[hsl(var(--ivory)/0.65)] mt-4 italic">
                   “{exp.chapter}”
                 </p>
+                {exp.seasonNote && (
+                  <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3">
+                    {exp.seasonNote}
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -174,9 +192,27 @@ const EnvironmentsSection = () => {
                             <p className="text-xs tracking-widest uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)]">
                               {exp.role}
                             </p>
+                            <p className="text-sm text-[hsl(var(--ivory)/0.6)] mt-3 max-w-md">
+                              {exp.context}
+                            </p>
+                            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 max-w-md">
+                              {exp.focus.map((f) => (
+                                <span
+                                  key={f}
+                                  className="text-[10px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.55)]"
+                                >
+                                  · {f}
+                                </span>
+                              ))}
+                            </div>
                             <p className="font-display text-base lg:text-lg italic max-w-md leading-relaxed text-[hsl(var(--ivory)/0.7)] mt-6">
                               “{exp.chapter}”
                             </p>
+                            {exp.seasonNote && (
+                              <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3 max-w-md">
+                                {exp.seasonNote}
+                              </p>
+                            )}
                           </motion.div>
                         </div>
                       </motion.div>
