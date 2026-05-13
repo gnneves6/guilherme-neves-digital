@@ -67,6 +67,20 @@ const ManifestoSection = () => {
             </motion.div>
           ))}
         </div>
+
+        <Reveal delay={0.4}>
+          <div className="mt-16 md:mt-20 pt-10 border-t border-border/50 flex flex-col md:flex-row md:items-baseline md:justify-between gap-3">
+            <p
+              className="font-display text-base md:text-lg italic max-w-xl"
+              style={{ color: "hsl(var(--foreground) / 0.78)" }}
+            >
+              Before I studied performance, I lived sport from the inside.
+            </p>
+            <span className="text-[10px] tracking-[0.3em] uppercase font-display opacity-50 whitespace-nowrap">
+              Athlete by nature · Nutritionist by purpose
+            </span>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
