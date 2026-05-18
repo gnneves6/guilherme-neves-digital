@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import Chapter from "@/components/motion/Chapter";
+import Magnetic from "@/components/motion/Magnetic";
 import ResourceModal from "@/components/resource/ResourceModal";
 import { featuredArtefacts, statusMeta, groupMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
 
@@ -32,6 +34,8 @@ const ArtefactPreview = ({ artefact, index }: { artefact: Artefact; index: numbe
 
   return (
     <div className="relative aspect-[16/9] overflow-hidden" style={{ background: bg }}>
+      {/* Inner visual gets a subtle parallax-on-hover lift via parent group */}
+      <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04] will-change-transform">
       {previewType === "blurredProtected" && (
         <div className="absolute inset-0 backdrop-blur-[2px] flex items-center justify-center">
           <div className="space-y-1.5 text-center opacity-30">
@@ -107,6 +111,15 @@ const ArtefactPreview = ({ artefact, index }: { artefact: Artefact; index: numbe
           </div>
         </div>
       )}
+      </div>
+      {/* Subtle inner vignette for depth */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 60%, transparent 0%, hsl(var(--charcoal-deep) / 0.45) 100%)",
+        }}
+      />
       <div className="absolute inset-0 flex flex-col justify-between p-5">
         <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.5)]">
           {artefact.category}
@@ -125,11 +138,16 @@ const SelectedArtefactsSection = () => {
   return (
     <section className="section-padding section-spacing section-dark">
       <div className="max-content">
+        <Reveal>
+          <Chapter
+            number="04"
+            title="Selected proof."
+            tone="dark"
+            className="mb-10 md:mb-14"
+          />
+        </Reveal>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <Reveal>
-              <p className="text-caption mb-4">Selected Artefacts</p>
-            </Reveal>
             <Reveal delay={0.1}>
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-[hsl(var(--ivory))] max-w-xl">
                 Selected proof. Protected depth. Tools in development.
@@ -165,11 +183,12 @@ const SelectedArtefactsSection = () => {
             };
             return (
               <Reveal key={a.slug} delay={i * 0.06}>
+                <Magnetic strength={6} className="h-full">
                 <motion.button
                   onClick={handleClick}
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="block w-full text-left group relative overflow-hidden h-full"
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="block w-full text-left group relative overflow-hidden h-full transition-shadow duration-500 hover:shadow-[0_24px_60px_-20px_hsl(0_0%_0%/0.55)]"
                   style={{ background: "hsl(var(--charcoal-deep))" }}
                 >
                   <div className="absolute top-0 left-0 right-0 h-px z-10 overflow-hidden">
@@ -215,6 +234,7 @@ const SelectedArtefactsSection = () => {
                     </span>
                   </div>
                 </motion.button>
+                </Magnetic>
               </Reveal>
             );
           })}
