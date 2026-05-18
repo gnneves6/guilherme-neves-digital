@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
-import SplitReveal from "@/components/motion/SplitReveal";
 import Magnetic from "@/components/motion/Magnetic";
 
 const HeroSection = () => {
@@ -109,17 +108,36 @@ const HeroSection = () => {
               Guilherme Neves — Applied Performance Nutrition
             </p>
           </motion.div>
-          <SplitReveal
-            text="Built from within."
-            as="h1"
-            delay={0.25}
-            stagger={0.09}
-            className="font-display font-semibold leading-[1.02] tracking-tight text-[clamp(3rem,9vw,8rem)]"
-          />
-          <style>{`
-            section h1 > span > span { color: hsl(var(--ivory)); }
-            section h1 > span:nth-child(2) > span { color: hsl(var(--ivory) / 0.75); font-style: italic; font-weight: 300; }
-          `}</style>
+          <h1
+            className="font-display font-semibold leading-[1.02] tracking-tight text-[clamp(3rem,9vw,8rem)] flex flex-wrap"
+            style={{ color: "hsl(var(--ivory))" }}
+          >
+            {[
+              { word: "Built", italic: false, delay: 0.25 },
+              { word: "from", italic: true, delay: 0.34 },
+              { word: "within.", italic: true, delay: 0.43 },
+            ].map((p) => (
+              <span
+                key={p.word}
+                className="inline-block overflow-hidden"
+                style={{ paddingRight: "0.28em", paddingBottom: "0.06em" }}
+              >
+                <motion.span
+                  className="inline-block will-change-transform"
+                  initial={{ y: reduceMotion ? 0 : "110%", opacity: 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
+                  transition={{ duration: 0.9, delay: p.delay, ease: [0.22, 1, 0.36, 1] }}
+                  style={
+                    p.italic
+                      ? { color: "hsl(var(--ivory) / 0.75)", fontStyle: "italic", fontWeight: 300 }
+                      : undefined
+                  }
+                >
+                  {p.word}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
           <motion.p
             className="text-base md:text-lg leading-relaxed max-w-xl mt-6 md:mt-8"
             style={{ color: "hsl(var(--ivory) / 0.6)" }}
