@@ -1,6 +1,7 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useRef, useState } from "react";
 import MannequinTorso from "@/components/MannequinTorso";
+import Chapter from "@/components/motion/Chapter";
 import logoAnderlecht from "@/assets/logo-anderlecht.png";
 import logoLeca from "@/assets/logo-leca.png";
 import logoR4E from "@/assets/logo-run4excellence.png";
@@ -82,7 +83,12 @@ const EnvironmentsSection = () => {
       {/* MOBILE FALLBACK — vertical cards (no pinning, no 3D) */}
       <section className="md:hidden section-dark section-padding section-spacing-sm">
         <div className="max-content">
-          <p className="text-caption mb-3">Selected Environments</p>
+          <Chapter
+            number="02"
+            title="Real environments."
+            tone="dark"
+            className="mb-6"
+          />
           <h2 className="font-display text-3xl font-semibold text-[hsl(var(--ivory))] mb-10">
             Chapters that shaped the work.
           </h2>
@@ -158,12 +164,17 @@ const EnvironmentsSection = () => {
 
           <div className="section-padding w-full relative z-10">
             <div className="max-content">
-              <div className="mb-6 md:mb-10 flex items-baseline justify-between">
-                <p className="text-caption">Selected Environments</p>
-                <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.3)]">
-                  Chapter {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
-                </p>
-              </div>
+              <Chapter
+                number="02"
+                title="Real environments."
+                tone="dark"
+                className="mb-6 md:mb-10"
+                meta={
+                  <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.3)]">
+                    Chapter {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                  </p>
+                }
+              />
 
               <div className="grid grid-cols-[1fr_260px_1fr] lg:grid-cols-[1fr_300px_1fr] gap-6 lg:gap-10 items-center min-h-[440px]">
                 {/* Left — identity */}
