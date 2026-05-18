@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
+import SplitReveal from "@/components/motion/SplitReveal";
+import Magnetic from "@/components/motion/Magnetic";
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -84,28 +86,40 @@ const HeroSection = () => {
         style={{ y: reduceMotion ? 0 : textY, opacity: textOpacity }}
       >
         <div className="max-w-3xl">
-          <motion.p
-            className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-display mb-6 md:mb-8"
-            style={{ color: "hsl(var(--ivory) / 0.5)" }}
+          <motion.div
+            className="flex items-center gap-3 mb-6 md:mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Guilherme Neves — Applied Performance Nutrition
-          </motion.p>
-          <motion.h1
-            className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold leading-[1.02] tracking-tight"
-            style={{ color: "hsl(var(--ivory))" }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.35 }}
-          >
-            Built{" "}
-            <span className="italic font-light" style={{ color: "hsl(var(--ivory) / 0.75)" }}>
-              from within
+            <span
+              className="font-display text-[10px] md:text-xs tracking-[0.4em] uppercase"
+              style={{ color: "hsl(var(--ivory) / 0.4)" }}
+            >
+              01
             </span>
-            .
-          </motion.h1>
+            <span
+              className="h-px w-6"
+              style={{ background: "hsl(var(--ivory) / 0.25)" }}
+            />
+            <p
+              className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-display"
+              style={{ color: "hsl(var(--ivory) / 0.5)" }}
+            >
+              Guilherme Neves — Applied Performance Nutrition
+            </p>
+          </motion.div>
+          <SplitReveal
+            text="Built from within."
+            as="h1"
+            delay={0.25}
+            stagger={0.09}
+            className="font-display font-semibold leading-[1.02] tracking-tight text-[clamp(3rem,9vw,8rem)]"
+          />
+          <style>{`
+            section h1 > span > span { color: hsl(var(--ivory)); }
+            section h1 > span:nth-child(2) > span { color: hsl(var(--ivory) / 0.75); font-style: italic; font-weight: 300; }
+          `}</style>
           <motion.p
             className="text-base md:text-lg leading-relaxed max-w-xl mt-6 md:mt-8"
             style={{ color: "hsl(var(--ivory) / 0.6)" }}
@@ -131,20 +145,24 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.75 }}
           >
-            <Link
-              to="/work"
-              className="group inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
-              style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
-            >
-              Explore the Resource Vault
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
-              style={{ border: "1px solid hsl(var(--ivory) / 0.18)", color: "hsl(var(--ivory) / 0.85)" }}
-            >
-              Start a Conversation
-            </Link>
+            <Magnetic strength={8} as="span">
+              <Link
+                to="/work"
+                className="group inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+                style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
+              >
+                Explore the Resource Vault
+              </Link>
+            </Magnetic>
+            <Magnetic strength={8} as="span">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+                style={{ border: "1px solid hsl(var(--ivory) / 0.18)", color: "hsl(var(--ivory) / 0.85)" }}
+              >
+                Start a Conversation
+              </Link>
+            </Magnetic>
           </motion.div>
         </div>
       </motion.div>
