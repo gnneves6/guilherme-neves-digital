@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
+import Chapter from "@/components/motion/Chapter";
 
 const laws = [
   {
@@ -44,11 +45,11 @@ const FuelLawsPreview = () => {
   return (
     <section className="section-padding section-spacing">
       <div className="max-content">
+        <Reveal>
+          <Chapter number="07" title="GN Fuel Laws." tone="light" className="mb-10 md:mb-14" />
+        </Reveal>
         <div className="grid md:grid-cols-[0.9fr,1.3fr] gap-12 md:gap-20 items-start">
           <div>
-            <Reveal>
-              <p className="text-caption mb-4">GN Fuel Laws</p>
-            </Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-headline max-w-md">
                 Five laws.<br />One repeatable cycle.

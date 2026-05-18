@@ -7,6 +7,7 @@ import CollaborationAreasSection from "@/components/sections/CollaborationAreasS
 import FuelLawsPreview from "@/components/sections/FuelLawsPreview";
 import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSection";
 import InvitationSection from "@/components/sections/InvitationSection";
+import ScrollProgress from "@/components/motion/ScrollProgress";
 
 const Divider = () => (
   <div className="section-padding max-content">
@@ -17,6 +18,7 @@ const Divider = () => (
 const Index = () => {
   return (
     <Layout>
+      <ScrollProgress />
       {/* 1 — Entry */}
       <HeroSection />
 

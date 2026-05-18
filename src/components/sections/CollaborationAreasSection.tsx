@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Reveal from "@/components/Reveal";
+import Chapter from "@/components/motion/Chapter";
 
 const areas = [
   {
@@ -32,11 +33,11 @@ const CollaborationAreasSection = () => {
   return (
     <section className="section-padding section-spacing">
       <div className="max-content">
+        <Reveal>
+          <Chapter number="06" title="Collaboration areas." tone="light" className="mb-10 md:mb-14" />
+        </Reveal>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <Reveal>
-              <p className="text-caption mb-4">Areas of Engagement</p>
-            </Reveal>
             <Reveal delay={0.1}>
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground max-w-2xl">
                 Collaboration areas for athletes, teams and performance environments.

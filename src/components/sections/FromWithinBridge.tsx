@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
+import Chapter from "@/components/motion/Chapter";
+import SplitReveal from "@/components/motion/SplitReveal";
 
 const pillars = [
   { num: "01", label: "Lived Sport" },
@@ -12,20 +14,29 @@ const FromWithinBridge = () => {
     <section className="section-padding section-spacing-sm relative">
       <div className="max-content">
         <Reveal>
-          <div className="flex items-baseline justify-between mb-10 md:mb-14">
-            <p className="text-caption">From Within</p>
-            <p className="text-[10px] tracking-[0.3em] uppercase font-display opacity-40 hidden md:block">
-              Bridge
-            </p>
-          </div>
+          <Chapter
+            number="03"
+            title="From lived sport to usable systems."
+            tone="light"
+            className="mb-10 md:mb-14"
+            meta={
+              <p className="text-[10px] tracking-[0.3em] uppercase font-display opacity-40">
+                Bridge
+              </p>
+            }
+          />
         </Reveal>
 
         <div className="grid md:grid-cols-[1.1fr_1fr] gap-10 md:gap-16 items-start">
           <Reveal>
             <div>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-foreground">
-                From lived sport to usable systems.
-              </h2>
+              <SplitReveal
+                text={"From lived sport\nto usable systems."}
+                as="h2"
+                splitBy="line"
+                stagger={0.12}
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-foreground"
+              />
               <p
                 className="mt-6 md:mt-8 font-sans text-base md:text-lg leading-relaxed max-w-xl"
                 style={{ color: "hsl(var(--foreground) / 0.78)" }}

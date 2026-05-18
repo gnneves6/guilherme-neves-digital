@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import Chapter from "@/components/motion/Chapter";
 
 const stages = [
   { title: "Assess", desc: "Understand the athlete, context, routine, needs and constraints." },
@@ -18,7 +19,7 @@ const SystemComponentsSection = () => {
     <section className="section-padding py-16 md:py-20">
       <div className="max-content">
         <Reveal>
-          <p className="text-caption mb-3">Operating System</p>
+          <Chapter number="05" title="Operating system." tone="light" className="mb-6" />
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="font-display text-xl md:text-2xl font-semibold text-foreground max-w-2xl mb-2">
