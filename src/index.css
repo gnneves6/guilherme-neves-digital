@@ -209,6 +209,13 @@
   .scene-dark  { background: hsl(var(--charcoal-deep)); color: hsl(var(--ivory)); }
   .scene-cinematic { background: hsl(var(--cinematic)); color: hsl(var(--ivory)); }
 
+  /* Inside dark/cinematic scenes, remap text tokens so Tailwind utilities (text-foreground, text-muted-foreground) read correctly. */
+  .scene-dark, .scene-cinematic {
+    --foreground: 40 33% 97%;
+    --muted-foreground: 40 12% 70%;
+    --border: 40 10% 28%;
+  }
+
   /* Inside dark/cinematic scenes, soften body text */
   .scene-dark .text-body, .scene-dark .text-body-lg,
   .scene-cinematic .text-body, .scene-cinematic .text-body-lg {
