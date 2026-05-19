@@ -43,10 +43,22 @@ const FuelLawsPreview = () => {
   }, [paused]);
 
   return (
-    <section className="section-padding section-spacing">
-      <div className="max-content">
+    <section className="section-padding section-spacing scene-cinematic relative overflow-hidden">
+      {/* Top dissolve from dim scene above */}
+      <div
+        aria-hidden
+        className="absolute top-0 left-0 right-0 h-32 z-[1] pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, hsl(var(--ivory-dim)), transparent)" }}
+      />
+      {/* Bottom dissolve to light invitation */}
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-32 z-[1] pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--background)))" }}
+      />
+      <div className="max-content relative z-[2]">
         <Reveal>
-          <Chapter number="07" title="GN Fuel Laws." tone="light" className="mb-10 md:mb-14" />
+          <Chapter number="07" title="GN Fuel Laws." tone="dark" className="mb-10 md:mb-14" />
         </Reveal>
         <div className="grid md:grid-cols-[0.9fr,1.3fr] gap-12 md:gap-20 items-start">
           <div>
