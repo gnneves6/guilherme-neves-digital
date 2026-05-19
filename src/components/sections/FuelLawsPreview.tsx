@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 import Chapter from "@/components/motion/Chapter";
+import Scene from "@/components/motion/Scene";
 
 const laws = [
   {
@@ -43,20 +44,17 @@ const FuelLawsPreview = () => {
   }, [paused]);
 
   return (
-    <section className="section-padding section-spacing scene-cinematic relative overflow-hidden">
-      {/* Top dissolve from dim scene above */}
-      <div
-        aria-hidden
-        className="absolute top-0 left-0 right-0 h-32 z-[1] pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, hsl(var(--ivory-dim)), transparent)" }}
-      />
-      {/* Bottom dissolve to light invitation */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-0 right-0 h-32 z-[1] pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--background)))" }}
-      />
-      <div className="max-content relative z-[2]">
+    <Scene
+      tone="cinematic"
+      spacing="xl"
+      grain
+      parallax={0.1}
+      fadeTopFrom="hsl(var(--ivory-dim))"
+      fadeBottomTo="hsl(var(--background))"
+      className="scene-atmos-philosophy"
+      contentClassName="section-padding"
+    >
+      <div className="max-content relative">
         <Reveal>
           <Chapter number="07" title="GN Fuel Laws." tone="dark" className="mb-10 md:mb-14" />
         </Reveal>
@@ -187,7 +185,7 @@ const FuelLawsPreview = () => {
           </Reveal>
         </div>
       </div>
-    </section>
+    </Scene>
   );
 };
 
