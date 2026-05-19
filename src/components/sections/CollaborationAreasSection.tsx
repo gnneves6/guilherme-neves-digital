@@ -31,7 +31,7 @@ const areas = [
 
 const CollaborationAreasSection = () => {
   return (
-    <section className="section-padding section-spacing">
+    <section className="section-padding section-spacing scene-dim relative overflow-hidden">
       <div className="max-content">
         <Reveal>
           <Chapter number="06" title="Collaboration areas." tone="light" className="mb-10 md:mb-14" />
@@ -63,7 +63,7 @@ const CollaborationAreasSection = () => {
         <div className="grid sm:grid-cols-2 gap-px" style={{ background: "hsl(var(--border) / 0.6)" }}>
           {areas.map((a, i) => (
             <Reveal key={a.num} delay={i * 0.06}>
-              <div className="bg-background p-8 md:p-10 h-full">
+              <div className="p-8 md:p-10 h-full" style={{ background: "hsl(var(--ivory-dim))" }}>
                 <div className="flex items-baseline gap-3 mb-5">
                   <span className="font-display text-xs tracking-[0.4em]" style={{ color: "hsl(var(--olive))" }}>
                     {a.num}

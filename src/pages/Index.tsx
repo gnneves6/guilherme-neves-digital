@@ -9,44 +9,23 @@ import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSec
 import InvitationSection from "@/components/sections/InvitationSection";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 
-const Divider = () => (
-  <div className="section-padding max-content">
-    <div className="divider" />
-  </div>
-);
-
 const Index = () => {
   return (
     <Layout>
       <ScrollProgress />
-      {/* 1 — Entry */}
+      {/*
+        Cinematic chapter rhythm — no hard dividers.
+        01 Hero (cinematic dark) → 02 Environments (light) → 03 Bridge (light exhale)
+        → 04 Selected Proof (cinematic dark) → 05 Operating System (dim)
+        → 06 Collaboration (dim) → 07 Fuel Laws (cinematic dark) → 08 Invitation (light close).
+      */}
       <HeroSection />
-
-      {/* 2 — Selected Environments (interactive credibility) */}
       <EnvironmentsSection />
-
-      {/* 3 — From Within Bridge (meaning) */}
       <FromWithinBridge />
-
-      <Divider />
-
-      {/* 4 — Selected Artefacts (proof of the story) */}
       <SelectedArtefactsSection />
-
-      <Divider />
-
-      {/* 5 — System Components */}
       <SystemComponentsSection />
-
-      <Divider />
-
-      {/* 6 — Collaboration Areas */}
       <CollaborationAreasSection />
-
-      {/* 7 — GN Fuel Laws Preview */}
       <FuelLawsPreview />
-
-      {/* 8 — Invitation */}
       <InvitationSection />
     </Layout>
   );

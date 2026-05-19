@@ -16,7 +16,7 @@ const SystemComponentsSection = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="section-padding py-16 md:py-20">
+    <section className="section-padding py-20 md:py-28 scene-dim relative overflow-hidden">
       <div className="max-content">
         <Reveal>
           <Chapter number="05" title="Operating system." tone="light" className="mb-6" />
