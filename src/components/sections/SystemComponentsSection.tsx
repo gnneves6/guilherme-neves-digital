@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import Chapter from "@/components/motion/Chapter";
+import Scene from "@/components/motion/Scene";
 
 const stages = [
   { title: "Assess", desc: "Understand the athlete, context, routine, needs and constraints." },
@@ -16,7 +17,12 @@ const SystemComponentsSection = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="section-padding py-20 md:py-28 scene-dim relative overflow-hidden">
+    <Scene
+      tone="dim"
+      spacing="md"
+      className="scene-atmos-method"
+      contentClassName="section-padding schematic-grid"
+    >
       <div className="max-content">
         <Reveal>
           <Chapter number="05" title="Operating system." tone="light" className="mb-6" />
@@ -83,7 +89,7 @@ const SystemComponentsSection = () => {
           </div>
         </Reveal>
       </div>
-    </section>
+    </Scene>
   );
 };
 
