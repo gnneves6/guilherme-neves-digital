@@ -6,6 +6,7 @@ import ResourceModal from "@/components/resource/ResourceModal";
 import { featuredArtefacts, statusMeta, groupMeta, type Artefact, type ArtefactStatus } from "@/data/artefacts";
 import ProofObjectCard from "@/components/proof/ProofObjectCard";
 import type { ProofObjectType } from "@/components/proof/ProofObjectTypes";
+import Scene from "@/components/motion/Scene";
 
 /** Map artefact status/category to the new ProofObject type system. */
 const getProofType = (status: ArtefactStatus, category: string): ProofObjectType => {
@@ -20,31 +21,20 @@ const getProofType = (status: ArtefactStatus, category: string): ProofObjectType
   return "document";
 };
 
-/** Placeholder cover slot — atmospheric editorial mark, used until real cover assets land. */
-const StageFallback = () => (
-  <div className="absolute inset-0 flex items-center justify-center">
-    <div className="space-y-1.5 text-center opacity-20">
-      <div className="w-10 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
-      <span className="text-[8px] tracking-[0.45em] uppercase font-display text-[hsl(var(--ivory))]">
-        Proof Object
-      </span>
-      <div className="w-10 h-px mx-auto" style={{ background: "hsl(var(--ivory))" }} />
-    </div>
-  </div>
-);
-
 const SelectedArtefactsSection = () => {
   const [open, setOpen] = useState<Artefact | null>(null);
 
   return (
-    <section className="section-padding section-spacing scene-cinematic relative overflow-hidden">
-      {/* Top dissolve from light scene above */}
-      <div
-        aria-hidden
-        className="absolute top-0 left-0 right-0 h-32 z-[1] pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, hsl(var(--background)), transparent)" }}
-      />
-      <div className="max-content relative z-[2]">
+    <Scene
+      tone="cinematic"
+      spacing="xl"
+      grain
+      parallax={0.15}
+      fadeTopFrom="hsl(var(--background))"
+      className="section-padding scene-atmos-archive"
+      contentClassName="section-padding"
+    >
+      <div className="max-content relative">
         <Reveal>
           <Chapter
             number="04"
@@ -96,7 +86,6 @@ const SelectedArtefactsSection = () => {
                   category={a.category}
                   ctaLabel={a.ctaLabel}
                   cover={a.previewImage}
-                  stageFallback={<StageFallback />}
                   meta={{
                     groupShort: g.short,
                     groupDot: g.dot,
@@ -112,7 +101,7 @@ const SelectedArtefactsSection = () => {
       </div>
 
       <ResourceModal artefact={open} onClose={() => setOpen(null)} />
-    </section>
+    </Scene>
   );
 };
 
