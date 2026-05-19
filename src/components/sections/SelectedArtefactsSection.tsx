@@ -31,7 +31,7 @@ const SelectedArtefactsSection = () => {
       grain
       parallax={0.15}
       fadeTopFrom="hsl(var(--background))"
-      className="section-padding scene-atmos-archive"
+      className="scene-atmos-archive"
       contentClassName="section-padding"
     >
       <div className="max-content relative">
