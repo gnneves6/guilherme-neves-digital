@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Reveal from "@/components/Reveal";
 import Chapter from "@/components/motion/Chapter";
+import Scene from "@/components/motion/Scene";
 
 const areas = [
   {
@@ -31,7 +32,12 @@ const areas = [
 
 const CollaborationAreasSection = () => {
   return (
-    <section className="section-padding section-spacing scene-dim relative overflow-hidden">
+    <Scene
+      tone="dim"
+      spacing="lg"
+      className="scene-atmos-warm"
+      contentClassName="section-padding"
+    >
       <div className="max-content">
         <Reveal>
           <Chapter number="06" title="Collaboration areas." tone="light" className="mb-10 md:mb-14" />
@@ -63,7 +69,15 @@ const CollaborationAreasSection = () => {
         <div className="grid sm:grid-cols-2 gap-px" style={{ background: "hsl(var(--border) / 0.6)" }}>
           {areas.map((a, i) => (
             <Reveal key={a.num} delay={i * 0.06}>
-              <div className="p-8 md:p-10 h-full" style={{ background: "hsl(var(--ivory-dim))" }}>
+              <div
+                className="group p-8 md:p-10 h-full transition-colors duration-500 relative overflow-hidden"
+                style={{ background: "hsl(var(--ivory-dim))" }}
+              >
+                <div
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"
+                  style={{ background: "hsl(var(--olive))" }}
+                />
                 <div className="flex items-baseline gap-3 mb-5">
                   <span className="font-display text-xs tracking-[0.4em]" style={{ color: "hsl(var(--olive))" }}>
                     {a.num}
@@ -87,7 +101,7 @@ const CollaborationAreasSection = () => {
           ))}
         </div>
       </div>
-    </section>
+    </Scene>
   );
 };
 
