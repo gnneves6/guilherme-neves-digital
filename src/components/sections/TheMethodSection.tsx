@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
 import Chapter from "@/components/motion/Chapter";
 import Scene from "@/components/motion/Scene";
+import sceneMethod from "@/assets/scene-method-podium.jpg";
 
 /**
  * Chapter 05 — The Method.
@@ -53,7 +54,11 @@ const TheMethodSection = () => {
       tone="cinematic"
       spacing="xl"
       grain
-      parallax={0.12}
+      parallax={0.14}
+      bgImage={sceneMethod}
+      overlayGradient="radial-gradient(ellipse 70% 60% at 50% 40%, hsl(var(--cinematic) / 0.55) 0%, hsl(var(--cinematic) / 0.95) 75%)"
+      fadeTopFrom="hsl(var(--cinematic))"
+      fadeBottomTo="hsl(var(--background))"
       className="scene-atmos-philosophy"
       contentClassName="section-padding"
     >

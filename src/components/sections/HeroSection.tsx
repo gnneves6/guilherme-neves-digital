@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import heroAtmosphere from "@/assets/hero-atmosphere.jpg";
+import heroAtmosphere from "@/assets/scene-hero-tunnel.jpg";
 import Magnetic from "@/components/motion/Magnetic";
 
 const HeroSection = () => {
@@ -46,7 +46,7 @@ const HeroSection = () => {
           className="absolute inset-0 w-full h-[130%] object-cover"
           style={{
             scale: reduceMotion ? 1.05 : imageScale,
-            filter: "brightness(0.32) contrast(1.12) saturate(0.65)",
+            filter: "brightness(0.42) contrast(1.15) saturate(0.7)",
           }}
         />
       </motion.div>
@@ -203,12 +203,12 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Fade to light world */}
+      {/* Dissolve down into the next cinematic scene (Environments — dark) */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-[35vh] z-[5] pointer-events-none"
         style={{
           opacity: fadeToLight,
-          background: "linear-gradient(to bottom, transparent, hsl(var(--background)))",
+          background: "linear-gradient(to bottom, transparent, hsl(var(--charcoal-deep)))",
         }}
       />
     </section>
