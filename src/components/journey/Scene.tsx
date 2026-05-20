@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { motion, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useTransform, useReducedMotion, useMotionValue } from "framer-motion";
 import { useJourney } from "./JourneyContext";
 
 interface SceneProps {
@@ -44,6 +44,32 @@ const Scene = ({
   const ctx = useJourney();
   const reduce = useReducedMotion();
 
+  // Always derive a progress source so hook order stays stable across
+  // mobile (no stage) and desktop (active stage) renders.
+  const fallbackProgress = useMotionValue(0);
+  const progress = ctx?.progress ?? fallbackProgress;
+  const total = ctx?.total ?? 1;
+
+  const slice = 1 / total;
+  const start = index * slice;
+  const end = start + slice;
+  const fadeIn = slice * 0.35;
+  const fadeOut = slice * 0.35;
+
+  const opacity = useTransform(
+    progress,
+    [
+      Math.max(0, start - fadeIn),
+      start + fadeIn * 0.3,
+      end - fadeOut * 0.3,
+      Math.min(1, end + fadeOut),
+    ],
+    [0, 1, 1, 0]
+  );
+  const scale = useTransform(progress, [start - fadeIn, end + fadeOut], [zoomFrom, zoomTo]);
+  const y = useTransform(progress, [start - fadeIn, end + fadeOut], ["3%", "-3%"]);
+  const bgScale = useTransform(progress, [start - fadeIn, end + fadeOut], [zoomFrom * 1.05, zoomTo * 0.96]);
+
   // --- Mobile / no-stage fallback: render as a regular section ----------
   if (!ctx || !ctx.active) {
     return (
@@ -65,31 +91,6 @@ const Scene = ({
       </section>
     );
   }
-
-  // --- Desktop cinematic rig --------------------------------------------
-  const slice = 1 / ctx.total;
-  const start = index * slice;
-  const end = start + slice;
-  const fadeIn = slice * 0.35;
-  const fadeOut = slice * 0.35;
-
-  const opacity = useTransform(
-    ctx.progress,
-    [
-      Math.max(0, start - fadeIn),
-      start + fadeIn * 0.3,
-      end - fadeOut * 0.3,
-      Math.min(1, end + fadeOut),
-    ],
-    [0, 1, 1, 0]
-  );
-
-  // Camera dolly inside the scene window
-  const scale = useTransform(ctx.progress, [start - fadeIn, end + fadeOut], [zoomFrom, zoomTo]);
-  // Subtle vertical pan — gives a sense of forward motion
-  const y = useTransform(ctx.progress, [start - fadeIn, end + fadeOut], ["3%", "-3%"]);
-  // Background dollies a bit further than the foreground for parallax
-  const bgScale = useTransform(ctx.progress, [start - fadeIn, end + fadeOut], [zoomFrom * 1.05, zoomTo * 0.96]);
 
   return (
     <motion.div
