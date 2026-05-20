@@ -114,7 +114,7 @@ const FromWithinBridge = () => {
             Athlete by nature · Nutritionist by purpose
           </p>
         </Reveal>
-      </div>
+      </motion.div>
     </section>
   );
 };
