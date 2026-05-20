@@ -7,6 +7,9 @@ import { featuredArtefacts, statusMeta, groupMeta, type Artefact, type ArtefactS
 import ProofObjectCard from "@/components/proof/ProofObjectCard";
 import type { ProofObjectType } from "@/components/proof/ProofObjectTypes";
 import Scene from "@/components/motion/Scene";
+import sceneProofArchive from "@/assets/scene-proof-archive.jpg";
+import sceneProofDisplay from "@/assets/scene-proof-display.jpg";
+import proofObjectAtlas from "@/assets/proof-object-atlas.jpg";
 
 /** Map artefact status/category to the new ProofObject type system. */
 const getProofType = (status: ArtefactStatus, category: string): ProofObjectType => {
@@ -29,8 +32,11 @@ const SelectedArtefactsSection = () => {
       tone="cinematic"
       spacing="xl"
       grain
-      parallax={0.15}
-      fadeTopFrom="hsl(var(--background))"
+      parallax={0.18}
+      bgImage={sceneProofArchive}
+      overlayGradient="radial-gradient(ellipse 80% 70% at 50% 30%, hsl(var(--cinematic) / 0.55) 0%, hsl(var(--cinematic) / 0.92) 80%)"
+      fadeTopFrom="hsl(var(--cinematic))"
+      fadeBottomTo="hsl(var(--cinematic))"
       className="scene-atmos-archive"
       contentClassName="section-padding"
     >
@@ -68,8 +74,20 @@ const SelectedArtefactsSection = () => {
           </Reveal>
         </div>
 
+        {/* Secondary atmosphere — proof display table, anchored on the right */}
         <div
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px"
+          aria-hidden
+          className="absolute -right-10 top-20 w-[60%] h-[55%] z-0 pointer-events-none opacity-25 hidden md:block"
+          style={{
+            backgroundImage: `url(${sceneProofDisplay})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          }}
+        />
+        <div
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px relative z-[1]"
           style={{ background: "hsl(var(--ivory) / 0.06)" }}
         >
           {featuredArtefacts.map((a, i) => {
@@ -85,7 +103,7 @@ const SelectedArtefactsSection = () => {
                   description={a.description}
                   category={a.category}
                   ctaLabel={a.ctaLabel}
-                  cover={a.previewImage}
+                  cover={a.previewImage ?? (proofType !== "protected" ? proofObjectAtlas : undefined)}
                   meta={{
                     groupShort: g.short,
                     groupDot: g.dot,

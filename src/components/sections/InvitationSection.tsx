@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
+import Scene from "@/components/motion/Scene";
+import sceneInvitation from "@/assets/scene-invitation-exit.jpg";
 
 const InvitationSection = () => {
   return (
-    <section className="section-padding py-32 md:py-40">
+    <Scene
+      tone="light"
+      spacing="xl"
+      parallax={0.1}
+      bgImage={sceneInvitation}
+      overlayGradient="linear-gradient(to bottom, hsl(var(--background) / 0.92) 0%, hsl(var(--background) / 0.78) 45%, hsl(var(--background) / 0.92) 100%)"
+      fadeTopFrom="hsl(var(--background))"
+      contentClassName="section-padding"
+    >
       <div className="max-content text-center">
         <Reveal>
           <div className="flex items-center justify-center gap-3 mb-6">
@@ -60,7 +70,7 @@ const InvitationSection = () => {
           </div>
         </Reveal>
       </div>
-    </section>
+    </Scene>
   );
 };
 
