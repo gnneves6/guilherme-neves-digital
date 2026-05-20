@@ -1,5 +1,6 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useRef, useState } from "react";
+import { usePointer } from "@/components/journey/PointerField";
 import MannequinTorso from "@/components/MannequinTorso";
 import Chapter from "@/components/motion/Chapter";
 import logoAnderlecht from "@/assets/logo-anderlecht.png";
@@ -78,6 +79,7 @@ const EnvironmentsSection = () => {
   };
 
   const activeExp = experiences[activeIndex];
+  const pointer = usePointer();
 
   return (
     <>
@@ -171,9 +173,17 @@ const EnvironmentsSection = () => {
               opacity: 0.55,
             }}
           />
+          {/* Pointer-driven exploration light — visible scene response on desktop */}
           <div
             aria-hidden
-            className="absolute inset-0 z-[1] pointer-events-none"
+            className="absolute inset-0 z-[1] pointer-events-none transition-[background] duration-200 ease-out"
+            style={{
+              background: `radial-gradient(circle 620px at ${50 + pointer.x * 22}% ${50 + pointer.y * 18}%, ${activeExp.kitColors.primary}1f, transparent 65%)`,
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 z-[2] pointer-events-none"
             style={{
               background:
                 "radial-gradient(ellipse 90% 80% at 50% 55%, transparent 0%, hsl(var(--charcoal-deep) / 0.85) 75%), linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 18%, transparent 82%, hsl(var(--background)) 100%)",
@@ -301,29 +311,46 @@ const EnvironmentsSection = () => {
                     {String(activeIndex + 1).padStart(2, "0")}
                   </motion.span>
 
-                  {/* Clickable dots */}
-                  <div className="flex items-center gap-3 mt-6">
-                    {experiences.map((exp, i) => (
-                      <button
-                        key={i}
-                        onClick={() => goTo(i)}
-                        aria-label={`Go to ${exp.name}`}
-                        className="group p-2 -m-2"
-                      >
-                        <motion.div
-                          className="rounded-full"
-                          animate={{
-                            width: activeIndex === i ? 32 : 8,
-                            height: 8,
-                            backgroundColor: activeIndex === i
-                              ? activeExp.kitColors.primary
-                              : "hsl(var(--ivory) / 0.18)",
-                          }}
-                          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                        />
-                      </button>
-                    ))}
-                  </div>
+                  {/* Environment hotspots — focusable zones, no card metaphor */}
+                  <ul className="flex flex-col items-end gap-2 mt-6">
+                    {experiences.map((exp, i) => {
+                      const isActive = activeIndex === i;
+                      return (
+                        <li key={exp.name}>
+                          <button
+                            onClick={() => goTo(i)}
+                            onFocus={() => setActiveIndex(i)}
+                            onMouseEnter={() => setActiveIndex(i)}
+                            aria-current={isActive ? "true" : undefined}
+                            aria-label={`Open ${exp.name} environment`}
+                            className="group flex items-center gap-3 px-2 py-1 -mx-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ivory)/0.4)]"
+                          >
+                            <span
+                              className="text-[10px] tracking-[0.3em] uppercase font-display transition-colors duration-500"
+                              style={{
+                                color: isActive
+                                  ? "hsl(var(--ivory) / 0.85)"
+                                  : "hsl(var(--ivory) / 0.3)",
+                              }}
+                            >
+                              {exp.name}
+                            </span>
+                            <motion.span
+                              className="block rounded-full"
+                              animate={{
+                                width: isActive ? 28 : 6,
+                                height: 6,
+                                backgroundColor: isActive
+                                  ? exp.kitColors.primary
+                                  : "hsl(var(--ivory) / 0.18)",
+                              }}
+                              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                            />
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
 
                   <motion.p
                     className="text-[9px] tracking-[0.3em] uppercase font-display mt-6 text-[hsl(var(--ivory)/0.25)]"
