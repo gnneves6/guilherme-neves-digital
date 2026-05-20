@@ -6,16 +6,17 @@ import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSec
 import TheMethodSection from "@/components/sections/TheMethodSection";
 import InvitationSection from "@/components/sections/InvitationSection";
 import ScrollProgress from "@/components/motion/ScrollProgress";
+import PointerField from "@/components/journey/PointerField";
 
 const Index = () => {
   return (
+    <PointerField>
     <Layout>
       <ScrollProgress />
       {/*
-        Cinematic 6-chapter rhythm — no hard dividers.
-        01 Hero (cinematic) → 02 Environments (light) → 03 From Within Bridge (light exhale)
-        → 04 Selected Proof (cinematic) → 05 The Method + GN Fuel Laws (cinematic)
-        → 06 Invitation (light close).
+        Cinematic 6-scene journey — POV camera, no hard dividers.
+        01 Tunnel/Entrance → 02 Locker/Environments → 03 From Within Thesis
+        → 04 Proof Table → 05 Method Room → 06 Exit/Invitation.
       */}
       <HeroSection />
       <EnvironmentsSection />
@@ -24,6 +25,7 @@ const Index = () => {
       <TheMethodSection />
       <InvitationSection />
     </Layout>
+    </PointerField>
   );
 };
 
