@@ -12,7 +12,7 @@ const InvitationSection = () => {
               className="font-display text-[10px] md:text-[11px] tracking-[0.4em] uppercase"
               style={{ color: "hsl(var(--olive))" }}
             >
-              08
+              06
             </span>
             <span className="h-px w-6" style={{ background: "hsl(var(--olive) / 0.45)" }} />
             <p className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-display opacity-60">
@@ -26,9 +26,9 @@ const InvitationSection = () => {
           </h2>
         </Reveal>
         <Reveal delay={0.25}>
-          <p className="text-body-lg max-w-lg mx-auto mt-5">
-            Open to clubs, academies, performance staff and collaborators building
-            environments where applied nutrition matters.
+          <p className="text-body-lg max-w-xl mx-auto mt-5">
+            For clubs, academies, athletes and performance environments
+            where clarity matters.
           </p>
         </Reveal>
         <Reveal delay={0.4}>
