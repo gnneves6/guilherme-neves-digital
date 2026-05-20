@@ -5,6 +5,7 @@ import Chapter from "@/components/motion/Chapter";
 import logoAnderlecht from "@/assets/logo-anderlecht.png";
 import logoLeca from "@/assets/logo-leca.png";
 import logoR4E from "@/assets/logo-run4excellence.png";
+import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
 
 export const experiences = [
   {
@@ -81,8 +82,15 @@ const EnvironmentsSection = () => {
   return (
     <>
       {/* MOBILE FALLBACK — vertical cards (no pinning, no 3D) */}
-      <section className="md:hidden section-dark section-padding section-spacing-sm">
-        <div className="max-content">
+      <section className="md:hidden section-dark section-padding section-spacing-sm relative overflow-hidden">
+        {/* Atmosphere — performance archive, anchored behind content */}
+        <div
+          aria-hidden
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-25"
+          style={{ backgroundImage: `url(${sceneEnvironments})`, filter: "brightness(0.45) contrast(1.1) saturate(0.7)" }}
+        />
+        <div aria-hidden className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 25%, transparent 75%, hsl(var(--charcoal-deep)) 100%)" }} />
+        <div className="max-content relative z-[2]">
           <Chapter
             number="02"
             title="Real environments."
@@ -153,6 +161,24 @@ const EnvironmentsSection = () => {
       {/* DESKTOP — pinned FIFA-style mannequin */}
       <div ref={sectionRef} className="hidden md:block" style={{ height: `${(experiences.length + 1) * 100}vh` }}>
         <div className="sticky top-0 h-screen flex items-center overflow-hidden section-dark">
+          {/* Atmosphere — performance archive corridor */}
+          <div
+            aria-hidden
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${sceneEnvironments})`,
+              filter: "brightness(0.32) contrast(1.15) saturate(0.55)",
+              opacity: 0.55,
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 z-[1] pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 90% 80% at 50% 55%, transparent 0%, hsl(var(--charcoal-deep) / 0.85) 75%), linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 18%, transparent 82%, hsl(var(--background)) 100%)",
+            }}
+          />
           {/* Background color wash */}
           <motion.div
             className="absolute inset-0 pointer-events-none"

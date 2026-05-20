@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 import Reveal from "@/components/Reveal";
 import Chapter from "@/components/motion/Chapter";
 import SplitReveal from "@/components/motion/SplitReveal";
@@ -10,9 +11,30 @@ const pillars = [
 ];
 
 const FromWithinBridge = () => {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const innerY = useTransform(scrollYProgress, [0, 1], ["4%", "-4%"]);
+  const breath = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.9]);
+
   return (
-    <section className="section-padding section-spacing-sm relative">
-      <div className="max-content">
+    <section ref={ref} className="section-padding section-spacing-sm relative overflow-hidden">
+      {/* Top dissolve from previous cinematic scene */}
+      <div
+        aria-hidden
+        className="absolute top-0 left-0 right-0 h-40 z-0 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)), transparent)" }}
+      />
+      {/* Bottom dissolve into the next cinematic scene (Selected Proof) */}
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-40 z-0 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--cinematic)))" }}
+      />
+      <motion.div
+        className="max-content relative z-[1]"
+        style={reduce ? undefined : { y: innerY, opacity: breath }}
+      >
         <Reveal>
           <Chapter
             number="03"
