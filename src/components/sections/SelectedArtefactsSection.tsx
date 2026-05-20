@@ -86,16 +86,25 @@ const SelectedArtefactsSection = () => {
             WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
           }}
         />
-        <div
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px relative z-[1]"
-          style={{ background: "hsl(var(--ivory) / 0.06)" }}
-        >
+        {/* Proof table — scatter layout (desktop). Objects sit on the table
+            with slight rotations, overlap and a per-object lift on hover/focus.
+            On mobile this falls back to a clean single-column stack. */}
+        <div className="relative z-[1] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 sm:gap-y-14 lg:gap-y-16 gap-x-6 sm:gap-x-8 lg:gap-x-10">
           {featuredArtefacts.map((a, i) => {
             const s = statusMeta[a.status];
             const g = groupMeta[a.group];
             const proofType = getProofType(a.status, a.category);
+            // Scatter pattern — gentle, editorial. Disabled on mobile.
+            const rotateSeq = [-1.6, 1.2, -0.6, 2, -1.8, 1.4, -0.8, 1.6, -1.2];
+            const liftSeq = [0, 24, 0, 28, 0, 18, 0, 22, 0];
+            const rot = rotateSeq[i % rotateSeq.length];
+            const lift = liftSeq[i % liftSeq.length];
             return (
               <Reveal key={a.slug} delay={i * 0.06}>
+                <div
+                  className="lg:transform"
+                  style={{ transform: `translateY(${lift}px)` }}
+                >
                 <ProofObjectCard
                   index={i}
                   type={proofType}
@@ -111,7 +120,10 @@ const SelectedArtefactsSection = () => {
                     statusDot: s.dot,
                   }}
                   onClick={() => setOpen(a)}
+                  rotate={rot}
+                  z={i % 2 === 0 ? 1 : 2}
                 />
+                </div>
               </Reveal>
             );
           })}
