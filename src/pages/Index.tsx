@@ -7,13 +7,6 @@ import TheMethodSection from "@/components/sections/TheMethodSection";
 import InvitationSection from "@/components/sections/InvitationSection";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import PointerField from "@/components/journey/PointerField";
-import JourneyStage from "@/components/journey/JourneyStage";
-import SceneTunnel from "@/components/journey/scenes/SceneTunnel";
-import SceneLocker from "@/components/journey/scenes/SceneLocker";
-import SceneBridge from "@/components/journey/scenes/SceneBridge";
-import SceneArchive from "@/components/journey/scenes/SceneArchive";
-import SceneMethod from "@/components/journey/scenes/SceneMethod";
-import SceneExit from "@/components/journey/scenes/SceneExit";
 
 const Index = () => {
   return (
@@ -21,29 +14,16 @@ const Index = () => {
     <Layout>
       <ScrollProgress />
       {/*
-        Desktop (md+): POV cinematic camera rig — one continuous world,
-        six scenes mapped to scroll progress. No stacked sections.
-        Mobile: same six chapters, but rendered as the existing
-        mobile-optimized stack (closer framing, native vertical scroll).
+        Cinematic 6-scene journey — POV camera, no hard dividers.
+        01 Tunnel/Entrance → 02 Locker/Environments → 03 From Within Thesis
+        → 04 Proof Table → 05 Method Room → 06 Exit/Invitation.
       */}
-      <div className="hidden md:block">
-        <JourneyStage scenePitch={140}>
-          <SceneTunnel index={0} />
-          <SceneLocker index={1} />
-          <SceneBridge index={2} />
-          <SceneArchive index={3} />
-          <SceneMethod index={4} />
-          <SceneExit index={5} />
-        </JourneyStage>
-      </div>
-      <div className="md:hidden">
-        <HeroSection />
-        <EnvironmentsSection />
-        <FromWithinBridge />
-        <SelectedArtefactsSection />
-        <TheMethodSection />
-        <InvitationSection />
-      </div>
+      <HeroSection />
+      <EnvironmentsSection />
+      <FromWithinBridge />
+      <SelectedArtefactsSection />
+      <TheMethodSection />
+      <InvitationSection />
     </Layout>
     </PointerField>
   );
