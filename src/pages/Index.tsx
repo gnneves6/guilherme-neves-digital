@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/sections/HeroSection";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
+import CredibilityStrip from "@/components/sections/CredibilityStrip";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
 import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSection";
 import TheMethodSection from "@/components/sections/TheMethodSection";
@@ -20,6 +21,7 @@ const Index = () => {
       */}
       <HeroSection />
       <EnvironmentsSection />
+      <CredibilityStrip />
       <FromWithinBridge />
       <SelectedArtefactsSection />
       <TheMethodSection />
