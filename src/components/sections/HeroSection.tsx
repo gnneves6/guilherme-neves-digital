@@ -157,6 +157,15 @@ const HeroSection = () => {
           >
             Athlete by nature. Nutritionist by purpose.
           </motion.p>
+          <motion.p
+            className="text-[10px] md:text-[11px] tracking-[0.22em] uppercase font-display mt-4 md:mt-5 max-w-xl"
+            style={{ color: "hsl(var(--ivory) / 0.35)" }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.72 }}
+          >
+            Field experience across elite academy, senior football and applied performance environments.
+          </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-14"
             initial={{ opacity: 0, y: 15 }}
