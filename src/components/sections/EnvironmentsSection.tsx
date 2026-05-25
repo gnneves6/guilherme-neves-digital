@@ -310,7 +310,12 @@ const EnvironmentsSection = () => {
                 <div className="flex flex-col justify-center items-end text-right">
                   <motion.span
                     className="font-display text-[100px] lg:text-[140px] font-bold leading-none"
-                    style={{ color: `${activeExp.kitColors.primary}18` }}
+                    style={{
+                      color:
+                        activeExp.id === "r4e"
+                          ? "rgba(170, 170, 170, 0.14)"
+                          : `${activeExp.kitColors.primary}18`,
+                    }}
                     key={activeIndex}
                     initial={{ opacity: 0, scale: 0.85 }}
                     animate={{ opacity: 1, scale: 1 }}
