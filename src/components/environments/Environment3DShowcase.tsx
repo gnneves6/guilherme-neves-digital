@@ -57,13 +57,13 @@ function KitPlane({
 
     const targetPos: [number, number, number] = isActive
       ? [0, 0.15, 0.6]
-      : [side * 1.95, -0.05, -0.45 - (absOff - 1) * 0.6];
-    const targetScale = isActive ? 1.12 : Math.max(0, 0.6 - (absOff - 1) * 0.25);
+      : [side * 2.55, -0.15, -1.3 - (absOff - 1) * 0.7];
+    const targetScale = isActive ? 1.12 : Math.max(0, 0.52 - (absOff - 1) * 0.22);
     const targetRotY = isActive
       ? (reduce ? 0 : pointer.x * 0.12)
-      : -side * 0.35;
+      : -side * 0.5;
     const targetRotX = isActive ? (reduce ? 0 : pointer.y * -0.06) : 0;
-    const targetOpacity = isActive ? 1 : absOff <= 1 ? 0.42 : 0;
+    const targetOpacity = isActive ? 1 : absOff <= 1 ? 0.22 : 0;
 
     const lambda = reduce ? 30 : 4.5;
     damp3(group.current.position, targetPos, 1 / lambda, dt);
@@ -89,6 +89,33 @@ function KitPlane({
         />
       </mesh>
     </group>
+  );
+}
+
+/**
+ * RoomAtmosphere — a large dark backdrop plane sitting far behind the kits
+ * that, together with scene fog, makes the WebGL space read as an
+ * infinite cinematic room rather than a flat layered composition.
+ */
+function RoomAtmosphere({ accent }: { accent: string }) {
+  const mat = useRef<THREE.MeshBasicMaterial>(null);
+  useFrame((_, dt) => {
+    if (!mat.current) return;
+    const target = hexToColor(accent).multiplyScalar(0.05);
+    dampColor(mat.current.color, target, 0.6, dt);
+  });
+  return (
+    <mesh position={[0, 0, -6]}>
+      <planeGeometry args={[40, 24]} />
+      <meshBasicMaterial
+        ref={mat}
+        color={"#08080a"}
+        transparent
+        opacity={0.95}
+        depthWrite={false}
+        toneMapped={false}
+      />
+    </mesh>
   );
 }
 
@@ -211,6 +238,8 @@ function SceneContent({ kits, activeIndex }: Props) {
     <>
       <SceneLights accent={activeAccent} />
       <CameraRig />
+      <fog attach="fog" args={["#08080a", 4.2, 12]} />
+      <RoomAtmosphere accent={activeAccent} />
       <Pedestal accent={activeAccent} />
       {kits.map((k, i) => (
         <KitPlane
