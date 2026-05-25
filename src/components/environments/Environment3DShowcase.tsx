@@ -56,9 +56,9 @@ function KitPlane({
     const absOff = Math.min(Math.abs(offset), 2);
 
     const targetPos: [number, number, number] = isActive
-      ? [0, 0.05, 0.6]
-      : [side * 1.85, -0.08, -0.45 - (absOff - 1) * 0.6];
-    const targetScale = isActive ? 1 : Math.max(0, 0.58 - (absOff - 1) * 0.25);
+      ? [0, 0.15, 0.6]
+      : [side * 1.95, -0.05, -0.45 - (absOff - 1) * 0.6];
+    const targetScale = isActive ? 1.12 : Math.max(0, 0.6 - (absOff - 1) * 0.25);
     const targetRotY = isActive
       ? (reduce ? 0 : pointer.x * 0.12)
       : -side * 0.35;
@@ -77,7 +77,7 @@ function KitPlane({
   return (
     <group ref={group}>
       <mesh>
-        <planeGeometry args={[1.5, 1.9]} />
+        <planeGeometry args={[1.6, 2.0]} />
         <meshBasicMaterial
           ref={mat}
           map={texture}
