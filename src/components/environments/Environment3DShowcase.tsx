@@ -57,8 +57,8 @@ function KitPlane({
 
     const targetPos: [number, number, number] = isActive
       ? [0, 0.15, 0.6]
-      : [side * 2.35, -0.22, -0.75 - (absOff - 1) * 0.6];
-    const targetScale = isActive ? 1.12 : Math.max(0, 0.52 - (absOff - 1) * 0.22);
+      : [side * 1.95, -0.05, -0.45 - (absOff - 1) * 0.6];
+    const targetScale = isActive ? 1.12 : Math.max(0, 0.6 - (absOff - 1) * 0.25);
     const targetRotY = isActive
       ? (reduce ? 0 : pointer.x * 0.12)
       : -side * 0.35;
@@ -213,14 +213,12 @@ function SceneContent({ kits, activeIndex }: Props) {
       <CameraRig />
       <Pedestal accent={activeAccent} />
       {kits.map((k, i) => (
-        slotOffset(i, activeIndex, kits.length) === 0 ? (
-          <KitPlane
-            key={k.id}
-            texture={textures[i]}
-            offset={0}
-            reduce={reduce}
-          />
-        ) : null
+        <KitPlane
+          key={k.id}
+          texture={textures[i]}
+          offset={slotOffset(i, activeIndex, kits.length)}
+          reduce={reduce}
+        />
       ))}
       <ContactShadows
         position={[0, -1.18, 0]}
