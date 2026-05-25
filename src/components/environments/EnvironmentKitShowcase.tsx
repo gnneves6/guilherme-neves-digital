@@ -22,13 +22,17 @@ interface Props {
 const EnvironmentKitShowcase = ({ kits, activeIndex }: Props) => {
   return (
     <div
-      className="absolute -inset-x-24 -inset-y-16 pointer-events-none"
+      className="absolute -inset-x-48 -inset-y-40 pointer-events-none"
       style={{
-        // Dissolve the canvas rectangle into the surrounding room.
+        zIndex: 0,
+        // Dissolve the canvas rectangle into the surrounding room — the
+        // scene must fade into pure darkness well before any visible edge,
+        // so there is no implied rectangular crop in the upper/lateral
+        // areas of the showcase.
         WebkitMaskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 55% 60% at 50% 54%, rgba(0,0,0,1) 22%, rgba(0,0,0,0.78) 46%, rgba(0,0,0,0.32) 68%, rgba(0,0,0,0.08) 86%, rgba(0,0,0,0) 100%)",
         maskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 55% 60% at 50% 54%, rgba(0,0,0,1) 22%, rgba(0,0,0,0.78) 46%, rgba(0,0,0,0.32) 68%, rgba(0,0,0,0.08) 86%, rgba(0,0,0,0) 100%)",
       }}
     >
       <Environment3DShowcase kits={kits} activeIndex={activeIndex} />
