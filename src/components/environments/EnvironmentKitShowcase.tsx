@@ -25,10 +25,12 @@ const EnvironmentKitShowcase = ({ kits, activeIndex }: Props) => {
       className="absolute -inset-x-24 -inset-y-16 pointer-events-none"
       style={{
         // Dissolve the canvas rectangle into the surrounding room.
+        // Mask fades to fully transparent well before the canvas edge so
+        // the rectangular boundary is no longer perceptible.
         WebkitMaskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 58% 64% at 50% 52%, rgba(0,0,0,1) 28%, rgba(0,0,0,0.9) 48%, rgba(0,0,0,0.45) 68%, rgba(0,0,0,0) 88%)",
         maskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 58% 64% at 50% 52%, rgba(0,0,0,1) 28%, rgba(0,0,0,0.9) 48%, rgba(0,0,0,0.45) 68%, rgba(0,0,0,0) 88%)",
       }}
     >
       <Environment3DShowcase kits={kits} activeIndex={activeIndex} />
