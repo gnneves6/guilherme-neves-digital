@@ -105,24 +105,37 @@ function Pedestal({ accent }: { accent: string }) {
   });
 
   return (
-    <group ref={group} position={[0, -1.1, 0]}>
-      {/* Pedestal disc */}
-      <mesh>
-        <cylinderGeometry args={[1.55, 1.7, 0.12, 64]} />
-        <meshStandardMaterial color="#0b0b0d" metalness={0.6} roughness={0.5} />
+    <group ref={group} position={[0, -1.15, 0]}>
+      {/* Pedestal disc — slimmer, lower, sunk into the floor */}
+      <mesh position={[0, -0.04, 0]}>
+        <cylinderGeometry args={[1.35, 1.5, 0.06, 64]} />
+        <meshStandardMaterial
+          color="#0a0a0c"
+          metalness={0.4}
+          roughness={0.85}
+          transparent
+          opacity={0.55}
+        />
       </mesh>
-      {/* Top rim accent */}
-      <mesh position={[0, 0.062, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[1.5, 1.56, 96]} />
-        <meshBasicMaterial ref={ringMat} transparent opacity={0.75} toneMapped={false} />
-      </mesh>
-      {/* Floor accent glow (additive) */}
+      {/* Top rim accent — whisper-thin */}
       <mesh position={[0, 0.001, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[1.6, 3.4, 96]} />
+        <ringGeometry args={[1.32, 1.35, 128]} />
+        <meshBasicMaterial
+          ref={ringMat}
+          transparent
+          opacity={0.28}
+          toneMapped={false}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+      {/* Floor accent glow — wide, soft, additive */}
+      <mesh position={[0, 0.0005, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[1.0, 4.2, 96]} />
         <meshBasicMaterial
           ref={glowMat}
           transparent
-          opacity={0.18}
+          opacity={0.07}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
           toneMapped={false}
@@ -139,10 +152,10 @@ function SceneLights({ accent }: { accent: string }) {
     if (point.current) {
       const c = hexToColor(accent);
       dampColor(point.current.color, c, 0.4, dt);
-      damp(point.current, "intensity", 4.5, 0.3, dt);
+      damp(point.current, "intensity", 2.6, 0.3, dt);
       damp3(
         point.current.position,
-        [pointer.x * 1.5, 1.2 + pointer.y * -0.3, 2.2],
+        [pointer.x * 1.8, 1.4 + pointer.y * -0.3, 2.6],
         0.3,
         dt,
       );
@@ -150,9 +163,9 @@ function SceneLights({ accent }: { accent: string }) {
   });
   return (
     <>
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[2, 3, 3]} intensity={0.9} />
-      <pointLight ref={point} position={[0, 1.2, 2.2]} intensity={4.5} distance={9} decay={2} />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[2, 3, 3]} intensity={0.55} />
+      <pointLight ref={point} position={[0, 1.4, 2.6]} intensity={2.6} distance={11} decay={2} />
     </>
   );
 }
@@ -208,11 +221,11 @@ function SceneContent({ kits, activeIndex }: Props) {
         />
       ))}
       <ContactShadows
-        position={[0, -1.04, 0]}
-        opacity={0.55}
-        scale={6}
-        blur={2.4}
-        far={2.4}
+        position={[0, -1.18, 0]}
+        opacity={0.38}
+        scale={9}
+        blur={3.6}
+        far={3}
         color="#000000"
       />
     </>
