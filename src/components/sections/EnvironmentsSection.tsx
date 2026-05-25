@@ -4,7 +4,15 @@ import { usePointer } from "@/components/journey/PointerField";
 import Chapter from "@/components/motion/Chapter";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
 import EnvironmentKitShowcase, { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
-import KitTorso from "@/components/environments/KitTorso";
+import anderlechtKit from "@/assets/kits/anderlecht-kit.png";
+import lecaKit from "@/assets/kits/leca-kit.png";
+import r4eKit from "@/assets/kits/run4excellence-kit.png";
+
+const kitImages: Record<string, string> = {
+  anderlecht: anderlechtKit,
+  leca: lecaKit,
+  r4e: r4eKit,
+};
 
 export const experiences = [
   {
@@ -85,11 +93,10 @@ const EnvironmentsSection = () => {
   const showcaseKits: ShowcaseKit[] = experiences.map((e) => ({
     id: e.id,
     name: e.name,
+    image: kitImages[e.id],
     primary: e.kitColors.primary,
     secondary: e.kitColors.secondary,
     accent: e.kitColors.accent,
-    variant: e.kit.variant,
-    symbol: e.kit.symbol,
   }));
 
   return (
@@ -124,14 +131,13 @@ const EnvironmentsSection = () => {
                 }}
               >
                 {/* Floating kit thumb */}
-                <div className="float-right ml-4 w-[88px] h-[110px] opacity-90">
-                  <KitTorso
-                    primary={exp.kitColors.primary}
-                    secondary={exp.kitColors.secondary}
-                    accent={exp.kitColors.accent}
-                    variant={exp.kit.variant}
-                    symbol={exp.kit.symbol}
-                    clarity={0.85}
+                <div className="float-right ml-4 w-[110px] h-[140px] opacity-95">
+                  <img
+                    src={kitImages[exp.id]}
+                    alt={exp.name}
+                    draggable={false}
+                    className="w-full h-full object-contain"
+                    style={{ filter: `drop-shadow(0 14px 20px rgba(0,0,0,0.5)) drop-shadow(0 0 18px ${exp.kitColors.primary}55)` }}
                   />
                 </div>
                 <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
@@ -240,7 +246,7 @@ const EnvironmentsSection = () => {
                 }
               />
 
-              <div className="grid grid-cols-[1fr_460px_1fr] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-10 items-center min-h-[460px]">
+              <div className="grid grid-cols-[minmax(220px,1fr)_440px_minmax(180px,0.8fr)] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-12 items-center min-h-[460px]">
                 {/* Left — identity */}
                 <div className="flex flex-col justify-center">
                   {experiences.map((exp, i) => {
@@ -261,10 +267,10 @@ const EnvironmentsSection = () => {
                             <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
                               {exp.period} — {exp.location}
                             </span>
-                            <h3 className="font-display text-3xl lg:text-5xl font-semibold leading-tight text-[hsl(var(--ivory))] mt-3">
+                            <h3 className="font-display text-2xl lg:text-4xl xl:text-5xl font-semibold leading-[1.05] tracking-tight text-[hsl(var(--ivory))] mt-3 break-words">
                               {exp.name}
                             </h3>
-                            <p className="text-xs tracking-widest uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)]">
+                            <p className="text-[11px] tracking-[0.18em] uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)] leading-snug max-w-sm">
                               {exp.role}
                             </p>
                             <p className="text-sm text-[hsl(var(--ivory)/0.6)] mt-3 max-w-md">
