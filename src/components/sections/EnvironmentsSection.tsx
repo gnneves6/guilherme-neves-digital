@@ -248,7 +248,7 @@ const EnvironmentsSection = () => {
 
               <div className="grid grid-cols-[minmax(220px,1fr)_440px_minmax(180px,0.8fr)] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-12 items-center min-h-[460px]">
                 {/* Left — identity */}
-                <div className="flex flex-col justify-center">
+                <div className="flex flex-col justify-center relative z-10">
                   {experiences.map((exp, i) => {
                     const isFocused = i === activeIndex;
                     return (
@@ -307,7 +307,7 @@ const EnvironmentsSection = () => {
                 </div>
 
                 {/* Right — index + dots */}
-                <div className="flex flex-col justify-center items-end text-right">
+                <div className="flex flex-col justify-center items-end text-right relative z-10">
                   <motion.span
                     className="font-display text-[100px] lg:text-[140px] font-bold leading-none"
                     style={{ color: `${activeExp.kitColors.primary}18` }}
