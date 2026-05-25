@@ -22,13 +22,15 @@ interface Props {
 const EnvironmentKitShowcase = ({ kits, activeIndex }: Props) => {
   return (
     <div
-      className="absolute -inset-x-24 -inset-y-16 pointer-events-none"
+      className="absolute -inset-x-[40%] -inset-y-32 pointer-events-none"
       style={{
-        // Dissolve the canvas rectangle into the surrounding room.
+        // Dissolve the canvas rectangle into the surrounding room — the
+        // falloff is wide and gradual so side kits fully fade into the
+        // atmosphere instead of being clipped by a visible edge.
         WebkitMaskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 85% 90% at 50% 50%, #000 55%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0) 100%)",
         maskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 85% 90% at 50% 50%, #000 55%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0) 100%)",
       }}
     >
       <Environment3DShowcase kits={kits} activeIndex={activeIndex} />
