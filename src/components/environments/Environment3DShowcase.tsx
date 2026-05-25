@@ -101,7 +101,7 @@ function Pedestal({ accent }: { accent: string }) {
     const target = hexToColor(accent);
     if (ringMat.current) dampColor(ringMat.current.color, target, 0.4, dt);
     if (glowMat.current) dampColor(glowMat.current.color, target, 0.4, dt);
-    if (group.current) damp(group.current.rotation, "y", group.current.rotation.y + dt * 0.05, 0.1, dt);
+    if (group.current) group.current.rotation.y += dt * 0.06;
   });
 
   return (
