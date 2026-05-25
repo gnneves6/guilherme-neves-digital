@@ -1,15 +1,14 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useRef, useState } from "react";
 import { usePointer } from "@/components/journey/PointerField";
-import MannequinTorso from "@/components/MannequinTorso";
 import Chapter from "@/components/motion/Chapter";
-import logoAnderlecht from "@/assets/logo-anderlecht.png";
-import logoLeca from "@/assets/logo-leca.png";
-import logoR4E from "@/assets/logo-run4excellence.png";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
+import EnvironmentKitShowcase, { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
+import KitTorso from "@/components/environments/KitTorso";
 
 export const experiences = [
   {
+    id: "anderlecht",
     name: "RSC Anderlecht",
     role: "Performance Nutrition Intern",
     location: "Brussels, Belgium",
@@ -18,10 +17,11 @@ export const experiences = [
     context: "Elite first-team football environment",
     focus: ["Hydration", "Matchday fueling", "Scientific reviews", "Athlete & staff education"],
     seasonNote: "During a season marked by a cup-final run and European qualification race.",
-    logo: logoAnderlecht,
-    kitColors: { primary: "#7B68AE", secondary: "#FFFFFF", accent: "#7B68AE" },
+    kitColors: { primary: "#5E3A8E", secondary: "#FFFFFF", accent: "#C9A84C" },
+    kit: { variant: "plain" as const, symbol: "dots" as const },
   },
   {
+    id: "leca",
     name: "Leça FC",
     role: "First Team Performance Nutrition",
     location: "Porto, Portugal",
@@ -30,10 +30,11 @@ export const experiences = [
     context: "Senior first-team football environment",
     focus: ["Body composition", "Matchweek routines", "Athlete education", "Practical fueling"],
     seasonNote: "Inside a competitive promotion-stage campaign.",
-    logo: logoLeca,
-    kitColors: { primary: "#1A3A6B", secondary: "#FFFFFF", accent: "#C4A853" },
+    kitColors: { primary: "#1F7A4D", secondary: "#FFFFFF", accent: "#C4A853" },
+    kit: { variant: "hoops" as const, symbol: "crest" as const },
   },
   {
+    id: "r4e",
     name: "Run4Excellence",
     role: "Performance Nutrition | Health & Performance",
     location: "Porto, Portugal",
@@ -42,8 +43,8 @@ export const experiences = [
     context: "Human-performance environment beyond football",
     focus: ["Health", "Habits", "Endurance", "Recovery", "Long-term development"],
     seasonNote: null,
-    logo: logoR4E,
-    kitColors: { primary: "#2D8C4E", secondary: "#FFFFFF", accent: "#F5A623" },
+    kitColors: { primary: "#0E0E10", secondary: "#FFFFFF", accent: "#FFFFFF" },
+    kit: { variant: "plain" as const, symbol: "four" as const },
   },
 ];
 
@@ -81,6 +82,16 @@ const EnvironmentsSection = () => {
   const activeExp = experiences[activeIndex];
   const pointer = usePointer();
 
+  const showcaseKits: ShowcaseKit[] = experiences.map((e) => ({
+    id: e.id,
+    name: e.name,
+    primary: e.kitColors.primary,
+    secondary: e.kitColors.secondary,
+    accent: e.kitColors.accent,
+    variant: e.kit.variant,
+    symbol: e.kit.symbol,
+  }));
+
   return (
     <>
       {/* MOBILE FALLBACK — vertical cards (no pinning, no 3D) */}
@@ -91,7 +102,7 @@ const EnvironmentsSection = () => {
           className="absolute inset-0 z-0 bg-cover bg-center opacity-25"
           style={{ backgroundImage: `url(${sceneEnvironments})`, filter: "brightness(0.45) contrast(1.1) saturate(0.7)" }}
         />
-        <div aria-hidden className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 25%, transparent 75%, hsl(var(--charcoal-deep)) 100%)" }} />
+        <div aria-hidden className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 18%, transparent 82%, hsl(var(--charcoal-deep) / 0) 100%)" }} />
         <div className="max-content relative z-[2]">
           <Chapter
             number="02"
@@ -102,16 +113,27 @@ const EnvironmentsSection = () => {
           <h2 className="font-display text-3xl font-semibold text-[hsl(var(--ivory))] mb-10">
             Chapters that shaped the work.
           </h2>
-          <div className="space-y-px" style={{ background: "hsl(var(--ivory) / 0.06)" }}>
+          <div className="space-y-6">
             {experiences.map((exp, i) => (
               <div
                 key={exp.name}
-                className="p-6"
+                className="p-6 rounded-sm relative overflow-hidden"
                 style={{
-                  background: "hsl(var(--charcoal-deep))",
+                  background: `linear-gradient(180deg, hsl(var(--charcoal-deep)) 0%, ${exp.kitColors.primary}10 100%)`,
                   borderLeft: `2px solid ${exp.kitColors.primary}`,
                 }}
               >
+                {/* Floating kit thumb */}
+                <div className="float-right ml-4 w-[88px] h-[110px] opacity-90">
+                  <KitTorso
+                    primary={exp.kitColors.primary}
+                    secondary={exp.kitColors.secondary}
+                    accent={exp.kitColors.accent}
+                    variant={exp.kit.variant}
+                    symbol={exp.kit.symbol}
+                    clarity={0.85}
+                  />
+                </div>
                 <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
                   {exp.period} — {exp.location}
                 </span>
@@ -121,7 +143,7 @@ const EnvironmentsSection = () => {
                 <p className="text-[10px] tracking-widest uppercase font-display mt-2 text-[hsl(var(--ivory)/0.4)]">
                   {exp.role}
                 </p>
-                <p className="text-xs text-[hsl(var(--ivory)/0.5)] mt-3">
+                <p className="text-xs text-[hsl(var(--ivory)/0.5)] mt-3 clear-right">
                   {exp.context}
                 </p>
                 <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
@@ -158,6 +180,12 @@ const EnvironmentsSection = () => {
             ))}
           </div>
         </div>
+        {/* Soft dissolve into next section */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-24 z-[3] pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--background)))" }}
+        />
       </section>
 
       {/* DESKTOP — pinned FIFA-style mannequin */}
@@ -186,7 +214,7 @@ const EnvironmentsSection = () => {
             className="absolute inset-0 z-[2] pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse 90% 80% at 50% 55%, transparent 0%, hsl(var(--charcoal-deep) / 0.85) 75%), linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 18%, transparent 82%, hsl(var(--background)) 100%)",
+                "radial-gradient(ellipse 90% 80% at 50% 55%, transparent 0%, hsl(var(--charcoal-deep) / 0.82) 78%), linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 14%, transparent 78%, hsl(var(--charcoal-deep) / 0.7) 92%, hsl(var(--charcoal-deep) / 0) 100%)",
             }}
           />
           {/* Background color wash */}
@@ -212,7 +240,7 @@ const EnvironmentsSection = () => {
                 }
               />
 
-              <div className="grid grid-cols-[1fr_260px_1fr] lg:grid-cols-[1fr_300px_1fr] gap-6 lg:gap-10 items-center min-h-[440px]">
+              <div className="grid grid-cols-[1fr_460px_1fr] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-10 items-center min-h-[460px]">
                 {/* Left — identity */}
                 <div className="flex flex-col justify-center">
                   {experiences.map((exp, i) => {
@@ -267,35 +295,9 @@ const EnvironmentsSection = () => {
                   })}
                 </div>
 
-                {/* Center — 3D Mannequin (smaller, more elegant) */}
-                <div className="relative h-[360px] lg:h-[420px]">
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <motion.img
-                      src={activeExp.logo}
-                      alt=""
-                      className="w-[200px] h-[200px] object-contain"
-                      animate={{ opacity: 0.05, scale: 1.1 }}
-                      transition={{ duration: 0.8 }}
-                      style={{
-                        filter: "grayscale(100%) brightness(2)",
-                        maskImage: "radial-gradient(ellipse at center, black 20%, transparent 65%)",
-                        WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 65%)",
-                      }}
-                    />
-                  </div>
-
-                  <MannequinTorso
-                    primaryColor={activeExp.kitColors.primary}
-                    secondaryColor={activeExp.kitColors.secondary}
-                    accentColor={activeExp.kitColors.accent}
-                  />
-
-                  <motion.div
-                    className="absolute bottom-6 left-1/2 -translate-x-1/2 h-px"
-                    style={{ background: `${activeExp.kitColors.primary}40` }}
-                    animate={{ width: 100 }}
-                    transition={{ duration: 0.8 }}
-                  />
+                {/* Center — Floating kit display archive */}
+                <div className="relative h-[400px] lg:h-[460px]">
+                  <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
                 </div>
 
                 {/* Right — index + dots */}
