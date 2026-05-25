@@ -1,4 +1,5 @@
 import Environment3DShowcase from "./Environment3DShowcase";
+import BackgroundKitGhosts from "./BackgroundKitGhosts";
 
 export interface ShowcaseKit {
   id: string;
@@ -21,7 +22,10 @@ interface Props {
  */
 const EnvironmentKitShowcase = ({ kits, activeIndex }: Props) => {
   return (
-    <div
+    <>
+      {/* Atmospheric ghosts — prev/next kits as full silhouettes behind text */}
+      <BackgroundKitGhosts kits={kits} activeIndex={activeIndex} />
+      <div
       className="absolute -inset-x-24 -inset-y-16 pointer-events-none"
       style={{
         // Dissolve the canvas rectangle into the surrounding room.
@@ -32,7 +36,8 @@ const EnvironmentKitShowcase = ({ kits, activeIndex }: Props) => {
       }}
     >
       <Environment3DShowcase kits={kits} activeIndex={activeIndex} />
-    </div>
+      </div>
+    </>
   );
 };
 
