@@ -246,7 +246,7 @@ const EnvironmentsSection = () => {
                 }
               />
 
-              <div className="grid grid-cols-[1fr_460px_1fr] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-10 items-center min-h-[460px]">
+              <div className="grid grid-cols-[minmax(220px,1fr)_440px_minmax(180px,0.8fr)] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-12 items-center min-h-[460px]">
                 {/* Left — identity */}
                 <div className="flex flex-col justify-center">
                   {experiences.map((exp, i) => {
@@ -267,10 +267,10 @@ const EnvironmentsSection = () => {
                             <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
                               {exp.period} — {exp.location}
                             </span>
-                            <h3 className="font-display text-3xl lg:text-5xl font-semibold leading-tight text-[hsl(var(--ivory))] mt-3">
+                            <h3 className="font-display text-2xl lg:text-4xl xl:text-5xl font-semibold leading-[1.05] tracking-tight text-[hsl(var(--ivory))] mt-3 break-words">
                               {exp.name}
                             </h3>
-                            <p className="text-xs tracking-widest uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)]">
+                            <p className="text-[11px] tracking-[0.18em] uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)] leading-snug max-w-sm">
                               {exp.role}
                             </p>
                             <p className="text-sm text-[hsl(var(--ivory)/0.6)] mt-3 max-w-md">
