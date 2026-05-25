@@ -213,12 +213,14 @@ function SceneContent({ kits, activeIndex }: Props) {
       <CameraRig />
       <Pedestal accent={activeAccent} />
       {kits.map((k, i) => (
-        <KitPlane
-          key={k.id}
-          texture={textures[i]}
-          offset={slotOffset(i, activeIndex, kits.length)}
-          reduce={reduce}
-        />
+        slotOffset(i, activeIndex, kits.length) === 0 ? (
+          <KitPlane
+            key={k.id}
+            texture={textures[i]}
+            offset={0}
+            reduce={reduce}
+          />
+        ) : null
       ))}
       <ContactShadows
         position={[0, -1.18, 0]}
