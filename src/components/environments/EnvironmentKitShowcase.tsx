@@ -1,16 +1,14 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useMemo } from "react";
 import { usePointer } from "@/components/journey/PointerField";
-import KitTorso, { KitSymbol, KitVariant } from "./KitTorso";
 
 export interface ShowcaseKit {
   id: string;
   name: string;
+  image: string;
   primary: string;
   secondary: string;
   accent?: string;
-  variant?: KitVariant;
-  symbol?: KitSymbol;
 }
 
 interface Props {
@@ -38,9 +36,9 @@ const EnvironmentKitShowcase = ({ kits, activeIndex, compact = false }: Props) =
   // Layout positions for three layered kits
   const slots = useMemo(
     () => [
-      { key: "prev", index: prevIndex, x: compact ? -110 : -150, y: 10, scale: 0.6, z: 1, blur: 4, opacity: 0.45, rotate: -6 },
-      { key: "next", index: nextIndex, x: compact ? 110 : 150, y: 10, scale: 0.6, z: 1, blur: 4, opacity: 0.45, rotate: 6 },
-      { key: "active", index: activeIndex, x: 0, y: -8, scale: 1, z: 5, blur: 0, opacity: 1, rotate: 0 },
+      { key: "prev", index: prevIndex, x: compact ? -130 : -190, y: 24, scale: 0.62, z: 1, blur: 5, opacity: 0.35, rotate: -8 },
+      { key: "next", index: nextIndex, x: compact ? 130 : 190, y: 24, scale: 0.62, z: 1, blur: 5, opacity: 0.35, rotate: 8 },
+      { key: "active", index: activeIndex, x: 0, y: -10, scale: 1, z: 5, blur: 0, opacity: 1, rotate: 0 },
     ],
     [activeIndex, prevIndex, nextIndex, compact],
   );
@@ -110,8 +108,8 @@ const EnvironmentKitShowcase = ({ kits, activeIndex, compact = false }: Props) =
         {slots.map((slot) => {
           const kit = kits[slot.index];
           const isActive = slot.key === "active";
-          const baseW = compact ? 150 : 190;
-          const baseH = compact ? 180 : 230;
+          const baseW = compact ? 200 : 280;
+          const baseH = compact ? 240 : 340;
           return (
             <motion.div
               key={slot.key}
@@ -146,18 +144,21 @@ const EnvironmentKitShowcase = ({ kits, activeIndex, compact = false }: Props) =
                     aria-hidden
                     className="absolute inset-0 -z-10"
                     style={{
-                      background: `radial-gradient(ellipse at 50% 45%, ${kit.primary}40 0%, transparent 60%)`,
-                      filter: "blur(20px)",
+                      background: `radial-gradient(ellipse at 50% 45%, ${kit.primary}55 0%, transparent 65%)`,
+                      filter: "blur(28px)",
                     }}
                   />
                 )}
-                <KitTorso
-                  primary={kit.primary}
-                  secondary={kit.secondary}
-                  accent={kit.accent}
-                  variant={kit.variant}
-                  symbol={kit.symbol}
-                  clarity={isActive ? 1 : 0.55}
+                <img
+                  src={kit.image}
+                  alt={kit.name}
+                  draggable={false}
+                  className="w-full h-full object-contain select-none"
+                  style={{
+                    filter: isActive
+                      ? `drop-shadow(0 30px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 30px ${kit.primary}55)`
+                      : "drop-shadow(0 18px 24px rgba(0,0,0,0.5)) brightness(0.7) saturate(0.7)",
+                  }}
                 />
               </motion.div>
             </motion.div>

@@ -4,7 +4,15 @@ import { usePointer } from "@/components/journey/PointerField";
 import Chapter from "@/components/motion/Chapter";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
 import EnvironmentKitShowcase, { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
-import KitTorso from "@/components/environments/KitTorso";
+import anderlechtKit from "@/assets/kits/anderlecht-kit.png";
+import lecaKit from "@/assets/kits/leca-kit.png";
+import r4eKit from "@/assets/kits/run4excellence-kit.png";
+
+const kitImages: Record<string, string> = {
+  anderlecht: anderlechtKit,
+  leca: lecaKit,
+  r4e: r4eKit,
+};
 
 export const experiences = [
   {
@@ -85,11 +93,10 @@ const EnvironmentsSection = () => {
   const showcaseKits: ShowcaseKit[] = experiences.map((e) => ({
     id: e.id,
     name: e.name,
+    image: kitImages[e.id],
     primary: e.kitColors.primary,
     secondary: e.kitColors.secondary,
     accent: e.kitColors.accent,
-    variant: e.kit.variant,
-    symbol: e.kit.symbol,
   }));
 
   return (
