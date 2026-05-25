@@ -20,8 +20,8 @@ const Index = () => {
         → 04 Proof Table → 05 Method Room → 06 Exit/Invitation.
       */}
       <HeroSection />
-      <EnvironmentsSection />
       <CredibilityStrip />
+      <EnvironmentsSection />
       <FromWithinBridge />
       <SelectedArtefactsSection />
       <TheMethodSection />
