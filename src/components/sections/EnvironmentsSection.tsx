@@ -131,14 +131,13 @@ const EnvironmentsSection = () => {
                 }}
               >
                 {/* Floating kit thumb */}
-                <div className="float-right ml-4 w-[88px] h-[110px] opacity-90">
-                  <KitTorso
-                    primary={exp.kitColors.primary}
-                    secondary={exp.kitColors.secondary}
-                    accent={exp.kitColors.accent}
-                    variant={exp.kit.variant}
-                    symbol={exp.kit.symbol}
-                    clarity={0.85}
+                <div className="float-right ml-4 w-[110px] h-[140px] opacity-95">
+                  <img
+                    src={kitImages[exp.id]}
+                    alt={exp.name}
+                    draggable={false}
+                    className="w-full h-full object-contain"
+                    style={{ filter: `drop-shadow(0 14px 20px rgba(0,0,0,0.5)) drop-shadow(0 0 18px ${exp.kitColors.primary}55)` }}
                   />
                 </div>
                 <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
