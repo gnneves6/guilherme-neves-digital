@@ -4,9 +4,9 @@ import { usePointer } from "@/components/journey/PointerField";
 import Chapter from "@/components/motion/Chapter";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
 import EnvironmentKitShowcase, { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
-import anderlechtKit from "@/assets/kits/anderlecht-kit.png";
-import lecaKit from "@/assets/kits/leca-kit.png";
-import r4eKit from "@/assets/kits/run4excellence-kit.png";
+import anderlechtKit from "@/assets/kits/anderlecht-kit-transparent.png";
+import lecaKit from "@/assets/kits/leca-kit-transparent.png";
+import r4eKit from "@/assets/kits/run4excellence-kit-transparent.png";
 
 const kitImages: Record<string, string> = {
   anderlecht: anderlechtKit,
