@@ -22,13 +22,21 @@ interface Props {
 const EnvironmentKitShowcase = ({ kits, activeIndex }: Props) => {
   return (
     <div
-      className="absolute -inset-x-24 -inset-y-16 pointer-events-none"
+      className="absolute pointer-events-none"
       style={{
-        // Dissolve the canvas rectangle into the surrounding room.
+        // Expand the render area far beyond the column so 3D objects
+        // (pedestal disc, floor glow, side kits) never reach a hard
+        // rectangular canvas edge. Then feather the visible area into
+        // the surrounding dark room with a soft elliptical mask.
+        top: "-60%",
+        bottom: "-60%",
+        left: "-50%",
+        right: "-50%",
+        overflow: "visible",
         WebkitMaskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 45% 50% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.18) 82%, rgba(0,0,0,0) 96%)",
         maskImage:
-          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+          "radial-gradient(ellipse 45% 50% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0.18) 82%, rgba(0,0,0,0) 96%)",
       }}
     >
       <Environment3DShowcase kits={kits} activeIndex={activeIndex} />
