@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTexture, ContactShadows } from "@react-three/drei";
-import { useRef, useMemo, Suspense } from "react";
+import { useRef, useMemo, Suspense, useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 import { damp, damp3 } from "maath/easing";
@@ -177,6 +177,12 @@ function CameraRig() {
 function SceneContent({ kits, activeIndex }: Props) {
   const reduce = !!useReducedMotion();
   const textures = useTexture(kits.map((k) => k.image));
+  const { invalidate } = useThree();
+  useEffect(() => {
+    // In demand frameloop (reduced motion), make sure the canvas redraws
+    // when the active environment changes.
+    for (let i = 0; i < 30; i++) setTimeout(() => invalidate(), i * 20);
+  }, [activeIndex, invalidate]);
   // Ensure colorspace correct
   useMemo(() => {
     textures.forEach((t) => {
