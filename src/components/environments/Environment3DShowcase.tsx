@@ -29,6 +29,12 @@ function hexToColor(hex: string) {
   return new THREE.Color(hex);
 }
 
+function dampColor(c: THREE.Color, target: THREE.Color, smooth: number, dt: number) {
+  damp(c, "r", target.r, smooth, dt);
+  damp(c, "g", target.g, smooth, dt);
+  damp(c, "b", target.b, smooth, dt);
+}
+
 function KitPlane({
   texture,
   offset,
@@ -93,8 +99,8 @@ function Pedestal({ accent }: { accent: string }) {
 
   useFrame((_, dt) => {
     const target = hexToColor(accent);
-    if (ringMat.current) damp3(ringMat.current.color, [target.r, target.g, target.b], 0.4, dt);
-    if (glowMat.current) damp3(glowMat.current.color, [target.r, target.g, target.b], 0.4, dt);
+    if (ringMat.current) dampColor(ringMat.current.color, target, 0.4, dt);
+    if (glowMat.current) dampColor(glowMat.current.color, target, 0.4, dt);
     if (group.current) damp(group.current.rotation, "y", group.current.rotation.y + dt * 0.05, 0.1, dt);
   });
 
@@ -132,7 +138,7 @@ function SceneLights({ accent }: { accent: string }) {
   useFrame((_, dt) => {
     if (point.current) {
       const c = hexToColor(accent);
-      damp3(point.current.color, [c.r, c.g, c.b], 0.4, dt);
+      dampColor(point.current.color, c, 0.4, dt);
       damp(point.current, "intensity", 4.5, 0.3, dt);
       damp3(
         point.current.position,
