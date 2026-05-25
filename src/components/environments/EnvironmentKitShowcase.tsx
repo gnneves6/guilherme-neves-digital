@@ -21,7 +21,16 @@ interface Props {
  */
 const EnvironmentKitShowcase = ({ kits, activeIndex }: Props) => {
   return (
-    <div className="absolute inset-0">
+    <div
+      className="absolute -inset-x-24 -inset-y-16 pointer-events-none"
+      style={{
+        // Dissolve the canvas rectangle into the surrounding room.
+        WebkitMaskImage:
+          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+        maskImage:
+          "radial-gradient(ellipse 62% 70% at 50% 52%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0) 100%)",
+      }}
+    >
       <Environment3DShowcase kits={kits} activeIndex={activeIndex} />
     </div>
   );
