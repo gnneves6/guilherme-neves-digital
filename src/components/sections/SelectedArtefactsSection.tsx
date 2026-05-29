@@ -196,7 +196,6 @@ const SelectedArtefactsSection = () => {
       tone="cinematic"
       spacing="xl"
       grain
-      bgColor="hsl(var(--cinematic))"
       overlayGradient="radial-gradient(ellipse 90% 80% at 50% 20%, hsl(220 22% 9% / 0.6) 0%, hsl(var(--cinematic) / 0.95) 80%)"
       fadeTopFrom="hsl(var(--cinematic))"
       fadeBottomTo="hsl(var(--cinematic))"
