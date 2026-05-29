@@ -48,6 +48,14 @@ export interface Artefact {
   notionUrl?: string;
   isProtected?: boolean;
   isDownloadable?: boolean;
+  // Extended editorial fields (used by the Applied Work homepage section and modal)
+  number?: string;
+  context?: string;
+  problem?: string;
+  whatIBuilt?: string;
+  whyItMatters?: string;
+  previewNote?: string;
+  confidentialityNote?: string;
 }
 
 export const artefacts: Artefact[] = [
