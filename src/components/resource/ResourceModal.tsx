@@ -175,12 +175,45 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                   {artefact.description}
                 </p>
 
-                <div className="mt-6 pt-6 border-t" style={{ borderColor: "hsl(var(--charcoal) / 0.08)" }}>
-                  <p className="text-[10px] tracking-widest uppercase font-display opacity-50 mb-2">
-                    What it proves
-                  </p>
-                  <p className="text-sm opacity-80">{artefact.whatItProves}</p>
-                </div>
+                {artefact.problem || artefact.whatIBuilt || artefact.whyItMatters ? (
+                  <>
+                    {artefact.problem && (
+                      <div className="mt-6 pt-6 border-t" style={{ borderColor: "hsl(var(--charcoal) / 0.08)" }}>
+                        <p className="text-[10px] tracking-widest uppercase font-display opacity-50 mb-2">Problem</p>
+                        <p className="text-sm opacity-80 leading-relaxed">{artefact.problem}</p>
+                      </div>
+                    )}
+                    {artefact.whatIBuilt && (
+                      <div className="mt-6 pt-6 border-t" style={{ borderColor: "hsl(var(--charcoal) / 0.08)" }}>
+                        <p className="text-[10px] tracking-widest uppercase font-display opacity-50 mb-2">What I built</p>
+                        <p className="text-sm opacity-80 leading-relaxed">{artefact.whatIBuilt}</p>
+                      </div>
+                    )}
+                    {artefact.whyItMatters && (
+                      <div className="mt-6 pt-6 border-t" style={{ borderColor: "hsl(var(--charcoal) / 0.08)" }}>
+                        <p className="text-[10px] tracking-widest uppercase font-display opacity-50 mb-2">Why it matters</p>
+                        <p className="text-sm opacity-80 leading-relaxed">{artefact.whyItMatters}</p>
+                      </div>
+                    )}
+                    {artefact.previewNote && (
+                      <div className="mt-6 pt-6 border-t" style={{ borderColor: "hsl(var(--charcoal) / 0.08)" }}>
+                        <p className="text-[10px] tracking-widest uppercase font-display opacity-50 mb-2">Preview</p>
+                        <p className="text-xs opacity-65 leading-relaxed">{artefact.previewNote}</p>
+                      </div>
+                    )}
+                    {artefact.confidentialityNote && (
+                      <div className="mt-6 pt-6 border-t" style={{ borderColor: "hsl(var(--charcoal) / 0.08)" }}>
+                        <p className="text-[10px] tracking-widest uppercase font-display opacity-50 mb-2">Confidentiality</p>
+                        <p className="text-xs opacity-65 leading-relaxed">{artefact.confidentialityNote}</p>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="mt-6 pt-6 border-t" style={{ borderColor: "hsl(var(--charcoal) / 0.08)" }}>
+                    <p className="text-[10px] tracking-widest uppercase font-display opacity-50 mb-2">What it proves</p>
+                    <p className="text-sm opacity-80">{artefact.whatItProves}</p>
+                  </div>
+                )}
 
                 {/* Protected reason */}
                 {(artefact.ctaType === "protected" || artefact.ctaType === "request-access") && (
