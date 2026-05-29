@@ -48,6 +48,14 @@ export interface Artefact {
   notionUrl?: string;
   isProtected?: boolean;
   isDownloadable?: boolean;
+  // Extended editorial fields (used by the Applied Work homepage section and modal)
+  number?: string;
+  context?: string;
+  problem?: string;
+  whatIBuilt?: string;
+  whyItMatters?: string;
+  previewNote?: string;
+  confidentialityNote?: string;
 }
 
 export const artefacts: Artefact[] = [
@@ -304,3 +312,185 @@ export const groupMeta: Record<
 };
 
 export const groupOrder: ArtefactGroup[] = ["public", "systems", "tools", "protected"];
+
+/* ============================================================
+   Applied Work — homepage section ("Selected Applied Work")
+   Six curated proof objects, edited for the cinematic archive.
+   ============================================================ */
+export type AppliedPreviewKind =
+  | "matchdayFuel"
+  | "hydrationDashboard"
+  | "redactedReport"
+  | "operationsManual"
+  | "educationGrid"
+  | "atlasBook";
+
+export interface AppliedWorkObject extends Artefact {
+  number: string;
+  context: string;
+  problem: string;
+  whatIBuilt: string;
+  whyItMatters: string;
+  appliedPreview: AppliedPreviewKind;
+  statusBadge: string; // visible badge label inside the card header
+}
+
+export const appliedWorkObjects: AppliedWorkObject[] = [
+  {
+    slug: "matchday-fuel-system",
+    number: "01",
+    title: "Matchday Fuel System",
+    statusBadge: "System / Applied Tool",
+    category: "Matchday System",
+    group: "systems",
+    type: "Matchday nutrition · athletes & staff",
+    status: "In Development",
+    context: "Matchday nutrition · athletes & staff",
+    description:
+      "Context-aware matchday fueling decisions, from MD-1 to recovery.",
+    problem:
+      "Matchday nutrition is often reduced to generic advice, even though kick-off time, role, appetite, travel, stress and recovery context change the real decision.",
+    whatIBuilt:
+      "A practical matchday fueling system combining timelines, MD-1 planning, pre-game meal guidance, liquid strategies, recovery actions and digital planner concepts.",
+    whyItMatters:
+      "It turns matchday nutrition into clear decisions athletes and staff can actually use under pressure.",
+    whatItProves:
+      "Matchday evidence translated into a tool staff and athletes can actually run.",
+    previewNote:
+      "Digital planner mockup + layered MD-1 / timeline document preview.",
+    appliedPreview: "matchdayFuel",
+    ctaLabel: "Explore system",
+    ctaType: "view-sample",
+  },
+  {
+    slug: "hydration-sweat-testing-framework",
+    number: "02",
+    title: "Hydration & Sweat Testing Framework",
+    statusBadge: "Framework / Digital System",
+    category: "Framework",
+    group: "systems",
+    type: "Sweat testing · sodium · hydration follow-up",
+    status: "In Development",
+    context: "Sweat testing · sodium · hydration follow-up",
+    description:
+      "From sweat testing data to athlete-ready hydration decisions.",
+    problem:
+      "Hydration advice often stays generic, while sweat losses, sodium losses and drinking behaviour vary widely between players.",
+    whatIBuilt:
+      "A practical field protocol and digital workflow for sweat-rate testing, sodium testing, player profiling, intervention planning and reporting.",
+    whyItMatters:
+      "It helps practitioners move from raw measurements to individualized hydration support.",
+    whatItProves:
+      "Measurement translated into individualized hydration decisions.",
+    previewNote: "Dashboard mockup + protocol page preview.",
+    appliedPreview: "hydrationDashboard",
+    ctaLabel: "View framework",
+    ctaType: "view-sample",
+  },
+  {
+    slug: "body-composition-monitoring",
+    number: "03",
+    title: "Body Composition & Monitoring Support",
+    statusBadge: "Protected / Internal",
+    category: "Team Report",
+    group: "protected",
+    type: "Team monitoring · staff decision support",
+    status: "Protected",
+    context: "Team monitoring · staff decision support",
+    description:
+      "Turning assessment into practical follow-up, not rankings.",
+    problem:
+      "Body composition data can easily become isolated numbers or harmful comparisons if it is not interpreted with context.",
+    whatIBuilt:
+      "Team and individual monitoring reports using standardized assessment, aggregated summaries, cut-off interpretation, longitudinal tracking and practical staff notes.",
+    whyItMatters:
+      "It supports nutrition, training and recovery decisions while keeping the focus on individual evolution.",
+    whatItProves:
+      "Staff-facing reporting that supports decisions without reducing players to rankings.",
+    previewNote: "Redacted report and dashboard preview.",
+    confidentialityNote:
+      "Protected internal work. Names and sensitive data remain redacted.",
+    appliedPreview: "redactedReport",
+    ctaLabel: "Protected preview",
+    ctaType: "protected",
+  },
+  {
+    slug: "food-environment-catering",
+    number: "04",
+    title: "Food Environment & Catering Operations",
+    statusBadge: "Protected / Club Systems",
+    category: "Applied Tool",
+    group: "protected",
+    type: "Hotels · catering · food logistics",
+    status: "Protected",
+    context: "Hotels · catering · food logistics",
+    description:
+      "Performance nutrition standards for real food environments.",
+    problem:
+      "Even strong nutrition plans fail if the food environment, catering standards and logistics do not support the players.",
+    whatIBuilt:
+      "Operational manuals, buffet requirements, matchday food standards, shopping lists, ingredient guidance and food information databases for performance environments.",
+    whyItMatters:
+      "It turns nutrition into an environment athletes can actually live inside.",
+    whatItProves:
+      "Nutrition operating standards designed for real catering and hotel environments.",
+    previewNote: "Blurred operational manual + checklist-style object.",
+    confidentialityNote:
+      "Protected operational work. Structure and quality only — no confidential details.",
+    appliedPreview: "operationsManual",
+    ctaLabel: "View structure",
+    ctaType: "protected",
+  },
+  {
+    slug: "football-nutrition-education-tools",
+    number: "05",
+    title: "Football Nutrition Education Tools",
+    statusBadge: "Public / Education",
+    category: "Educational Series",
+    group: "public",
+    type: "Athletes · parents · staff",
+    status: "Public",
+    context: "Athletes · parents · staff",
+    description:
+      "Visual education tools that make performance nutrition easier to understand.",
+    problem:
+      "Athletes often receive information that is either too scientific to use or too simple to respect.",
+    whatIBuilt:
+      "Infographics, mini-classes, ABC-style concepts, supplement education, cramp shot explainers, hydration visuals, youth athlete snack guides and practical food education.",
+    whyItMatters:
+      "It turns evidence into simple, memorable decisions without losing scientific responsibility.",
+    whatItProves:
+      "Translation of evidence into clear, athlete-facing behaviour.",
+    previewNote:
+      "Stack of visual education pieces / infographic thumbnails.",
+    appliedPreview: "educationGrid",
+    ctaLabel: "Open collection",
+    ctaType: "view-sample",
+  },
+  {
+    slug: "football-nutrition-atlas",
+    number: "06",
+    title: "Football Nutrition Atlas",
+    statusBadge: "In Development / Premium Resource",
+    category: "Product",
+    group: "systems",
+    type: "Football food decisions · practical resource",
+    status: "In Development",
+    context: "Football food decisions · practical resource",
+    description:
+      "A practical atlas translating science into football food decisions.",
+    problem:
+      "Football nutrition resources are often scattered across guidelines, recipes, isolated tips and context-free recommendations.",
+    whatIBuilt:
+      "A premium educational atlas connecting matchday, training day, recovery, hydration, plate structure, timing and practical food examples.",
+    whyItMatters:
+      "It creates a scalable resource that helps athletes and practitioners understand not just what to eat, but why and when.",
+    whatItProves:
+      "A scalable education product built from applied performance nutrition systems.",
+    previewNote:
+      "Premium book / atlas mockup with first pages visible and remaining pages blurred.",
+    appliedPreview: "atlasBook",
+    ctaLabel: "Preview atlas",
+    ctaType: "early-access",
+  },
+];
