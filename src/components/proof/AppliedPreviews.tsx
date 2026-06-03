@@ -73,27 +73,12 @@ const ImagePreview = ({
   lazy?: boolean;
 }) => (
   <StageFrame>
-    {/* dark blurred backdrop so contain doesn't leave ugly empty space */}
-    <img
-      src={src}
-      alt=""
-      aria-hidden
-      loading={lazy ? "lazy" : "eager"}
-      className="absolute inset-0 h-full w-full"
-      style={{
-        objectFit: "cover",
-        objectPosition: "center",
-        filter: "blur(28px) saturate(0.85) brightness(0.45)",
-        transform: "scale(1.15)",
-        opacity: 0.55,
-      }}
-    />
     <img
       src={src}
       alt={alt}
       loading={lazy ? "lazy" : "eager"}
       className="absolute inset-0 h-full w-full"
-      style={{ objectFit: "contain", objectPosition }}
+      style={{ objectFit: "cover", objectPosition }}
     />
     <div
       aria-hidden
