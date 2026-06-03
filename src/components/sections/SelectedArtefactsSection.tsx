@@ -138,7 +138,13 @@ const ProofCard = ({
               : "relative aspect-[16/10] order-1"
           }
         >
-          <AppliedPreview kind={obj.appliedPreview} />
+          <AppliedPreview
+            kind={obj.appliedPreview}
+            previewImage={obj.previewImage}
+            previewAlt={obj.previewAlt}
+            objectPosition={obj.previewObjectPosition}
+            lazy={!isFeatured}
+          />
           {/* subtle pointer glare */}
           <div
             aria-hidden

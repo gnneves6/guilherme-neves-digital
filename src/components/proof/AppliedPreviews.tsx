@@ -61,6 +61,41 @@ const StageFrame = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
+const ImagePreview = ({
+  src,
+  alt,
+  objectPosition = "center",
+  lazy = true,
+}: {
+  src: string;
+  alt: string;
+  objectPosition?: string;
+  lazy?: boolean;
+}) => (
+  <StageFrame>
+    <img
+      src={src}
+      alt={alt}
+      loading={lazy ? "lazy" : "eager"}
+      className="absolute inset-0 h-full w-full"
+      style={{ objectFit: "cover", objectPosition }}
+    />
+    <div
+      aria-hidden
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background:
+          "linear-gradient(180deg, hsl(220 24% 5% / 0.08) 0%, transparent 30%, transparent 72%, hsl(220 24% 4% / 0.2) 100%), radial-gradient(ellipse 90% 82% at 50% 52%, transparent 58%, hsl(220 24% 4% / 0.55) 100%)",
+      }}
+    />
+    <div
+      aria-hidden
+      className="absolute inset-[2.5%] rounded-[2px] pointer-events-none"
+      style={{ boxShadow: "inset 0 0 0 1px hsl(var(--ivory) / 0.05)" }}
+    />
+  </StageFrame>
+);
+
 const PaperLines = ({
   count = 5,
   shadeFrom = 0.18,
@@ -654,7 +689,30 @@ const AtlasBook = () => (
   </StageFrame>
 );
 
-export const AppliedPreview = ({ kind }: { kind: AppliedPreviewKind }) => {
+export const AppliedPreview = ({
+  kind,
+  previewImage,
+  previewAlt,
+  objectPosition,
+  lazy = true,
+}: {
+  kind: AppliedPreviewKind;
+  previewImage?: string;
+  previewAlt?: string;
+  objectPosition?: string;
+  lazy?: boolean;
+}) => {
+  if (previewImage && previewAlt) {
+    return (
+      <ImagePreview
+        src={previewImage}
+        alt={previewAlt}
+        objectPosition={objectPosition}
+        lazy={lazy}
+      />
+    );
+  }
+
   switch (kind) {
     case "matchdayFuel": return <MatchdayFuel />;
     case "hydrationDashboard": return <HydrationDashboard />;
