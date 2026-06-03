@@ -66,8 +66,8 @@ const ProofCard = ({
       </div>
 
       <div className="flex flex-col h-full">
-        {/* Preview area — compact top band */}
-        <div className="relative w-full overflow-hidden h-[230px] sm:h-[210px] md:h-[230px] lg:h-[240px]">
+        {/* Preview area — full image, no crop */}
+        <div className="relative w-full overflow-hidden aspect-[16/9]">
           <AppliedPreview
             kind={obj.appliedPreview}
             previewImage={obj.previewImage}
@@ -78,7 +78,7 @@ const ProofCard = ({
           {/* bottom fade into card body */}
           <div
             aria-hidden
-            className="absolute inset-x-0 bottom-0 h-14 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 h-10 pointer-events-none"
             style={{
               background:
                 "linear-gradient(to bottom, transparent, hsl(220 24% 6% / 0.9))",
@@ -96,9 +96,9 @@ const ProofCard = ({
           />
         </div>
 
-        {/* Text content */}
-        <div className="p-5 md:p-6 flex flex-col flex-1">
-          <div className="flex items-center justify-between mb-3 gap-3">
+        {/* Text content — compact footer */}
+        <div className="px-5 md:px-6 pt-3.5 pb-4 md:pb-5 flex flex-col flex-1">
+          <div className="flex items-center justify-between mb-2 gap-3">
             <span
               className="text-[10px] tracking-[0.3em] font-display"
               style={{ color: ivory(0.45) }}
@@ -109,28 +109,28 @@ const ProofCard = ({
           </div>
 
           <h3
-            className="font-display font-semibold leading-tight text-lg md:text-xl"
+            className="font-display font-semibold leading-tight text-base md:text-lg"
             style={{ color: ivory(0.95) }}
           >
             {obj.title}
           </h3>
 
           <p
-            className="text-[10px] tracking-[0.22em] uppercase font-display mt-2"
+            className="text-[10px] tracking-[0.22em] uppercase font-display mt-1.5 line-clamp-1"
             style={{ color: "hsl(var(--accent) / 0.85)" }}
           >
             {obj.context}
           </p>
 
           <p
-            className="text-[13px] mt-3 leading-relaxed line-clamp-3"
+            className="text-[12.5px] mt-2 leading-snug line-clamp-2"
             style={{ color: ivory(0.7) }}
           >
             {obj.description}
           </p>
 
           <span
-            className="inline-flex items-center gap-2 mt-auto pt-5 text-[11px] font-display tracking-[0.18em] uppercase opacity-75 group-hover:opacity-100 transition-all duration-500"
+            className="inline-flex items-center gap-2 mt-auto pt-3 text-[11px] font-display tracking-[0.18em] uppercase opacity-75 group-hover:opacity-100 transition-all duration-500"
             style={{ color: ivory(0.85) }}
           >
             {obj.status === "Protected" && (
