@@ -39,14 +39,11 @@ const StatusBadge = ({ obj }: { obj: AppliedWorkObject }) => {
 
 const ProofCard = ({
   obj,
-  variant,
   onOpen,
 }: {
   obj: AppliedWorkObject;
-  variant: "featured" | "supporting";
   onOpen: (a: Artefact) => void;
 }) => {
-  const isFeatured = variant === "featured";
   return (
     <motion.button
       onClick={() => onOpen(obj)}
@@ -68,9 +65,39 @@ const ProofCard = ({
         />
       </div>
 
-      <div className={isFeatured ? "grid grid-cols-1 md:grid-cols-2" : "flex flex-col"}>
-        {/* Text column */}
-        <div className={isFeatured ? "p-7 md:p-9 flex flex-col" : "p-6 order-2 flex flex-col"}>
+      <div className="flex flex-col h-full">
+        {/* Preview area — top, ~55% of card height via aspect ratio */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden">
+          <AppliedPreview
+            kind={obj.appliedPreview}
+            previewImage={obj.previewImage}
+            previewAlt={obj.previewAlt}
+            objectPosition={obj.previewObjectPosition}
+            lazy
+          />
+          {/* bottom fade into card body */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent, hsl(220 24% 6% / 0.9))",
+            }}
+          />
+          {/* subtle pointer glare */}
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+            style={{
+              background:
+                "linear-gradient(115deg, transparent 35%, hsl(var(--ivory) / 0.06) 50%, transparent 65%)",
+              mixBlendMode: "screen",
+            }}
+          />
+        </div>
+
+        {/* Text content */}
+        <div className="p-7 md:p-8 flex flex-col flex-1">
           <div className="flex items-center justify-between mb-5 gap-3">
             <span
               className="text-[10px] tracking-[0.3em] font-display"
@@ -82,9 +109,7 @@ const ProofCard = ({
           </div>
 
           <h3
-            className={`font-display font-semibold leading-tight ${
-              isFeatured ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
-            }`}
+            className="font-display font-semibold leading-tight text-xl md:text-2xl"
             style={{ color: ivory(0.95) }}
           >
             {obj.title}
@@ -97,29 +122,15 @@ const ProofCard = ({
             {obj.context}
           </p>
 
-          {isFeatured && (
-            <p
-              className="text-sm mt-4 leading-relaxed"
-              style={{ color: ivory(0.7) }}
-            >
-              {obj.description}
-            </p>
-          )}
-
-          {!isFeatured && (
-            <>
-              {/* description visible on hover for supporting cards (keeps them compact) */}
-              <p
-                className="text-xs mt-3 leading-relaxed opacity-65 transition-opacity duration-500 group-hover:opacity-90"
-                style={{ color: ivory(0.7) }}
-              >
-                {obj.description}
-              </p>
-            </>
-          )}
+          <p
+            className="text-sm mt-4 leading-relaxed"
+            style={{ color: ivory(0.7) }}
+          >
+            {obj.description}
+          </p>
 
           <span
-            className={`inline-flex items-center gap-2 mt-auto pt-${isFeatured ? "10" : "6"} text-xs font-display tracking-[0.18em] uppercase opacity-75 group-hover:opacity-100 transition-all duration-500`}
+            className="inline-flex items-center gap-2 mt-auto pt-8 text-xs font-display tracking-[0.18em] uppercase opacity-75 group-hover:opacity-100 transition-all duration-500"
             style={{ color: ivory(0.85) }}
           >
             {obj.status === "Protected" && (
@@ -128,33 +139,6 @@ const ProofCard = ({
             {obj.ctaLabel}
             <ArrowRight className="w-3 h-3 transition-transform duration-500 group-hover:translate-x-1" />
           </span>
-        </div>
-
-        {/* Preview column */}
-        <div
-          className={
-            isFeatured
-              ? "relative aspect-[5/4] md:aspect-auto md:min-h-[280px] order-first md:order-last"
-              : "relative aspect-[16/10] order-1"
-          }
-        >
-          <AppliedPreview
-            kind={obj.appliedPreview}
-            previewImage={obj.previewImage}
-            previewAlt={obj.previewAlt}
-            objectPosition={obj.previewObjectPosition}
-            lazy={!isFeatured}
-          />
-          {/* subtle pointer glare */}
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-            style={{
-              background:
-                "linear-gradient(115deg, transparent 35%, hsl(var(--ivory) / 0.06) 50%, transparent 65%)",
-              mixBlendMode: "screen",
-            }}
-          />
         </div>
       </div>
     </motion.button>
@@ -194,8 +178,6 @@ const Legend = () => {
 
 const SelectedArtefactsSection = () => {
   const [open, setOpen] = useState<Artefact | null>(null);
-  const featured = appliedWorkObjects.slice(0, 2);
-  const supporting = appliedWorkObjects.slice(2);
 
   return (
     <Scene
@@ -244,20 +226,11 @@ const SelectedArtefactsSection = () => {
           </Reveal>
         </div>
 
-        {/* Featured row — 2 wider cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6 mb-5 md:mb-6">
-          {featured.map((obj, i) => (
-            <Reveal key={obj.slug} delay={i * 0.06}>
-              <ProofCard obj={obj} variant="featured" onOpen={setOpen} />
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Supporting row — 4 smaller cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {supporting.map((obj, i) => (
-            <Reveal key={obj.slug} delay={i * 0.05}>
-              <ProofCard obj={obj} variant="supporting" onOpen={setOpen} />
+        {/* Unified grid — 2 columns × 3 rows on desktop, 1 column on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          {appliedWorkObjects.map((obj, i) => (
+            <Reveal key={obj.slug} delay={(i % 2) * 0.06}>
+              <ProofCard obj={obj} onOpen={setOpen} />
             </Reveal>
           ))}
         </div>
