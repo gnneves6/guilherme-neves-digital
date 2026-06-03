@@ -2,6 +2,12 @@ export type ArtefactStatus = "Public" | "Protected" | "In Development";
 import abcA from "@/assets/previews/abc-a-athlete-fuel-performance.png";
 import abcB from "@/assets/previews/abc-b-build-your-base.png";
 import abcC from "@/assets/previews/abc-c-care-about-recovery.png";
+import matchdayFuelPreview from "@/assets/work-previews/matchday-fuel-preview.png.asset.json";
+import hydrationSweatTestingPreview from "@/assets/work-previews/hydration-sweat-testing-preview.png.asset.json";
+import bodyCompositionMonitoringPreview from "@/assets/work-previews/body-composition-monitoring-preview.png.asset.json";
+import foodCateringOperationsPreview from "@/assets/work-previews/food-catering-operations-preview.png.asset.json";
+import educationToolsPreview from "@/assets/work-previews/education-tools-preview.png.asset.json";
+import footballNutritionAtlasPreview from "@/assets/work-previews/football-nutrition-atlas-preview.png.asset.json";
 
 export type ArtefactCategory =
   | "Educational Series"
@@ -333,6 +339,9 @@ export interface AppliedWorkObject extends Artefact {
   whyItMatters: string;
   appliedPreview: AppliedPreviewKind;
   statusBadge: string; // visible badge label inside the card header
+  previewImage?: string;
+  previewAlt?: string;
+  previewObjectPosition?: string;
 }
 
 export const appliedWorkObjects: AppliedWorkObject[] = [
@@ -359,6 +368,10 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewNote:
       "Digital planner mockup + layered MD-1 / timeline document preview.",
     appliedPreview: "matchdayFuel",
+    previewImage: matchdayFuelPreview.url,
+    previewAlt:
+      "Dark premium preview of the Matchday Fuel System dashboard with overlapping MD-1 and Matchday Timeline planning sheets.",
+    previewObjectPosition: "center",
     ctaLabel: "Explore system",
     ctaType: "view-sample",
   },
@@ -384,6 +397,10 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
       "Measurement translated into individualized hydration decisions.",
     previewNote: "Dashboard mockup + protocol page preview.",
     appliedPreview: "hydrationDashboard",
+    previewImage: hydrationSweatTestingPreview.url,
+    previewAlt:
+      "Hydration and sweat testing dashboard preview with athlete metrics, chart and protocol sheet in a dark premium layout.",
+    previewObjectPosition: "center right",
     ctaLabel: "View framework",
     ctaType: "view-sample",
   },
@@ -411,6 +428,10 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     confidentialityNote:
       "Protected internal work. Names and sensitive data remain redacted.",
     appliedPreview: "redactedReport",
+    previewImage: bodyCompositionMonitoringPreview.url,
+    previewAlt:
+      "Protected redacted body composition monitoring preview showing confidential team report panels, charts and obscured athlete data.",
+    previewObjectPosition: "center left",
     ctaLabel: "Protected preview",
     ctaType: "protected",
   },
@@ -438,6 +459,10 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     confidentialityNote:
       "Protected operational work. Structure and quality only — no confidential details.",
     appliedPreview: "operationsManual",
+    previewImage: foodCateringOperationsPreview.url,
+    previewAlt:
+      "Protected food environment and catering operations preview with a dark operations dashboard and confidential manual on clipboard.",
+    previewObjectPosition: "center",
     ctaLabel: "View structure",
     ctaType: "protected",
   },
@@ -464,6 +489,10 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewNote:
       "Stack of visual education pieces / infographic thumbnails.",
     appliedPreview: "educationGrid",
+    previewImage: educationToolsPreview.url,
+    previewAlt:
+      "Collection preview of six football nutrition education tools arranged as a premium dark grid of visual learning objects.",
+    previewObjectPosition: "center",
     ctaLabel: "Open collection",
     ctaType: "view-sample",
   },
@@ -490,6 +519,10 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewNote:
       "Premium book / atlas mockup with first pages visible and remaining pages blurred.",
     appliedPreview: "atlasBook",
+    previewImage: footballNutritionAtlasPreview.url,
+    previewAlt:
+      "Football Nutrition Atlas preview showing open premium book pages with a pre-match plate spread and protected in-development content.",
+    previewObjectPosition: "top center",
     ctaLabel: "Preview atlas",
     ctaType: "early-access",
   },
