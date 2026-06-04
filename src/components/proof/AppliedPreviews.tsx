@@ -72,28 +72,20 @@ const ImagePreview = ({
   objectPosition?: string;
   lazy?: boolean;
 }) => (
-  <StageFrame>
+  <div className="absolute inset-0 overflow-hidden bg-[hsl(220_24%_5%)]">
     <img
       src={src}
       alt={alt}
       loading={lazy ? "lazy" : "eager"}
+      decoding="async"
       className="absolute inset-0 h-full w-full"
-      style={{ objectFit: "cover", objectPosition }}
-    />
-    <div
-      aria-hidden
-      className="absolute inset-0 pointer-events-none"
       style={{
-        background:
-          "linear-gradient(180deg, hsl(220 24% 5% / 0.08) 0%, transparent 30%, transparent 72%, hsl(220 24% 4% / 0.2) 100%), radial-gradient(ellipse 90% 82% at 50% 52%, transparent 58%, hsl(220 24% 4% / 0.55) 100%)",
+        objectFit: "cover",
+        objectPosition,
+        imageRendering: "auto",
       }}
     />
-    <div
-      aria-hidden
-      className="absolute inset-[2.5%] rounded-[2px] pointer-events-none"
-      style={{ boxShadow: "inset 0 0 0 1px hsl(var(--ivory) / 0.05)" }}
-    />
-  </StageFrame>
+  </div>
 );
 
 const PaperLines = ({
