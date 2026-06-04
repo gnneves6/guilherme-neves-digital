@@ -66,8 +66,8 @@ const ProofCard = ({
       </div>
 
       <div className="flex flex-col h-full">
-        {/* Preview area — top, ~55% of card height via aspect ratio */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden">
+        {/* Preview area — taller so the full image shows crisp at 3-col widths */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
           <AppliedPreview
             kind={obj.appliedPreview}
             previewImage={obj.previewImage}
