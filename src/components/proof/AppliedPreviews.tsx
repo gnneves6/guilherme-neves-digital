@@ -79,7 +79,7 @@ const ImagePreview = ({
       loading={lazy ? "lazy" : "eager"}
       decoding="async"
       className="absolute inset-0 h-full w-full"
-      style={{ objectFit: "cover", objectPosition }}
+      style={{ objectFit: "contain", objectPosition: objectPosition ?? "center" }}
     />
     <div
       aria-hidden
