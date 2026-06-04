@@ -1,70 +1,80 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
-import ImageLightbox from "./ImageLightbox";
-import type { Artefact } from "@/data/artefacts";
-import { statusMeta } from "@/data/artefacts";
+import { X, Lock, Globe, Layers, Sparkles, ArrowRight, ArrowUpRight } from "lucide-react";
+import type { Artefact, AppliedAccessType } from "@/data/artefacts";
+import { accessMeta } from "@/data/artefacts";
 import { supabase } from "@/integrations/supabase/client";
+import { LINKS } from "@/data/links";
 
 interface Props {
   artefact: Artefact | null;
   onClose: () => void;
 }
 
-const isFormCta = (t: string) =>
-  t === "request-access" || t === "waitlist" || t === "early-access";
+const ivory = (a: number) => `hsl(var(--ivory) / ${a})`;
 
-const ctaIntro: Record<string, { title: string; body: string; submit: string; success: string }> = {
-  "request-access": {
-    title: "Request Access",
-    body: "This resource is protected because it contains private, internal or athlete-specific work. A public case-study version may be released later.",
-    submit: "Submit Request",
-    success: "Request received. You'll hear back shortly.",
-  },
-  waitlist: {
-    title: "Join the Build List",
-    body: "Get notified when this is released. No spam — only the launch note.",
-    submit: "Join Waitlist",
-    success: "You're on the build list. I'll notify you when this resource is ready.",
-  },
-  "early-access": {
-    title: "Early Access",
-    body: "Be first to test this when it ships. Reserved for performance staff, athletes and partners.",
-    submit: "Request Early Access",
-    success: "You're on the build list. I'll notify you when this resource is ready.",
-  },
-  protected: {
-    title: "Protected Resource",
-    body: "This resource is protected because it contains private, internal or athlete-specific work. A public case-study version may be released later.",
-    submit: "",
-    success: "",
-  },
-  "view-sample": {
-    title: "Sample Preview",
-    body: "A condensed preview of the structure and content.",
-    submit: "",
-    success: "",
-  },
+const deriveAccessType = (a: Artefact): AppliedAccessType => {
+  const explicit = (a as Artefact & { accessType?: AppliedAccessType }).accessType;
+  if (explicit) return explicit;
+  if (a.status === "Protected") return "protected";
+  if (a.status === "In Development") return "in-development";
+  // Public default — anything else with a notion / external URL is treated as public
+  if (a.group === "systems" || a.group === "tools") return "internal";
+  return "public";
 };
 
-// Meaningful sample page labels per artefact
-const samplePages: Record<string, string[]> = {
-  "md-1-fuel-system": [
-    "Matchday-minus-one structure",
-    "Carbohydrate loading & hydration",
-    "Familiar meals & practical checklist",
-  ],
-  "athlete-equivalent-bank": [
-    "Carbohydrate options",
-    "Protein options",
-    "Flexible substitutions",
-  ],
-  "abc-of-football-nutrition": [
-    "A — Athlete Fuel = Performance",
-    "B — Build Your Base",
-    "C — Care About Recovery",
-  ],
+const AccessIcon = ({
+  kind,
+  color,
+  className,
+}: {
+  kind: "globe" | "layers" | "lock" | "sparkle";
+  color: string;
+  className?: string;
+}) => {
+  const props = { className, style: { color } } as const;
+  if (kind === "globe") return <Globe {...props} />;
+  if (kind === "layers") return <Layers {...props} />;
+  if (kind === "lock") return <Lock {...props} />;
+  return <Sparkles {...props} />;
 };
+
+const Block = ({
+  label,
+  children,
+  accent,
+}: {
+  label: string;
+  children: React.ReactNode;
+  accent?: string;
+}) => (
+  <div
+    className="rounded-sm p-5 md:p-6"
+    style={{
+      background: "hsl(220 22% 8% / 0.55)",
+      border: `1px solid ${ivory(0.06)}`,
+    }}
+  >
+    <div className="flex items-center gap-2 mb-3">
+      <span
+        className="block w-4 h-px"
+        style={{ background: accent ?? ivory(0.3) }}
+      />
+      <p
+        className="text-[10px] tracking-[0.3em] uppercase font-display"
+        style={{ color: ivory(0.55) }}
+      >
+        {label}
+      </p>
+    </div>
+    <div
+      className="text-[13.5px] leading-relaxed"
+      style={{ color: ivory(0.78) }}
+    >
+      {children}
+    </div>
+  </div>
+);
 
 const ResourceModal = ({ artefact, onClose }: Props) => {
   const [name, setName] = useState("");
