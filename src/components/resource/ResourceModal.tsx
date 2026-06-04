@@ -83,11 +83,11 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
   const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     if (artefact) {
-      setName(""); setEmail(""); setMessage(""); setConsent(false); setSubmitted(false); setLoading(false); setLightboxIndex(null);
+      setName(""); setEmail(""); setMessage(""); setConsent(false); setSubmitted(false); setLoading(false); setShowForm(false);
       document.body.style.overflow = "hidden";
       const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
       window.addEventListener("keydown", onKey);
