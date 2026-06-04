@@ -331,6 +331,12 @@ export type AppliedPreviewKind =
   | "educationGrid"
   | "atlasBook";
 
+export type AppliedAccessType =
+  | "public"
+  | "internal"
+  | "protected"
+  | "in-development";
+
 export interface AppliedWorkObject extends Artefact {
   number: string;
   context: string;
@@ -342,7 +348,77 @@ export interface AppliedWorkObject extends Artefact {
   previewImage?: string;
   previewAlt?: string;
   previewObjectPosition?: string;
+  accessType?: AppliedAccessType;
+  positioningLine?: string;
 }
+
+export const accessMeta: Record<
+  AppliedAccessType,
+  {
+    label: string;
+    accent: string;            // primary accent hex (icon / text accent)
+    background: string;        // tinted background
+    border: string;            // muted border
+    ctaLabel: string;
+    accessNote: string;
+    panelTitle: string;
+    panelBody: string;
+    icon: "globe" | "layers" | "lock" | "sparkle";
+  }
+> = {
+  public: {
+    label: "Public Resource",
+    accent: "#7EA885",
+    background: "rgba(73, 115, 88, 0.12)",
+    border: "rgba(126, 168, 133, 0.28)",
+    ctaLabel: "Open collection",
+    accessNote:
+      "Shared openly as part of the GN education library.",
+    panelTitle: "Want to use this type of education?",
+    panelBody:
+      "Open resources are shared to make performance nutrition easier to understand and apply.",
+    icon: "globe",
+  },
+  internal: {
+    label: "Internal System",
+    accent: "#7E91AA",
+    background: "rgba(76, 96, 120, 0.12)",
+    border: "rgba(120, 145, 170, 0.25)",
+    ctaLabel: "Start a conversation",
+    accessNote:
+      "Built for applied performance environments and adaptable by context.",
+    panelTitle: "Interested in applying this type of system?",
+    panelBody:
+      "This can be discussed for teams, athletes, academies or performance environments.",
+    icon: "layers",
+  },
+  protected: {
+    label: "Protected Casework",
+    accent: "#C9A45C",
+    background: "rgba(162, 123, 55, 0.12)",
+    border: "rgba(206, 164, 83, 0.30)",
+    ctaLabel: "Request private walkthrough",
+    accessNote:
+      "This is protected casework. Details remain confidential. A private walkthrough can be requested when relevant.",
+    panelTitle: "Private walkthrough available by request.",
+    panelBody:
+      "This object represents confidential applied work. Details stay protected, but the structure can be discussed privately when relevant.",
+    icon: "lock",
+  },
+  "in-development": {
+    label: "In Development",
+    accent: "#D1A85A",
+    background: "rgba(187, 143, 67, 0.10)",
+    border: "rgba(210, 170, 90, 0.25)",
+    ctaLabel: "Register interest",
+    accessNote:
+      "This resource is being developed as part of the GN Performance Systems ecosystem.",
+    panelTitle: "Built as part of the GN Performance Systems ecosystem.",
+    panelBody:
+      "This concept is being developed into a future resource or product.",
+    icon: "sparkle",
+  },
+};
 
 export const appliedWorkObjects: AppliedWorkObject[] = [
   {
