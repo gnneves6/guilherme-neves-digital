@@ -75,13 +75,13 @@ const ProofCard = ({
             objectPosition={obj.previewObjectPosition}
             lazy
           />
-          {/* bottom fade into card body */}
+          {/* subtle bottom fade into card body */}
           <div
             aria-hidden
-            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 h-10 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to bottom, transparent, hsl(220 24% 6% / 0.9))",
+                "linear-gradient(to bottom, transparent, hsl(220 24% 6% / 0.55))",
             }}
           />
           {/* subtle pointer glare */}
