@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Lock, ArrowRight } from "lucide-react";
+import { Lock, ArrowRight, Globe, Layers, Sparkles } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import Scene from "@/components/motion/Scene";
 import ResourceModal from "@/components/resource/ResourceModal";
 import {
   appliedWorkObjects,
   statusMeta,
+  accessMeta,
   type Artefact,
   type AppliedWorkObject,
 } from "@/data/artefacts";
@@ -14,22 +15,38 @@ import AppliedPreview from "@/components/proof/AppliedPreviews";
 
 const ivory = (a: number) => `hsl(var(--ivory) / ${a})`;
 
+const AccessIcon = ({
+  kind,
+  color,
+  className,
+}: {
+  kind: "globe" | "layers" | "lock" | "sparkle";
+  color: string;
+  className?: string;
+}) => {
+  const props = { className, style: { color } } as const;
+  if (kind === "globe") return <Globe {...props} />;
+  if (kind === "layers") return <Layers {...props} />;
+  if (kind === "lock") return <Lock {...props} />;
+  return <Sparkles {...props} />;
+};
+
 const StatusBadge = ({ obj }: { obj: AppliedWorkObject }) => {
+  const meta = obj.accessType ? accessMeta[obj.accessType] : null;
   const s = statusMeta[obj.status];
-  const isProtected = obj.status === "Protected";
+  const accent = meta?.accent ?? s.dot;
+  const bg = meta?.background ?? ivory(0.04);
+  const border = meta?.border ?? ivory(0.08);
+  const iconKind = meta?.icon ?? (obj.status === "Protected" ? "lock" : "layers");
   return (
     <span
       className="inline-flex items-center gap-1.5 px-2 py-1 rounded-sm"
-      style={{ background: ivory(0.04), border: `1px solid ${ivory(0.08)}` }}
+      style={{ background: bg, border: `1px solid ${border}` }}
     >
-      {isProtected ? (
-        <Lock className="w-2.5 h-2.5" style={{ color: s.dot }} />
-      ) : (
-        <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
-      )}
+      <AccessIcon kind={iconKind} color={accent} className="w-2.5 h-2.5" />
       <span
         className="text-[9px] tracking-[0.22em] uppercase font-display"
-        style={{ color: ivory(0.7) }}
+        style={{ color: ivory(0.78) }}
       >
         {obj.statusBadge}
       </span>
