@@ -97,8 +97,8 @@ const ProofCard = ({
         </div>
 
         {/* Text content */}
-        <div className="p-7 md:p-8 flex flex-col flex-1">
-          <div className="flex items-center justify-between mb-5 gap-3">
+        <div className="p-5 md:p-6 flex flex-col flex-1">
+          <div className="flex items-center justify-between mb-3 gap-3">
             <span
               className="text-[10px] tracking-[0.3em] font-display"
               style={{ color: ivory(0.45) }}
@@ -109,28 +109,28 @@ const ProofCard = ({
           </div>
 
           <h3
-            className="font-display font-semibold leading-tight text-xl md:text-2xl"
+            className="font-display font-semibold leading-tight text-lg md:text-xl"
             style={{ color: ivory(0.95) }}
           >
             {obj.title}
           </h3>
 
           <p
-            className="text-[10px] tracking-[0.22em] uppercase font-display mt-3"
+            className="text-[10px] tracking-[0.22em] uppercase font-display mt-2"
             style={{ color: "hsl(var(--accent) / 0.85)" }}
           >
             {obj.context}
           </p>
 
           <p
-            className="text-sm mt-4 leading-relaxed"
+            className="text-[13px] mt-3 leading-relaxed"
             style={{ color: ivory(0.7) }}
           >
             {obj.description}
           </p>
 
           <span
-            className="inline-flex items-center gap-2 mt-auto pt-8 text-xs font-display tracking-[0.18em] uppercase opacity-75 group-hover:opacity-100 transition-all duration-500"
+            className="inline-flex items-center gap-2 mt-auto pt-5 text-[11px] font-display tracking-[0.18em] uppercase opacity-75 group-hover:opacity-100 transition-all duration-500"
             style={{ color: ivory(0.85) }}
           >
             {obj.status === "Protected" && (
@@ -226,10 +226,10 @@ const SelectedArtefactsSection = () => {
           </Reveal>
         </div>
 
-        {/* Unified grid — 2 columns × 3 rows on desktop, 1 column on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+        {/* Unified grid — 3 columns × 2 rows on desktop, 2 on tablet, 1 on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {appliedWorkObjects.map((obj, i) => (
-            <Reveal key={obj.slug} delay={(i % 2) * 0.06}>
+            <Reveal key={obj.slug} delay={(i % 3) * 0.06}>
               <ProofCard obj={obj} onOpen={setOpen} />
             </Reveal>
           ))}
