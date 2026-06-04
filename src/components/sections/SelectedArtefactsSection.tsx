@@ -66,8 +66,8 @@ const ProofCard = ({
       </div>
 
       <div className="flex flex-col h-full">
-        {/* Preview area — top, ~55% of card height via aspect ratio */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden">
+        {/* Preview area — taller so the full image shows crisp at 3-col widths */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
           <AppliedPreview
             kind={obj.appliedPreview}
             previewImage={obj.previewImage}
@@ -75,13 +75,13 @@ const ProofCard = ({
             objectPosition={obj.previewObjectPosition}
             lazy
           />
-          {/* subtle bottom fade into card body */}
+          {/* bottom fade into card body */}
           <div
             aria-hidden
-            className="absolute inset-x-0 bottom-0 h-10 pointer-events-none"
+            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to bottom, transparent, hsl(220 24% 6% / 0.55))",
+                "linear-gradient(to bottom, transparent, hsl(220 24% 6% / 0.9))",
             }}
           />
           {/* subtle pointer glare */}
