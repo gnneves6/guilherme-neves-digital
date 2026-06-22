@@ -22,7 +22,7 @@ const InvitationSection = () => {
               className="font-display text-[10px] md:text-[11px] tracking-[0.4em] uppercase"
               style={{ color: "hsl(var(--olive))" }}
             >
-              06
+              07
             </span>
             <span className="h-px w-6" style={{ background: "hsl(var(--olive) / 0.45)" }} />
             <p className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-display opacity-60">
@@ -37,12 +37,12 @@ const InvitationSection = () => {
         </Reveal>
         <Reveal delay={0.25}>
           <p className="text-body-lg max-w-xl mx-auto mt-5">
-            For clubs, academies, athletes and performance environments
-            where clarity matters.
+            For clubs, academies and performance environments
+            looking for systems that hold under real conditions.
           </p>
         </Reveal>
         <Reveal delay={0.4}>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-12">
+          <div className="flex justify-center mt-12">
             <Magnetic strength={8} as="span">
               <Link
                 to="/contact"
@@ -51,23 +51,12 @@ const InvitationSection = () => {
                 Start a Conversation
               </Link>
             </Magnetic>
-            <Magnetic strength={8} as="span">
-              <Link
-                to="/work"
-                className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
-              >
-                View Resource Vault
-              </Link>
-            </Magnetic>
-            <Magnetic strength={8} as="span">
-              <Link
-                to="/work#fuelops-ai"
-                className="inline-flex items-center justify-center px-10 py-4 border border-border/60 font-display text-sm font-medium tracking-wide hover:border-foreground/40 transition-all duration-500 hover:tracking-wider"
-              >
-                Join FuelOps Early Access
-              </Link>
-            </Magnetic>
           </div>
+        </Reveal>
+        <Reveal delay={0.55}>
+          <p className="mt-10 text-[10px] tracking-[0.35em] uppercase font-display opacity-40">
+            GN Performance Systems — Porto · Brussels
+          </p>
         </Reveal>
       </div>
     </Scene>
