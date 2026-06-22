@@ -3,6 +3,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
 import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSection";
+import SystemsBridgeSection from "@/components/sections/SystemsBridgeSection";
 import TheMethodSection from "@/components/sections/TheMethodSection";
 import InvitationSection from "@/components/sections/InvitationSection";
 import ScrollProgress from "@/components/motion/ScrollProgress";
@@ -22,6 +23,7 @@ const Index = () => {
       <EnvironmentsSection />
       <FromWithinBridge />
       <SelectedArtefactsSection />
+      <SystemsBridgeSection />
       <TheMethodSection />
       <InvitationSection />
     </Layout>

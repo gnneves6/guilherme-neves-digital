@@ -10,6 +10,7 @@ type Service = {
   problem: string;
   audience: string;
   outcomes: string[];
+  deliverables: string[];
   cta: string;
   flagship?: boolean;
 };
@@ -31,6 +32,12 @@ const services: Service[] = [
       "Prioritised recommendations the staff can actually act on",
       "A written systems review document for internal use",
     ],
+    deliverables: [
+      "On-site and remote diagnostic across 4–6 weeks",
+      "Stakeholder interviews across performance, medical, catering and player groups",
+      "Written systems review document and executive summary",
+      "Closing presentation with prioritised roadmap",
+    ],
     cta: "Request the audit overview",
     flagship: true,
   },
@@ -50,6 +57,12 @@ const services: Service[] = [
       "Hydration, body composition and recovery touchpoints",
       "Clear ownership: who does what, when, and how it is tracked",
     ],
+    deliverables: [
+      "Quarterly or season-long retained partnership",
+      "Custom matchday, travel and training-week frameworks",
+      "Athlete-facing tools and staff playbooks",
+      "Recurring review cycles and adjustments",
+    ],
     cta: "Discuss a partnership",
   },
   {
@@ -67,6 +80,12 @@ const services: Service[] = [
       "Tools and visuals designed for retention, not slides",
       "A shared internal vocabulary around fuelling decisions",
       "Follow-up material the environment continues to use",
+    ],
+    deliverables: [
+      "Single sessions or multi-session programmes",
+      "Audience-specific content for athletes, staff or parents",
+      "Printable and digital follow-up materials",
+      "Optional integration with an ongoing systems engagement",
     ],
     cta: "Plan a programme",
   },
@@ -87,14 +106,45 @@ const principles = [
   },
 ];
 
+const processSteps = [
+  {
+    label: "Discover",
+    text: "Understand the environment, the people, the constraints and the real question behind the brief.",
+  },
+  {
+    label: "Audit",
+    text: "Map the current nutrition operation across performance, medical, catering and athlete touchpoints.",
+  },
+  {
+    label: "Design",
+    text: "Build the system — frameworks, tools, ownership — to fit the environment, not the textbook.",
+  },
+  {
+    label: "Implementation",
+    text: "Embed the system on the floor, with staff and athletes, through real training weeks.",
+  },
+  {
+    label: "Review",
+    text: "Measure adherence, surface friction, refine. Systems are revisited, not handed over and forgotten.",
+  },
+];
+
+const ecosystem = [
+  { label: "Applied Work", state: "Live", to: "/work", note: "Proof objects from real environments." },
+  { label: "Consulting", state: "Live", to: "/services", note: "Strategic engagements for organisations." },
+  { label: "Resources", state: "Live", to: "/work", note: "Public tools originated from applied work." },
+  { label: "Technology", state: "In Development", to: null, note: "FuelOps — operating tools for performance staff." },
+  { label: "Research", state: "Future", to: null, note: "Field-driven applied performance nutrition research." },
+];
+
 const Services = () => {
   return (
     <Layout>
-      {/* Hero */}
+      {/* Hero — Why */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Services</p>
+            <p className="text-caption mb-6">Consulting · GN Performance Systems</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-5xl">
@@ -109,6 +159,19 @@ const Services = () => {
               paper?
             </p>
           </Reveal>
+          <Reveal delay={0.35}>
+            <div className="mt-10 flex items-center gap-6 flex-wrap">
+              <Link
+                to="/work"
+                className="text-sm font-display tracking-wide link-underline"
+              >
+                View the applied work this is built on →
+              </Link>
+              <span className="text-caption text-[10px] text-muted-foreground">
+                Porto / Brussels · By invitation & enquiry
+              </span>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -120,7 +183,7 @@ const Services = () => {
       <section className="section-padding section-spacing-sm">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-10">How the work is approached</p>
+            <p className="text-caption mb-10">01 — Philosophy</p>
           </Reveal>
           <div className="grid md:grid-cols-3 gap-10 md:gap-12">
             {principles.map((p, i) => (
@@ -147,7 +210,7 @@ const Services = () => {
         <div className="max-content space-y-10 md:space-y-14">
           <Reveal>
             <div className="flex items-baseline justify-between gap-6 flex-wrap">
-              <p className="text-caption">Engagements</p>
+              <p className="text-caption">02 — Strategic Engagements</p>
               <p className="text-caption text-[10px] text-muted-foreground">
                 Three offerings · By invitation & enquiry
               </p>
@@ -194,16 +257,29 @@ const Services = () => {
                         </div>
                       </div>
 
-                      <div className="space-y-3">
-                        <p className="text-caption text-[10px]">Expected outcomes</p>
-                        <ul className="space-y-2">
-                          {s.outcomes.map((o) => (
-                            <li key={o} className="flex gap-3 text-body text-sm">
-                              <span className="mt-2 h-px w-4 bg-foreground/40 shrink-0" />
-                              <span>{o}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="grid md:grid-cols-2 gap-8 md:gap-10">
+                        <div className="space-y-3">
+                          <p className="text-caption text-[10px]">Expected outcomes</p>
+                          <ul className="space-y-2">
+                            {s.outcomes.map((o) => (
+                              <li key={o} className="flex gap-3 text-body text-sm">
+                                <span className="mt-2 h-px w-4 bg-foreground/40 shrink-0" />
+                                <span>{o}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="space-y-3">
+                          <p className="text-caption text-[10px]">Deliverables</p>
+                          <ul className="space-y-2">
+                            {s.deliverables.map((d) => (
+                              <li key={d} className="flex gap-3 text-body text-sm">
+                                <span className="mt-2 h-px w-4 bg-foreground/40 shrink-0" />
+                                <span>{d}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
 
                       <div className="pt-2">
@@ -229,13 +305,110 @@ const Services = () => {
         </div>
       </section>
 
+      <div className="section-padding max-content">
+        <div className="divider" />
+      </div>
+
+      {/* Process */}
+      <section className="section-padding section-spacing-sm">
+        <div className="max-content">
+          <Reveal>
+            <div className="flex items-baseline justify-between gap-6 flex-wrap mb-12">
+              <p className="text-caption">03 — How Collaboration Works</p>
+              <p className="text-caption text-[10px] text-muted-foreground">
+                A consulting process, not a service menu
+              </p>
+            </div>
+          </Reveal>
+          <ol className="grid md:grid-cols-5 gap-6 md:gap-4">
+            {processSteps.map((step, i) => (
+              <Reveal key={step.label} delay={i * 0.06}>
+                <li className="relative pt-6 md:pt-8 border-t border-border/60">
+                  <span className="absolute top-0 left-0 -translate-y-1/2 bg-background pr-3 text-caption text-[10px]">
+                    0{i + 1}
+                  </span>
+                  <h3 className="font-display text-base md:text-lg font-medium text-foreground tracking-tight">
+                    {step.label}
+                  </h3>
+                  <p className="text-body text-sm mt-3 leading-relaxed">
+                    {step.text}
+                  </p>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <div className="section-padding max-content">
+        <div className="divider" />
+      </div>
+
+      {/* Ecosystem */}
+      <section className="section-padding section-spacing-sm">
+        <div className="max-content">
+          <Reveal>
+            <div className="flex items-baseline justify-between gap-6 flex-wrap mb-3">
+              <p className="text-caption">04 — The Wider Ecosystem</p>
+              <p className="text-caption text-[10px] text-muted-foreground">
+                GN Performance Systems
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="text-body-lg max-w-2xl mb-12">
+              Consulting is one layer of a longer-term ecosystem — applied work
+              feeds public resources, operational tools and field-driven
+              research.
+            </p>
+          </Reveal>
+
+          <div className="divide-y divide-border/60 border-y border-border/60">
+            {ecosystem.map((e, i) => {
+              const inner = (
+                <div className="grid grid-cols-[40px,1fr,auto] md:grid-cols-[60px,220px,1fr,140px] items-center gap-4 md:gap-8 py-6 md:py-7 group">
+                  <span className="text-caption text-[10px] tabular-nums">0{i + 1}</span>
+                  <h3 className="font-display text-lg md:text-xl font-medium text-foreground tracking-tight">
+                    {e.label}
+                  </h3>
+                  <p className="text-body text-sm hidden md:block">{e.note}</p>
+                  <span
+                    className={`text-caption text-[10px] md:text-right ${
+                      e.state === "Live"
+                        ? "text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {e.state}
+                    {e.to && (
+                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    )}
+                  </span>
+                </div>
+              );
+              return (
+                <Reveal key={e.label} delay={i * 0.04}>
+                  {e.to ? (
+                    <Link to={e.to} className="block hover:bg-card/40 transition-colors duration-300 -mx-4 px-4">
+                      {inner}
+                    </Link>
+                  ) : (
+                    <div className="-mx-4 px-4">{inner}</div>
+                  )}
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Closing callout — full-width dark */}
       <section className="section-dark relative overflow-hidden">
         <div className="scene-grain absolute inset-0 pointer-events-none" />
         <div className="section-padding section-spacing relative">
           <div className="max-content">
             <Reveal>
-              <p className="text-caption mb-10">A closing note</p>
+              <p className="text-caption mb-10">05 — Invitation</p>
             </Reveal>
             <Reveal delay={0.1}>
               <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight max-w-5xl text-[hsl(var(--ivory))]">
