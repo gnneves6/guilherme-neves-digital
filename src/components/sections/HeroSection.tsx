@@ -178,7 +178,7 @@ const HeroSection = () => {
                 className="group inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
                 style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
               >
-                Explore the Resource Vault
+                View Applied Work
               </Link>
             </Magnetic>
             <Magnetic strength={8} as="span">
