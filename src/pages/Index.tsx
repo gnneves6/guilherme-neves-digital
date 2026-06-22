@@ -5,6 +5,7 @@ import FromWithinBridge from "@/components/sections/FromWithinBridge";
 import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSection";
 import SystemsBridgeSection from "@/components/sections/SystemsBridgeSection";
 import TheMethodSection from "@/components/sections/TheMethodSection";
+import SystemsArchitectureSection from "@/components/sections/SystemsArchitectureSection";
 import InvitationSection from "@/components/sections/InvitationSection";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import PointerField from "@/components/journey/PointerField";
@@ -25,6 +26,7 @@ const Index = () => {
       <SelectedArtefactsSection />
       <SystemsBridgeSection />
       <TheMethodSection />
+      <SystemsArchitectureSection />
       <InvitationSection />
     </Layout>
     </PointerField>
