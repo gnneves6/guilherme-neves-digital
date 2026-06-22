@@ -5,9 +5,9 @@ import Chapter from "@/components/motion/Chapter";
 import SplitReveal from "@/components/motion/SplitReveal";
 
 const pillars = [
-  { num: "01", label: "Lived Sport" },
-  { num: "02", label: "Nutrition Science" },
-  { num: "03", label: "Practical Systems" },
+  { num: "01", label: "Diagnostic" },
+  { num: "02", label: "Translation" },
+  { num: "03", label: "Embedded Systems" },
 ];
 
 const FromWithinBridge = () => {
@@ -38,12 +38,12 @@ const FromWithinBridge = () => {
         <Reveal>
           <Chapter
             number="03"
-            title="From lived sport to usable systems."
+            title="The Practice."
             tone="light"
             className="mb-10 md:mb-14"
             meta={
               <p className="text-[10px] tracking-[0.3em] uppercase font-display opacity-40">
-                Bridge
+                Thesis
               </p>
             }
           />
@@ -53,7 +53,7 @@ const FromWithinBridge = () => {
           <Reveal>
             <div>
               <SplitReveal
-                text={"From lived sport\nto usable systems."}
+                text={"Performance nutrition,\nstructured as a system."}
                 as="h2"
                 splitBy="line"
                 stagger={0.12}
@@ -63,16 +63,17 @@ const FromWithinBridge = () => {
                 className="mt-6 md:mt-8 font-sans text-base md:text-lg leading-relaxed max-w-xl"
                 style={{ color: "hsl(var(--foreground) / 0.78)" }}
               >
-                Before I studied performance, I lived the routine: training,
-                competition, recovery, pressure and the small decisions that
-                shape consistency.
+                Most performance nutrition fails not because the science is wrong,
+                but because the delivery is fragile. The practice exists to close
+                that gap — turning evidence into structures that staff, athletes
+                and organisations can actually run.
               </p>
               <p
                 className="mt-4 font-display italic text-base md:text-lg max-w-xl"
                 style={{ color: "hsl(var(--foreground) / 0.6)" }}
               >
-                This is where lived sport, nutrition science and practical
-                systems meet.
+                Diagnose the environment. Translate the science. Embed it
+                quietly inside the daily routine.
               </p>
             </div>
           </Reveal>
@@ -111,7 +112,7 @@ const FromWithinBridge = () => {
 
         <Reveal delay={0.3}>
           <p className="mt-12 md:mt-16 text-[11px] tracking-[0.3em] uppercase font-display opacity-50">
-            Athlete by nature · Nutritionist by purpose
+            Diagnostic before prescription · Built for the floor
           </p>
         </Reveal>
       </motion.div>
