@@ -23,38 +23,86 @@ const awards = [
 const About = () => {
   return (
     <Layout>
-      {/* Hero */}
+      {/* The Practice */}
+      <section className="section-padding section-spacing">
+        <div className="max-content">
+          <Reveal>
+            <p className="text-caption mb-6">The Practice</p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="text-display max-w-4xl">
+              A practice built where sport, science and systems meet.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.25}>
+            <p className="text-body-lg max-w-2xl mt-8">
+              GN Performance Systems is a performance nutrition practice for
+              high-performance environments. The work is not about giving advice —
+              it is about translating science into systems that survive a real
+              training week, a competition block, a travel day.
+            </p>
+          </Reveal>
+          <Reveal delay={0.35}>
+            <p className="text-body max-w-2xl mt-4">
+              Three disciplines hold the practice together: diagnosis of the
+              environment as it actually operates, translation of evidence into
+              decisions a staff can use, and embedded systems that keep nutrition
+              consistent when intensity rises.
+            </p>
+          </Reveal>
+          <Reveal delay={0.45}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 mt-12 max-w-3xl">
+              {[
+                { k: "01", t: "Diagnosis", d: "Read the environment before prescribing." },
+                { k: "02", t: "Translation", d: "Convert evidence into operable decisions." },
+                { k: "03", t: "Systems", d: "Build structures that hold under pressure." },
+              ].map((p) => (
+                <div key={p.k} className="bg-background p-6">
+                  <p className="text-caption text-[10px] mb-3">{p.k}</p>
+                  <p className="font-display text-base font-medium text-foreground mb-2">{p.t}</p>
+                  <p className="text-body text-sm">{p.d}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <div className="section-padding max-content">
+        <div className="divider" />
+      </div>
+
+      {/* The Principal */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <div className="grid md:grid-cols-[1fr,340px] lg:grid-cols-[1fr,400px] gap-12 md:gap-16 items-start">
             <div>
               <Reveal>
-                <p className="text-caption mb-6">About</p>
+                <p className="text-caption mb-6">The Principal</p>
               </Reveal>
               <Reveal delay={0.1}>
-                <h1 className="text-display max-w-4xl">
-                  Athlete by nature. Nutritionist by purpose.
-                </h1>
+                <h2 className="text-headline max-w-3xl">
+                  Guilherme Neves leads the practice.
+                </h2>
               </Reveal>
-              <Reveal delay={0.25}>
-                <p className="text-body-lg max-w-2xl mt-8">
-                  I am a 21-year-old final-year Nutrition Sciences student at FCNAUP
-                  (University of Porto), currently completing my curricular internship
-                  in Performance Nutrition at RSC Anderlecht.
+              <Reveal delay={0.2}>
+                <p className="text-body-lg max-w-2xl mt-6">
+                  A final-year Nutrition Sciences student at FCNAUP — University
+                  of Porto, currently embedded in Performance Nutrition at
+                  RSC Anderlecht as part of his curricular internship.
                 </p>
               </Reveal>
-              <Reveal delay={0.35}>
+              <Reveal delay={0.3}>
                 <p className="text-body max-w-2xl mt-4">
-                  My work sits at the intersection of science, sport and real-life application.
-                  I am especially interested in football environments, where nutrition must go
-                  beyond theory and become something athletes can actually use in training,
-                  competition and recovery.
+                  His perspective comes from inside sport. Years lived across
+                  competitive disciplines shape how he reads environments,
+                  designs interventions and earns the trust of athletes and staff.
+                  The practice carries that perspective into every engagement.
                 </p>
               </Reveal>
-              <Reveal delay={0.45}>
-                <p className="text-body max-w-2xl mt-4">
-                  Having lived sport from the inside across multiple disciplines, I approach
-                  nutrition as a performance tool built on clarity, consistency, adaptation and trust.
+              <Reveal delay={0.4}>
+                <p className="text-caption text-[10px] mt-8">
+                  21 · Porto — Brussels
                 </p>
               </Reveal>
             </div>
@@ -73,49 +121,11 @@ const About = () => {
                   />
                 </div>
                 <div className="absolute -bottom-3 -left-3 bg-background px-3 py-1.5">
-                  <p className="text-caption text-[10px]">Guilherme Neves — Porto / Brussels</p>
+                  <p className="text-caption text-[10px]">Guilherme Neves — Principal</p>
                 </div>
               </div>
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      <div className="section-padding max-content">
-        <div className="divider" />
-      </div>
-
-      {/* Why this work matters */}
-      <section className="section-padding section-spacing">
-        <div className="max-content grid md:grid-cols-2 gap-16">
-          <Reveal>
-            <div>
-              <p className="text-caption mb-6">Why This Work Matters</p>
-              <h2 className="text-headline">
-                Nutrition knowledge only matters when it translates into action.
-              </h2>
-            </div>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="space-y-6">
-              <p className="text-body-lg">
-                Most athletes don't lack information — they lack usable systems.
-                The gap between knowing what to eat and consistently doing it under
-                pressure, fatigue and competition demands is where real performance
-                nutrition lives.
-              </p>
-              <p className="text-body-lg">
-                I focus on closing that gap. Every resource, tool and system I build
-                exists to make nutrition practical, repeatable and genuinely useful
-                in the environments where it matters most.
-              </p>
-              <p className="text-body">
-                This isn't about perfection or trend-chasing. It's about building things
-                that survive the real complexity of training weeks, match days, travel
-                and the human reality of being an athlete.
-              </p>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -306,12 +316,13 @@ const About = () => {
         <div className="max-content text-center">
           <Reveal>
             <h2 className="text-headline max-w-2xl mx-auto">
-              Interested in working together?
+              Considering an engagement?
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-md mx-auto mt-4">
-              I'm always open to meaningful conversations about performance, education and applied sport nutrition.
+              The practice opens a limited number of conversations each season
+              with organisations and staff serious about performance nutrition.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
@@ -319,7 +330,7 @@ const About = () => {
               to="/contact"
               className="inline-flex items-center justify-center mt-8 px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
             >
-              Get in Touch
+              Enquire about an engagement
             </Link>
           </Reveal>
         </div>
