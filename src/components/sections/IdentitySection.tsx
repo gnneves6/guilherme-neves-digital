@@ -36,7 +36,7 @@ const IdentitySection = () => {
                 to="/about"
                 className="inline-block mt-8 text-body text-sm link-underline hover:text-foreground transition-colors"
               >
-                More about me →
+                Read the practice →
               </Link>
             </Reveal>
           </div>
