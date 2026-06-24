@@ -9,7 +9,8 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    organisation: "",
+    engagementType: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -21,13 +22,20 @@ const Contact = () => {
     setLoading(true);
     setError(null);
 
+    const subjectLine = [
+      formData.organisation.trim() && `Organisation: ${formData.organisation.trim()}`,
+      formData.engagementType.trim() && `Engagement: ${formData.engagementType.trim()}`,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
     const payload = {
       created_at: new Date().toISOString(),
       name: formData.name.trim().slice(0, 100),
       email: formData.email.trim().slice(0, 255),
-      subject: formData.subject.trim().slice(0, 200),
+      subject: subjectLine.slice(0, 200),
       message: formData.message.trim().slice(0, 2000),
-      source_page: "contact",
+      source_page: "engagement-enquiry",
     };
 
     try {
@@ -46,15 +54,16 @@ const Contact = () => {
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Contact</p>
+            <p className="text-caption mb-6">Chapter 04 — Engagement</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">Let's connect.</h1>
+            <h1 className="text-display max-w-4xl">Enquire about an engagement.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              Open to meaningful opportunities in performance environments, educational
-              systems and applied sport nutrition projects. If there's alignment, let's talk.
+              GN Performance Systems works with a small number of organisations at a time.
+              A short note about the environment and what you're trying to solve is the
+              best place to start a conversation.
             </p>
           </Reveal>
         </div>
@@ -74,13 +83,15 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="py-20 text-center"
               >
-                <h2 className="text-headline mb-4">Message sent.</h2>
-                <p className="text-body-lg">Thank you. I'll get back to you soon.</p>
+                <h2 className="text-headline mb-4">Enquiry received.</h2>
+                <p className="text-body-lg">
+                  Thank you. You'll get a reply within a few working days.
+                </p>
                 <button
                   onClick={() => setSubmitted(false)}
                   className="mt-8 text-body text-sm link-underline hover:text-foreground transition-colors"
                 >
-                  Send another message
+                  Send another enquiry
                 </button>
               </motion.div>
             ) : (
@@ -112,19 +123,36 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-caption text-xs">Subject</label>
+                  <label className="text-caption text-xs">Organisation</label>
                   <input
                     type="text"
-                    value={formData.subject}
+                    value={formData.organisation}
                     onChange={(e) =>
-                      setFormData({ ...formData, subject: e.target.value })
+                      setFormData({ ...formData, organisation: e.target.value })
                     }
                     className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300 placeholder:text-muted-foreground/40"
-                    placeholder="What's this about?"
+                    placeholder="Club, federation, academy, company"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-caption text-xs">Message</label>
+                  <label className="text-caption text-xs">Type of engagement</label>
+                  <select
+                    value={formData.engagementType}
+                    onChange={(e) =>
+                      setFormData({ ...formData, engagementType: e.target.value })
+                    }
+                    className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300"
+                  >
+                    <option value="">Select one</option>
+                    <option value="Embedded engagement">Embedded engagement</option>
+                    <option value="Diagnostic / audit">Diagnostic / audit</option>
+                    <option value="Education programme">Education programme</option>
+                    <option value="Advisory">Advisory</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-caption text-xs">Context</label>
                   <textarea
                     required
                     rows={5}
@@ -133,7 +161,7 @@ const Contact = () => {
                       setFormData({ ...formData, message: e.target.value })
                     }
                     className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300 resize-none placeholder:text-muted-foreground/40"
-                    placeholder="Tell me about your project or opportunity..."
+                    placeholder="A few lines about the environment, the people involved, and what you'd like to solve."
                   />
                 </div>
                 {error && (
@@ -146,7 +174,7 @@ const Contact = () => {
                   whileHover={loading ? {} : { y: -1 }}
                   whileTap={loading ? {} : { scale: 0.98 }}
                 >
-                  {loading ? "Sending..." : "Send Message"}
+                  {loading ? "Sending..." : "Send enquiry"}
                 </motion.button>
               </form>
             )}
@@ -156,47 +184,32 @@ const Contact = () => {
           <Reveal delay={0.2}>
             <div className="space-y-12">
               <div className="space-y-4">
-                <p className="text-caption">Email</p>
+                <p className="text-caption">Direct</p>
                 <a
                   href={`mailto:${LINKS.EMAIL}`}
                   className="text-body-lg link-underline hover:text-foreground transition-colors"
                 >
                   {LINKS.EMAIL}
                 </a>
+                <p className="text-body text-sm">
+                  For organisations that prefer email over the form above.
+                </p>
               </div>
               <div className="space-y-4">
-                <p className="text-caption">Phone</p>
+                <p className="text-caption">Professional</p>
                 <a
-                  href="tel:+351936071216"
+                  href={LINKS.LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-body-lg link-underline hover:text-foreground transition-colors"
                 >
-                  +351 936 071 216
+                  LinkedIn ↗
                 </a>
               </div>
               <div className="space-y-4">
-                <p className="text-caption">Social</p>
-                <div className="flex flex-col gap-3">
-                  {[
-                    { label: "LinkedIn", href: LINKS.LINKEDIN_URL },
-                    { label: "Linktree", href: LINKS.LINKTREE_URL },
-                  ].map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-body-lg link-underline w-fit hover:text-foreground transition-colors group flex items-center gap-2"
-                    >
-                      {link.label}
-                      <span className="text-xs opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-300">↗</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-4">
-                <p className="text-caption">Location</p>
-                <p className="text-body-lg">From Porto, Portugal · Currently in Brussels, Belgium</p>
-                <p className="text-body text-sm">Open to international opportunities.</p>
+                <p className="text-caption">Based</p>
+                <p className="text-body-lg">Porto · Brussels</p>
+                <p className="text-body text-sm">Working with organisations internationally.</p>
               </div>
             </div>
           </Reveal>
