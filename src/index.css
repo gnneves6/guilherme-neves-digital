@@ -171,7 +171,13 @@
 
   .divider {
     @apply w-full h-px;
-    background: hsl(var(--subtle-border));
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--subtle-border)) 18%,
+      hsl(var(--subtle-border)) 82%,
+      transparent
+    );
   }
 
   /* Film grain overlay */
@@ -202,7 +208,13 @@
   }
 
   .section-dark .divider {
-    background: hsl(var(--ivory) / 0.08);
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--ivory) / 0.1) 18%,
+      hsl(var(--ivory) / 0.1) 82%,
+      transparent
+    );
   }
 
   /* Scene tones */
