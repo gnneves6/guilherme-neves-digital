@@ -207,13 +207,16 @@ const Work = () => {
             <p className="text-caption mb-6">Work</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">Selected proof. Protected depth.</h1>
+            <h1 className="text-display max-w-4xl">
+              Applied work from inside performance environments.
+            </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="text-body-lg max-w-xl mt-6">
-              A curated archive of applied resources, frameworks and tools.
-              Public artefacts are open. Protected work exists as proof —
-              accessible on request. In-development tools accept early interest.
+            <p className="text-body-lg max-w-xl mt-8">
+              A curated archive of resources, frameworks and tools developed
+              inside real engagements. Public artefacts are open. Protected work
+              exists as proof — accessible on request. In-development tools accept
+              early interest.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
@@ -328,16 +331,16 @@ const Work = () => {
         <div className="max-content text-center">
           <Reveal>
             <p className="text-body-lg max-w-md mx-auto">
-              Building a performance environment? Some of these resources are
-              shared on request.
+              Building a performance environment? Some of this work is shared
+              on request as part of an engagement conversation.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
             <Link
               to="/contact"
-              className="group inline-flex items-center justify-center mt-8 px-12 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+              className="group inline-flex items-center justify-center mt-8 px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
             >
-              Get in Touch
+              Enquire about an engagement
             </Link>
           </Reveal>
         </div>
