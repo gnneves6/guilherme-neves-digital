@@ -8,14 +8,14 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between gap-12">
           <div className="space-y-3 max-w-sm">
             <p className="font-display text-lg font-semibold text-foreground">
-              Guilherme Neves
+              GN Performance Systems
             </p>
             <p className="text-body text-sm">
-              Practical nutrition systems, educational tools and applied resources
-              for real sporting environments.
+              A practice for high-performance environments — diagnosis, translation
+              and embedded nutrition systems.
             </p>
             <p className="text-caption text-[10px] font-normal mt-4">
-              From Porto, Portugal · Currently in Brussels, Belgium
+              Porto · Brussels
             </p>
           </div>
 
@@ -28,7 +28,6 @@ const Footer = () => {
                   { label: "About", path: "/about" },
                   { label: "Work", path: "/work" },
                   { label: "Services", path: "/services" },
-                  { label: "GN Fuel Laws", path: "/fuel-laws" },
                   { label: "Contact", path: "/contact" },
                 ].map((item) => (
                   <Link
@@ -58,14 +57,6 @@ const Footer = () => {
                   className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"
                 >
                   LinkedIn
-                </a>
-                <a
-                  href={LINKS.LINKTREE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-body text-sm link-underline w-fit hover:text-foreground transition-colors"
-                >
-                  Linktree
                 </a>
               </div>
             </div>
