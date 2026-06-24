@@ -204,7 +204,7 @@ const Work = () => {
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Resource Vault</p>
+            <p className="text-caption mb-6">Work</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">Selected proof. Protected depth.</h1>
