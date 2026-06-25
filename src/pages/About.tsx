@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import portraitImg from "@/assets/guilherme-portrait.jpg";
 
@@ -23,6 +24,7 @@ const awards = [
 const About = () => {
   return (
     <Layout>
+      <SEO title="About — GN Performance Systems" description="The practice and the principal: diagnosis, translation and embedded nutrition systems by Guilherme Neves." path="/about" />
       {/* The Practice */}
       <section className="section-padding section-spacing">
         <div className="max-content">

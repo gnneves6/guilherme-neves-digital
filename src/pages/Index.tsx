@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import HeroSection from "@/components/sections/HeroSection";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
@@ -14,6 +15,7 @@ const Index = () => {
   return (
     <PointerField>
     <Layout>
+      <SEO title="Guilherme Neves — GN Performance Systems" description="Embedded performance nutrition for clubs, federations and athletes. Diagnosis, translation and applied systems." path="/" />
       <ScrollProgress />
       {/*
         Cinematic 6-scene journey — POV camera, no hard dividers.
