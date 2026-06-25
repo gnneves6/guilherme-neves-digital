@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 
 type Service = {
@@ -140,6 +141,7 @@ const ecosystem = [
 const Services = () => {
   return (
     <Layout>
+      <SEO title="Services — GN Performance Systems" description="Embedded engagements, diagnostics, education programmes and advisory for high-performance environments." path="/services" />
       {/* Hero — Why */}
       <section className="section-padding section-spacing">
         <div className="max-content">

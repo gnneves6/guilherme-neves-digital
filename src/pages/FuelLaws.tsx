@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 
 const laws = [
@@ -88,6 +89,7 @@ const FuelLaws = () => {
 
   return (
     <Layout>
+      <SEO title="GN Fuel Laws — Performance Nutrition Principles" description="Ten applied principles that frame how we fuel for performance." path="/fuel-laws" />
       {/* Header */}
       <section className="section-padding section-spacing">
         <div className="max-content">

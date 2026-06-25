@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import ResourceModal from "@/components/resource/ResourceModal";
 import {
@@ -201,6 +202,7 @@ const Work = () => {
 
   return (
     <Layout>
+      <SEO title="Work — GN Performance Systems" description="Applied resources, frameworks and tools developed inside real performance engagements." path="/work" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
