@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import { LINKS } from "@/data/links";
 import { supabase } from "@/integrations/supabase/client";
@@ -51,6 +52,7 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEO title="Engagement Enquiry — GN Performance Systems" description="Enquire about an embedded engagement, diagnostic, education programme or advisory." path="/contact" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
