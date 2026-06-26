@@ -107,15 +107,19 @@ const Scene = ({
       {fadeTopFrom && (
         <div
           aria-hidden
-          className="absolute top-0 left-0 right-0 h-32 z-[2] pointer-events-none"
-          style={{ background: `linear-gradient(to bottom, ${fadeTopFrom}, transparent)` }}
+          className="absolute top-0 left-0 right-0 h-56 md:h-72 z-[2] pointer-events-none"
+          style={{
+            background: `linear-gradient(to bottom, ${fadeTopFrom} 0%, ${fadeTopFrom} 18%, transparent 100%)`,
+          }}
         />
       )}
       {fadeBottomTo && (
         <div
           aria-hidden
-          className="absolute bottom-0 left-0 right-0 h-32 z-[2] pointer-events-none"
-          style={{ background: `linear-gradient(to bottom, transparent, ${fadeBottomTo})` }}
+          className="absolute bottom-0 left-0 right-0 h-56 md:h-72 z-[2] pointer-events-none"
+          style={{
+            background: `linear-gradient(to bottom, transparent 0%, ${fadeBottomTo} 82%, ${fadeBottomTo} 100%)`,
+          }}
         />
       )}
 
