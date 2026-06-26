@@ -103,6 +103,12 @@ const EnvironmentsSection = () => {
     <>
       {/* MOBILE FALLBACK — vertical cards (no pinning, no 3D) */}
       <section className="md:hidden section-dark section-padding section-spacing-sm relative overflow-hidden">
+        {/* Cinematic top dissolve — coming from ivory (FromWithinBridge above) */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-40 z-[3] pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.6) 35%, transparent 100%)" }}
+        />
         {/* Atmosphere — performance archive, anchored behind content */}
         <div
           aria-hidden
@@ -186,17 +192,29 @@ const EnvironmentsSection = () => {
             ))}
           </div>
         </div>
-        {/* Soft dissolve into next section */}
+        {/* Cinematic bottom dissolve — into SelectedArtefactsSection (cinematic dark) */}
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-24 z-[3] pointer-events-none"
-          style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--background)))" }}
+          className="absolute inset-x-0 bottom-0 h-40 z-[3] pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, transparent 0%, hsl(var(--cinematic) / 0.7) 60%, hsl(var(--cinematic)) 100%)" }}
         />
       </section>
 
       {/* DESKTOP — pinned FIFA-style mannequin */}
       <div ref={sectionRef} className="hidden md:block" style={{ height: `${(experiences.length + 1) * 100}vh` }}>
         <div className="sticky top-0 h-screen flex items-center overflow-hidden section-dark">
+          {/* Cinematic top dissolve — coming from FromWithinBridge (ivory) */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-48 z-[4] pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.55) 35%, transparent 100%)" }}
+          />
+          {/* Cinematic bottom dissolve — into SelectedArtefactsSection (cinematic dark) */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 bottom-0 h-48 z-[4] pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, transparent 0%, hsl(var(--cinematic) / 0.7) 60%, hsl(var(--cinematic)) 100%)" }}
+          />
           {/* Atmosphere — performance archive corridor */}
           <div
             aria-hidden

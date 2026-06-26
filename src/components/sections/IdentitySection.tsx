@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
-import portraitImg from "@/assets/guilherme-portrait.jpg";
+import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 
 const IdentitySection = () => {
   return (
@@ -43,28 +42,7 @@ const IdentitySection = () => {
           <Reveal delay={0.3} direction="right">
             {/* data-portrait so the real image can be swapped easily later */}
             <div className="relative group" data-portrait>
-              <div className="overflow-hidden">
-                <motion.img
-                  src={portraitImg}
-                  alt="Guilherme Neves"
-                  className="w-full aspect-[3/4] object-cover object-top"
-                  loading="lazy"
-                  width={380}
-                  height={510}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                  style={{ filter: "grayscale(15%) contrast(1.05)" }}
-                />
-              </div>
-              <motion.div
-                className="absolute -bottom-3 -left-3 bg-background px-4 py-2 border border-border/50"
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                <p className="text-caption text-[10px]">Porto — Brussels</p>
-              </motion.div>
+              <PortraitPlaceholder caption="Porto — Brussels" />
             </div>
           </Reveal>
         </div>
