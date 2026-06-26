@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
-import portraitImg from "@/assets/guilherme-portrait.jpg";
+import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 
 const certifications = [
   "ISAK Level 1 — Certified Anthropometrist",
@@ -110,21 +110,7 @@ const About = () => {
             </div>
             <Reveal delay={0.2} direction="right">
               <div className="relative mt-4 md:mt-12">
-                <div className="overflow-hidden">
-                  <motion.img
-                    src={portraitImg}
-                    alt="Guilherme Neves"
-                    className="w-full aspect-[3/4] object-cover object-top grayscale-[20%]"
-                    loading="lazy"
-                    width={400}
-                    height={533}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.6 }}
-                  />
-                </div>
-                <div className="absolute -bottom-3 -left-3 bg-background px-3 py-1.5">
-                  <p className="text-caption text-[10px]">Guilherme Neves — Principal</p>
-                </div>
+                <PortraitPlaceholder caption="Guilherme Neves — Principal" />
               </div>
             </Reveal>
           </div>
