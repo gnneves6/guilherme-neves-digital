@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 
