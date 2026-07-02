@@ -1,7 +1,7 @@
 export type ArtefactStatus = "Public" | "Protected" | "In Development";
-import abcA from "@/assets/previews/abc-a-athlete-fuel-performance.png";
-import abcB from "@/assets/previews/abc-b-build-your-base.png";
-import abcC from "@/assets/previews/abc-c-care-about-recovery.png";
+import abcA from "@/assets/previews/abc-a-athlete-fuel-performance.webp";
+import abcB from "@/assets/previews/abc-b-build-your-base.webp";
+import abcC from "@/assets/previews/abc-c-care-about-recovery.webp";
 import matchdayFuelPreview from "@/assets/work-previews/matchday-fuel-preview.png.asset.json";
 import hydrationSweatTestingPreview from "@/assets/work-previews/hydration-sweat-testing-preview.png.asset.json";
 import bodyCompositionMonitoringPreview from "@/assets/work-previews/body-composition-monitoring-preview.png.asset.json";

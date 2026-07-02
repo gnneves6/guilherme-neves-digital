@@ -1,9 +1,11 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { usePointer } from "@/components/journey/PointerField";
 import Chapter from "@/components/motion/Chapter";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
-import EnvironmentKitShowcase, { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
+import type { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
+
+const EnvironmentKitShowcase = lazy(() => import("@/components/environments/EnvironmentKitShowcase"));
 import anderlechtKit from "@/assets/kits/anderlecht-kit-transparent.png";
 import lecaKit from "@/assets/kits/leca-kit-transparent.png";
 import r4eKit from "@/assets/kits/run4excellence-kit-transparent.png";
@@ -321,7 +323,9 @@ const EnvironmentsSection = () => {
 
                 {/* Center — Floating kit display archive */}
                 <div className="relative h-[400px] lg:h-[460px]">
-                  <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
+                  <Suspense fallback={null}>
+                    <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
+                  </Suspense>
                 </div>
 
                 {/* Right — index + dots */}
