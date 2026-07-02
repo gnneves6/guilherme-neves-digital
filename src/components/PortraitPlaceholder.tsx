@@ -1,24 +1,71 @@
 import { cn } from "@/lib/utils";
+import portraitAsset from "@/assets/guilherme-portrait.jpeg.asset.json";
 
 interface PortraitPlaceholderProps {
   className?: string;
   caption?: string;
+  /**
+   * CSS object-position for the portrait image. Ajusta aqui para reposicionar
+   * o enquadramento (ex.: "50% 20%" puxa a foto para cima).
+   * Default: "50% 30%" — centra o rosto no terço superior.
+   */
+  focal?: string;
+  /** Force placeholder mode (hide the real photo). */
+  placeholder?: boolean;
 }
 
 /**
- * Editorial placeholder used until the real portrait photo is uploaded.
- * Tipográfico, sóbrio, propositado — não parece "imagem em falta", parece capa.
+ * Editorial portrait frame. Mostra a foto real do Guilherme com controlo de
+ * enquadramento via `focal` (object-position). Se `placeholder` for true,
+ * volta ao monograma tipográfico "GN".
  */
-const PortraitPlaceholder = ({ className, caption }: PortraitPlaceholderProps) => {
+const PortraitPlaceholder = ({
+  className,
+  caption,
+  focal = "50% 30%",
+  placeholder = false,
+}: PortraitPlaceholderProps) => {
   return (
     <div
       className={cn(
         "relative w-full aspect-[3/4] overflow-hidden bg-[hsl(var(--ivory-deep))]",
         className,
       )}
-      aria-label="Portrait — Guilherme Neves (placeholder)"
+      aria-label={placeholder ? "Portrait — Guilherme Neves (placeholder)" : "Portrait — Guilherme Neves"}
       role="img"
     >
+      {!placeholder && (
+        <>
+          <img
+            src={portraitAsset.url}
+            alt="Guilherme Neves — RSC Anderlecht"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: focal }}
+          />
+          {/* Editorial tone: warm ivory wash + subtle bottom vignette */}
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(180deg, hsl(var(--ivory-deep) / 0.10) 0%, transparent 30%, transparent 70%, hsl(var(--charcoal-deep) / 0.18) 100%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-[0.08]"
+            style={{
+              background:
+                "repeating-linear-gradient(90deg, hsl(var(--charcoal-deep)) 0 1px, transparent 1px 3px)",
+            }}
+          />
+        </>
+      )}
+
+      {placeholder && (
+        <>
       {/* Subtle vertical grain band — like exposed film */}
       <div
         aria-hidden
@@ -50,6 +97,8 @@ const PortraitPlaceholder = ({ className, caption }: PortraitPlaceholderProps) =
           Portrait — forthcoming
         </span>
       </div>
+        </>
+      )}
 
       {/* Frame ticks — top-left + bottom-right */}
       <div aria-hidden className="absolute top-3 left-3 w-4 h-4 border-l border-t border-[hsl(var(--charcoal-deep)/0.35)]" />
