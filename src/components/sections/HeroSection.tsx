@@ -140,7 +140,7 @@ const HeroSection = () => {
           </h1>
           <motion.p
             className="text-base md:text-lg leading-relaxed max-w-xl mt-6 md:mt-8"
-            style={{ color: "hsl(var(--ivory) / 0.6)" }}
+            style={{ color: "hsl(var(--ivory) / 0.72)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
@@ -150,7 +150,7 @@ const HeroSection = () => {
           </motion.p>
           <motion.p
             className="text-xs md:text-sm tracking-[0.18em] uppercase font-display mt-5 md:mt-6"
-            style={{ color: "hsl(var(--ivory) / 0.4)" }}
+            style={{ color: "hsl(var(--ivory) / 0.55)" }}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.65 }}
@@ -159,7 +159,7 @@ const HeroSection = () => {
           </motion.p>
           <motion.p
             className="text-[10px] md:text-[11px] tracking-[0.22em] uppercase font-display mt-4 md:mt-5 max-w-xl"
-            style={{ color: "hsl(var(--ivory) / 0.35)" }}
+            style={{ color: "hsl(var(--ivory) / 0.5)" }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.72 }}

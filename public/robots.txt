@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://gn-digital.lovable.app/sitemap.xml
+Sitemap: https://guilhermeneves.com/sitemap.xml

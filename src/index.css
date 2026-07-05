@@ -22,7 +22,9 @@
     --secondary-foreground: 220 15% 20%;
 
     --muted: 40 12% 90%;
-    --muted-foreground: 220 8% 50%;
+    /* Darkened from 50% → 42% L to meet WCAG AA (4.5:1) for captions
+       and secondary text on the ivory background. */
+    --muted-foreground: 220 9% 42%;
 
     --accent: 35 20% 60%;
     --accent-foreground: 220 15% 12%;

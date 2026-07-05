@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/guilherme-neves-digital-6rrw2v
   workflow_dispatch:
 
 permissions:
@@ -26,7 +25,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx vite build --base=/guilherme-neves-digital/
+      - run: npm run build
       - name: SPA fallback
         run: cp dist/index.html dist/404.html
       - uses: actions/configure-pages@v5
