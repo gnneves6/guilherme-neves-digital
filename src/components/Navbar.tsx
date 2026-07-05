@@ -69,6 +69,7 @@ const Navbar = () => {
                 key={item.path}
                 to={item.path}
                 onClick={item.path === "/" ? handleHomeClick : undefined}
+                aria-current={location.pathname === item.path ? "page" : undefined}
                 className={`relative text-sm font-body tracking-wide transition-colors duration-300 ${
                   location.pathname === item.path
                     ? inDarkHero ? "text-[hsl(var(--ivory))]" : "text-foreground"
@@ -95,7 +96,9 @@ const Navbar = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden flex flex-col gap-1.5 p-2"
-            aria-label="Toggle menu"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             <motion.span
               className={`block w-6 h-px origin-center ${inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"}`}
@@ -124,6 +127,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            id="mobile-menu"
             className="md:hidden bg-background/98 backdrop-blur-md border-b border-border overflow-hidden"
           >
             <div className="section-padding py-8 flex flex-col gap-6">
@@ -137,6 +141,7 @@ const Navbar = () => {
                   <Link
                     to={item.path}
                     onClick={() => setIsOpen(false)}
+                    aria-current={location.pathname === item.path ? "page" : undefined}
                     className={`font-display text-2xl font-medium transition-colors ${
                       location.pathname === item.path
                         ? "text-foreground"
