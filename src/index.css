@@ -95,6 +95,20 @@
     background: hsl(var(--primary) / 0.15);
     color: hsl(var(--foreground));
   }
+
+  /* Keyboard-only focus ring, in the brand gold so it reads on both the
+     ivory pages and the dark cinematic scenes. :focus-visible keeps it
+     invisible for mouse users, so the design is untouched on click. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #c9a84c;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
