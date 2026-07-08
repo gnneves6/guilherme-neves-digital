@@ -25,9 +25,9 @@ const IdentitySection = () => {
             </Reveal>
             <Reveal delay={0.35}>
               <p className="text-body text-sm max-w-2xl mt-5 opacity-70">
-                Final-year BSc Nutrition Sciences student at FCNAUP, currently
-                completing a curricular internship in Performance Nutrition at
-                RSC Anderlecht.
+                Final-year BSc Nutrition Sciences student at FCNAUP, with a
+                recently completed curricular internship in Performance
+                Nutrition at RSC Anderlecht.
               </p>
             </Reveal>
             <Reveal delay={0.4}>

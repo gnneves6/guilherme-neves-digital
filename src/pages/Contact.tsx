@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
+import Magnetic from "@/components/motion/Magnetic";
 import { LINKS } from "@/data/links";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -169,15 +170,17 @@ const Contact = () => {
                 {error && (
                   <p className="text-sm" style={{ color: "hsl(0, 60%, 55%)" }}>{error}</p>
                 )}
-                <motion.button
-                  type="submit"
-                  disabled={loading}
-                  className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85 disabled:opacity-50"
-                  whileHover={loading ? {} : { y: -1 }}
-                  whileTap={loading ? {} : { scale: 0.98 }}
-                >
-                  {loading ? "Sending..." : "Send enquiry"}
-                </motion.button>
+                <Magnetic as="span" strength={6}>
+                  <motion.button
+                    type="submit"
+                    disabled={loading}
+                    className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85 disabled:opacity-50"
+                    whileHover={loading ? {} : { y: -1 }}
+                    whileTap={loading ? {} : { scale: 0.98 }}
+                  >
+                    {loading ? "Sending..." : "Send enquiry"}
+                  </motion.button>
+                </Magnetic>
               </form>
             )}
           </Reveal>

@@ -14,7 +14,7 @@ import {
   type ArtefactStatus,
   type ArtefactGroup,
 } from "@/data/artefacts";
-import { LINKS } from "@/data/links";
+import Magnetic from "@/components/motion/Magnetic";
 
 type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup" | "tableMockup" | "seriesMockup";
 
@@ -221,19 +221,6 @@ const Work = () => {
               early interest.
             </p>
           </Reveal>
-          <Reveal delay={0.3}>
-            <p className="text-body max-w-xl mt-3">
-              The complete archive lives in{" "}
-              <a
-                href={LINKS.NOTION_PORTFOLIO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-underline hover:text-foreground transition-colors"
-              >
-                my Notion workspace →
-              </a>
-            </p>
-          </Reveal>
         </div>
       </section>
 
@@ -338,12 +325,14 @@ const Work = () => {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <Link
-              to="/contact"
-              className="group inline-flex items-center justify-center mt-8 px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
-            >
-              Enquire about an engagement
-            </Link>
+            <Magnetic as="span" strength={7} className="mt-8">
+              <Link
+                to="/contact"
+                className="group inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+              >
+                Enquire about an engagement
+              </Link>
+            </Magnetic>
           </Reveal>
         </div>
       </section>

@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useInView } from "fra
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
+import Magnetic from "@/components/motion/Magnetic";
 
 const laws = [
   {
@@ -413,12 +414,14 @@ const FuelLaws = () => {
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <Link
-              to="/contact"
-              className="group inline-flex items-center justify-center mt-10 px-12 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
-            >
-              Get in Touch
-            </Link>
+            <Magnetic as="span" strength={7} className="mt-10">
+              <Link
+                to="/contact"
+                className="group inline-flex items-center justify-center px-12 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+              >
+                Get in Touch
+              </Link>
+            </Magnetic>
           </Reveal>
         </div>
       </section>

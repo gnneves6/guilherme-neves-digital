@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
+import Magnetic from "@/components/motion/Magnetic";
 
 type Service = {
   index: string;
@@ -419,12 +420,14 @@ const Services = () => {
             </Reveal>
             <Reveal delay={0.25}>
               <div className="mt-12 flex items-center gap-6 flex-wrap">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center px-10 py-4 bg-[hsl(var(--ivory))] text-[hsl(var(--charcoal-deep))] font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-90"
-                >
-                  Start a conversation
-                </Link>
+                <Magnetic as="span" strength={7}>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center px-10 py-4 bg-[hsl(var(--ivory))] text-[hsl(var(--charcoal-deep))] font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-90"
+                  >
+                    Start a conversation
+                  </Link>
+                </Magnetic>
                 <p className="text-caption text-[10px] text-[hsl(var(--ivory)/0.5)]">
                   Enquiries reviewed personally · Porto / Brussels
                 </p>
