@@ -8,7 +8,6 @@ import SystemsBridgeSection from "@/components/sections/SystemsBridgeSection";
 import TheMethodSection from "@/components/sections/TheMethodSection";
 import SystemsArchitectureSection from "@/components/sections/SystemsArchitectureSection";
 import InvitationSection from "@/components/sections/InvitationSection";
-import ScrollProgress from "@/components/motion/ScrollProgress";
 import PointerField from "@/components/journey/PointerField";
 
 const Index = () => {
@@ -16,7 +15,6 @@ const Index = () => {
     <PointerField>
     <Layout>
       <SEO title="Guilherme Neves — GN Performance Systems" description="Embedded performance nutrition for clubs, federations and athletes. Diagnosis, translation and applied systems." path="/" />
-      <ScrollProgress />
       {/*
         Cinematic 6-scene journey — POV camera, no hard dividers.
         01 Tunnel/Entrance → 02 Locker/Environments → 03 From Within Thesis
