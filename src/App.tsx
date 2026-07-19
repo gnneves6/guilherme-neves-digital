@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { MotionConfig } from "framer-motion";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,13 +17,18 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const queryClient = new QueryClient();
 
+// The artifact preview build (VITE_ARTIFACT=1) is served from a sandboxed
+// path where URL-based routing can't work, so it falls back to hash routing.
+const Router = import.meta.env.VITE_ARTIFACT === "1" ? HashRouter : BrowserRouter;
+const routerProps = import.meta.env.VITE_ARTIFACT === "1" ? {} : { basename: import.meta.env.BASE_URL };
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <MotionConfig reducedMotion="user">
       <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <Router {...routerProps}>
         <ScrollToTop />
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
@@ -36,7 +41,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
-      </BrowserRouter>
+      </Router>
       </TooltipProvider>
     </MotionConfig>
   </QueryClientProvider>
