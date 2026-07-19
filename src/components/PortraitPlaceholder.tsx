@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import portraitAsset from "@/assets/guilherme-portrait.jpeg.asset.json";
+import portrait from "@/assets/guilherme-portrait.jpg";
 
 interface PortraitPlaceholderProps {
   className?: string;
@@ -37,7 +37,7 @@ const PortraitPlaceholder = ({
       {!placeholder && (
         <>
           <img
-            src={portraitAsset.url}
+            src={portrait}
             alt="Guilherme Neves — RSC Anderlecht"
             loading="lazy"
             decoding="async"
