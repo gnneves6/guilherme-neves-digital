@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/guilherme-neves-digital-6rrw2v
   workflow_dispatch:
 
 permissions:
