@@ -2,6 +2,12 @@ export type ArtefactStatus = "Public" | "Protected" | "In Development";
 import abcA from "@/assets/previews/abc-a-athlete-fuel-performance.webp";
 import abcB from "@/assets/previews/abc-b-build-your-base.webp";
 import abcC from "@/assets/previews/abc-c-care-about-recovery.webp";
+// Premium proof-object previews for the Selected Applied Work cards.
+import hydrationPreview from "@/assets/work-previews/hydration-sweat-testing-preview.webp";
+import bodyCompositionPreview from "@/assets/work-previews/body-composition-monitoring-preview.webp";
+import foodCateringPreview from "@/assets/work-previews/food-catering-operations-preview.webp";
+import educationToolsPreview from "@/assets/work-previews/education-tools-preview.webp";
+import atlasPreview from "@/assets/work-previews/football-nutrition-atlas-preview.webp";
 
 export type ArtefactCategory =
   | "Educational Series"
@@ -470,6 +476,9 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
       "Measurement translated into individualized hydration decisions.",
     previewNote: "Dashboard mockup + protocol page preview.",
     appliedPreview: "hydrationDashboard",
+    previewImage: hydrationPreview,
+    previewAlt:
+      "Hydration & Sweat Testing framework preview — a dark premium dashboard with squad sweat-rate and sodium metrics, a trend chart and the Sweat Testing Protocol sheet.",
     previewObjectPosition: "center right",
     ctaLabel: "View framework",
     ctaType: "view-sample",
@@ -501,6 +510,9 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     confidentialityNote:
       "Protected internal work. Names and sensitive data remain redacted.",
     appliedPreview: "redactedReport",
+    previewImage: bodyCompositionPreview,
+    previewAlt:
+      "Body Composition & Monitoring Support preview — a confidential Team Report (Redacted) with Σ8 skinfolds season-trend chart, redacted athlete table and an individual summary sheet.",
     previewObjectPosition: "center left",
     ctaLabel: "Protected preview",
     ctaType: "protected",
@@ -532,6 +544,9 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     confidentialityNote:
       "Protected operational work. Structure and quality only — no confidential details.",
     appliedPreview: "operationsManual",
+    previewImage: foodCateringPreview,
+    previewAlt:
+      "Food Environment & Catering Operations preview — a dark operations dashboard alongside the Catering Operations Manual, structure and quality only with no confidential details.",
     previewObjectPosition: "center",
     ctaLabel: "View structure",
     ctaType: "protected",
@@ -562,6 +577,9 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewNote:
       "Stack of visual education pieces / infographic thumbnails.",
     appliedPreview: "educationGrid",
+    previewImage: educationToolsPreview,
+    previewAlt:
+      "Football Nutrition Education Tools preview — a premium dark grid of six visual learning objects covering matchday nutrition, hydration, recovery and supplements.",
     previewObjectPosition: "center",
     ctaLabel: "Open collection",
     ctaType: "view-sample",
@@ -592,6 +610,9 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewNote:
       "Premium book / atlas mockup with first pages visible and remaining pages blurred.",
     appliedPreview: "atlasBook",
+    previewImage: atlasPreview,
+    previewAlt:
+      "Football Nutrition Atlas preview — an open premium book spread showing the pre-match plate chapter, with additional in-development pages held back.",
     previewObjectPosition: "top center",
     ctaLabel: "Preview atlas",
     ctaType: "early-access",
