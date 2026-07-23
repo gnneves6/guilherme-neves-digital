@@ -14,9 +14,9 @@ const Index = () => {
   return (
     <PointerField>
     <Layout>
-      <SEO title="Guilherme Neves — GN Performance Systems" description="Embedded performance nutrition for clubs, federations and athletes. Diagnosis, translation and applied systems." path="/" />
+      <SEO title="Guilherme Neves, GN Performance Systems" description="Embedded performance nutrition for clubs, federations and athletes. Diagnosis, translation and applied systems." path="/" />
       {/*
-        Cinematic 6-scene journey — POV camera, no hard dividers.
+        Cinematic 6-scene journey, POV camera, no hard dividers.
         01 Tunnel/Entrance → 02 Locker/Environments → 03 From Within Thesis
         → 04 Proof Table → 05 Method Room → 06 Exit/Invitation.
       */}

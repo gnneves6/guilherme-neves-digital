@@ -1,4 +1,4 @@
-// Centralized external links — single source of truth
+// Centralized external links, single source of truth
 export const LINKS = {
   CV_URL: "https://drive.google.com/file/d/1XNcFZrlPjftXA-H8A6sxpnN0_nn_5vOx/view",
   LINKEDIN_URL: "https://www.linkedin.com/in/guilhermeneves28/",

@@ -13,7 +13,7 @@ const laws = [
     title: "Fuel to Perform",
     tagline: "Energy is the currency of performance.",
     detail:
-      "Without adequate energy availability, everything else breaks down — decision-making, recovery, adaptation, intensity. Fueling isn't about eating more. It's about eating enough, at the right times, to sustain the demands of training and competition. This is the foundation.",
+      "Without adequate energy availability, everything else breaks down, decision-making, recovery, adaptation, intensity. Fueling isn't about eating more. It's about eating enough, at the right times, to sustain the demands of training and competition. This is the foundation.",
     practical: "Match energy intake to training load. Periodise carbohydrate availability. Never under-fuel on high-demand days.",
     color: "150 30% 46%",
   },
@@ -22,7 +22,7 @@ const laws = [
     title: "Build Your Base",
     tagline: "Daily habits build or break the athlete.",
     detail:
-      "Performance nutrition isn't a match-day intervention — it's a daily operating system. The habits athletes build around sleep, hydration, meal structure and consistency across the week are what create a resilient base. You can't out-supplement a broken routine.",
+      "Performance nutrition isn't a match-day intervention, it's a daily operating system. The habits athletes build around sleep, hydration, meal structure and consistency across the week are what create a resilient base. You can't out-supplement a broken routine.",
     practical: "Establish consistent meal timing. Build weekly nutrition rhythms. Create accountability through simple tracking.",
     color: "168 34% 46%",
   },
@@ -31,8 +31,8 @@ const laws = [
     title: "Recover Like a Pro",
     tagline: "Recovery prepares the next performance.",
     detail:
-      "What happens in the 2–4 hours after training or competition determines how quickly the body adapts and how prepared the athlete is for the next session. Recovery nutrition — protein timing, carbohydrate replenishment, hydration — is a non-negotiable system, not an afterthought.",
-    practical: "Protein within 30–60 min post-session. Replenish glycogen. Rehydrate with structure, not guesswork.",
+      "The hours after training or competition shape how quickly the body adapts and how prepared the athlete is for the next session. Recovery nutrition is a system, not an afterthought: protein, carbohydrate replenishment and hydration, prioritised most when the next session is close.",
+    practical: "Prioritise protein and carbohydrate after the session, especially when recovery time is short. Rebuild glycogen across the day. Rehydrate with structure, not guesswork.",
     color: "192 42% 52%",
   },
   {
@@ -40,7 +40,7 @@ const laws = [
     title: "Hydrate to Dominate",
     tagline: "Hydration supports physical and cognitive output.",
     detail:
-      "Even mild dehydration impairs reaction time, concentration and physical capacity. Hydration monitoring and structured intake protocols should be as habitual as warm-ups. It's one of the simplest, most impactful systems to get right — and one of the most commonly neglected.",
+      "Even mild dehydration impairs reaction time, concentration and physical capacity. Hydration monitoring and structured intake protocols should be as habitual as warm-ups. It's one of the simplest, most impactful systems to get right, and one of the most commonly neglected.",
     practical: "Monitor body weight changes. Use structured hydration protocols. Adapt intake to climate and session intensity.",
     color: "205 55% 56%",
   },
@@ -49,7 +49,7 @@ const laws = [
     title: "Test Before the Game",
     tagline: "Competition is not the place to experiment.",
     detail:
-      "Every nutrition strategy — from match-day meals to supplement use to hydration plans — must be tested in training before it's used in competition. The match is the exam, not the practice session. If it hasn't been rehearsed, it doesn't belong on game day.",
+      "Every nutrition strategy, from match-day meals to supplement use to hydration plans, must be tested in training before it's used in competition. The match is the exam, not the practice session. If it hasn't been rehearsed, it doesn't belong on game day.",
     practical: "Rehearse match-day meals in training weeks. Trial supplements before competition. Build a proven pre-match routine.",
     color: "44 65% 55%",
   },
@@ -58,7 +58,7 @@ const laws = [
 const expansions = [
   {
     title: "Athlete Education",
-    description: "Turning each law into language athletes understand, remember and act on — session by session.",
+    description: "Turning each law into language athletes understand, remember and act on, session by session.",
   },
   {
     title: "Team Systems",
@@ -92,7 +92,7 @@ const FuelLaws = () => {
 
   return (
     <Layout>
-      <SEO title="GN Fuel Laws — The Operating System for Performance Nutrition" description="Five applied principles that turn nutrition from information into repeatable performance behaviour." path="/fuel-laws" />
+      <SEO title="GN Fuel Laws, The Operating System for Performance Nutrition" description="Five applied principles that turn nutrition from information into repeatable performance behaviour." path="/fuel-laws" />
 
       {/* Header */}
       <section className="section-padding section-spacing">
@@ -276,7 +276,7 @@ const FuelLaws = () => {
                             transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                             className="overflow-hidden"
                           >
-                            {/* Visual signal — the principle, shown not told */}
+                            {/* Visual signal, the principle, shown not told */}
                             <div className="px-4 md:px-6 pt-1 pb-6">
                               <div
                                 className="rounded-xl px-4 py-4"
@@ -337,7 +337,7 @@ const FuelLaws = () => {
                       className="text-[13px] font-display tracking-wide"
                       style={{ color: "hsl(44 65% 62%)" }}
                     >
-                      System mapped — all five laws explored. This is how a real fueling operation runs.
+                      System mapped, all five laws explored. This is how a real fueling operation runs.
                     </motion.p>
                   ) : (
                     <motion.p
@@ -376,7 +376,7 @@ const FuelLaws = () => {
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-xl mb-14">
               The framework extends into practical applications across performance
-              environments — from individual athlete education to team-level systems.
+              environments, from individual athlete education to team-level systems.
             </p>
           </Reveal>
           <div className="grid sm:grid-cols-2 gap-px bg-border/40">
@@ -416,7 +416,7 @@ const FuelLaws = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-md mx-auto mt-5">
-              Whether for your team, club or individual practice — let's explore how the framework fits.
+              Whether for your team, club or individual practice, let's explore how the framework fits.
             </p>
           </Reveal>
           <Reveal delay={0.2}>

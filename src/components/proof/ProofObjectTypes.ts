@@ -1,5 +1,5 @@
 /**
- * ProofObject — reusable system for displaying artefacts as physical objects
+ * ProofObject, reusable system for displaying artefacts as physical objects
  * on a stage. Three object types: document, tool, protected.
  *
  * The system is asset-ready: each card has a replaceable cover slot, so when

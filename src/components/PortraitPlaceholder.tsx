@@ -7,7 +7,7 @@ interface PortraitPlaceholderProps {
   /**
    * CSS object-position for the portrait image. Ajusta aqui para reposicionar
    * o enquadramento (ex.: "50% 20%" puxa a foto para cima).
-   * Default: "50% 30%" — centra o rosto no terço superior.
+   * Default: "50% 30%", centra o rosto no terço superior.
    */
   focal?: string;
   /** Force placeholder mode (hide the real photo). */
@@ -31,7 +31,7 @@ const PortraitPlaceholder = ({
         "relative w-full aspect-[3/4] overflow-hidden bg-[hsl(var(--ivory-deep))]",
         className,
       )}
-      aria-label={placeholder ? "Portrait — Guilherme Neves (placeholder)" : "Portrait — Guilherme Neves"}
+      aria-label={placeholder ? "Portrait, Guilherme Neves (placeholder)" : "Portrait, Guilherme Neves"}
       role="img"
     >
       {!placeholder && (
@@ -66,7 +66,7 @@ const PortraitPlaceholder = ({
 
       {placeholder && (
         <>
-      {/* Subtle vertical grain band — like exposed film */}
+      {/* Subtle vertical grain band, like exposed film */}
       <div
         aria-hidden
         className="absolute inset-0 opacity-[0.18]"
@@ -94,13 +94,13 @@ const PortraitPlaceholder = ({
           GN
         </span>
         <span className="mt-6 text-[10px] tracking-[0.32em] uppercase font-display text-[hsl(var(--charcoal-deep)/0.55)]">
-          Portrait — forthcoming
+          Portrait, forthcoming
         </span>
       </div>
         </>
       )}
 
-      {/* Frame ticks — top-left + bottom-right */}
+      {/* Frame ticks, top-left + bottom-right */}
       <div aria-hidden className="absolute top-3 left-3 w-4 h-4 border-l border-t border-[hsl(var(--charcoal-deep)/0.35)]" />
       <div aria-hidden className="absolute bottom-3 right-3 w-4 h-4 border-r border-b border-[hsl(var(--charcoal-deep)/0.35)]" />
 

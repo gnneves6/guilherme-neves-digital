@@ -1,6 +1,5 @@
 // Single source of truth for the site's public address and identity.
-// Change SITE_URL here (no trailing slash) when the final domain is live —
-// every canonical URL, social share tag and structured-data reference reads
+// Change SITE_URL here (no trailing slash) when the final domain is live, // every canonical URL, social share tag and structured-data reference reads
 // from this one constant.
 export const SITE_URL = "https://guilhermeneves.com";
 

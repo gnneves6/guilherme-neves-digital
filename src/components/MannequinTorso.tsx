@@ -3,7 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import * as THREE from "three";
 
-/* ═══ Torso Mesh — geometric mannequin built from primitives ═══ */
+/* ═══ Torso Mesh, geometric mannequin built from primitives ═══ */
 const TorsoMesh = ({
   primaryColor,
   secondaryColor,
@@ -52,7 +52,7 @@ const TorsoMesh = ({
         />
       </mesh>
 
-      {/* ── Chest area — slight bulge ── */}
+      {/* ── Chest area, slight bulge ── */}
       <mesh position={[0, 0.55, 0.08]} scale={[1.05, 0.5, 0.6]}>
         <sphereGeometry args={[0.5, 32, 16]} />
         <meshStandardMaterial

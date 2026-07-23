@@ -49,8 +49,7 @@ const ManifestoSection = () => {
                 >
                   {s.num}
                 </span>
-                <span className="text-[10px] tracking-[0.35em] uppercase font-display opacity-50">
-                  — {s.label}
+                <span className="text-[10px] tracking-[0.35em] uppercase font-display opacity-50">, {s.label}
                 </span>
               </div>
               <p className="font-display text-[22px] md:text-[26px] lg:text-[30px] leading-[1.2] tracking-tight font-medium text-foreground min-h-[6rem]">

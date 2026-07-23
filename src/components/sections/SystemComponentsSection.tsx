@@ -70,7 +70,7 @@ const SystemComponentsSection = () => {
                         >
                           <div className="p-4 border border-border/50 bg-background shadow-lg">
                             <p className="text-[10px] tracking-[0.25em] uppercase font-display opacity-40 mb-1.5">
-                              0{i + 1} — {s.title}
+                              0{i + 1}, {s.title}
                             </p>
                             <p className="text-body text-xs leading-relaxed opacity-75">
                               {s.desc}

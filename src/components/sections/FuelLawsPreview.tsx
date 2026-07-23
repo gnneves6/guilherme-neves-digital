@@ -9,17 +9,17 @@ const laws = [
   {
     title: "Fuel",
     micro: "Energy before output.",
-    detail: "Every session, every match, every travel day — energy availability is the first decision. Without fuel, nothing else works.",
+    detail: "Every session, every match, every travel day, energy availability is the first decision. Without fuel, nothing else works.",
   },
   {
     title: "Build",
     micro: "Daily base before detail.",
-    detail: "Consistent daily structure beats any supplement or trend. Build meals around protein, carbohydrates and real food — then refine.",
+    detail: "Consistent daily structure beats any supplement or trend. Build meals around protein, carbohydrates and real food, then refine.",
   },
   {
     title: "Recover",
     micro: "The next session starts now.",
-    detail: "Recovery nutrition is not optional. The window after training is where adaptation happens — protein, carbohydrates, hydration, timing.",
+    detail: "Recovery nutrition is not optional. The window after training is where adaptation happens, protein, carbohydrates, hydration, timing.",
   },
   {
     title: "Hydrate",

@@ -7,12 +7,12 @@ import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
 
 const certifications = [
-  "ISAK Level 1 — Certified Anthropometrist",
-  "Sports Nutrition & Supplementation — Challenges for Athletes in the Next Decade",
+  "ISAK Level 1, Certified Anthropometrist",
+  "Sports Nutrition & Supplementation, Challenges for Athletes in the Next Decade",
   "Nutrition in Football: From Men to Women",
   "Muscle Mass & Physical Function Assessment",
   "Nutrition in Wound Healing",
-  "Youthpass Certificate — Erasmus+ Project, Italy",
+  "Youthpass Certificate, Erasmus+ Project, Italy",
 ];
 
 const awards = [
@@ -25,7 +25,7 @@ const awards = [
 const About = () => {
   return (
     <Layout>
-      <SEO title="About — GN Performance Systems" description="The practice and the principal: diagnosis, translation and embedded nutrition systems by Guilherme Neves." path="/about" />
+      <SEO title="About, GN Performance Systems" description="The practice and the principal: diagnosis, translation and embedded nutrition systems by Guilherme Neves." path="/about" />
       {/* The Practice */}
       <section className="section-padding section-spacing">
         <div className="max-content">
@@ -40,8 +40,7 @@ const About = () => {
           <Reveal delay={0.25}>
             <p className="text-body-lg max-w-2xl mt-8">
               GN Performance Systems is a performance nutrition practice for
-              high-performance environments. The work is not about giving advice —
-              it is about translating science into systems that survive a real
+              high-performance environments. The work is not about giving advice, it is about translating science into systems that survive a real
               training week, a competition block, a travel day.
             </p>
           </Reveal>
@@ -90,7 +89,7 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="text-body-lg max-w-2xl mt-6">
-                  A final-year Nutrition Sciences student at FCNAUP — University
+                  A final-year Nutrition Sciences student at FCNAUP, University
                   of Porto, who recently completed a curricular internship in
                   Performance Nutrition at RSC Anderlecht.
                 </p>
@@ -105,13 +104,13 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.4}>
                 <p className="text-caption text-[10px] mt-8">
-                  21 · Porto — Brussels
+                  21 · Porto, Brussels
                 </p>
               </Reveal>
             </div>
             <Reveal delay={0.2} direction="right">
               <div className="relative mt-4 md:mt-12">
-                <PortraitPlaceholder caption="Guilherme Neves — Principal" />
+                <PortraitPlaceholder caption="Guilherme Neves, Principal" />
               </div>
             </Reveal>
           </div>
@@ -136,7 +135,7 @@ const About = () => {
               },
               {
                 title: "Athlete-Centered",
-                text: "The athlete is the user. Everything should be designed around how they actually live, train and compete — not around textbook ideals.",
+                text: "The athlete is the user. Everything should be designed around how they actually live, train and compete, not around textbook ideals.",
               },
               {
                 title: "Evidence-Based",
@@ -183,7 +182,7 @@ const About = () => {
               My work sits where these worlds converge. I don't believe in
               nutrition advice that exists in isolation. Real impact happens when
               knowledge is embedded into systems, when education becomes a team
-              habit, and when discipline is designed into the structure — not left
+              habit, and when discipline is designed into the structure, not left
               to willpower.
             </p>
           </Reveal>
@@ -215,7 +214,7 @@ const About = () => {
               <div className="space-y-8">
                 <div className="space-y-2">
                   <h3 className="font-display text-lg font-medium text-foreground">BSc in Nutrition Sciences</h3>
-                  <p className="text-body text-sm">FCNAUP — University of Porto</p>
+                  <p className="text-body text-sm">FCNAUP, University of Porto</p>
                   <p className="text-caption text-[10px] font-normal">2022–2026 · Final-year student</p>
                   <p className="text-body text-sm mt-2">Curricular internship at RSC Anderlecht: Feb–Jun 2026</p>
                 </div>

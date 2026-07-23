@@ -103,15 +103,15 @@ const EnvironmentsSection = () => {
 
   return (
     <>
-      {/* MOBILE FALLBACK — vertical cards (no pinning, no 3D) */}
+      {/* MOBILE FALLBACK, vertical cards (no pinning, no 3D) */}
       <section className="md:hidden section-dark section-padding section-spacing-sm relative overflow-hidden">
-        {/* Cinematic top dissolve — coming from ivory (FromWithinBridge above) */}
+        {/* Cinematic top dissolve, coming from ivory (FromWithinBridge above) */}
         <div
           aria-hidden
           className="absolute inset-x-0 top-0 h-40 z-[3] pointer-events-none"
           style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.6) 35%, transparent 100%)" }}
         />
-        {/* Atmosphere — performance archive, anchored behind content */}
+        {/* Atmosphere, performance archive, anchored behind content */}
         <div
           aria-hidden
           className="absolute inset-0 z-0 bg-cover bg-center opacity-25"
@@ -149,7 +149,7 @@ const EnvironmentsSection = () => {
                   />
                 </div>
                 <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                  {exp.period} — {exp.location}
+                  {exp.period}, {exp.location}
                 </span>
                 <h3 className="font-display text-2xl font-semibold text-[hsl(var(--ivory))] mt-2">
                   {exp.name}
@@ -194,7 +194,7 @@ const EnvironmentsSection = () => {
             ))}
           </div>
         </div>
-        {/* Cinematic bottom dissolve — into SelectedArtefactsSection (cinematic dark) */}
+        {/* Cinematic bottom dissolve, into SelectedArtefactsSection (cinematic dark) */}
         <div
           aria-hidden
           className="absolute inset-x-0 bottom-0 h-40 z-[3] pointer-events-none"
@@ -202,22 +202,22 @@ const EnvironmentsSection = () => {
         />
       </section>
 
-      {/* DESKTOP — pinned FIFA-style mannequin */}
+      {/* DESKTOP, pinned FIFA-style mannequin */}
       <div ref={sectionRef} className="hidden md:block" style={{ height: `${(experiences.length + 1) * 100}vh` }}>
         <div className="sticky top-0 h-screen flex items-center overflow-hidden section-dark">
-          {/* Cinematic top dissolve — coming from FromWithinBridge (ivory) */}
+          {/* Cinematic top dissolve, coming from FromWithinBridge (ivory) */}
           <div
             aria-hidden
             className="absolute inset-x-0 top-0 h-48 z-[4] pointer-events-none"
             style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.55) 35%, transparent 100%)" }}
           />
-          {/* Cinematic bottom dissolve — into SelectedArtefactsSection (cinematic dark) */}
+          {/* Cinematic bottom dissolve, into SelectedArtefactsSection (cinematic dark) */}
           <div
             aria-hidden
             className="absolute inset-x-0 bottom-0 h-48 z-[4] pointer-events-none"
             style={{ background: "linear-gradient(to bottom, transparent 0%, hsl(var(--cinematic) / 0.7) 60%, hsl(var(--cinematic)) 100%)" }}
           />
-          {/* Atmosphere — performance archive corridor */}
+          {/* Atmosphere, performance archive corridor */}
           <div
             aria-hidden
             className="absolute inset-0 z-0 bg-cover bg-center"
@@ -227,7 +227,7 @@ const EnvironmentsSection = () => {
               opacity: 0.55,
             }}
           />
-          {/* Pointer-driven exploration light — visible scene response on desktop */}
+          {/* Pointer-driven exploration light, visible scene response on desktop */}
           <div
             aria-hidden
             className="absolute inset-0 z-[1] pointer-events-none transition-[background] duration-200 ease-out"
@@ -267,7 +267,7 @@ const EnvironmentsSection = () => {
               />
 
               <div className="grid grid-cols-[minmax(220px,1fr)_440px_minmax(180px,0.8fr)] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-12 items-center min-h-[460px]">
-                {/* Left — identity */}
+                {/* Left, identity */}
                 <div className="flex flex-col justify-center">
                   {experiences.map((exp, i) => {
                     const isFocused = i === activeIndex;
@@ -285,7 +285,7 @@ const EnvironmentsSection = () => {
                             transition={{ duration: 0.5, delay: 0.1 }}
                           >
                             <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                              {exp.period} — {exp.location}
+                              {exp.period}, {exp.location}
                             </span>
                             <h3 className="font-display text-2xl lg:text-4xl xl:text-5xl font-semibold leading-[1.05] tracking-tight text-[hsl(var(--ivory))] mt-3 break-words">
                               {exp.name}
@@ -321,14 +321,14 @@ const EnvironmentsSection = () => {
                   })}
                 </div>
 
-                {/* Center — Floating kit display archive */}
+                {/* Center, Floating kit display archive */}
                 <div className="relative h-[400px] lg:h-[460px]">
                   <Suspense fallback={null}>
                     <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
                   </Suspense>
                 </div>
 
-                {/* Right — index + dots */}
+                {/* Right, index + dots */}
                 <div className="flex flex-col justify-center items-end text-right">
                   <motion.span
                     className="font-display text-[100px] lg:text-[140px] font-bold leading-none"
@@ -346,7 +346,7 @@ const EnvironmentsSection = () => {
                     {String(activeIndex + 1).padStart(2, "0")}
                   </motion.span>
 
-                  {/* Environment hotspots — focusable zones, no card metaphor */}
+                  {/* Environment hotspots, focusable zones, no card metaphor */}
                   <ul className="flex flex-col items-end gap-2 mt-6">
                     {experiences.map((exp, i) => {
                       const isActive = activeIndex === i;

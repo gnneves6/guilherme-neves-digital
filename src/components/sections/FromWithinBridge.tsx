@@ -65,7 +65,7 @@ const FromWithinBridge = () => {
               >
                 Most performance nutrition fails not because the science is wrong,
                 but because the delivery is fragile. The practice exists to close
-                that gap — turning evidence into structures that staff, athletes
+                that gap, turning evidence into structures that staff, athletes
                 and organisations can actually run.
               </p>
               <p

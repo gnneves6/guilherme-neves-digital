@@ -9,12 +9,12 @@ interface KitTorsoProps {
   accent?: string;
   variant?: KitVariant;
   symbol?: KitSymbol;
-  /** 0..1 — lower for background kits */
+  /** 0..1, lower for background kits */
   clarity?: number;
 }
 
 /**
- * KitTorso — stylized SVG jersey on an abstract collar form. Pure
+ * KitTorso, stylized SVG jersey on an abstract collar form. Pure
  * presentational, no brand assets. Used inside the EnvironmentKitShowcase
  * to represent each environment as a floating display object.
  */
@@ -86,7 +86,7 @@ const KitTorso = ({
           fill={`url(#kit-shade-${primary.replace("#", "")})`}
         />
 
-        {/* Symbol — abstract, never real club assets */}
+        {/* Symbol, abstract, never real club assets */}
         {symbol === "four" && (
           <text
             x="110"

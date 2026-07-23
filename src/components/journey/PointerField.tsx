@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState, ReactNode } fro
 import { useReducedMotion } from "framer-motion";
 
 /**
- * PointerField — global normalized pointer position (-1..1 on both axes).
+ * PointerField, global normalized pointer position (-1..1 on both axes).
  * Updated via requestAnimationFrame for smoothness. Returns {0,0} when
  * reduced motion is requested or on touch-only devices, so the cinematic
  * journey degrades into a calm static sequence.

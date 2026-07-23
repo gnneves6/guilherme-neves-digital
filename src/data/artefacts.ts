@@ -29,10 +29,10 @@ export type ArtefactGroup = "public" | "systems" | "tools" | "protected";
 export type CtaType =
   | "view"            // open external URL
   | "view-sample"     // open sample preview modal
-  | "request-access"  // protected — request access form
-  | "waitlist"        // in development — join waitlist
-  | "early-access"    // future product — early access
-  | "protected";      // confidential — info only modal
+  | "request-access"  // protected, request access form
+  | "waitlist"        // in development, join waitlist
+  | "early-access"    // future product, early access
+  | "protected";      // confidential, info only modal
 
 export interface Artefact {
   slug: string;
@@ -91,7 +91,7 @@ export const artefacts: Artefact[] = [
     type: "Matchday Protocol",
     status: "Public",
     description:
-      "A practical matchday-minus-one structure for carbohydrate loading, hydration and familiar meals — built to survive real match weeks.",
+      "A practical matchday-minus-one structure for carbohydrate loading, hydration and familiar meals, built to survive real match weeks.",
     whatItProves: "Matchday evidence translated into a protocol staff and athletes can actually run.",
     ctaLabel: "View Sample",
     ctaType: "view-sample",
@@ -107,7 +107,7 @@ export const artefacts: Artefact[] = [
     status: "Public",
     description:
       "A food substitution system that lets athletes adapt meals on the road or at home without losing nutritional structure.",
-    whatItProves: "Flexibility designed for real life — without breaking the plan.",
+    whatItProves: "Flexibility designed for real life, without breaking the plan.",
     ctaLabel: "View Sample",
     ctaType: "view-sample",
     featured: true,
@@ -136,7 +136,7 @@ export const artefacts: Artefact[] = [
     type: "Applied Visual Guide",
     status: "Public",
     description:
-      "An evidence-led visual guide on what actually moves the needle in football supplementation — and what doesn't.",
+      "An evidence-led visual guide on what actually moves the needle in football supplementation, and what doesn't.",
     whatItProves: "Evidence filtering and clear staff/athlete communication.",
     ctaLabel: "View Sample",
     ctaType: "view-sample",
@@ -151,7 +151,7 @@ export const artefacts: Artefact[] = [
     type: "Educational Mini-Class",
     status: "Public",
     description:
-      "A short visual lesson on the real drivers of late-game cramping — beyond the hydration cliché.",
+      "A short visual lesson on the real drivers of late-game cramping, beyond the hydration cliché.",
     whatItProves: "Sharp educational thinking on a real, recurring performance problem.",
     ctaLabel: "View Sample",
     ctaType: "view-sample",
@@ -223,7 +223,7 @@ export const artefacts: Artefact[] = [
     type: "Applied Framework · In Development",
     status: "In Development",
     description:
-      "The applied playbook behind the GN Fuel Laws — turning principles into tools, guides and repeatable routines.",
+      "The applied playbook behind the GN Fuel Laws, turning principles into tools, guides and repeatable routines.",
     whatItProves: "A scalable system behind the public-facing education.",
     ctaLabel: "Join the Build List",
     ctaType: "waitlist",
@@ -251,7 +251,7 @@ export const artefacts: Artefact[] = [
     type: "Protected Casework",
     status: "Protected",
     description:
-      "Real athlete-facing work translating body composition goals, training demands and daily habits into action. Confidential — preview shown on request.",
+      "Real athlete-facing work translating body composition goals, training demands and daily habits into action. Confidential, preview shown on request.",
     whatItProves: "Individual translation from context to behaviour, in real environments.",
     ctaLabel: "Request Access",
     ctaType: "request-access",
@@ -265,7 +265,7 @@ export const artefacts: Artefact[] = [
     type: "Protected Team Casework",
     status: "Protected",
     description:
-      "Team-level monitoring and reporting built for staff decision-making. Confidential — full document not shown publicly.",
+      "Team-level monitoring and reporting built for staff decision-making. Confidential, full document not shown publicly.",
     whatItProves: "Staff-facing reporting and team-level performance communication.",
     ctaLabel: "Learn More",
     ctaType: "protected",
@@ -307,21 +307,21 @@ export const groupMeta: Record<
     short: "Tools",
     anchor: "tools-product-lab",
     dot: "hsl(40, 38%, 58%)",
-    description: "Interactive tools, agents and in-development products — including FuelOps.",
+    description: "Interactive tools, agents and in-development products, including FuelOps.",
   },
   protected: {
     label: "Protected Casework",
     short: "Protected",
     anchor: "protected-casework",
     dot: "hsl(220, 8%, 52%)",
-    description: "Confidential athlete, team and staff-facing work — shown as proof.",
+    description: "Confidential athlete, team and staff-facing work, shown as proof.",
   },
 };
 
 export const groupOrder: ArtefactGroup[] = ["public", "systems", "tools", "protected"];
 
 /* ============================================================
-   Applied Work — homepage section ("Selected Applied Work")
+   Applied Work, homepage section ("Selected Applied Work")
    Six curated proof objects, edited for the cinematic archive.
    ============================================================ */
 export type AppliedPreviewKind =
@@ -450,7 +450,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     appliedPreview: "matchdayFuel",
     previewImage: matchdayFuelPreview,
     previewAlt:
-      "Matchday Fuel System preview — a dark premium matchday planner dashboard with kick-off timeline and overlapping MD-1 Plan and Matchday Timeline sheets.",
+      "Matchday Fuel System preview, a dark premium matchday planner dashboard with kick-off timeline and overlapping MD-1 Plan and Matchday Timeline sheets.",
     previewObjectPosition: "center",
     ctaLabel: "Explore system",
     ctaType: "view-sample",
@@ -482,7 +482,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     appliedPreview: "hydrationDashboard",
     previewImage: hydrationPreview,
     previewAlt:
-      "Hydration & Sweat Testing framework preview — a dark premium dashboard with squad sweat-rate and sodium metrics, a trend chart and the Sweat Testing Protocol sheet.",
+      "Hydration & Sweat Testing framework preview, a dark premium dashboard with squad sweat-rate and sodium metrics, a trend chart and the Sweat Testing Protocol sheet.",
     previewObjectPosition: "center right",
     ctaLabel: "View framework",
     ctaType: "view-sample",
@@ -516,7 +516,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     appliedPreview: "redactedReport",
     previewImage: bodyCompositionPreview,
     previewAlt:
-      "Body Composition & Monitoring Support preview — a confidential Team Report (Redacted) with Σ8 skinfolds season-trend chart, redacted athlete table and an individual summary sheet.",
+      "Body Composition & Monitoring Support preview, a confidential Team Report (Redacted) with Σ8 skinfolds season-trend chart, redacted athlete table and an individual summary sheet.",
     previewObjectPosition: "center left",
     ctaLabel: "Protected preview",
     ctaType: "protected",
@@ -546,11 +546,11 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
       "Nutrition operating standards designed for real catering and hotel environments.",
     previewNote: "Blurred operational manual + checklist-style object.",
     confidentialityNote:
-      "Protected operational work. Structure and quality only — no confidential details.",
+      "Protected operational work. Structure and quality only, no confidential details.",
     appliedPreview: "operationsManual",
     previewImage: foodCateringPreview,
     previewAlt:
-      "Food Environment & Catering Operations preview — a dark operations dashboard alongside the Catering Operations Manual, structure and quality only with no confidential details.",
+      "Food Environment & Catering Operations preview, a dark operations dashboard alongside the Catering Operations Manual, structure and quality only with no confidential details.",
     previewObjectPosition: "center",
     ctaLabel: "View structure",
     ctaType: "protected",
@@ -583,7 +583,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     appliedPreview: "educationGrid",
     previewImage: educationToolsPreview,
     previewAlt:
-      "Football Nutrition Education Tools preview — a premium dark grid of six visual learning objects covering matchday nutrition, hydration, recovery and supplements.",
+      "Football Nutrition Education Tools preview, a premium dark grid of six visual learning objects covering matchday nutrition, hydration, recovery and supplements.",
     previewObjectPosition: "center",
     ctaLabel: "Open collection",
     ctaType: "view-sample",
@@ -616,7 +616,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     appliedPreview: "atlasBook",
     previewImage: atlasPreview,
     previewAlt:
-      "Football Nutrition Atlas preview — an open premium book spread showing the pre-match plate chapter, with additional in-development pages held back.",
+      "Football Nutrition Atlas preview, an open premium book spread showing the pre-match plate chapter, with additional in-development pages held back.",
     previewObjectPosition: "top center",
     ctaLabel: "Preview atlas",
     ctaType: "early-access",

@@ -25,8 +25,7 @@ const InvitationSection = () => {
               07
             </span>
             <span className="h-px w-6" style={{ background: "hsl(var(--olive) / 0.45)" }} />
-            <p className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-display opacity-60">
-              — Invitation.
+            <p className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-display opacity-60">, Invitation.
             </p>
           </div>
         </Reveal>
@@ -55,7 +54,7 @@ const InvitationSection = () => {
         </Reveal>
         <Reveal delay={0.55}>
           <p className="mt-10 text-[10px] tracking-[0.35em] uppercase font-display opacity-40">
-            GN Performance Systems — Porto · Brussels
+            GN Performance Systems, Porto · Brussels
           </p>
         </Reveal>
       </div>

@@ -3,7 +3,7 @@ import type { AppliedPreviewKind } from "@/data/artefacts";
 
 /**
  * Per-object preview compositions for the "Selected Applied Work" section.
- * Pure CSS/SVG mockups — no fake athlete data, no real club logos.
+ * Pure CSS/SVG mockups, no fake athlete data, no real club logos.
  * Tuned for a dark cinematic archive, ivory/olive/gold accents.
  * Each composition layers a primary "system" object with secondary
  * paper / document / report artefacts to evoke a real working desk.
@@ -122,7 +122,7 @@ const PaperLines = ({
   </div>
 );
 
-/* 01 — Matchday Fuel: planner card + layered MD-1 / timeline sheets + gold tag */
+/* 01, Matchday Fuel: planner card + layered MD-1 / timeline sheets + gold tag */
 const MatchdayFuel = () => (
   <StageFrame>
     <div
@@ -252,7 +252,7 @@ const MatchdayFuel = () => (
   </StageFrame>
 );
 
-/* 02 — Hydration & Sweat Testing */
+/* 02, Hydration & Sweat Testing */
 const HydrationDashboard = () => (
   <StageFrame>
     <div
@@ -367,7 +367,7 @@ const HydrationDashboard = () => (
   </StageFrame>
 );
 
-/* 03 — Body Composition: redacted report */
+/* 03, Body Composition: redacted report */
 const RedactedReport = () => (
   <StageFrame>
     <div
@@ -450,7 +450,7 @@ const RedactedReport = () => (
   </StageFrame>
 );
 
-/* 04 — Food Environment: manual cover + checklist + protected tag */
+/* 04, Food Environment: manual cover + checklist + protected tag */
 const OperationsManual = () => (
   <StageFrame>
     <div
@@ -535,7 +535,7 @@ const OperationsManual = () => (
   </StageFrame>
 );
 
-/* 05 — Education Tools: 6-tile infographic grid */
+/* 05, Education Tools: 6-tile infographic grid */
 const EducationGrid = () => {
   const tiles = [
     { title: "The ABC", subtitle: "Football Nutrition", tone: "olive", icon: "abc" },
@@ -602,7 +602,7 @@ const EducationGrid = () => {
   );
 };
 
-/* 06 — Atlas: closed cover + open spread with locked right page */
+/* 06, Atlas: closed cover + open spread with locked right page */
 const AtlasBook = () => (
   <StageFrame>
     <div

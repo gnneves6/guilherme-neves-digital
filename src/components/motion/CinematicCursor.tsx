@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 
 /**
- * CinematicCursor — a soft trailing ring plus a precise dot that replace the
+ * CinematicCursor, a soft trailing ring plus a precise dot that replace the
  * native cursor on fine-pointer desktops. Uses mix-blend-difference so it
  * reads on both the ivory pages and the dark cinematic scenes. The ring
  * expands over interactive elements. Disabled entirely for touch devices and

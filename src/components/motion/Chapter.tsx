@@ -12,7 +12,7 @@ interface ChapterProps {
 }
 
 /**
- * Editorial chapter marker: "02 — Real environments."
+ * Editorial chapter marker: "02, Real environments."
  * Numeral + title + thin animated rule. Pairs with each homepage section.
  */
 const Chapter = ({
@@ -49,8 +49,7 @@ const Chapter = ({
           <span
             className="font-display text-[10px] md:text-[11px] tracking-[0.3em] uppercase"
             style={{ color: titleColor }}
-          >
-            — {title}
+          >, {title}
           </span>
         </div>
         {meta && <div className="hidden md:block">{meta}</div>}

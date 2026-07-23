@@ -19,7 +19,7 @@ const HeroSection = () => {
   const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const fadeToLight = useTransform(scrollYProgress, [0.4, 1], [0, 1]);
 
-  // Mouse parallax — light follow
+  // Mouse parallax, light follow
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   useEffect(() => {
     if (reduceMotion) return;
@@ -105,7 +105,7 @@ const HeroSection = () => {
               className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-display"
               style={{ color: "hsl(var(--ivory) / 0.5)" }}
             >
-              Guilherme Neves — Applied Performance Nutrition
+              Guilherme Neves, Applied Performance Nutrition
             </p>
           </motion.div>
           <h1
@@ -146,7 +146,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.55 }}
           >
             Applied performance nutrition systems for athletes, teams and performance
-            environments — shaped by lived sport, rooted in football and built for real-world use.
+            environments, shaped by lived sport, rooted in football and built for real-world use.
           </motion.p>
           <motion.p
             className="text-xs md:text-sm tracking-[0.18em] uppercase font-display mt-5 md:mt-6"
@@ -212,7 +212,7 @@ const HeroSection = () => {
         />
       </motion.div>
 
-      {/* Dissolve down into the next cinematic scene (Environments — dark) */}
+      {/* Dissolve down into the next cinematic scene (Environments, dark) */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-[35vh] z-[5] pointer-events-none"
         style={{

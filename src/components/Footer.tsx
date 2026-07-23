@@ -11,7 +11,7 @@ const Footer = () => {
               GN Performance Systems
             </p>
             <p className="text-body text-sm">
-              A practice for high-performance environments — diagnosis, translation
+              A practice for high-performance environments. Diagnosis, translation
               and embedded nutrition systems.
             </p>
             <p className="text-caption text-[10px] font-normal mt-4">

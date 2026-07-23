@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 /**
- * LawSignal — a minimal animated "instrument" that represents each Fuel Law
+ * LawSignal, a minimal animated "instrument" that represents each Fuel Law
  * visually. One diagram per law, drawn on mount (i.e. when the law expands),
  * tinted with the law's accent colour. Built as inline SVG so it scales
- * cleanly, stays light, and animates. No real athlete data — schematic only.
+ * cleanly, stays light, and animates. No real athlete data, schematic only.
  */
 
 interface Props {
@@ -33,7 +33,7 @@ const LawSignal = ({ number, color }: Props) => {
   const frame = { width: "100%", height: "auto" } as const;
   const vb = "0 0 340 128";
 
-  // 01 — Fuel meets demand: fuel bars rising to match a training-load line
+  // 01, Fuel meets demand: fuel bars rising to match a training-load line
   if (number === "01") {
     const load = [34, 58, 44, 72, 50, 82, 40];
     return (
@@ -69,7 +69,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 02 — Build the base: a week of consistent habit bars on a foundation
+  // 02, Build the base: a week of consistent habit bars on a foundation
   if (number === "02") {
     const days = ["M", "T", "W", "T", "F", "S", "S"];
     return (
@@ -97,7 +97,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 03 — Recovery window: post-session timeline with a highlighted window
+  // 03, Recovery window: post-session timeline with a highlighted window
   if (number === "03") {
     const marks = [
       { x: 60, label: "Protein" },
@@ -132,7 +132,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 04 — Hydration: a level column sitting inside the optimal band
+  // 04, Hydration: a level column sitting inside the optimal band
   if (number === "04") {
     return (
       <svg viewBox={vb} style={frame} role="img" aria-label="Structured hydration held within the optimal range">
@@ -154,7 +154,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 05 — Rehearse then race: training reps leading into a match marker
+  // 05, Rehearse then race: training reps leading into a match marker
   return (
     <svg viewBox={vb} style={frame} role="img" aria-label="Strategies rehearsed in training before being used on game day">
       <line x1="24" y1="64" x2="316" y2="64" stroke={line} />

@@ -7,7 +7,7 @@ const areas = [
   {
     num: "01",
     title: "Performance Nutrition Systems Review",
-    desc: "Identifying gaps in nutrition strategy, education, routines and practical implementation across clubs, academies and performance environments — with football as the primary proof environment.",
+    desc: "Identifying gaps in nutrition strategy, education, routines and practical implementation across clubs, academies and performance environments, with football as the primary proof environment.",
     anchor: "protected-casework",
   },
   {
@@ -51,7 +51,7 @@ const CollaborationAreasSection = () => {
             </Reveal>
             <Reveal delay={0.18}>
               <p className="text-body text-sm md:text-base mt-5 max-w-lg">
-                Applied performance nutrition systems, education and tools — rooted in football,
+                Applied performance nutrition systems, education and tools, rooted in football,
                 built for any high-performance environment.
               </p>
             </Reveal>

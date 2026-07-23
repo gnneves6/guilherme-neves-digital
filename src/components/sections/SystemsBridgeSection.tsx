@@ -6,7 +6,7 @@ import Scene from "@/components/motion/Scene";
 const ivory = (a: number) => `hsl(var(--ivory) / ${a})`;
 
 /**
- * 04.5 — Systems Bridge.
+ * 04.5, Systems Bridge.
  * Narrative transition between Applied Work (proof objects) and The Method.
  * Connects individual projects to organisational consulting (Services).
  */
@@ -22,7 +22,7 @@ const SystemsBridgeSection = () => {
     >
       <div className="max-content relative">
         <div className="grid lg:grid-cols-[0.9fr,1.1fr] gap-12 lg:gap-20 items-start">
-          {/* Left — chapter mark + headline */}
+          {/* Left, chapter mark + headline */}
           <div>
             <Reveal>
               <div className="flex items-center gap-3 mb-6">
@@ -36,8 +36,7 @@ const SystemsBridgeSection = () => {
                 <p
                   className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-display"
                   style={{ color: ivory(0.5) }}
-                >
-                  — From Projects to Systems.
+                >, From Projects to Systems.
                 </p>
               </div>
             </Reveal>
@@ -53,7 +52,7 @@ const SystemsBridgeSection = () => {
             </Reveal>
           </div>
 
-          {/* Right — paragraph + CTA */}
+          {/* Right, paragraph + CTA */}
           <div className="lg:pt-6">
             <Reveal delay={0.18}>
               <p
@@ -61,7 +60,7 @@ const SystemsBridgeSection = () => {
                 style={{ color: ivory(0.72) }}
               >
                 The projects above are not isolated deliverables. They reflect a
-                broader philosophy — turning performance nutrition into practical
+                broader philosophy, turning performance nutrition into practical
                 systems that organisations can actually implement, sustain and
                 own.
               </p>

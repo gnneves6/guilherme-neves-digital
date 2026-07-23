@@ -14,7 +14,7 @@ interface SpotlightProps {
 }
 
 /**
- * Spotlight — soft radial light that follows the global pointer. Purely
+ * Spotlight, soft radial light that follows the global pointer. Purely
  * decorative, `pointer-events-none`. Falls back to a static centered glow
  * when the pointer field is inactive (touch/reduced-motion).
  */

@@ -8,7 +8,7 @@ export type SceneSpacing = "sm" | "md" | "lg" | "xl";
 interface SceneProps {
   id?: string;
   tone?: SceneTone;
-  /** Optional atmospheric background image (URL or imported asset). Used as atmosphere only — never as UI. */
+  /** Optional atmospheric background image (URL or imported asset). Used as atmosphere only, never as UI. */
   bgImage?: string;
   /** Optional overlay gradient layered above the bg image, below content. */
   overlayGradient?: string;
@@ -43,7 +43,7 @@ const toneClass: Record<SceneTone, string> = {
 };
 
 /**
- * Scene — cinematic chapter wrapper.
+ * Scene, cinematic chapter wrapper.
  *
  * Provides tone, optional atmospheric background image, overlay gradient,
  * grain layer, parallax and dissolve transitions. Content stays as real HTML;

@@ -8,7 +8,7 @@ import { usePointer } from "@/components/journey/PointerField";
 import type { ShowcaseKit } from "./EnvironmentKitShowcase";
 
 /**
- * Environment3DShowcase — WebGL cinematic display for the Environments
+ * Environment3DShowcase, WebGL cinematic display for the Environments
  * section. Renders the kit PNG alpha textures as floating planes on a dark
  * pedestal, with the active kit forward / sharp, prev+next receded / blurred.
  * Scroll-driven activeIndex changes are smoothed inside useFrame via damp.
@@ -106,7 +106,7 @@ function Pedestal({ accent }: { accent: string }) {
 
   return (
     <group ref={group} position={[0, -1.15, 0]}>
-      {/* Pedestal disc — slimmer, lower, sunk into the floor */}
+      {/* Pedestal disc, slimmer, lower, sunk into the floor */}
       <mesh position={[0, -0.04, 0]}>
         <cylinderGeometry args={[1.35, 1.5, 0.06, 64]} />
         <meshStandardMaterial
@@ -117,7 +117,7 @@ function Pedestal({ accent }: { accent: string }) {
           opacity={0.55}
         />
       </mesh>
-      {/* Top rim accent — whisper-thin */}
+      {/* Top rim accent, whisper-thin */}
       <mesh position={[0, 0.001, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[1.32, 1.35, 128]} />
         <meshBasicMaterial
@@ -129,7 +129,7 @@ function Pedestal({ accent }: { accent: string }) {
           depthWrite={false}
         />
       </mesh>
-      {/* Floor accent glow — wide, soft, additive */}
+      {/* Floor accent glow, wide, soft, additive */}
       <mesh position={[0, 0.0005, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[1.0, 4.2, 96]} />
         <meshBasicMaterial

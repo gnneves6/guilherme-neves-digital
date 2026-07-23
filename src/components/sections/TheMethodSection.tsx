@@ -7,24 +7,24 @@ import Scene from "@/components/motion/Scene";
 import sceneMethod from "@/assets/scene-method-podium.jpg";
 
 /**
- * Chapter 05 — The Method.
+ * Chapter 05, The Method.
  * Folds the former Operating System (Assess → Embed) and
  * GN Fuel Laws (Fuel → Test) into a single cinematic, two-act chapter.
- * Act I  — The Method (process)
- * Act II — GN Fuel Laws™ (memorable IP loop)
+ * Act I, The Method (process)
+ * Act II, GN Fuel Laws™ (memorable IP loop)
  */
 
 const method = [
   { title: "Assess", desc: "Context, routines, constraints, real-world signals." },
   { title: "Translate", desc: "Science and data become language athletes actually use." },
-  { title: "Structure", desc: "Fueling, hydration, recovery, matchday — built to fit." },
+  { title: "Structure", desc: "Fueling, hydration, recovery, matchday, built to fit." },
   { title: "Educate", desc: "Autonomy through literacy and clear resources." },
   { title: "Monitor", desc: "Adherence, body comp, feedback, practical markers." },
   { title: "Embed", desc: "Nutrition becomes culture, not an extra task." },
 ];
 
 const laws = [
-  { title: "Fuel", micro: "Energy before output.", detail: "Energy availability is the first decision — every session, every match, every travel day." },
+  { title: "Fuel", micro: "Energy before output.", detail: "Energy availability is the first decision, every session, every match, every travel day." },
   { title: "Build", micro: "Daily base before detail.", detail: "Consistent structure beats any supplement or trend. Real food, then refine." },
   { title: "Recover", micro: "The next session starts now.", detail: "Protein, carbs, hydration, timing. Adaptation lives in the window after training." },
   { title: "Hydrate", micro: "Flow supports body and brain.", detail: "Hydration shapes cognition and performance before thirst arrives." },
@@ -67,12 +67,12 @@ const TheMethodSection = () => {
           <Chapter number="05" title="The Method." tone="dark" className="mb-14 md:mb-20" />
         </Reveal>
 
-        {/* ============ ACT I — The Method ============ */}
+        {/* ============ ACT I, The Method ============ */}
         <div className="grid md:grid-cols-[0.85fr,1.15fr] gap-12 md:gap-20 items-start mb-28 md:mb-40">
           <div>
             <Reveal delay={0.05}>
               <p className="text-[10px] tracking-[0.4em] uppercase font-display opacity-45 mb-4">
-                Act I — Process
+                Act I, Process
               </p>
             </Reveal>
             <Reveal delay={0.12}>
@@ -82,8 +82,7 @@ const TheMethodSection = () => {
             </Reveal>
             <Reveal delay={0.22}>
               <p className="text-body-lg max-w-md mt-6 opacity-80">
-                From context to behaviour. From knowledge to repeatable action —
-                the operating system behind every environment I build.
+                From context to behaviour. From knowledge to repeatable action, the operating system behind every environment I build.
               </p>
             </Reveal>
           </div>
@@ -133,12 +132,12 @@ const TheMethodSection = () => {
           </div>
         </Reveal>
 
-        {/* ============ ACT II — GN Fuel Laws™ ============ */}
+        {/* ============ ACT II, GN Fuel Laws™ ============ */}
         <div className="grid md:grid-cols-[0.9fr,1.3fr] gap-12 md:gap-20 items-start">
           <div>
             <Reveal delay={0.05}>
               <p className="text-[10px] tracking-[0.4em] uppercase font-display opacity-45 mb-4">
-                Act II — Memorable IP
+                Act II, Memorable IP
               </p>
             </Reveal>
             <Reveal delay={0.12}>

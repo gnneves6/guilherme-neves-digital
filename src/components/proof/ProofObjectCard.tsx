@@ -11,19 +11,19 @@ interface ProofObjectCardProps {
   category: string;
   ctaLabel: string;
   meta: ProofObjectMeta;
-  /** Atmospheric cover image (optional — replaceable as assets land). */
+  /** Atmospheric cover image (optional, replaceable as assets land). */
   cover?: string;
   /** Fallback rendered inside the cover slot when no cover image exists. */
   stageFallback?: ReactNode;
   onClick: () => void;
-  /** Base rotation (deg) — scatter table arrangement. */
+  /** Base rotation (deg), scatter table arrangement. */
   rotate?: number;
   /** Z-index inside scatter layout. */
   z?: number;
 }
 
 /**
- * ProofObjectCard — reusable card composing a ProofObjectStage with
+ * ProofObjectCard, reusable card composing a ProofObjectStage with
  * editorial metadata. Stays a button so resource modals continue to open.
  */
 const ProofObjectCard = ({
@@ -77,7 +77,7 @@ const ProofObjectCard = ({
       }}
       className="block w-full text-left group relative overflow-hidden h-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ivory)/0.4)] transition-shadow duration-500 hover:shadow-[0_28px_70px_-20px_hsl(0_0%_0%/0.7)] focus-visible:shadow-[0_28px_70px_-20px_hsl(0_0%_0%/0.7)]"
     >
-      {/* Inner tilt layer — driven by local mouse, respects reduced-motion */}
+      {/* Inner tilt layer, driven by local mouse, respects reduced-motion */}
       <motion.div
         className="relative will-change-transform"
         animate={{ rotateX: tilt.x, rotateY: tilt.y }}
@@ -100,7 +100,7 @@ const ProofObjectCard = ({
           category={category}
         />
 
-        {/* Pointer-driven glare — moves with local cursor */}
+        {/* Pointer-driven glare, moves with local cursor */}
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500"

@@ -18,7 +18,7 @@ const deriveAccessType = (a: Artefact): AppliedAccessType => {
   if (explicit) return explicit;
   if (a.status === "Protected") return "protected";
   if (a.status === "In Development") return "in-development";
-  // Public default — anything else with a notion / external URL is treated as public
+  // Public default, anything else with a notion / external URL is treated as public
   if (a.group === "systems" || a.group === "tools") return "internal";
   return "public";
 };
@@ -569,7 +569,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                             color: ivory(0.8),
                           }}
                         >
-                          Received. I'll reply personally — usually within a few days.
+                          Received. I'll reply personally, usually within a few days.
                         </div>
                       )}
                     </div>

@@ -202,7 +202,7 @@ const Work = () => {
 
   return (
     <Layout>
-      <SEO title="Work — GN Performance Systems" description="Applied resources, frameworks and tools developed inside real performance engagements." path="/work" />
+      <SEO title="Work, GN Performance Systems" description="Applied resources, frameworks and tools developed inside real performance engagements." path="/work" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
@@ -217,7 +217,7 @@ const Work = () => {
             <p className="text-body-lg max-w-xl mt-8">
               A curated archive of resources, frameworks and tools developed
               inside real engagements. Public artefacts are open. Protected work
-              exists as proof — accessible on request. In-development tools accept
+              exists as proof, accessible on request. In-development tools accept
               early interest.
             </p>
           </Reveal>
@@ -264,7 +264,7 @@ const Work = () => {
         </div>
       </section>
 
-      {/* Vault — grouped */}
+      {/* Vault, grouped */}
       <section className="section-padding py-16">
         <div className="max-content space-y-20">
           <AnimatePresence mode="wait">

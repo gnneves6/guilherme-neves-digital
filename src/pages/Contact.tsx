@@ -53,11 +53,11 @@ const Contact = () => {
 
   return (
     <Layout>
-      <SEO title="Engagement Enquiry — GN Performance Systems" description="Enquire about an embedded engagement, diagnostic, education programme or advisory." path="/contact" />
+      <SEO title="Engagement Enquiry, GN Performance Systems" description="Enquire about an embedded engagement, diagnostic, education programme or advisory." path="/contact" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Chapter 04 — Engagement</p>
+            <p className="text-caption mb-6">Chapter 04, Engagement</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">Enquire about an engagement.</h1>

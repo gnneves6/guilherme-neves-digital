@@ -83,7 +83,7 @@ const ProofCard = ({
       </div>
 
       <div className="flex flex-col h-full">
-        {/* Preview area — taller so the full image shows crisp at 3-col widths */}
+        {/* Preview area, taller so the full image shows crisp at 3-col widths */}
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           <AppliedPreview
             kind={obj.appliedPreview}
@@ -216,7 +216,7 @@ const SelectedArtefactsSection = () => {
                 className="block text-[11px] tracking-[0.4em] uppercase font-display mb-5"
                 style={{ color: ivory(0.5) }}
               >
-                04 — Applied Work
+                04, Applied Work
               </span>
             </Reveal>
             <Reveal delay={0.08}>
@@ -232,7 +232,7 @@ const SelectedArtefactsSection = () => {
                 className="text-sm md:text-base mt-5 leading-relaxed max-w-xl"
                 style={{ color: ivory(0.6) }}
               >
-                Proof objects from applied performance nutrition — systems, tools
+                Proof objects from applied performance nutrition, systems, tools
                 and educational resources built to turn science into usable
                 decisions.
               </p>
@@ -243,7 +243,7 @@ const SelectedArtefactsSection = () => {
           </Reveal>
         </div>
 
-        {/* Unified grid — 3 columns × 2 rows on desktop, 2 on tablet, 1 on mobile */}
+        {/* Unified grid, 3 columns × 2 rows on desktop, 2 on tablet, 1 on mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {appliedWorkObjects.map((obj, i) => (
             <Reveal key={obj.slug} delay={(i % 3) * 0.06}>

@@ -15,7 +15,7 @@ interface Props {
 }
 
 /**
- * EnvironmentKitShowcase — wrapper around the WebGL Environment3DShowcase.
+ * EnvironmentKitShowcase, wrapper around the WebGL Environment3DShowcase.
  * The active kit floats forward on a dark pedestal; siblings recede into
  * depth. All rendering happens in WebGL with transparent kit textures.
  */

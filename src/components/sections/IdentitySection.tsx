@@ -42,7 +42,7 @@ const IdentitySection = () => {
           <Reveal delay={0.3} direction="right">
             {/* data-portrait so the real image can be swapped easily later */}
             <div className="relative group" data-portrait>
-              <PortraitPlaceholder caption="Porto — Brussels" />
+              <PortraitPlaceholder caption="Porto, Brussels" />
             </div>
           </Reveal>
         </div>

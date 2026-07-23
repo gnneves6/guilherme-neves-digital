@@ -58,7 +58,7 @@ const statusOpacity: Record<Status, number> = {
 };
 
 /**
- * 05.5 — GN Performance Systems.
+ * 05.5, GN Performance Systems.
  * Editorial masthead + five pillars arranged as a quiet, magazine-style
  * spread. Reveals that the website is the architecture of a firm, not a
  * portfolio. Avoids flowchart, dashboard or SaaS aesthetics.
@@ -89,8 +89,7 @@ const SystemsArchitectureSection = () => {
             <p
               className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-display"
               style={{ color: ivory(0.5) }}
-            >
-              — The Architecture.
+            >, The Architecture.
             </p>
           </div>
         </Reveal>
@@ -145,7 +144,7 @@ const SystemsArchitectureSection = () => {
           </Reveal>
         </div>
 
-        {/* Five pillars — editorial column grid */}
+        {/* Five pillars, editorial column grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px"
              style={{ background: ivory(0.08) }}>
           {pillars.map((p, i) => {
@@ -226,7 +225,7 @@ const SystemsArchitectureSection = () => {
             className="mt-14 md:mt-20 text-center text-[10px] tracking-[0.35em] uppercase font-display"
             style={{ color: ivory(0.35) }}
           >
-            Est. Porto · Brussels — A long-horizon practice
+            Est. Porto · Brussels, A long-horizon practice
           </p>
         </Reveal>
       </div>

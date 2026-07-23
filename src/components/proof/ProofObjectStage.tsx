@@ -4,9 +4,9 @@ import type { ProofObjectType } from "./ProofObjectTypes";
 
 interface ProofObjectStageProps {
   type: ProofObjectType;
-  /** Optional cover image asset — atmosphere only. */
+  /** Optional cover image asset, atmosphere only. */
   cover?: string;
-  /** Replaceable cover slot — used when no cover image is provided yet. */
+  /** Replaceable cover slot, used when no cover image is provided yet. */
   fallback?: ReactNode;
   /** Index used for the large numeral. */
   index: number;
@@ -66,7 +66,7 @@ const TypeFallback = ({ type }: { type: ProofObjectType }) => {
       </div>
     );
   }
-  // protected — vault seal with redacted bars
+  // protected, vault seal with redacted bars
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
       <div
@@ -99,7 +99,7 @@ const TypeFallback = ({ type }: { type: ProofObjectType }) => {
 };
 
 /**
- * ProofObjectStage — the "stage" a proof object sits on:
+ * ProofObjectStage, the "stage" a proof object sits on:
  * shadow plate, object frame, replaceable cover slot, material/glare overlay.
  */
 const ProofObjectStage = ({
@@ -118,7 +118,7 @@ const ProofObjectStage = ({
       )}
       style={{ background: stageBg[type] }}
     >
-      {/* Cover slot — atmosphere only, never UI */}
+      {/* Cover slot, atmosphere only, never UI */}
       <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04] will-change-transform">
         {cover ? (
           <img
@@ -144,7 +144,7 @@ const ProofObjectStage = ({
         />
       )}
 
-      {/* Material / glare overlay — sweeps on hover */}
+      {/* Material / glare overlay, sweeps on hover */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000"
@@ -154,7 +154,7 @@ const ProofObjectStage = ({
         }}
       />
 
-      {/* Inner vignette — gives every object a soft floor */}
+      {/* Inner vignette, gives every object a soft floor */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"

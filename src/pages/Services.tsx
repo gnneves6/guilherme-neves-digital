@@ -23,9 +23,9 @@ const services: Service[] = [
     tag: "Flagship engagement",
     title: "Football Nutrition Audit & Systems Review",
     positioning:
-      "A structured diagnostic of how nutrition is actually delivered inside a football environment — from staff workflow to athlete experience.",
+      "A structured diagnostic of how nutrition is actually delivered inside a football environment, from staff workflow to athlete experience.",
     problem:
-      "Most clubs do not lack nutrition knowledge. They lack a clear picture of how nutrition is operating across performance, medical, catering and player-facing touchpoints — and where it quietly breaks down.",
+      "Most clubs do not lack nutrition knowledge. They lack a clear picture of how nutrition is operating across performance, medical, catering and player-facing touchpoints, and where it quietly breaks down.",
     audience:
       "Professional and academy football clubs, federations and high-performance departments seeking an external, evidence-based read on their current nutrition operation.",
     outcomes: [
@@ -50,7 +50,7 @@ const services: Service[] = [
     positioning:
       "Design and implementation of practical nutrition systems that survive real training weeks, travel, congested fixtures and human reality.",
     problem:
-      "Documents and protocols rarely fail on the science. They fail on the floor — when fatigue, schedule, catering reality and athlete habits collide with the plan.",
+      "Documents and protocols rarely fail on the science. They fail on the floor, when fatigue, schedule, catering reality and athlete habits collide with the plan.",
     audience:
       "Performance departments and individual elite athletes who need their nutrition operation to function consistently, not occasionally.",
     outcomes: [
@@ -72,7 +72,7 @@ const services: Service[] = [
     tag: "Education programme",
     title: "Education & Workshops",
     positioning:
-      "Closed-door education built for athletes, staff and parent groups inside performance environments — not generic talks.",
+      "Closed-door education built for athletes, staff and parent groups inside performance environments, not generic talks.",
     problem:
       "Athletes are repeatedly told what to eat. They are rarely shown how to think, decide and adapt around food in the context of their own sport, schedule and body.",
     audience:
@@ -96,7 +96,7 @@ const services: Service[] = [
 const principles = [
   {
     label: "Diagnostic before prescription",
-    text: "Every engagement begins by understanding the environment as it actually operates — not as it appears on paper.",
+    text: "Every engagement begins by understanding the environment as it actually operates, not as it appears on paper.",
   },
   {
     label: "Built for the floor",
@@ -119,7 +119,7 @@ const processSteps = [
   },
   {
     label: "Design",
-    text: "Build the system — frameworks, tools, ownership — to fit the environment, not the textbook.",
+    text: "Build the system, frameworks, tools, ownership, to fit the environment, not the textbook.",
   },
   {
     label: "Implementation",
@@ -135,15 +135,15 @@ const ecosystem = [
   { label: "Applied Work", state: "Live", to: "/work", note: "Proof objects from real environments." },
   { label: "Consulting", state: "Live", to: "/services", note: "Strategic engagements for organisations." },
   { label: "Resources", state: "Live", to: "/work", note: "Public tools originated from applied work." },
-  { label: "Technology", state: "In Development", to: null, note: "FuelOps — operating tools for performance staff." },
+  { label: "Technology", state: "In Development", to: null, note: "FuelOps, operating tools for performance staff." },
   { label: "Research", state: "Future", to: null, note: "Field-driven applied performance nutrition research." },
 ];
 
 const Services = () => {
   return (
     <Layout>
-      <SEO title="Services — GN Performance Systems" description="Embedded engagements, diagnostics, education programmes and advisory for high-performance environments." path="/services" />
-      {/* Hero — Why */}
+      <SEO title="Services, GN Performance Systems" description="Embedded engagements, diagnostics, education programmes and advisory for high-performance environments." path="/services" />
+      {/* Hero, Why */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
@@ -186,7 +186,7 @@ const Services = () => {
       <section className="section-padding section-spacing-sm">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-10">01 — Philosophy</p>
+            <p className="text-caption mb-10">01, Philosophy</p>
           </Reveal>
           <div className="grid md:grid-cols-3 gap-10 md:gap-12">
             {principles.map((p, i) => (
@@ -213,7 +213,7 @@ const Services = () => {
         <div className="max-content space-y-10 md:space-y-14">
           <Reveal>
             <div className="flex items-baseline justify-between gap-6 flex-wrap">
-              <p className="text-caption">02 — Strategic Engagements</p>
+              <p className="text-caption">02, Strategic Engagements</p>
               <p className="text-caption text-[10px] text-muted-foreground">
                 Three offerings · By invitation & enquiry
               </p>
@@ -317,7 +317,7 @@ const Services = () => {
         <div className="max-content">
           <Reveal>
             <div className="flex items-baseline justify-between gap-6 flex-wrap mb-12">
-              <p className="text-caption">03 — How Collaboration Works</p>
+              <p className="text-caption">03, How Collaboration Works</p>
               <p className="text-caption text-[10px] text-muted-foreground">
                 A consulting process, not a service menu
               </p>
@@ -352,7 +352,7 @@ const Services = () => {
         <div className="max-content">
           <Reveal>
             <div className="flex items-baseline justify-between gap-6 flex-wrap mb-3">
-              <p className="text-caption">04 — The Wider Ecosystem</p>
+              <p className="text-caption">04, The Wider Ecosystem</p>
               <p className="text-caption text-[10px] text-muted-foreground">
                 GN Performance Systems
               </p>
@@ -360,7 +360,7 @@ const Services = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-2xl mb-12">
-              Consulting is one layer of a longer-term ecosystem — applied work
+              Consulting is one layer of a longer-term ecosystem, applied work
               feeds public resources, operational tools and field-driven
               research.
             </p>
@@ -405,13 +405,13 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Closing callout — full-width dark */}
+      {/* Closing callout, full-width dark */}
       <section className="section-dark relative overflow-hidden">
         <div className="scene-grain absolute inset-0 pointer-events-none" />
         <div className="section-padding section-spacing relative">
           <div className="max-content">
             <Reveal>
-              <p className="text-caption mb-10">05 — Invitation</p>
+              <p className="text-caption mb-10">05, Invitation</p>
             </Reveal>
             <Reveal delay={0.1}>
               <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight max-w-5xl text-[hsl(var(--ivory))]">
