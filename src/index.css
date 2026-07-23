@@ -22,9 +22,7 @@
     --secondary-foreground: 220 15% 20%;
 
     --muted: 40 12% 90%;
-    /* Darkened from 50% → 42% L to meet WCAG AA (4.5:1) for captions
-       and secondary text on the ivory background. */
-    --muted-foreground: 220 9% 42%;
+    --muted-foreground: 220 8% 50%;
 
     --accent: 35 20% 60%;
     --accent-foreground: 220 15% 12%;
@@ -94,33 +92,6 @@
   ::selection {
     background: hsl(var(--primary) / 0.15);
     color: hsl(var(--foreground));
-  }
-
-  /* Custom cinematic cursor: hide the native cursor while it is active
-     (added only on fine-pointer, non-reduced-motion desktops), but keep the
-     text caret on form fields for usability. */
-  body.has-custom-cursor,
-  body.has-custom-cursor * {
-    cursor: none !important;
-  }
-  body.has-custom-cursor input,
-  body.has-custom-cursor textarea,
-  body.has-custom-cursor [contenteditable="true"] {
-    cursor: text !important;
-  }
-
-  /* Keyboard-only focus ring, in the brand gold so it reads on both the
-     ivory pages and the dark cinematic scenes. :focus-visible keeps it
-     invisible for mouse users, so the design is untouched on click. */
-  a:focus-visible,
-  button:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible,
-  select:focus-visible,
-  [tabindex]:focus-visible {
-    outline: 2px solid #c9a84c;
-    outline-offset: 3px;
-    border-radius: 2px;
   }
 }
 
@@ -337,21 +308,4 @@
   .delay-300 { animation-delay: 300ms; }
   .delay-400 { animation-delay: 400ms; }
   .delay-500 { animation-delay: 500ms; }
-}
-
-/* Respect the OS "reduce motion" preference: neutralise CSS animations,
-   transitions and smooth scrolling for users with vestibular sensitivity.
-   Framer Motion is handled separately via <MotionConfig reducedMotion="user">. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-  html {
-    scroll-behavior: auto !important;
-  }
 }

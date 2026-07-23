@@ -4,7 +4,6 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
-import Magnetic from "@/components/motion/Magnetic";
 
 const certifications = [
   "ISAK Level 1 — Certified Anthropometrist",
@@ -91,8 +90,8 @@ const About = () => {
               <Reveal delay={0.2}>
                 <p className="text-body-lg max-w-2xl mt-6">
                   A final-year Nutrition Sciences student at FCNAUP — University
-                  of Porto, who recently completed a curricular internship in
-                  Performance Nutrition at RSC Anderlecht.
+                  of Porto, currently embedded in Performance Nutrition at
+                  RSC Anderlecht as part of his curricular internship.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
@@ -315,14 +314,12 @@ const About = () => {
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <Magnetic as="span" strength={7} className="mt-8">
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
-              >
-                Enquire about an engagement
-              </Link>
-            </Magnetic>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center mt-8 px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+            >
+              Enquire about an engagement
+            </Link>
           </Reveal>
         </div>
       </section>
