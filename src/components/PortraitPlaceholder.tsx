@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import portrait from "@/assets/guilherme-portrait.jpg";
+import portrait from "@/assets/guilherme-portrait.webp";
 
 interface PortraitPlaceholderProps {
   className?: string;
@@ -38,7 +38,7 @@ const PortraitPlaceholder = ({
         <>
           <img
             src={portrait}
-            alt="Guilherme Neves — RSC Anderlecht"
+            alt="Guilherme Neves"
             loading="lazy"
             decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
