@@ -5,6 +5,7 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
+import LawSignal from "@/components/fuel-laws/LawSignal";
 
 const laws = [
   {
@@ -275,6 +276,17 @@ const FuelLaws = () => {
                             transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                             className="overflow-hidden"
                           >
+                            {/* Visual signal — the principle, shown not told */}
+                            <div className="px-4 md:px-6 pt-1 pb-6">
+                              <div
+                                className="rounded-xl px-4 py-4"
+                                style={{ background: "hsl(var(--ivory) / 0.02)", border: "1px solid hsl(var(--ivory) / 0.06)" }}
+                              >
+                                <div className="max-w-md mx-auto">
+                                  <LawSignal number={law.number} color={law.color} />
+                                </div>
+                              </div>
+                            </div>
                             <div className="px-4 md:px-6 pb-8 pt-1 grid md:grid-cols-[1fr,300px] gap-6 md:gap-10">
                               <p className="text-[14px] md:text-[15px] leading-relaxed" style={{ color: "hsl(var(--ivory) / 0.66)" }}>
                                 {law.detail}
