@@ -3,6 +3,7 @@ import abcA from "@/assets/previews/abc-a-athlete-fuel-performance.webp";
 import abcB from "@/assets/previews/abc-b-build-your-base.webp";
 import abcC from "@/assets/previews/abc-c-care-about-recovery.webp";
 // Premium proof-object previews for the Selected Applied Work cards.
+import matchdayFuelPreview from "@/assets/work-previews/matchday-fuel-preview.webp";
 import hydrationPreview from "@/assets/work-previews/hydration-sweat-testing-preview.webp";
 import bodyCompositionPreview from "@/assets/work-previews/body-composition-monitoring-preview.webp";
 import foodCateringPreview from "@/assets/work-previews/food-catering-operations-preview.webp";
@@ -447,6 +448,9 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewNote:
       "Digital planner mockup + layered MD-1 / timeline document preview.",
     appliedPreview: "matchdayFuel",
+    previewImage: matchdayFuelPreview,
+    previewAlt:
+      "Matchday Fuel System preview — a dark premium matchday planner dashboard with kick-off timeline and overlapping MD-1 Plan and Matchday Timeline sheets.",
     previewObjectPosition: "center",
     ctaLabel: "Explore system",
     ctaType: "view-sample",
