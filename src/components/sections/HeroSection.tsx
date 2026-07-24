@@ -105,7 +105,7 @@ const HeroSection = () => {
               className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-display"
               style={{ color: "hsl(var(--ivory) / 0.5)" }}
             >
-              Guilherme Neves, Applied Performance Nutrition
+              Guilherme Neves · Performance Nutrition &amp; Systems
             </p>
           </motion.div>
           <h1
