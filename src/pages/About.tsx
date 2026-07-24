@@ -121,6 +121,56 @@ const About = () => {
         <div className="divider" />
       </div>
 
+      {/* Why this work */}
+      <section className="section-padding section-spacing">
+        <div className="max-content">
+          <Reveal>
+            <p className="text-caption mb-6">Why this work</p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="text-headline max-w-3xl">
+              I have been an athlete my whole life. That is where this starts.
+            </h2>
+          </Reveal>
+          <div className="max-w-2xl mt-8 space-y-5">
+            <Reveal delay={0.2}>
+              <p className="text-body-lg">
+                I lived it from the inside, and I saw that quality and effort are not
+                enough on their own. There has to be strategy, and you have to actually
+                know what you are doing. What I want now is to give athletes the tools and
+                the help I did not have back then.
+              </p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <p className="text-body">
+                A lot of what athletes struggle with is shared. Eating too much, or the
+                wrong things, or believing that healthy always means right, when the
+                healthiest food at the wrong time does nothing for performance. I lived
+                those same difficulties, and I crossed them with my passion for sport and
+                for science. That is why I went into nutrition sciences, to really
+                understand something so present in our lives that most of us never notice
+                it. Food shapes how we show up, how we feel, our energy, our health. It is
+                not a diet and it is not the enemy. It is a tool, and it can be a friendly one.
+              </p>
+            </Reveal>
+            <Reveal delay={0.4}>
+              <p className="text-body">
+                I found that out for myself the day I built a calm relationship with food.
+                No pressure, no cutting things out, enjoying it but being smart with my
+                body. Now I want to hand that to other athletes, and to as many people as I
+                can. To take this seriously, drop the taboos, and treat nutrition as quality
+                we get to enjoy, not something to fear. I want to give a lot of value, be
+                genuinely useful, and build this on my own terms.
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <div className="section-padding max-content">
+        <div className="divider" />
+      </div>
+
       {/* Philosophy */}
       <section className="section-padding section-spacing">
         <div className="max-content">
