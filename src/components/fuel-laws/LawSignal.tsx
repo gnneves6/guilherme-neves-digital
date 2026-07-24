@@ -34,7 +34,7 @@ const LawSignal = ({ number, color }: Props) => {
   const frame = { width: "100%", height: "auto" } as const;
   const vb = "0 0 340 160";
 
-  // 01 — Charged battery driving performance to a high, sustained plateau
+  // 01 - Charged battery driving performance to a high, sustained plateau
   if (number === "01") {
     const cells = [0, 1, 2, 3];
     return (
@@ -71,7 +71,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 02 — Interlocking base blocks holding an athlete up
+  // 02 - Interlocking base blocks holding an athlete up
   if (number === "02") {
     const W = 66, T = 7, yT = 84, yB = 110, m1 = 94, m2 = 104;
     const base = [
@@ -119,7 +119,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 03 — The 3 R's, labels inside each lobe, recovery only in the centre overlap
+  // 03 - The 3 R's, labels inside each lobe, recovery only in the centre overlap
   if (number === "03") {
     const amber = "38 70% 55%";
     const rose = "5 62% 60%";
@@ -156,7 +156,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 04 — Hydration as the input that keeps both mind and body running high
+  // 04 - Hydration as the input that keeps both mind and body running high
   if (number === "04") {
     const rows = [
       { y: 60, label: "Focus", icon: "brain" },
@@ -199,7 +199,7 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 05 — Rehearse then race: training reps proven before game day
+  // 05 - Rehearse then race: training reps proven before game day
   return (
     <svg viewBox={vb} style={frame} role="img" aria-label="Strategies rehearsed across training days before being trusted on game day">
       <line x1="30" y1="80" x2="316" y2="80" stroke={line} />

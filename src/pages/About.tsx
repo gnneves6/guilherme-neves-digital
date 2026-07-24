@@ -1,3 +1,4 @@
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
@@ -5,6 +6,27 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
+import sceneTunnel from "@/assets/scene-invitation-exit.jpg";
+
+/** Highlights an essential phrase with a soft on-brand marker, so the eye
+ *  catches the spine of the story without reading every line. */
+const Em = ({ children }: { children: ReactNode }) => (
+  <span
+    style={{
+      backgroundImage:
+        "linear-gradient(hsl(var(--olive-light) / 0.22), hsl(var(--olive-light) / 0.22))",
+      backgroundSize: "100% 0.4em",
+      backgroundPosition: "0 90%",
+      backgroundRepeat: "no-repeat",
+      WebkitBoxDecorationBreak: "clone",
+      boxDecorationBreak: "clone",
+      fontWeight: 500,
+      color: "hsl(var(--foreground))",
+    }}
+  >
+    {children}
+  </span>
+);
 
 const certifications = [
   "ISAK Level 1, Certified Anthropometrist",
@@ -129,40 +151,77 @@ const About = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="text-headline max-w-3xl">
-              I have been an athlete my whole life. That is where this starts.
+              I have been an athlete my whole life.{" "}
+              <span style={{ color: "hsl(var(--olive-light))", fontStyle: "italic", fontWeight: 300 }}>
+                That is where this starts.
+              </span>
             </h2>
           </Reveal>
-          <div className="max-w-2xl mt-8 space-y-5">
-            <Reveal delay={0.2}>
-              <p className="text-body-lg">
-                I lived it from the inside, and I saw that quality and effort are not
-                enough on their own. There has to be strategy, and you have to actually
-                know what you are doing. What I want now is to give athletes the tools and
-                the help I did not have back then.
+
+          {/* Cinematic band, the athlete's path from the tunnel to the pitch */}
+          <Reveal delay={0.2}>
+            <figure className="relative mt-10 md:mt-14 overflow-hidden rounded-lg">
+              <img
+                src={sceneTunnel}
+                alt="A stadium tunnel opening onto the pitch, the passage from athlete to practitioner."
+                className="w-full h-[38vh] md:h-[52vh] object-cover"
+                style={{ objectPosition: "center 40%" }}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.5), transparent 55%)" }}
+              />
+              <figcaption
+                className="absolute bottom-4 left-5 text-[10px] tracking-[0.28em] uppercase font-display"
+                style={{ color: "hsl(var(--ivory) / 0.72)" }}
+              >
+                From the pitch to the practice
+              </figcaption>
+            </figure>
+          </Reveal>
+
+          {/* Story, essentials marked so the spine reads at a glance */}
+          <div className="grid md:grid-cols-[0.9fr,1.3fr] gap-8 md:gap-16 mt-12 md:mt-16">
+            <Reveal delay={0.15}>
+              <p
+                className="font-display text-xl md:text-2xl font-light leading-snug"
+                style={{ color: "hsl(var(--foreground))" }}
+              >
+                I lived it from the inside. And I learned that quality and effort, on their
+                own, are <Em>never enough</Em>.
               </p>
             </Reveal>
-            <Reveal delay={0.3}>
-              <p className="text-body">
-                A lot of what athletes struggle with is shared. Eating too much, or the
-                wrong things, or believing that healthy always means right, when the
-                healthiest food at the wrong time does nothing for performance. I lived
-                those same difficulties, and I crossed them with my passion for sport and
-                for science. That is why I went into nutrition sciences, to really
-                understand something so present in our lives that most of us never notice
-                it. Food shapes how we show up, how we feel, our energy, our health. It is
-                not a diet and it is not the enemy. It is a tool, and it can be a friendly one.
-              </p>
-            </Reveal>
-            <Reveal delay={0.4}>
-              <p className="text-body">
-                I found that out for myself the day I built a calm relationship with food.
-                No pressure, no cutting things out, enjoying it but being smart with my
-                body. Now I want to hand that to other athletes, and to as many people as I
-                can. To take this seriously, drop the taboos, and treat nutrition as quality
-                we get to enjoy, not something to fear. I want to give a lot of value, be
-                genuinely useful, and build this on my own terms.
-              </p>
-            </Reveal>
+            <div className="space-y-5 max-w-2xl">
+              <Reveal delay={0.2}>
+                <p className="text-body-lg">
+                  Talent and work took me a long way, but they kept running into the same
+                  wall. What was missing was <Em>strategy, and actually knowing what I was
+                  doing with my body</Em>. The help I needed then did not exist around me, so
+                  I decided to become it for the athletes coming up now.
+                </p>
+              </Reveal>
+              <Reveal delay={0.3}>
+                <p className="text-body">
+                  So much of what athletes struggle with is shared. Eating too much, or the
+                  wrong things, or trusting that healthy always means right, when the{" "}
+                  <Em>healthiest food at the wrong moment does nothing for performance</Em>. I
+                  went into nutrition sciences to understand something this present in our
+                  lives that most people never stop to see. Food shapes how we show up, how
+                  we recover, and quietly, how healthy we stay. It is not a diet and it is
+                  not the enemy. It is a tool, and <Em>it can be a friendly one</Em>.
+                </p>
+              </Reveal>
+              <Reveal delay={0.4}>
+                <p className="text-body">
+                  Things changed for me the day I built <Em>a calm relationship with food</Em>.
+                  No pressure, nothing forbidden, enjoying it while being smart with my body.
+                  That is what I want to hand to other athletes, and to as many people as I
+                  can: to take this seriously, drop the taboos, and treat nutrition as quality
+                  we get to enjoy, not something to fear. I want to be <Em>genuinely
+                  useful</Em>, give real value, and build this the right way.
+                </p>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
@@ -180,16 +239,16 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-10 mt-8">
             {[
               {
-                title: "Practical",
-                text: "If it doesn't work in a real training week, it doesn't work. Systems must survive the complexity of sport schedules, travel and competition pressure.",
+                title: "Practical & Sustainable",
+                text: "If it doesn't work in a real training week, it doesn't work. And it has to keep working, week after week, or it was never a system. What I build has to survive travel, fixtures and pressure, and still make sense a month later.",
               },
               {
                 title: "Athlete-Centered",
-                text: "The athlete is the user. Everything should be designed around how they actually live, train and compete, not around textbook ideals.",
+                text: "I care about the person, not only the performance. Health comes with the results, never traded for them. Someone's tastes, culture and life have to fit inside the plan, because a strategy that ignores who they are will not survive.",
               },
               {
                 title: "Evidence-Based",
-                text: "Grounded in science, shaped by application. Research informs the direction; practical experience determines the execution.",
+                text: "Grounded in science, but always context dependent. Research points the direction; the athlete in front of me, their sport and the moment decide how it actually gets applied.",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.1}>
