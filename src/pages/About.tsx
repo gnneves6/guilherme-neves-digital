@@ -7,6 +7,17 @@ import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
 import sceneTunnel from "@/assets/scene-invitation-exit.jpg";
+import sceneArchive from "@/assets/scene-environments-archive.jpg";
+import { experiences, additionalExposure } from "@/data/experiences";
+import logoAnderlecht from "@/assets/logo-anderlecht.png";
+import logoLeca from "@/assets/logo-leca.png";
+import logoR4e from "@/assets/logo-run4excellence.png";
+
+const clubLogos: Record<string, string> = {
+  anderlecht: logoAnderlecht,
+  leca: logoLeca,
+  r4e: logoR4e,
+};
 
 /** Highlights an essential phrase with a soft on-brand marker, so the eye
  *  catches the spine of the story without reading every line. */
@@ -62,8 +73,9 @@ const About = () => {
           <Reveal delay={0.25}>
             <p className="text-body-lg max-w-2xl mt-8">
               GN Performance Systems is a performance nutrition practice for
-              high-performance environments. The work is not about giving advice, it is about translating science into systems that survive a real
-              training week, a competition block, a travel day.
+              high-performance environments. The work is not about giving advice, it is about{" "}
+              <Em>translating science into systems that survive a real training week</Em>, a
+              competition block, a travel day.
             </p>
           </Reveal>
           <Reveal delay={0.35}>
@@ -111,17 +123,18 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="text-body-lg max-w-2xl mt-6">
-                  A final-year Nutrition Sciences student at FCNAUP, University
-                  of Porto, who recently completed a curricular internship in
-                  Performance Nutrition at RSC Anderlecht.
+                  A final-year Nutrition Sciences student at FCNAUP, University of
+                  Porto, who has already worked inside <Em>elite professional
+                  football</Em>. Most recently at RSC Anderlecht, one of Europe's
+                  historic clubs, and before that alongside the first team at Leça FC.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="text-body max-w-2xl mt-4">
                   His perspective comes from inside sport. Years lived across
-                  competitive disciplines shape how he reads environments,
-                  designs interventions and earns the trust of athletes and staff.
-                  The practice carries that perspective into every engagement.
+                  competitive disciplines shape how he reads environments, designs
+                  interventions and <Em>earns the trust of athletes and staff</Em>.
+                  That perspective carries into every engagement.
                 </p>
               </Reveal>
               <Reveal delay={0.4}>
@@ -230,6 +243,93 @@ const About = () => {
         <div className="divider" />
       </div>
 
+      {/* Experience */}
+      <section className="section-padding section-spacing">
+        <div className="max-content">
+          <Reveal>
+            <p className="text-caption mb-6">Experience</p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="text-headline max-w-3xl">
+              Tested inside{" "}
+              <span style={{ color: "hsl(var(--olive-light))", fontStyle: "italic", fontWeight: 300 }}>
+                elite professional football
+              </span>.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="text-body-lg max-w-2xl mt-6">
+              Not theory from the outside. Time spent inside real first-team
+              environments, where nutrition has to hold up under the pressure of a
+              competitive season.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 md:mt-16">
+            {experiences.map((exp, i) => (
+              <Reveal key={exp.id} delay={i * 0.08}>
+                <div className="grid grid-cols-[auto,1fr] gap-5 md:gap-8 py-8 border-t border-border/60">
+                  {/* club crest as visual anchor */}
+                  <div
+                    className="w-16 h-16 md:w-[76px] md:h-[76px] rounded-xl bg-white flex items-center justify-center shrink-0 overflow-hidden"
+                    style={{ boxShadow: "0 8px 24px -12px rgba(0,0,0,0.35)", border: "1px solid hsl(var(--border) / 0.6)" }}
+                  >
+                    <img src={clubLogos[exp.id]} alt={exp.name} className="w-[80%] h-[80%] object-contain" loading="lazy" />
+                  </div>
+                  {/* details */}
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h3 className="font-display text-xl md:text-2xl font-medium text-foreground">
+                        {exp.name}
+                      </h3>
+                      <span
+                        className="text-[10px] tracking-[0.22em] uppercase font-display"
+                        style={{ color: exp.kitColors.primary === "#0E0E10" ? "hsl(var(--muted-foreground))" : exp.kitColors.primary }}
+                      >
+                        {exp.period} · {exp.location}
+                      </span>
+                    </div>
+                    <p className="text-caption text-[10px] mt-2">{exp.role}</p>
+                    <p className="text-body text-sm mt-3 max-w-xl italic" style={{ color: "hsl(var(--muted-foreground))" }}>
+                      “{exp.chapter}”
+                    </p>
+                    <div className="flex flex-wrap gap-x-5 gap-y-1.5 mt-4">
+                      {exp.focus.map((f) => (
+                        <span key={f} className="inline-flex items-center gap-2 text-[11px] text-muted-foreground">
+                          <span
+                            className="w-1 h-1 rounded-full shrink-0"
+                            style={{ background: exp.kitColors.primary === "#0E0E10" ? "hsl(var(--foreground) / 0.5)" : exp.kitColors.primary }}
+                          />
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="mt-8 pt-6 border-t border-border/40">
+              <p className="text-caption text-[10px] mb-4">Additional exposure</p>
+              <div className="flex flex-wrap gap-x-8 gap-y-2">
+                {additionalExposure.map((a) => (
+                  <span key={a.name} className="font-display text-sm text-foreground">
+                    {a.name}
+                    <span className="text-muted-foreground text-xs"> · {a.date}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <div className="section-padding max-content">
+        <div className="divider" />
+      </div>
+
       {/* Philosophy */}
       <section className="section-padding section-spacing">
         <div className="max-content">
@@ -289,12 +389,35 @@ const About = () => {
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-2xl mt-6">
               My work sits where these worlds converge. I don't believe in
-              nutrition advice that exists in isolation. Real impact happens when
-              knowledge is embedded into systems, when education becomes a team
+              nutrition advice that exists in isolation. Real impact happens when{" "}
+              <Em>knowledge is embedded into systems</Em>, when education becomes a team
               habit, and when discipline is designed into the structure, not left
               to willpower.
             </p>
           </Reveal>
+
+          {/* Cinematic band, where the environments live */}
+          <Reveal delay={0.25}>
+            <figure className="relative mt-12 overflow-hidden rounded-lg">
+              <img
+                src={sceneArchive}
+                alt="A dimly lit professional locker room with an athlete standing ready."
+                className="w-full h-[34vh] md:h-[46vh] object-cover"
+                style={{ objectPosition: "center 42%" }}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.55), transparent 60%)" }}
+              />
+              <figcaption
+                className="absolute bottom-4 left-5 text-[10px] tracking-[0.28em] uppercase font-display"
+                style={{ color: "hsl(var(--ivory) / 0.72)" }}
+              >
+                Where the standard is set
+              </figcaption>
+            </figure>
+          </Reveal>
+
           <Reveal delay={0.3}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
               {["Sport Performance", "Applied Education", "Lifestyle Discipline", "System Design"].map((item, i) => (
@@ -325,7 +448,6 @@ const About = () => {
                   <h3 className="font-display text-lg font-medium text-foreground">BSc in Nutrition Sciences</h3>
                   <p className="text-body text-sm">FCNAUP, University of Porto</p>
                   <p className="text-caption text-[10px] font-normal">2022–2026 · Final-year student</p>
-                  <p className="text-body text-sm mt-2">Curricular internship at RSC Anderlecht: Feb–Jun 2026</p>
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-display text-lg font-medium text-foreground">Erasmus+ Mobility Project</h3>
