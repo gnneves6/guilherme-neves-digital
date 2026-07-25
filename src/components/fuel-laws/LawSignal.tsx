@@ -91,18 +91,16 @@ const LawSignal = ({ number, color }: Props) => {
     };
     return (
       <svg viewBox={vb} style={frame} role="img" aria-label="Interlocking daily habits of sleep, nutrition and hydration holding the athlete up">
-        {/* athlete mid-stride, driving arms and legs in opposition */}
-        <motion.g stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none"
-          initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, ease }}>
-          <circle cx="170" cy="15" r="6" fill={c} stroke="none" />
-          {/* torso, leaning forward into the run */}
-          <path d="M167 21 L172 44" />
-          {/* legs: front thigh driving up, back leg extended behind */}
-          <path d="M172 44 L188 50 L193 68" />
-          <path d="M172 44 L159 54 L150 66" />
-          {/* arms: opposite drive to the legs */}
-          <path d="M168 24 L181 27 L187 21" />
-          <path d="M168 24 L156 30 L149 36" />
+        {/* athlete mid-stride: filled head, thick rounded limbs, natural anatomy */}
+        <motion.g initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, ease }}>
+          <circle cx="179" cy="19" r="5.5" fill={c} />
+          <g fill="none" stroke={c} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M176.5 26 L169.5 49" />
+            <path d="M169.5 49 L184 54 L190 68" />
+            <path d="M169.5 49 L158.5 58 L150 52" />
+            <path d="M175.5 30 L182.5 38 L190 32" />
+            <path d="M175.5 30 L167 37 L161 30" />
+          </g>
         </motion.g>
         {/* platform the blocks lift */}
         <motion.rect x="45" y="72" width="254" height="7" rx="3" fill={c40}
@@ -126,41 +124,35 @@ const LawSignal = ({ number, color }: Props) => {
     );
   }
 
-  // 03 - The 3 R's: labels sit clear outside each circle, recovery only in the centre
+  // 03 - The 3 R's: big circles, each word inside its own clear zone, recover in the centre
   if (number === "03") {
-    const amber = "38 70% 55%";
-    const rose = "5 62% 60%";
-    const blue = "205 62% 58%";
-    const r = 42;
-    // centres pulled close so the triple overlap is wide enough to hold the word
-    const circles = [
-      { cx: 170, cy: 62, hue: amber, k: "Refuel", lx: 170, ly: 14, anchor: "middle" as const },
-      { cx: 152, cy: 96, hue: rose, k: "Repair", lx: 78, ly: 130, anchor: "start" as const },
-      { cx: 188, cy: 96, hue: blue, k: "Rehydrate", lx: 262, ly: 130, anchor: "end" as const },
+    const rings = [
+      { cx: 170, cy: 74, hue: "38 70% 55%", lab: "38 70% 63%", k: "Refuel", lx: 170, ly: 46, fs: 11 },
+      { cx: 136, cy: 128, hue: "5 62% 60%", lab: "5 62% 67%", k: "Repair", lx: 108, ly: 152, fs: 11 },
+      { cx: 204, cy: 128, hue: "205 62% 58%", lab: "205 62% 68%", k: "Rehydrate", lx: 232, ly: 152, fs: 10 },
     ];
-    const gx = (170 + 152 + 188) / 3;
-    const gy = (62 + 96 + 96) / 3;
+    const gx = 170, gy = 110;
     return (
-      <svg viewBox={vb} style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
-        {circles.map((o, i) => (
-          <motion.circle key={o.k} cx={o.cx} cy={o.cy} r={r}
-            fill={`hsl(${o.hue} / 0.14)`} stroke={`hsl(${o.hue} / 0.7)`} strokeWidth="1.2"
+      <svg viewBox="0 0 340 210" style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
+        {rings.map((o, i) => (
+          <motion.circle key={o.k} cx={o.cx} cy={o.cy} r={66}
+            fill={`hsl(${o.hue} / 0.15)`} stroke={`hsl(${o.hue} / 0.8)`} strokeWidth="1.3"
             initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
             style={{ transformOrigin: `${o.cx}px ${o.cy}px`, transformBox: "fill-box" }}
             transition={{ duration: 0.5, delay: 0.15 + i * 0.15, ease }} />
         ))}
-        {circles.map((o, i) => (
-          <motion.text key={o.k} x={o.lx} y={o.ly} textAnchor={o.anchor}
-            style={{ fontSize: 9, letterSpacing: "0.1em", fontFamily: "var(--font-display)", textTransform: "uppercase", fill: `hsl(${o.hue})` }}
+        {rings.map((o, i) => (
+          <motion.text key={o.k} x={o.lx} y={o.ly} textAnchor="middle"
+            style={{ fontSize: o.fs, letterSpacing: "0.08em", fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 600, fill: `hsl(${o.lab})` }}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 + i * 0.12 }}>
             {o.k}
           </motion.text>
         ))}
-        {/* recovery, centred exactly on the triple overlap and small enough to fit inside it */}
-        <motion.g initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
+        {/* recover, centred exactly on the triple overlap */}
+        <motion.g initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}
           style={{ transformOrigin: `${gx}px ${gy}px`, transformBox: "fill-box" }} transition={{ delay: 0.9, ease }}>
-          <text x={gx} y={gy + 3} textAnchor="middle"
-            style={{ fontSize: 8, letterSpacing: "0.1em", fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 600, fill: "hsl(var(--ivory))" }}>
+          <text x={gx} y={gy + 3.5} textAnchor="middle"
+            style={{ fontSize: 10.5, letterSpacing: "0.12em", fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 700, fill: "hsl(var(--ivory))" }}>
             Recover
           </text>
         </motion.g>
@@ -224,7 +216,7 @@ const LawSignal = ({ number, color }: Props) => {
                 {row.label}
               </text>
               {/* small upward tick = lifted by hydration */}
-              <path d={`M324 ${row.y + 1} l -4 -5 l -4 5`} fill="none" stroke={c} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              <path d={`M312 ${row.y + 1} l -4 -5 l -4 5`} fill="none" stroke={c} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </motion.g>
           </g>
         ))}
