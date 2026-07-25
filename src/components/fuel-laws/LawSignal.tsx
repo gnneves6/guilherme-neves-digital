@@ -91,15 +91,15 @@ const LawSignal = ({ number, color }: Props) => {
     };
     return (
       <svg viewBox={vb} style={frame} role="img" aria-label="Interlocking daily habits of sleep, nutrition and hydration holding the athlete up">
-        {/* athlete mid-stride: filled head, thick rounded limbs, natural anatomy */}
+        {/* athlete in an explosive sprint: straight arms in opposition, driving stride */}
         <motion.g initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, ease }}>
-          <circle cx="179" cy="19" r="5.5" fill={c} />
+          <circle cx="179" cy="23" r="5.2" fill={c} />
           <g fill="none" stroke={c} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M176.5 26 L169.5 49" />
-            <path d="M169.5 49 L184 54 L190 68" />
-            <path d="M169.5 49 L158.5 58 L150 52" />
-            <path d="M175.5 30 L182.5 38 L190 32" />
-            <path d="M175.5 30 L167 37 L161 30" />
+            <path d="M174.6 31 L167.7 52" />
+            <path d="M167.7 52 L179.3 54 L182.8 68" />
+            <path d="M167.7 52 L147.9 67" />
+            <path d="M174.6 32 L192 24" />
+            <path d="M174.6 32 L160.7 43.6" />
           </g>
         </motion.g>
         {/* platform the blocks lift */}
@@ -127,15 +127,15 @@ const LawSignal = ({ number, color }: Props) => {
   // 03 - The 3 R's: big circles, each word inside its own clear zone, recover in the centre
   if (number === "03") {
     const rings = [
-      { cx: 170, cy: 74, hue: "38 70% 55%", lab: "38 70% 63%", k: "Refuel", lx: 170, ly: 46, fs: 11 },
-      { cx: 136, cy: 128, hue: "5 62% 60%", lab: "5 62% 67%", k: "Repair", lx: 108, ly: 152, fs: 11 },
-      { cx: 204, cy: 128, hue: "205 62% 58%", lab: "205 62% 68%", k: "Rehydrate", lx: 232, ly: 152, fs: 10 },
+      { cx: 170, cy: 84, hue: "38 70% 55%", lab: "38 70% 63%", k: "Refuel", lx: 170, ly: 54, fs: 11 },
+      { cx: 132, cy: 140, hue: "5 62% 60%", lab: "5 62% 67%", k: "Repair", lx: 97, ly: 176, fs: 11 },
+      { cx: 208, cy: 140, hue: "205 62% 58%", lab: "205 62% 68%", k: "Rehydrate", lx: 243, ly: 176, fs: 11 },
     ];
-    const gx = 170, gy = 110;
+    const gx = 170, gy = 121;
     return (
-      <svg viewBox="0 0 340 210" style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
+      <svg viewBox="0 0 340 230" style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
         {rings.map((o, i) => (
-          <motion.circle key={o.k} cx={o.cx} cy={o.cy} r={66}
+          <motion.circle key={o.k} cx={o.cx} cy={o.cy} r={80}
             fill={`hsl(${o.hue} / 0.15)`} stroke={`hsl(${o.hue} / 0.8)`} strokeWidth="1.3"
             initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
             style={{ transformOrigin: `${o.cx}px ${o.cy}px`, transformBox: "fill-box" }}
@@ -152,7 +152,7 @@ const LawSignal = ({ number, color }: Props) => {
         <motion.g initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}
           style={{ transformOrigin: `${gx}px ${gy}px`, transformBox: "fill-box" }} transition={{ delay: 0.9, ease }}>
           <text x={gx} y={gy + 3.5} textAnchor="middle"
-            style={{ fontSize: 10.5, letterSpacing: "0.12em", fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 700, fill: "hsl(var(--ivory))" }}>
+            style={{ fontSize: 11, letterSpacing: "0.12em", fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 700, fill: "hsl(var(--ivory))" }}>
             Recover
           </text>
         </motion.g>
@@ -171,28 +171,29 @@ const LawSignal = ({ number, color }: Props) => {
     ];
     const ix = 150; // icon centre x
     const tx = 164; // label start x
+    // every icon is drawn centred on the origin, then translated to (ix, y),
+    // so all four share the exact same anchor point on the row.
     const icon = (kind: string, y: number) => {
+      let glyph;
       if (kind === "thermo")
-        return (
-          <g stroke={c} strokeWidth="1.4" fill="none" strokeLinecap="round">
-            <line x1={ix} y1={y - 6} x2={ix} y2={y + 1} />
-            <circle cx={ix} cy={y + 3} r="3" fill={c} stroke="none" />
-          </g>
+        glyph = (
+          <>
+            <line x1={0} y1={-6} x2={0} y2={1} stroke={c} strokeWidth="1.6" strokeLinecap="round" />
+            <circle cx={0} cy={3.5} r="2.8" fill={c} />
+          </>
         );
-      if (kind === "heart")
-        return (
-          <path d={`M${ix} ${y + 5} c -4 -4 -8 -1 -8 2 c 0 3 4 5 8 8 c 4 -3 8 -5 8 -8 c 0 -3 -4 -6 -8 -2 z`} fill={c} />
+      else if (kind === "heart")
+        glyph = <path d="M0 5 C -6 -1 -4.5 -6.5 0 -2.5 C 4.5 -6.5 6 -1 0 5 Z" fill={c} />;
+      else if (kind === "focus")
+        glyph = (
+          <>
+            <circle cx={0} cy={0} r="6" fill="none" stroke={c} strokeWidth="1.4" />
+            <circle cx={0} cy={0} r="2.4" fill={c} />
+          </>
         );
-      if (kind === "focus")
-        return (
-          <g stroke={c} strokeWidth="1.3" fill="none">
-            <circle cx={ix} cy={y} r="6" />
-            <circle cx={ix} cy={y} r="2.4" fill={c} stroke="none" />
-          </g>
-        );
-      return (
-        <path d={`M${ix + 3} ${y - 6} L${ix - 4} ${y + 2} L${ix} ${y + 2} L${ix - 2} ${y + 8} L${ix + 5} ${y - 1} L${ix + 1} ${y - 1} Z`} fill={c} />
-      );
+      else
+        glyph = <path d="M1.5 -6 L -3.5 1 L -0.5 1 L -2 6 L 4 -1.5 L 1 -1.5 Z" fill={c} />;
+      return <g transform={`translate(${ix} ${y})`}>{glyph}</g>;
     };
     return (
       <svg viewBox={vb} style={frame} role="img" aria-label="Correct hydration supporting temperature control, blood and oxygen flow, focus and reaction, power and endurance">
