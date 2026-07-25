@@ -106,7 +106,7 @@ const FuelLaws = () => {
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-2xl mt-8">
               A practical framework that turns nutrition from information into usable
-              performance behaviour. Five principles. Clear action. Repeatable systems.
+              performance behaviour, and keeps it working long after the advice is forgotten.
             </p>
           </Reveal>
           <Reveal delay={0.3}>

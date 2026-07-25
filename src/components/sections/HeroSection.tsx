@@ -149,20 +149,11 @@ const HeroSection = () => {
             environments, shaped by lived sport, rooted in football and built for real-world use.
           </motion.p>
           <motion.p
-            className="text-xs md:text-sm tracking-[0.18em] uppercase font-display mt-5 md:mt-6"
-            style={{ color: "hsl(var(--ivory) / 0.55)" }}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.65 }}
-          >
-            Athlete by nature. Nutritionist by purpose.
-          </motion.p>
-          <motion.p
-            className="text-[10px] md:text-[11px] tracking-[0.22em] uppercase font-display mt-4 md:mt-5 max-w-xl"
+            className="text-[10px] md:text-[11px] tracking-[0.22em] uppercase font-display mt-5 md:mt-6 max-w-xl"
             style={{ color: "hsl(var(--ivory) / 0.5)" }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.72 }}
+            transition={{ duration: 0.8, delay: 0.65 }}
           >
             Field experience across elite academy, senior football and applied performance environments.
           </motion.p>
