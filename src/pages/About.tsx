@@ -9,9 +9,9 @@ import Magnetic from "@/components/motion/Magnetic";
 import sceneTunnel from "@/assets/scene-invitation-exit.jpg";
 import sceneArchive from "@/assets/scene-environments-archive.jpg";
 import { experiences, additionalExposure } from "@/data/experiences";
-import logoAnderlecht from "@/assets/logo-anderlecht.png";
-import logoLeca from "@/assets/logo-leca.png";
-import logoR4e from "@/assets/logo-run4excellence.png";
+import logoAnderlecht from "@/assets/logos/anderlecht.png";
+import logoLeca from "@/assets/logos/leca.png";
+import logoR4e from "@/assets/logos/run4excellence.jpg";
 
 const clubLogos: Record<string, string> = {
   anderlecht: logoAnderlecht,
