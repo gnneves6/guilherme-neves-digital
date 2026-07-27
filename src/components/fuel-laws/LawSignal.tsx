@@ -52,6 +52,11 @@ const LawSignal = ({ number, color }: Props) => {
         <motion.path d="M92 64 L80 88 L90 88 L84 106 L102 80 L92 80 Z" fill={c}
           initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}
           style={{ transformOrigin: "91px 85px", transformBox: "fill-box" }} transition={{ delay: 0.6, ease }} />
+        {/* fuel drives the output */}
+        <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.95 }} stroke={c40} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none">
+          <line x1="166" y1="83" x2="175" y2="83" />
+          <path d="M171 79 L176 83 L171 87" />
+        </motion.g>
         {/* performance graph: low baseline, then a climb to a flat, high plateau */}
         <line x1="178" y1="112" x2="324" y2="112" stroke={line} strokeDasharray="3 3" />
         <text x="178" y="126" style={{ ...micro(dim), fontSize: 7 }}>Baseline</text>
@@ -208,16 +213,16 @@ const LawSignal = ({ number, color }: Props) => {
         {/* four systems it drives */}
         {rows.map((row, i) => (
           <g key={row.label}>
-            <motion.path d={`M98 ${cy} C 120 ${cy}, 126 ${row.y} 142 ${row.y}`} fill="none" stroke={c40}
+            <motion.path d={`M98 ${cy} C 120 ${cy}, 124 ${row.y} 138 ${row.y}`} fill="none" stroke={c40}
               initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.4 + i * 0.12 }} />
+            <motion.path d={`M135 ${row.y - 3} L140 ${row.y} L135 ${row.y + 3} Z`} fill={c40}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 + i * 0.12 }} />
             <motion.g initial={{ opacity: 0, x: -4 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.55 + i * 0.12, ease }}>
               {icon(row.icon, row.y)}
               <text x={tx} y={row.y + 3}
                 style={{ fontSize: 8.5, letterSpacing: "0.02em", fontFamily: "var(--font-display)", fill: "hsl(var(--ivory) / 0.86)" }}>
                 {row.label}
               </text>
-              {/* small upward tick = lifted by hydration */}
-              <path d={`M312 ${row.y + 1} l -4 -5 l -4 5`} fill="none" stroke={c} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </motion.g>
           </g>
         ))}
@@ -241,14 +246,14 @@ const LawSignal = ({ number, color }: Props) => {
         );
       })}
       <text x="52" y="110" style={micro(dim)}>Rehearsed in training</text>
-      <motion.line x1="246" y1="80" x2="278" y2="80" stroke={c40}
+      <motion.line x1="246" y1="80" x2="278" y2="80" stroke={c40} strokeDasharray="3 3"
         initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.75 }} />
       <motion.g initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
         style={{ transformOrigin: "302px 80px", transformBox: "fill-box" }} transition={{ delay: 0.85, ease }}>
         <circle cx="302" cy="80" r="17" fill={c15} stroke={c} />
         <path d="M296 71 v18 M296 72 h10 l-2.5 3.5 l2.5 3.5 h-10" fill="none" stroke={c} strokeWidth="1.4" strokeLinejoin="round" />
       </motion.g>
-      <text x="302" y="114" textAnchor="middle" style={{ ...micro(c), fontSize: 7.5 }}>Game day</text>
+      <text x="302" y="115" textAnchor="middle" style={micro(c)}>Game day</text>
     </svg>
   );
 };
