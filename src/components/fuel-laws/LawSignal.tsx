@@ -91,15 +91,22 @@ const LawSignal = ({ number, color }: Props) => {
     };
     return (
       <svg viewBox={vb} style={frame} role="img" aria-label="Interlocking daily habits of sleep, nutrition and hydration holding the athlete up">
-        {/* athlete in an explosive sprint: straight arms in opposition, driving stride */}
+        {/* athlete running: solid leaning silhouette with speed lines behind */}
         <motion.g initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, ease }}>
-          <circle cx="179" cy="23" r="5.2" fill={c} />
-          <g fill="none" stroke={c} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M174.6 31 L167.7 52" />
-            <path d="M167.7 52 L179.3 54 L182.8 68" />
-            <path d="M167.7 52 L147.9 67" />
-            <path d="M174.6 32 L192 24" />
-            <path d="M174.6 32 L160.7 43.6" />
+          <g transform="translate(106 -7) scale(0.6)">
+            <g stroke={c} strokeWidth="4" strokeLinecap="round">
+              <line x1="34" y1="52" x2="66" y2="52" />
+              <line x1="28" y1="64" x2="60" y2="64" />
+              <line x1="34" y1="76" x2="66" y2="76" />
+            </g>
+            <g fill="none" stroke={c} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M150 60 L112 96" />
+              <path d="M150 60 L168 72 L160 88" />
+              <path d="M150 60 L128 54 L114 64" />
+              <path d="M112 96 L142 100 L150 124" />
+              <path d="M112 96 L96 118 L72 128" />
+            </g>
+            <circle cx="164" cy="44" r="13" fill={c} />
           </g>
         </motion.g>
         {/* platform the blocks lift */}
@@ -127,15 +134,15 @@ const LawSignal = ({ number, color }: Props) => {
   // 03 - The 3 R's: big circles, each word inside its own clear zone, recover in the centre
   if (number === "03") {
     const rings = [
-      { cx: 170, cy: 84, hue: "38 70% 55%", lab: "38 70% 63%", k: "Refuel", lx: 170, ly: 54, fs: 11 },
-      { cx: 132, cy: 140, hue: "5 62% 60%", lab: "5 62% 67%", k: "Repair", lx: 97, ly: 176, fs: 11 },
-      { cx: 208, cy: 140, hue: "205 62% 58%", lab: "205 62% 68%", k: "Rehydrate", lx: 243, ly: 176, fs: 11 },
+      { cx: 180, cy: 96, hue: "38 70% 55%", lab: "38 70% 63%", k: "Refuel", lx: 180, ly: 60, fs: 11 },
+      { cx: 138, cy: 160, hue: "5 62% 60%", lab: "5 62% 67%", k: "Repair", lx: 102, ly: 196, fs: 11 },
+      { cx: 222, cy: 160, hue: "205 62% 58%", lab: "205 62% 68%", k: "Rehydrate", lx: 258, ly: 196, fs: 11 },
     ];
-    const gx = 170, gy = 121;
+    const gx = 180, gy = 139;
     return (
-      <svg viewBox="0 0 340 230" style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
+      <svg viewBox="0 0 360 260" style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
         {rings.map((o, i) => (
-          <motion.circle key={o.k} cx={o.cx} cy={o.cy} r={80}
+          <motion.circle key={o.k} cx={o.cx} cy={o.cy} r={90}
             fill={`hsl(${o.hue} / 0.15)`} stroke={`hsl(${o.hue} / 0.8)`} strokeWidth="1.3"
             initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }}
             style={{ transformOrigin: `${o.cx}px ${o.cy}px`, transformBox: "fill-box" }}
