@@ -91,22 +91,15 @@ const LawSignal = ({ number, color }: Props) => {
     };
     return (
       <svg viewBox={vb} style={frame} role="img" aria-label="Interlocking daily habits of sleep, nutrition and hydration holding the athlete up">
-        {/* athlete running: solid leaning silhouette with speed lines behind */}
+        {/* athlete running: clean filled silhouette (Material directions_run) + speed lines */}
         <motion.g initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, ease }}>
-          <g transform="translate(106 -7) scale(0.6)">
-            <g stroke={c} strokeWidth="4" strokeLinecap="round">
-              <line x1="34" y1="52" x2="66" y2="52" />
-              <line x1="28" y1="64" x2="60" y2="64" />
-              <line x1="34" y1="76" x2="66" y2="76" />
-            </g>
-            <g fill="none" stroke={c} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M150 60 L112 96" />
-              <path d="M150 60 L168 72 L160 88" />
-              <path d="M150 60 L128 54 L114 64" />
-              <path d="M112 96 L142 100 L150 124" />
-              <path d="M112 96 L96 118 L72 128" />
-            </g>
-            <circle cx="164" cy="44" r="13" fill={c} />
+          <g stroke={c} strokeWidth="3" strokeLinecap="round">
+            <line x1="118" y1="34" x2="142" y2="34" />
+            <line x1="112" y1="44" x2="136" y2="44" />
+            <line x1="118" y1="54" x2="142" y2="54" />
+          </g>
+          <g transform="translate(146 9.5) scale(2.9)" fill={c}>
+            <path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z" />
           </g>
         </motion.g>
         {/* platform the blocks lift */}
@@ -134,13 +127,13 @@ const LawSignal = ({ number, color }: Props) => {
   // 03 - The 3 R's: big circles, each word inside its own clear zone, recover in the centre
   if (number === "03") {
     const rings = [
-      { cx: 180, cy: 96, hue: "38 70% 55%", lab: "38 70% 63%", k: "Refuel", lx: 180, ly: 60, fs: 11 },
-      { cx: 138, cy: 160, hue: "5 62% 60%", lab: "5 62% 67%", k: "Repair", lx: 102, ly: 196, fs: 11 },
-      { cx: 222, cy: 160, hue: "205 62% 58%", lab: "205 62% 68%", k: "Rehydrate", lx: 258, ly: 196, fs: 11 },
+      { cx: 180, cy: 96, hue: "38 70% 55%", lab: "38 70% 63%", k: "Refuel", lx: 180, ly: 60, fs: 11, ls: 0.09 },
+      { cx: 130, cy: 162, hue: "5 62% 60%", lab: "5 62% 67%", k: "Repair", lx: 100, ly: 198, fs: 11, ls: 0.09 },
+      { cx: 230, cy: 162, hue: "205 62% 58%", lab: "205 62% 68%", k: "Rehydrate", lx: 264, ly: 198, fs: 11, ls: 0.04 },
     ];
-    const gx = 180, gy = 139;
+    const gx = 180, gy = 140;
     return (
-      <svg viewBox="0 0 360 260" style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
+      <svg viewBox="0 0 360 264" style={frame} role="img" aria-label="Refuel, repair and rehydrate overlapping so that recovery sits where all three meet">
         {rings.map((o, i) => (
           <motion.circle key={o.k} cx={o.cx} cy={o.cy} r={90}
             fill={`hsl(${o.hue} / 0.15)`} stroke={`hsl(${o.hue} / 0.8)`} strokeWidth="1.3"
@@ -150,7 +143,7 @@ const LawSignal = ({ number, color }: Props) => {
         ))}
         {rings.map((o, i) => (
           <motion.text key={o.k} x={o.lx} y={o.ly} textAnchor="middle"
-            style={{ fontSize: o.fs, letterSpacing: "0.08em", fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 600, fill: `hsl(${o.lab})` }}
+            style={{ fontSize: o.fs, letterSpacing: `${o.ls}em`, fontFamily: "var(--font-display)", textTransform: "uppercase", fontWeight: 600, fill: `hsl(${o.lab})` }}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 + i * 0.12 }}>
             {o.k}
           </motion.text>
