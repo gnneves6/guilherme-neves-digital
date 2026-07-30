@@ -9,6 +9,7 @@ import Magnetic from "@/components/motion/Magnetic";
 import sceneArchive from "@/assets/scene-environments-archive.jpg";
 import photoLockerRoom from "@/assets/photos/locker-room.webp";
 import photoPitchside from "@/assets/photos/leca-pitchside.webp";
+import photoArrival from "@/assets/photos/leca-arrival.webp";
 import photoTrophies from "@/assets/photos/anderlecht-trophies.webp";
 import photoSign from "@/assets/photos/anderlecht-sign.webp";
 import { experiences, additionalExposure } from "@/data/experiences";
@@ -271,11 +272,12 @@ const About = () => {
 
           {/* Real proof, inside the environments */}
           <Reveal delay={0.25}>
-            <div className="grid grid-cols-3 gap-2.5 md:gap-4 mt-10 md:mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4 mt-10 md:mt-12">
               {[
                 { src: photoSign, alt: "Guilherme at the RSC Anderlecht training centre.", cap: "RSC Anderlecht", pos: "center 30%" },
-                { src: photoTrophies, alt: "Guilherme in the RSC Anderlecht trophy room.", cap: "Brussels", pos: "center 20%" },
+                { src: photoTrophies, alt: "Guilherme inside the RSC Anderlecht club.", cap: "Brussels", pos: "center 20%" },
                 { src: photoPitchside, alt: "Guilherme pitchside with Leça FC.", cap: "Leça FC", pos: "center 22%" },
+                { src: photoArrival, alt: "Guilherme arriving with the Leça FC squad.", cap: "Matchday", pos: "center 25%" },
               ].map((ph) => (
                 <figure key={ph.cap} className="relative overflow-hidden rounded-lg aspect-[3/4]">
                   <img src={ph.src} alt={ph.alt} className="w-full h-full object-cover" style={{ objectPosition: ph.pos }} loading="lazy" />
