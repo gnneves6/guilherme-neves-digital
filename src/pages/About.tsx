@@ -265,8 +265,8 @@ const About = () => {
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-2xl mt-6">
               Not theory from the outside. Time spent inside real first-team
-              environments, where nutrition has to hold up under the pressure of a
-              competitive season.
+              environments, where nutrition has to <Em>hold up under the pressure of
+              a competitive season</Em>.
             </p>
           </Reveal>
 
@@ -528,23 +528,22 @@ const About = () => {
             <div>
               <p className="text-caption mb-6">Looking Outward</p>
               <h2 className="text-headline max-w-3xl">
-                International ambition. Meaningful work. Long-term vision.
+                The aim is international, and built to last.
               </h2>
             </div>
           </Reveal>
           <Reveal delay={0.15}>
             <div className="space-y-6">
               <p className="text-body-lg">
-                I'm building toward a career defined by contribution to elite sport
-                environments internationally. The ambition is clear: create
-                genuinely useful systems, work with high-performance organisations,
-                and continuously raise the standard of what practical sport
-                nutrition looks like.
+                I'm building toward a career inside elite sport environments,
+                internationally. The ambition is clear: <Em>create genuinely useful
+                systems</Em>, work with high-performance organisations, and keep
+                raising the standard of what practical sport nutrition looks like.
               </p>
               <p className="text-body-lg">
-                Not for visibility. For impact. For building things that last and
-                environments that perform better because of how they think about
-                nutrition.
+                Not for visibility, but for impact. Building things that last, and{" "}
+                <Em>environments that perform better because of how they think about
+                nutrition</Em>.
               </p>
             </div>
           </Reveal>
