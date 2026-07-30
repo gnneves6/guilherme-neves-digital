@@ -6,8 +6,11 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
-import sceneTunnel from "@/assets/scene-invitation-exit.jpg";
 import sceneArchive from "@/assets/scene-environments-archive.jpg";
+import photoLockerRoom from "@/assets/photos/locker-room.webp";
+import photoPitchside from "@/assets/photos/leca-pitchside.webp";
+import photoTrophies from "@/assets/photos/anderlecht-trophies.webp";
+import photoSign from "@/assets/photos/anderlecht-sign.webp";
 import { experiences, additionalExposure } from "@/data/experiences";
 import logoAnderlecht from "@/assets/logos/anderlecht.png";
 import logoLeca from "@/assets/logos/leca.png";
@@ -171,24 +174,25 @@ const About = () => {
             </h2>
           </Reveal>
 
-          {/* Cinematic band, the athlete's path from the tunnel to the pitch */}
+          {/* Cinematic band, a real moment inside the football environment */}
           <Reveal delay={0.2}>
             <figure className="relative mt-10 md:mt-14 overflow-hidden rounded-lg">
               <img
-                src={sceneTunnel}
-                alt="A stadium tunnel opening onto the pitch, the passage from athlete to practitioner."
+                src={photoLockerRoom}
+                alt="Guilherme focused inside a football dressing room before a match."
                 className="w-full h-[38vh] md:h-[52vh] object-cover"
-                style={{ objectPosition: "center 40%" }}
+                style={{ objectPosition: "center 26%" }}
+                loading="lazy"
               />
               <div
                 className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.5), transparent 55%)" }}
+                style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.55), transparent 55%)" }}
               />
               <figcaption
                 className="absolute bottom-4 left-5 text-[10px] tracking-[0.28em] uppercase font-display"
-                style={{ color: "hsl(var(--ivory) / 0.72)" }}
+                style={{ color: "hsl(var(--ivory) / 0.75)" }}
               >
-                From the pitch to the practice
+                Inside the room, before it counts
               </figcaption>
             </figure>
           </Reveal>
@@ -263,6 +267,25 @@ const About = () => {
               environments, where nutrition has to hold up under the pressure of a
               competitive season.
             </p>
+          </Reveal>
+
+          {/* Real proof, inside the environments */}
+          <Reveal delay={0.25}>
+            <div className="grid grid-cols-3 gap-2.5 md:gap-4 mt-10 md:mt-12">
+              {[
+                { src: photoSign, alt: "Guilherme at the RSC Anderlecht training centre.", cap: "RSC Anderlecht", pos: "center 30%" },
+                { src: photoTrophies, alt: "Guilherme in the RSC Anderlecht trophy room.", cap: "Brussels", pos: "center 20%" },
+                { src: photoPitchside, alt: "Guilherme pitchside with Leça FC.", cap: "Leça FC", pos: "center 22%" },
+              ].map((ph) => (
+                <figure key={ph.cap} className="relative overflow-hidden rounded-lg aspect-[3/4]">
+                  <img src={ph.src} alt={ph.alt} className="w-full h-full object-cover" style={{ objectPosition: ph.pos }} loading="lazy" />
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.6), transparent 50%)" }} />
+                  <figcaption className="absolute bottom-2.5 left-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.85)" }}>
+                    {ph.cap}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </Reveal>
 
           <div className="mt-12 md:mt-16">
