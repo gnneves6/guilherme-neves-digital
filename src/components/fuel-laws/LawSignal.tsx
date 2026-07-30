@@ -220,7 +220,7 @@ const LawSignal = ({ number, color }: Props) => {
             <motion.g initial={{ opacity: 0, x: -4 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.55 + i * 0.12, ease }}>
               {icon(row.icon, row.y)}
               <text x={tx} y={row.y + 3}
-                style={{ fontSize: 8.5, letterSpacing: "0.02em", fontFamily: "var(--font-display)", fill: "hsl(var(--ivory) / 0.86)" }}>
+                style={{ fontSize: 7.5, letterSpacing: "0.1em", fontFamily: "var(--font-display)", textTransform: "uppercase", fill: "hsl(var(--ivory) / 0.82)" }}>
                 {row.label}
               </text>
             </motion.g>
