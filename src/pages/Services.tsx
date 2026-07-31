@@ -10,12 +10,16 @@ type Service = {
   index: string;
   tag: string;
   title: string;
+  outcome: string;
+  format: string;
+  forWhom: string;
   positioning: string;
   problem: string;
   audience: string;
   outcomes: string[];
   deliverables: string[];
   cta: string;
+  ctaMicro: string;
   flagship?: boolean;
 };
 
@@ -24,6 +28,10 @@ const services: Service[] = [
     index: "01",
     tag: "Flagship engagement",
     title: "Football Nutrition Audit & Systems Review",
+    outcome: "A clear map of what's working, what's leaking, and what to fix first.",
+    format: "4–6 weeks · on-site + remote",
+    forWhom: "Clubs · Federations · Performance departments",
+    ctaMicro: "Starts with a short scoping call, no obligation.",
     positioning:
       "A structured diagnostic of how nutrition is actually delivered inside a football environment, from staff workflow to athlete experience.",
     problem:
@@ -49,6 +57,10 @@ const services: Service[] = [
     index: "02",
     tag: "Ongoing partnership",
     title: "Performance Nutrition Systems",
+    outcome: "Nutrition that runs every week, not just on match day.",
+    format: "Season-long · retained",
+    forWhom: "Performance departments · Elite athletes",
+    ctaMicro: "Starts from your calendar, never a template.",
     positioning:
       "Design and implementation of practical nutrition systems that survive real training weeks, travel, congested fixtures and human reality.",
     problem:
@@ -73,6 +85,10 @@ const services: Service[] = [
     index: "03",
     tag: "Education programme",
     title: "Education & Workshops",
+    outcome: "Players who own their fuelling, in a language your whole staff shares.",
+    format: "Single or multi-session",
+    forWhom: "Clubs · Academies · National teams",
+    ctaMicro: "Built for your group, not a generic talk.",
     positioning:
       "Closed-door education built for athletes, staff and parent groups inside performance environments, not generic talks.",
     problem:
@@ -241,14 +257,36 @@ const Services = () => {
       {/* Services */}
       <section className="section-padding section-spacing">
         <div className="max-content space-y-10 md:space-y-14">
-          <Reveal>
-            <div className="flex items-baseline justify-between gap-6 flex-wrap">
+          <div>
+            <Reveal>
               <p className="text-caption">02, Strategic Engagements</p>
-              <p className="text-caption text-[10px] text-muted-foreground">
-                Three offerings · By invitation & enquiry
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="text-headline max-w-3xl mt-5">
+                Three ways to make nutrition{" "}
+                <span style={{ color: "hsl(var(--olive-light))", fontStyle: "italic", fontWeight: 300 }}>
+                  work in your environment
+                </span>
+                , not just on paper.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p className="text-body-lg max-w-2xl mt-6">
+                Each one starts inside your environment and ends with something your
+                staff and athletes actually use. Chosen with you, scoped to fit.
               </p>
-            </div>
-          </Reveal>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2">
+                {["By invitation", "A few partners each season", "Every enquiry reviewed personally"].map((t) => (
+                  <span key={t} className="inline-flex items-center gap-2 text-caption text-[10px] text-muted-foreground">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(var(--olive) / 0.7)" }} />
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+          </div>
 
           <div className="space-y-8 md:space-y-10">
             {services.map((s, i) => (
@@ -271,63 +309,69 @@ const Services = () => {
                     </div>
 
                     {/* Body */}
-                    <div className="space-y-8">
-                      <header className="space-y-4">
-                        <h2 className="font-display text-2xl md:text-3xl font-medium leading-tight tracking-tight text-foreground">
-                          {s.title}
-                        </h2>
-                        <p className="text-body-lg max-w-2xl">{s.positioning}</p>
-                      </header>
-
-                      <div className="grid md:grid-cols-2 gap-8 md:gap-10">
-                        <div className="space-y-2">
-                          <p className="text-caption text-[10px]">The problem it solves</p>
-                          <p className="text-body text-sm">{s.problem}</p>
-                        </div>
-                        <div className="space-y-2">
-                          <p className="text-caption text-[10px]">Who it is for</p>
-                          <p className="text-body text-sm">{s.audience}</p>
-                        </div>
+                    <div className="space-y-6">
+                      {/* who it is for + format, sets expectation up front */}
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <span className="text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--olive))" }}>
+                          {s.forWhom}
+                        </span>
+                        <span className="text-caption text-[10px] text-muted-foreground">{s.format}</span>
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-8 md:gap-10">
+                      {/* the outcome, what the client actually walks toward */}
+                      <h3 className="font-display text-2xl md:text-[28px] lg:text-[32px] font-semibold leading-[1.15] tracking-tight text-foreground max-w-3xl">
+                        {s.outcome}
+                      </h3>
+
+                      <p className="text-body text-sm max-w-2xl leading-relaxed">
+                        <span className="text-foreground font-medium">{s.title}.</span>{" "}
+                        {s.positioning}
+                      </p>
+
+                      <div className="grid md:grid-cols-2 gap-8 md:gap-12 pt-2">
+                        <div className="space-y-2">
+                          <p className="text-caption text-[10px]">The problem we remove</p>
+                          <p className="text-body text-sm leading-relaxed">{s.problem}</p>
+                        </div>
                         <div className="space-y-3">
-                          <p className="text-caption text-[10px]">Expected outcomes</p>
-                          <ul className="space-y-2">
+                          <p className="text-caption text-[10px]" style={{ color: "hsl(var(--olive))" }}>
+                            What you walk away with
+                          </p>
+                          <ul className="space-y-2.5">
                             {s.outcomes.map((o) => (
-                              <li key={o} className="flex gap-3 text-body text-sm">
-                                <span className="mt-2 h-px w-4 bg-foreground/40 shrink-0" />
+                              <li key={o} className="flex gap-2.5 text-body text-sm">
+                                <svg width="14" height="14" viewBox="0 0 14 14" className="mt-1 shrink-0" fill="none" aria-hidden>
+                                  <path d="M3 7.5 L6 10.5 L11 4" stroke="hsl(var(--olive))" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
                                 <span>{o}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
-                        <div className="space-y-3">
-                          <p className="text-caption text-[10px]">Deliverables</p>
-                          <ul className="space-y-2">
-                            {s.deliverables.map((d) => (
-                              <li key={d} className="flex gap-3 text-body text-sm">
-                                <span className="mt-2 h-px w-4 bg-foreground/40 shrink-0" />
-                                <span>{d}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
                       </div>
 
-                      <div className="pt-2">
-                        <Link
-                          to="/contact"
-                          className="group/cta inline-flex items-center gap-3 text-sm font-display font-medium text-foreground"
-                        >
-                          <span className="link-underline">{s.cta}</span>
-                          <span
-                            aria-hidden
-                            className="inline-block transition-transform duration-300 group-hover/cta:translate-x-1"
+                      <div className="pt-1">
+                        <p className="text-caption text-[10px] mb-2">How it runs</p>
+                        <p className="text-body text-xs text-muted-foreground max-w-2xl leading-relaxed">
+                          {s.deliverables.join("   ·   ")}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-2.5">
+                        <Magnetic as="span" strength={6}>
+                          <Link
+                            to="/contact"
+                            className={`group/cta inline-flex items-center gap-2.5 px-6 py-3 rounded-md font-display text-sm font-medium tracking-wide transition-all duration-300 ${
+                              s.flagship
+                                ? "bg-foreground text-background hover:opacity-90"
+                                : "border border-foreground/25 text-foreground hover:border-foreground/50"
+                            }`}
                           >
-                            →
-                          </span>
-                        </Link>
+                            {s.cta}
+                            <span aria-hidden className="inline-block transition-transform duration-300 group-hover/cta:translate-x-1">→</span>
+                          </Link>
+                        </Magnetic>
+                        <span className="text-caption text-[10px] text-muted-foreground">{s.ctaMicro}</span>
                       </div>
                     </div>
                   </div>
