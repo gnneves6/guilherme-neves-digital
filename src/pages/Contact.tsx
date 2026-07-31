@@ -78,7 +78,7 @@ const Contact = () => {
       </div>
 
       <section className="section-padding section-spacing">
-        <div className="max-content grid md:grid-cols-[1fr,320px] lg:grid-cols-[1fr,400px] gap-16 md:gap-20">
+        <div className="max-content grid md:grid-cols-[1fr,320px] lg:grid-cols-[1fr,400px] gap-12 md:gap-20">
           {/* Form */}
           <Reveal>
             {submitted ? (

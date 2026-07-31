@@ -409,26 +409,46 @@ const Services = () => {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 1.3, ease: [0.25, 0.1, 0.25, 1] }}
             />
-            <ol className="grid md:grid-cols-5 gap-10 md:gap-4">
+            <ol className="grid md:grid-cols-5 gap-5 md:gap-4">
               {processSteps.map((step, i) => (
                 <Reveal key={step.label} delay={i * 0.1}>
-                  <li className="relative flex flex-col items-start md:items-center md:text-center">
-                    <span
-                      className="relative z-[1] flex items-center justify-center w-10 h-10 rounded-full font-display text-[11px] tabular-nums shrink-0"
-                      style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--olive) / 0.5)", color: "hsl(var(--olive))" }}
-                    >
-                      0{i + 1}
-                    </span>
-                    <h3 className="font-display text-base md:text-lg font-medium text-foreground tracking-tight mt-5">
-                      {step.label}
-                    </h3>
-                    <p className="text-body text-sm mt-3 leading-relaxed md:px-1">
-                      {step.text}
-                    </p>
+                  <li className="relative flex md:flex-col items-stretch md:items-center gap-4 md:gap-0 md:text-center">
+                    {/* number, with a connector down to the next step on mobile */}
+                    <div className="relative flex flex-col items-center md:block shrink-0">
+                      <span
+                        className="relative z-[1] flex items-center justify-center w-10 h-10 rounded-full font-display text-[11px] tabular-nums"
+                        style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--olive) / 0.5)", color: "hsl(var(--olive))" }}
+                      >
+                        0{i + 1}
+                      </span>
+                      {i < processSteps.length - 1 && (
+                        <span
+                          aria-hidden
+                          className="md:hidden w-px flex-1 mt-1"
+                          style={{ background: "hsl(var(--olive) / 0.3)" }}
+                        />
+                      )}
+                    </div>
+                    <div className="md:mt-5 pb-1 md:pb-0">
+                      <h3 className="font-display text-base md:text-lg font-medium text-foreground tracking-tight">
+                        {step.label}
+                      </h3>
+                      <p className="text-body text-sm mt-2 md:mt-3 leading-relaxed md:px-1">
+                        {step.text}
+                      </p>
+                    </div>
                   </li>
                 </Reveal>
               ))}
             </ol>
+
+            {/* mobile: the cycle, in one clear line */}
+            <div className="md:hidden mt-5 flex items-center gap-2.5 pl-[3px]">
+              <span className="text-base leading-none" style={{ color: "hsl(var(--olive))" }} aria-hidden>↺</span>
+              <span className="text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--olive))" }}>
+                Revisited, not handed over
+              </span>
+            </div>
 
             {/* the loop, systems come back rather than getting handed over */}
             <div className="hidden md:block relative mt-6" aria-hidden>
