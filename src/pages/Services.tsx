@@ -3,6 +3,7 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
+import sceneMethod from "@/assets/scene-method-podium.jpg";
 
 type Service = {
   index: string;
@@ -178,9 +179,37 @@ const Services = () => {
         </div>
       </section>
 
-      <div className="section-padding max-content">
-        <div className="divider" />
-      </div>
+      {/* Cinematic statement band */}
+      <section className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${sceneMethod})`, filter: "brightness(0.3) contrast(1.1) saturate(0.65)" }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)), hsl(var(--charcoal-deep) / 0.5) 45%, hsl(var(--charcoal-deep)))" }}
+        />
+        <div className="relative section-padding py-24 md:py-36">
+          <div className="max-content">
+            <Reveal>
+              <p className="text-caption mb-6" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
+                The standard
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2
+                className="font-display text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight max-w-4xl"
+                style={{ color: "hsl(var(--ivory))" }}
+              >
+                A system that holds when the season gets loud, not a document that
+                looks good in a meeting.
+              </h2>
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
       {/* Principles */}
       <section className="section-padding section-spacing-sm">
