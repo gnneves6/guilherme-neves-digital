@@ -282,7 +282,10 @@ const FuelLaws = () => {
                                 className="rounded-xl px-4 py-4"
                                 style={{ background: "hsl(var(--ivory) / 0.02)", border: "1px solid hsl(var(--ivory) / 0.06)" }}
                               >
-                                <div className="max-w-md mx-auto">
+                                <div
+                                  className="mx-auto"
+                                  style={{ maxWidth: law.number === "03" ? 290 : 448 }}
+                                >
                                   <LawSignal number={law.number} color={law.color} />
                                 </div>
                               </div>
