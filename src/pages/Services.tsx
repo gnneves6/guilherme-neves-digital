@@ -3,6 +3,7 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
+import { motion } from "framer-motion";
 import sceneMethod from "@/assets/scene-method-podium.jpg";
 
 type Service = {
@@ -345,30 +346,80 @@ const Services = () => {
       <section className="section-padding section-spacing-sm">
         <div className="max-content">
           <Reveal>
-            <div className="flex items-baseline justify-between gap-6 flex-wrap mb-12">
+            <div className="flex items-baseline justify-between gap-6 flex-wrap mb-14 md:mb-20">
               <p className="text-caption">03, How Collaboration Works</p>
               <p className="text-caption text-[10px] text-muted-foreground">
-                A consulting process, not a service menu
+                A loop, not a handover
               </p>
             </div>
           </Reveal>
-          <ol className="grid md:grid-cols-5 gap-6 md:gap-4">
-            {processSteps.map((step, i) => (
-              <Reveal key={step.label} delay={i * 0.06}>
-                <li className="relative pt-6 md:pt-8 border-t border-border/60">
-                  <span className="absolute top-0 left-0 -translate-y-1/2 bg-background pr-3 text-caption text-[10px]">
-                    0{i + 1}
-                  </span>
-                  <h3 className="font-display text-base md:text-lg font-medium text-foreground tracking-tight">
-                    {step.label}
-                  </h3>
-                  <p className="text-body text-sm mt-3 leading-relaxed">
-                    {step.text}
-                  </p>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
+
+          <div className="relative">
+            {/* forward line, drawn through the steps on scroll */}
+            <motion.div
+              aria-hidden
+              className="hidden md:block absolute top-[19px] left-[10%] right-[10%] h-px origin-left"
+              style={{ background: "hsl(var(--olive) / 0.6)" }}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 1.3, ease: [0.25, 0.1, 0.25, 1] }}
+            />
+            <ol className="grid md:grid-cols-5 gap-10 md:gap-4">
+              {processSteps.map((step, i) => (
+                <Reveal key={step.label} delay={i * 0.1}>
+                  <li className="relative flex flex-col items-start md:items-center md:text-center">
+                    <span
+                      className="relative z-[1] flex items-center justify-center w-10 h-10 rounded-full font-display text-[11px] tabular-nums shrink-0"
+                      style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--olive) / 0.5)", color: "hsl(var(--olive))" }}
+                    >
+                      0{i + 1}
+                    </span>
+                    <h3 className="font-display text-base md:text-lg font-medium text-foreground tracking-tight mt-5">
+                      {step.label}
+                    </h3>
+                    <p className="text-body text-sm mt-3 leading-relaxed md:px-1">
+                      {step.text}
+                    </p>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
+
+            {/* the loop, systems come back rather than getting handed over */}
+            <div className="hidden md:block relative mt-6" aria-hidden>
+              <svg viewBox="0 0 1000 92" className="w-full h-auto">
+                <motion.path
+                  d="M905 12 C 905 74, 640 82, 500 82 C 360 82, 95 74, 95 16"
+                  fill="none"
+                  stroke="hsl(var(--olive) / 0.45)"
+                  strokeWidth="1.4"
+                  strokeDasharray="5 6"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.6, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+                />
+                <motion.path
+                  d="M95 16 l -6 8 M95 16 l 6 8"
+                  fill="none"
+                  stroke="hsl(var(--olive) / 0.7)"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 2.1 }}
+                />
+              </svg>
+              <p
+                className="absolute left-1/2 -translate-x-1/2 bottom-0 px-3 text-caption text-[10px]"
+                style={{ color: "hsl(var(--olive))", background: "hsl(var(--background))" }}
+              >
+                Revisited, not handed over
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
