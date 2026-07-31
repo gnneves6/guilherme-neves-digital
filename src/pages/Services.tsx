@@ -439,44 +439,66 @@ const Services = () => {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="text-body-lg max-w-2xl mb-12">
-              Consulting is one layer of a longer-term ecosystem, applied work
-              feeds public resources, operational tools and field-driven
-              research.
+            <p className="text-body-lg max-w-2xl mb-12 md:mb-14">
+              Consulting is one layer of a longer-term ecosystem. Applied work feeds
+              public resources, operational tools and field-driven research. Some
+              layers are already standing, others are still being built.
             </p>
           </Reveal>
 
-          <div className="divide-y divide-border/60 border-y border-border/60">
+          <div className="space-y-3 md:space-y-4">
             {ecosystem.map((e, i) => {
+              const live = e.state === "Live";
+              const dev = e.state === "In Development";
+              const border = live
+                ? "1px solid hsl(var(--foreground) / 0.22)"
+                : dev
+                ? "1px dashed hsl(var(--olive) / 0.55)"
+                : "1px dotted hsl(var(--foreground) / 0.28)";
               const inner = (
-                <div className="grid grid-cols-[40px,1fr,auto] md:grid-cols-[60px,220px,1fr,140px] items-center gap-4 md:gap-8 py-6 md:py-7 group">
-                  <span className="text-caption text-[10px] tabular-nums">0{i + 1}</span>
-                  <h3 className="font-display text-lg md:text-xl font-medium text-foreground tracking-tight">
-                    {e.label}
-                  </h3>
-                  <p className="text-body text-sm hidden md:block">{e.note}</p>
-                  <span
-                    className={`text-caption text-[10px] md:text-right ${
-                      e.state === "Live"
-                        ? "text-foreground"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {e.state}
-                    {e.to && (
-                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                    )}
-                  </span>
+                <div
+                  className="relative flex items-center gap-4 md:gap-8 rounded-lg px-5 md:px-8 py-5 md:py-6 transition-colors duration-300"
+                  style={{
+                    border,
+                    background: live ? "hsl(var(--card) / 0.55)" : "transparent",
+                    opacity: live ? 1 : dev ? 0.72 : 0.5,
+                  }}
+                >
+                  <span className="text-caption text-[10px] tabular-nums w-6 shrink-0">0{i + 1}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-x-3 gap-y-1 flex-wrap">
+                      <h3 className="font-display text-lg md:text-xl font-medium text-foreground tracking-tight">
+                        {e.label}
+                      </h3>
+                      <span
+                        className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase font-display"
+                        style={{ color: live ? "hsl(var(--olive))" : "hsl(var(--muted-foreground))" }}
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{
+                            background: live ? "hsl(var(--olive))" : "transparent",
+                            border: live ? "none" : "1px solid hsl(var(--muted-foreground) / 0.7)",
+                          }}
+                        />
+                        {e.state}
+                      </span>
+                    </div>
+                    <p className="text-body text-sm mt-1.5">{e.note}</p>
+                  </div>
+                  {e.to && (
+                    <span aria-hidden className="shrink-0 text-foreground/70 opacity-0 group-hover:opacity-100 transition-opacity">
+                      →
+                    </span>
+                  )}
                 </div>
               );
               return (
-                <Reveal key={e.label} delay={i * 0.04}>
+                <Reveal key={e.label} delay={i * 0.08}>
                   {e.to ? (
-                    <Link to={e.to} className="block hover:bg-card/40 transition-colors duration-300 -mx-4 px-4">
-                      {inner}
-                    </Link>
+                    <Link to={e.to} className="block group">{inner}</Link>
                   ) : (
-                    <div className="-mx-4 px-4">{inner}</div>
+                    <div className="group">{inner}</div>
                   )}
                 </Reveal>
               );
