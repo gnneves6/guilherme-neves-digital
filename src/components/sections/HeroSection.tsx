@@ -145,8 +145,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
           >
-            Applied performance nutrition systems for athletes, teams and performance
-            environments, shaped by lived sport, rooted in football and built for real-world use.
+            Applied performance nutrition systems for athletes and teams, rooted in
+            football and built to survive a real week.
           </motion.p>
           <motion.p
             className="text-[10px] md:text-[11px] tracking-[0.22em] uppercase font-display mt-5 md:mt-6 max-w-xl"

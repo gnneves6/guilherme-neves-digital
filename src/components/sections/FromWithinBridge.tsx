@@ -72,7 +72,7 @@ const FromWithinBridge = () => {
                 className="mt-4 font-display italic text-base md:text-lg max-w-xl"
                 style={{ color: "hsl(var(--foreground) / 0.6)" }}
               >
-                Diagnose the environment. Translate the science. Embed it
+                Diagnose the environment, translate the science, and embed it
                 quietly inside the daily routine.
               </p>
             </div>
