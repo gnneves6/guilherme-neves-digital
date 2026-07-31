@@ -142,11 +142,11 @@
   }
 
   .section-spacing {
-    @apply py-24 md:py-32 lg:py-40;
+    @apply py-20 md:py-28 lg:py-32;
   }
 
   .section-spacing-sm {
-    @apply py-16 md:py-24 lg:py-28;
+    @apply py-12 md:py-16 lg:py-20;
   }
 
   .max-content {
