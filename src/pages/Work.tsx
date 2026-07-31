@@ -216,8 +216,9 @@ const Work = () => {
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
               A curated archive of resources, frameworks and tools developed
-              inside real engagements. Public artefacts are open. Protected work
-              exists as proof, accessible on request. In-development tools accept
+              inside real engagements. Public artefacts are open.{" "}
+              <span className="text-foreground font-medium">Protected work exists as proof</span>,
+              shown privately when it's relevant. In-development tools accept
               early interest.
             </p>
           </Reveal>
@@ -301,6 +302,19 @@ const Work = () => {
                         {g.description}
                       </p>
                     </div>
+                    {gKey === "protected" && (
+                      <Reveal>
+                        <p
+                          className="text-body text-sm max-w-2xl mb-8 leading-relaxed"
+                          style={{ color: "hsl(var(--muted-foreground))" }}
+                        >
+                          Some of the sharpest proof stays behind a line, because it
+                          belongs to the athletes and clubs it was built for. What's here
+                          is the structure and the standard. The detail is walked through
+                          privately, when it's relevant.
+                        </p>
+                      </Reveal>
+                    )}
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
                       {items.map((a, i) => renderCard(a, i))}
                     </div>
