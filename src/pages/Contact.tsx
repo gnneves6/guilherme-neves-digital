@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
 import { LINKS } from "@/data/links";
 import { supabase } from "@/integrations/supabase/client";
+import portrait from "@/assets/guilherme-portrait.webp";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -60,13 +61,13 @@ const Contact = () => {
             <p className="text-caption mb-6">Chapter 04, Engagement</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">Enquire about an engagement.</h1>
+            <h1 className="text-display max-w-4xl">Tell me what you're trying to solve.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              GN Performance Systems works with a small number of organisations at a time.
-              A short note about the environment and what you're trying to solve is the
-              best place to start a conversation.
+              I work closely with a small number of environments at a time. If nutrition
+              isn't holding up the way it should, a few honest lines about what you're
+              facing are the best place to start.
             </p>
           </Reveal>
         </div>
@@ -86,9 +87,10 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="py-20 text-center"
               >
-                <h2 className="text-headline mb-4">Enquiry received.</h2>
-                <p className="text-body-lg">
-                  Thank you. You'll get a reply within a few working days.
+                <h2 className="text-headline mb-4">Got it, it's with me now.</h2>
+                <p className="text-body-lg max-w-md mx-auto">
+                  Thank you for the note. I read every enquiry myself and will reply
+                  personally, usually within a few working days. Talk soon.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -170,51 +172,91 @@ const Contact = () => {
                 {error && (
                   <p className="text-sm" style={{ color: "hsl(0, 60%, 55%)" }}>{error}</p>
                 )}
-                <Magnetic as="span" strength={6}>
-                  <motion.button
-                    type="submit"
-                    disabled={loading}
-                    className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85 disabled:opacity-50"
-                    whileHover={loading ? {} : { y: -1 }}
-                    whileTap={loading ? {} : { scale: 0.98 }}
-                  >
-                    {loading ? "Sending..." : "Send enquiry"}
-                  </motion.button>
-                </Magnetic>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-3">
+                  <Magnetic as="span" strength={6}>
+                    <motion.button
+                      type="submit"
+                      disabled={loading}
+                      className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85 disabled:opacity-50"
+                      whileHover={loading ? {} : { y: -1 }}
+                      whileTap={loading ? {} : { scale: 0.98 }}
+                    >
+                      {loading ? "Sending..." : "Send it over"}
+                    </motion.button>
+                  </Magnetic>
+                  <p className="text-caption text-[10px] text-muted-foreground max-w-[16rem] leading-relaxed">
+                    No obligation. Read personally, usually answered within a few working days.
+                  </p>
+                </div>
               </form>
             )}
           </Reveal>
 
-          {/* Links */}
+          {/* Who you're reaching, and what happens next */}
           <Reveal delay={0.2}>
-            <div className="space-y-12">
-              <div className="space-y-4">
-                <p className="text-caption">Direct</p>
-                <a
-                  href={`mailto:${LINKS.EMAIL}`}
-                  className="text-body-lg link-underline hover:text-foreground transition-colors"
-                >
-                  {LINKS.EMAIL}
-                </a>
-                <p className="text-body text-sm">
-                  For organisations that prefer email over the form above.
-                </p>
+            <div className="md:sticky md:top-28">
+              <div className="flex items-center gap-4">
+                <img
+                  src={portrait}
+                  alt="Guilherme Neves"
+                  className="w-14 h-14 rounded-full object-cover shrink-0"
+                  style={{ objectPosition: "center 28%" }}
+                />
+                <div>
+                  <p className="font-display text-base font-medium text-foreground">Guilherme Neves</p>
+                  <p className="text-caption text-[10px]">Reads and replies personally</p>
+                </div>
               </div>
-              <div className="space-y-4">
-                <p className="text-caption">Professional</p>
-                <a
-                  href={LINKS.LINKEDIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-body-lg link-underline hover:text-foreground transition-colors"
-                >
-                  LinkedIn ↗
-                </a>
+              <p className="text-body text-sm mt-5 leading-relaxed max-w-sm">
+                Every enquiry comes straight to me. No inbox to get lost in, no
+                gatekeeper, no template reply.
+              </p>
+
+              <div className="mt-10">
+                <p className="text-caption mb-6">What happens next</p>
+                <ol className="space-y-5">
+                  {[
+                    "You send a few lines about the environment and what you want to solve.",
+                    "I reply personally, usually within a few working days.",
+                    "If it fits, we take a short call. No pressure, no obligation.",
+                  ].map((step, i) => (
+                    <li key={i} className="flex gap-4">
+                      <span
+                        className="flex items-center justify-center w-6 h-6 rounded-full shrink-0 text-[10px] font-display tabular-nums"
+                        style={{ border: "1px solid hsl(var(--olive) / 0.5)", color: "hsl(var(--olive))" }}
+                      >
+                        {i + 1}
+                      </span>
+                      <span className="text-body text-sm leading-snug max-w-xs">{step}</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
-              <div className="space-y-4">
-                <p className="text-caption">Based</p>
-                <p className="text-body-lg">Porto · Brussels</p>
-                <p className="text-body text-sm">Working with organisations internationally.</p>
+
+              <div className="mt-10 pt-8 space-y-6 border-t border-border/60">
+                <div className="space-y-1.5">
+                  <p className="text-caption text-[10px]">Prefer email</p>
+                  <a
+                    href={`mailto:${LINKS.EMAIL}`}
+                    className="text-body text-sm link-underline hover:text-foreground transition-colors"
+                  >
+                    {LINKS.EMAIL}
+                  </a>
+                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="space-y-1.5">
+                    <p className="text-caption text-[10px]">Based</p>
+                    <p className="text-body text-sm">Porto · Brussels</p>
+                  </div>
+                  <a
+                    href={LINKS.LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body text-sm link-underline hover:text-foreground transition-colors"
+                  >
+                    LinkedIn ↗
+                  </a>
+                </div>
               </div>
             </div>
           </Reveal>
