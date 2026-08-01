@@ -1,7 +1,9 @@
 // Single source of truth for the site's public address and identity.
-// Change SITE_URL here (no trailing slash) when the final domain is live, // every canonical URL, social share tag and structured-data reference reads
-// from this one constant.
-export const SITE_URL = "https://guilhermeneves.com";
+// Currently the live GitHub Pages project URL. When a custom domain is bought
+// and pointed at the site, change SITE_URL here (no trailing slash) and update
+// public/sitemap.xml, public/robots.txt and index.html to match. Every
+// canonical URL, social share tag and structured-data reference reads from this.
+export const SITE_URL = "https://gnneves6.github.io/guilherme-neves-digital";
 
 export const SITE_NAME = "Guilherme Neves";
 export const SITE_BRAND = "GN Performance Systems";

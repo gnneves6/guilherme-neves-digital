@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://guilhermeneves.com/sitemap.xml
+Sitemap: https://gnneves6.github.io/guilherme-neves-digital/sitemap.xml

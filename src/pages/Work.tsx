@@ -181,12 +181,17 @@ const Work = () => {
                 {g.short}
               </span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
-              <span className="text-[9px] tracking-[0.25em] uppercase font-display opacity-55">
-                {s.label}
-              </span>
-            </div>
+            {/* Status chip, only when it adds information beyond the group tag
+                (e.g. a Systems artefact that is Protected). For a Public
+                resource that is Public, the group tag alone already says it. */}
+            {s.label !== g.short && (
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
+                <span className="text-[9px] tracking-[0.25em] uppercase font-display opacity-55">
+                  {s.label}
+                </span>
+              </div>
+            )}
           </div>
           <h3 className="font-display text-lg md:text-xl font-medium leading-snug">
             {a.title}

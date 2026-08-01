@@ -281,7 +281,7 @@
     z-index: 1;
   }
 
-  /* Scene atmosphere overlays — radial light shaping for chapter mood */
+  /* Scene atmosphere overlays, radial light shaping for chapter mood */
   .scene-atmos-archive::after {
     content: "";
     position: absolute;

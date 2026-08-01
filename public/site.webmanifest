@@ -1,13 +1,14 @@
 {
-  "name": "Guilherme Neves — GN Performance Systems",
+  "name": "Guilherme Neves, GN Performance Systems",
   "short_name": "Guilherme Neves",
   "description": "Applied performance nutrition for athletes, teams and performance environments.",
-  "start_url": "/",
+  "start_url": "/guilherme-neves-digital/",
+  "scope": "/guilherme-neves-digital/",
   "display": "standalone",
   "background_color": "#14161c",
   "theme_color": "#14161c",
   "icons": [
-    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/guilherme-neves-digital/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/guilherme-neves-digital/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
