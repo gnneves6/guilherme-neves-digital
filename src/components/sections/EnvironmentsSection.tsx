@@ -1,6 +1,7 @@
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { lazy, Suspense, useRef, useState } from "react";
 import { usePointer } from "@/components/journey/PointerField";
+import { useIsMobile } from "@/hooks/use-mobile";
 import Chapter from "@/components/motion/Chapter";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
 import type { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
@@ -19,28 +20,48 @@ const kitImages: Record<string, string> = {
 
 const EnvironmentsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const mobileRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const adjusted = Math.max(0, Math.min(0.999, (v - 0.1) / 0.8));
-    const idx = Math.min(experiences.length - 1, Math.floor(adjusted * experiences.length));
-    setActiveIndex(idx);
+  const { scrollYProgress: mobileProgress } = useScroll({
+    target: mobileRef,
+    offset: ["start start", "end end"],
   });
 
-  // Smooth-scroll dots: scroll to a target progress within the section
-  const goTo = (idx: number) => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
+  const progressToIndex = (v: number) => {
+    const adjusted = Math.max(0, Math.min(0.999, (v - 0.1) / 0.8));
+    return Math.min(experiences.length - 1, Math.floor(adjusted * experiences.length));
+  };
+
+  // Two independent scroll trackers, one per layout. Only the visible one
+  // (matched to the breakpoint) is allowed to drive the shared active index,
+  // so the hidden layout never fights it.
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (isMobile) return;
+    setActiveIndex(progressToIndex(v));
+  });
+  useMotionValueEvent(mobileProgress, "change", (v) => {
+    if (!isMobile) return;
+    setActiveIndex(progressToIndex(v));
+  });
+
+  // Smooth-scroll dots: scroll to a target progress within a given container
+  const goToWithin = (ref: React.RefObject<HTMLDivElement>, idx: number) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
     const totalScrollable = rect.height - window.innerHeight;
     const target = 0.1 + (idx + 0.5) * (0.8 / experiences.length);
     const top = window.scrollY + rect.top + totalScrollable * target;
     window.scrollTo({ top, behavior: "smooth" });
   };
+  const goTo = (idx: number) => goToWithin(sectionRef, idx);
+  const goToMobile = (idx: number) => goToWithin(mobileRef, idx);
 
   const activeExp = experiences[activeIndex];
   const pointer = usePointer();
@@ -56,101 +77,162 @@ const EnvironmentsSection = () => {
 
   return (
     <>
-      {/* MOBILE FALLBACK, vertical cards (no pinning, no 3D) */}
-      <section className="md:hidden section-dark section-padding section-spacing-sm relative overflow-hidden">
-        {/* Cinematic top dissolve, coming from ivory (FromWithinBridge above) */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0 h-40 z-[3] pointer-events-none"
-          style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.6) 35%, transparent 100%)" }}
-        />
-        {/* Atmosphere, performance archive, anchored behind content */}
-        <div
-          aria-hidden
-          className="absolute inset-0 z-0 bg-cover bg-center opacity-25"
-          style={{ backgroundImage: `url(${sceneEnvironments})`, filter: "brightness(0.45) contrast(1.1) saturate(0.7)" }}
-        />
-        <div aria-hidden className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 18%, transparent 82%, hsl(var(--charcoal-deep) / 0) 100%)" }} />
-        <div className="max-content relative z-[2]">
-          <Chapter
-            number="02"
-            title="Real environments."
-            tone="dark"
-            className="mb-6"
+      {/* MOBILE, pinned cinematic roulette mirroring the desktop mechanic */}
+      <div
+        ref={mobileRef}
+        className="md:hidden"
+        style={{ height: `${(experiences.length + 1) * 100}vh` }}
+      >
+        <div className="sticky top-0 h-[100svh] overflow-hidden section-dark flex flex-col">
+          {/* Cinematic top dissolve, coming from ivory (FromWithinBridge above) */}
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-32 z-[4] pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.55) 35%, transparent 100%)" }}
           />
-          <h2 className="font-display text-3xl font-semibold text-[hsl(var(--ivory))] mb-10">
-            Chapters that shaped the work.
-          </h2>
-          <div className="space-y-6">
-            {experiences.map((exp, i) => (
-              <div
-                key={exp.name}
-                className="p-6 rounded-sm relative overflow-hidden"
-                style={{
-                  background: `linear-gradient(180deg, hsl(var(--charcoal-deep)) 0%, ${exp.kitColors.primary}10 100%)`,
-                  borderLeft: `2px solid ${exp.kitColors.primary}`,
-                }}
-              >
-                {/* Floating kit thumb */}
-                <div className="float-right ml-4 w-[110px] h-[140px] opacity-95">
-                  <img
-                    src={kitImages[exp.id]}
-                    alt={exp.name}
-                    draggable={false}
-                    className="w-full h-full object-contain"
-                    style={{ filter: `drop-shadow(0 14px 20px rgba(0,0,0,0.5)) drop-shadow(0 0 18px ${exp.kitColors.primary}55)` }}
-                  />
-                </div>
-                <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                  {exp.period}, {exp.location}
-                </span>
-                <h3 className="font-display text-2xl font-semibold text-[hsl(var(--ivory))] mt-2">
-                  {exp.name}
-                </h3>
-                <p className="text-[10px] tracking-widest uppercase font-display mt-2 text-[hsl(var(--ivory)/0.4)]">
-                  {exp.role}
-                </p>
-                <p className="text-xs text-[hsl(var(--ivory)/0.5)] mt-3 clear-right">
-                  {exp.context}
-                </p>
-                <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
-                  {exp.focus.map((f) => (
-                    <span
-                      key={f}
-                      className="text-[10px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.55)]"
-                    >
-                      · {f}
-                    </span>
-                  ))}
-                </div>
-                <p className="text-sm leading-relaxed text-[hsl(var(--ivory)/0.65)] mt-4 italic">
-                  “{exp.chapter}”
-                </p>
-                {exp.seasonNote && (
-                  <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3">
-                    {exp.seasonNote}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
+          {/* Atmosphere, performance archive corridor */}
+          <div
+            aria-hidden
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${sceneEnvironments})`, filter: "brightness(0.3) contrast(1.15) saturate(0.55)", opacity: 0.5 }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 z-[1] pointer-events-none"
+            style={{ background: "radial-gradient(ellipse 92% 70% at 50% 44%, transparent 0%, hsl(var(--charcoal-deep) / 0.85) 82%), linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, transparent 16%, transparent 74%, hsl(var(--charcoal-deep) / 0.85) 96%)" }}
+          />
+          {/* Active-kit colour wash */}
+          <motion.div
+            className="absolute inset-0 z-[1] pointer-events-none"
+            animate={{ background: `radial-gradient(ellipse 90% 55% at 50% 42%, ${activeExp.kitColors.primary}1c 0%, transparent 68%)` }}
+            transition={{ duration: 1 }}
+          />
 
-          <div className="mt-10 pt-6" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
-            <p className="text-[10px] tracking-widest uppercase font-display mb-3 text-[hsl(var(--ivory)/0.3)]">
-              Additional Exposure
-            </p>
-            {additionalExposure.map((item) => (
-              <div key={item.name} className="flex justify-between py-2 text-xs">
-                <span className="font-display text-[hsl(var(--ivory)/0.5)]">{item.name}</span>
-                <span className="text-[hsl(var(--ivory)/0.25)]">{item.date}</span>
-              </div>
-            ))}
+          <div className="section-padding relative z-10 flex flex-col h-full pt-[76px] pb-7">
+            <Chapter
+              number="02"
+              title="Real environments."
+              tone="dark"
+              className="mb-0"
+              meta={
+                <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.3)]">
+                  Chapter {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                </p>
+              }
+            />
+
+            {/* 3D kit showcase, floating on its pedestal */}
+            <div className="relative flex-1 min-h-0">
+              {/* giant ghost index behind the kit */}
+              <motion.span
+                key={`n-${activeIndex}`}
+                className="absolute inset-x-0 top-1 text-center font-display font-bold leading-none pointer-events-none select-none"
+                style={{
+                  fontSize: "40vw",
+                  color: activeExp.id === "r4e" ? "rgba(170,170,170,0.10)" : `${activeExp.kitColors.primary}14`,
+                }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+              >
+                {String(activeIndex + 1).padStart(2, "0")}
+              </motion.span>
+              {isMobile && (
+                <Suspense fallback={null}>
+                  <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
+                </Suspense>
+              )}
+            </div>
+
+            {/* Identity, crossfaded per active chapter */}
+            <div className="relative min-h-[188px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.4)]">
+                    {activeExp.period}, {activeExp.location}
+                  </span>
+                  <h3 className="font-display text-[2rem] leading-[1.02] font-semibold text-[hsl(var(--ivory))] mt-1.5 break-words">
+                    {activeExp.name}
+                  </h3>
+                  <p className="text-[10px] tracking-[0.16em] uppercase font-display mt-2 text-[hsl(var(--ivory)/0.45)] leading-snug">
+                    {activeExp.role}
+                  </p>
+                  <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-2.5">
+                    {activeExp.focus.map((f) => (
+                      <span key={f} className="text-[9px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.5)]">
+                        · {f}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="font-display text-[15px] italic leading-snug text-[hsl(var(--ivory)/0.72)] mt-3.5">
+                    “{activeExp.chapter}”
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Chapter selector, tap to jump */}
+            <div className="mt-4 flex items-center justify-between">
+              <ul className="flex items-center gap-2.5">
+                {experiences.map((exp, i) => {
+                  const isActive = activeIndex === i;
+                  return (
+                    <li key={exp.name}>
+                      <button
+                        onClick={() => goToMobile(i)}
+                        aria-current={isActive ? "true" : undefined}
+                        aria-label={`Open ${exp.name} environment`}
+                        className="flex items-center py-2"
+                      >
+                        <motion.span
+                          className="block rounded-full"
+                          animate={{
+                            width: isActive ? 26 : 7,
+                            height: 7,
+                            backgroundColor: isActive ? exp.kitColors.primary : "hsl(var(--ivory) / 0.2)",
+                          }}
+                          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                        />
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+              <motion.span
+                className="text-[9px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.28)]"
+                animate={{ opacity: [0.28, 0.55, 0.28] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                Scroll to advance
+              </motion.span>
+            </div>
           </div>
+        </div>
+      </div>
+
+      {/* MOBILE, additional exposure, compact strip that closes the chapter */}
+      <section className="md:hidden section-dark section-padding pb-16 pt-4 relative overflow-hidden">
+        <div className="max-content relative z-[2]">
+          <p className="text-[10px] tracking-widest uppercase font-display mb-3 text-[hsl(var(--ivory)/0.3)]">
+            Additional Exposure
+          </p>
+          {additionalExposure.map((item) => (
+            <div key={item.name} className="flex justify-between py-2 text-xs" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
+              <span className="font-display text-[hsl(var(--ivory)/0.55)]">{item.name}</span>
+              <span className="text-[hsl(var(--ivory)/0.28)]">{item.date}</span>
+            </div>
+          ))}
         </div>
         {/* Cinematic bottom dissolve, into SelectedArtefactsSection (cinematic dark) */}
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-0 h-40 z-[3] pointer-events-none"
+          className="absolute inset-x-0 bottom-0 h-24 z-[3] pointer-events-none"
           style={{ background: "linear-gradient(to bottom, transparent 0%, hsl(var(--cinematic) / 0.7) 60%, hsl(var(--cinematic)) 100%)" }}
         />
       </section>
@@ -276,9 +358,11 @@ const EnvironmentsSection = () => {
 
                 {/* Center, Floating kit display archive */}
                 <div className="relative h-[400px] lg:h-[460px]">
-                  <Suspense fallback={null}>
-                    <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
-                  </Suspense>
+                  {!isMobile && (
+                    <Suspense fallback={null}>
+                      <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
+                    </Suspense>
+                  )}
                 </div>
 
                 {/* Right, index + dots */}
