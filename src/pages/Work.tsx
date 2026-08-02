@@ -10,13 +10,20 @@ import {
   appliedWorkObjects,
   statusMeta,
   groupMeta,
-  groupOrder,
   type Artefact,
   type ArtefactStatus,
-  type ArtefactGroup,
 } from "@/data/artefacts";
 import Magnetic from "@/components/motion/Magnetic";
-import { nodeOf, maturityMeta, fieldNotes, environmentMeta } from "@/data/work-graph";
+import {
+  nodeOf,
+  maturityMeta,
+  fieldNotes,
+  environmentMeta,
+  workByTopic,
+  topicMeta,
+  topicOrder,
+  type Topic,
+} from "@/data/work-graph";
 
 type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup" | "tableMockup" | "seriesMockup";
 
@@ -125,11 +132,11 @@ const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number })
   );
 };
 
-type Filter = "All" | ArtefactGroup;
+type Filter = "All" | Topic;
 
-const filters: Filter[] = ["All", ...groupOrder];
+const filters: Filter[] = ["All", ...topicOrder];
 
-const filterLabel = (f: Filter) => (f === "All" ? "All" : groupMeta[f].label);
+const filterLabel = (f: Filter) => (f === "All" ? "All" : topicMeta[f].label);
 
 const Work = () => {
   const [active, setActive] = useState<Filter>("All");
@@ -151,15 +158,17 @@ const Work = () => {
     setSearchParams(searchParams, { replace: true });
   }, [searchParams, setSearchParams]);
 
-  const visibleGroups = useMemo<ArtefactGroup[]>(
-    () => (active === "All" ? groupOrder : [active]),
+  const visibleTopics = useMemo<Topic[]>(
+    () => (active === "All" ? topicOrder : [active]),
     [active]
   );
 
+  // One catalogue, organised by area of practice. Everything the site holds
+  // lives here, including the applied systems that used to sit in a separate
+  // collection of their own.
   const grouped = useMemo(() => {
-    const map = {} as Record<ArtefactGroup, Artefact[]>;
-    for (const g of groupOrder) map[g] = [];
-    for (const a of artefacts) map[a.group].push(a);
+    const map = {} as Record<Topic, Artefact[]>;
+    for (const t of topicOrder) map[t] = workByTopic(t);
     return map;
   }, []);
 
@@ -269,6 +278,18 @@ const Work = () => {
             </div>
           </Reveal>
 
+          <Reveal delay={0.05}>
+            <p
+              className="text-body text-sm max-w-2xl mb-8 leading-relaxed"
+              style={{ color: "hsl(var(--muted-foreground))" }}
+            >
+              Some of the sharpest proof stays behind a line, because it belongs to
+              the athletes and clubs it was built for. What's here is the structure
+              and the standard. The detail is walked through privately, when it's
+              relevant.
+            </p>
+          </Reveal>
+
           <Reveal delay={0.1}>
             <div className="flex flex-wrap gap-2">
               {filters.map((f) => (
@@ -301,44 +322,37 @@ const Work = () => {
               transition={{ duration: 0.4 }}
               className="space-y-20"
             >
-              {visibleGroups.map((gKey) => {
-                const g = groupMeta[gKey];
-                const items = grouped[gKey];
+              {visibleTopics.map((tKey, ti) => {
+                const t = topicMeta[tKey];
+                const items = grouped[tKey];
                 if (items.length === 0) return null;
+                const anchor = `topic-${tKey}`;
                 return (
                   <section
-                    key={gKey}
-                    id={g.anchor}
+                    key={tKey}
+                    id={anchor}
                     className="scroll-mt-24"
-                    aria-labelledby={`${g.anchor}-title`}
+                    aria-labelledby={`${anchor}-title`}
                   >
-                    <div className="flex items-baseline justify-between mb-6 gap-4 flex-wrap">
-                      <div className="flex items-baseline gap-3">
-                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: g.dot }} />
+                    <div className="flex items-baseline justify-between mb-7 gap-4 flex-wrap">
+                      <div className="flex items-baseline gap-4">
+                        <span className="text-caption text-[10px] opacity-40 tabular-nums">
+                          {String(ti + 1).padStart(2, "0")}
+                        </span>
                         <h2
-                          id={`${g.anchor}-title`}
+                          id={`${anchor}-title`}
                           className="font-display text-xl md:text-2xl font-medium"
                         >
-                          {g.label}
+                          {t.label}
                         </h2>
+                        <span className="text-caption text-[10px] opacity-40">
+                          {items.length}
+                        </span>
                       </div>
                       <p className="text-xs md:text-sm opacity-60 max-w-md">
-                        {g.description}
+                        {t.description}
                       </p>
                     </div>
-                    {gKey === "protected" && (
-                      <Reveal>
-                        <p
-                          className="text-body text-sm max-w-2xl mb-8 leading-relaxed"
-                          style={{ color: "hsl(var(--muted-foreground))" }}
-                        >
-                          Some of the sharpest proof stays behind a line, because it
-                          belongs to the athletes and clubs it was built for. What's here
-                          is the structure and the standard. The detail is walked through
-                          privately, when it's relevant.
-                        </p>
-                      </Reveal>
-                    )}
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
                       {items.map((a, i) => renderCard(a, i))}
                     </div>

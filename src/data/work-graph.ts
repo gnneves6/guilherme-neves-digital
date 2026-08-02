@@ -34,7 +34,60 @@ export type Maturity =
 
 export type EnvironmentId = "anderlecht" | "leca" | "r4e" | "independent";
 
+/**
+ * Areas of practice. These are the top level of the work: a visitor should
+ * meet the problem being solved before meeting the format it was solved in.
+ * A system, the guide behind it and the tool that came out of it belong
+ * together under one heading, rather than scattered across separate
+ * catalogues by how finished or how public they happen to be.
+ */
+export type Topic =
+  | "matchday"
+  | "hydration"
+  | "composition"
+  | "environment"
+  | "education"
+  | "framework";
+
+export const topicMeta: Record<Topic, { label: string; description: string; order: number }> = {
+  matchday: {
+    label: "Matchday Fuelling",
+    description: "From MD-1 through kick-off to recovery, built to hold when the week gets loud.",
+    order: 1,
+  },
+  hydration: {
+    label: "Hydration",
+    description: "Sweat losses, sodium and individual protocols, monitored rather than guessed.",
+    order: 2,
+  },
+  composition: {
+    label: "Body Composition & Monitoring",
+    description: "Reading the athlete over time, and turning that reading into decisions staff can act on.",
+    order: 3,
+  },
+  environment: {
+    label: "The Food Environment",
+    description: "Catering, structure and daily availability, because what is within reach decides most of it.",
+    order: 4,
+  },
+  education: {
+    label: "Athlete Education",
+    description: "Making the science stick in language an athlete repeats without being asked.",
+    order: 5,
+  },
+  framework: {
+    label: "Framework & Products",
+    description: "The operating system underneath the work, and what is being built on top of it.",
+    order: 6,
+  },
+};
+
+export const topicOrder: Topic[] = (Object.keys(topicMeta) as Topic[]).sort(
+  (a, b) => topicMeta[a].order - topicMeta[b].order
+);
+
 export interface WorkNode {
+  topic: Topic;
   laws: number[];
   maturity: Maturity;
   environment: EnvironmentId;
@@ -79,74 +132,74 @@ export const environmentMeta: Record<EnvironmentId, { label: string; short: stri
 const curatedGraph: Record<string, WorkNode> = {
   // ── Public education ──────────────────────────────────────────────
   "abc-of-football-nutrition": {
-    laws: [1, 2], maturity: "series", environment: "independent",
+    topic: "education", laws: [1, 2], maturity: "series", environment: "independent",
   },
   "supplementation-elite-football": {
-    laws: [1, 5], maturity: "visual", environment: "anderlecht",
+    topic: "education", laws: [1, 5], maturity: "visual", environment: "anderlecht",
   },
   "why-players-cramp": {
-    laws: [1, 4], maturity: "series", environment: "anderlecht",
+    topic: "hydration", laws: [1, 4], maturity: "series", environment: "anderlecht",
     grewFrom: ["hydration-sweat-testing-framework"],
   },
   "athletes-food-pyramid": {
-    laws: [2], maturity: "visual", environment: "independent",
+    topic: "environment", laws: [2], maturity: "visual", environment: "independent",
   },
   "football-nutrition-education-tools": {
-    laws: [1, 2], maturity: "series", environment: "leca",
+    topic: "education", laws: [1, 2], maturity: "series", environment: "leca",
     grewFrom: ["abc-of-football-nutrition"],
   },
 
   // ── Written and structural work ───────────────────────────────────
   "fuel-laws-playbook": {
-    laws: [1, 2, 3, 4, 5], maturity: "guide", environment: "independent",
+    topic: "framework", laws: [1, 2, 3, 4, 5], maturity: "guide", environment: "independent",
   },
   "md-1-fuel-system": {
-    laws: [1, 5], maturity: "guide", environment: "anderlecht",
+    topic: "matchday", laws: [1, 5], maturity: "guide", environment: "anderlecht",
   },
   "athlete-equivalent-bank": {
-    laws: [2], maturity: "guide", environment: "leca",
+    topic: "environment", laws: [2], maturity: "guide", environment: "leca",
   },
   "football-nutrition-atlas": {
-    laws: [1, 2], maturity: "guide", environment: "independent",
+    topic: "framework", laws: [1, 2], maturity: "guide", environment: "independent",
     grewFrom: ["fuel-laws-playbook"],
   },
   "athlete-orientation": {
-    laws: [2], maturity: "guide", environment: "leca",
+    topic: "composition", laws: [2], maturity: "guide", environment: "leca",
   },
   "team-monitoring-report": {
-    laws: [2, 4], maturity: "guide", environment: "leca",
+    topic: "composition", laws: [2, 4], maturity: "guide", environment: "leca",
   },
 
   // ── Systems run inside environments ───────────────────────────────
   "matchday-fuel-system": {
-    laws: [1, 5], maturity: "system", environment: "anderlecht",
+    topic: "matchday", laws: [1, 5], maturity: "system", environment: "anderlecht",
     grewFrom: ["md-1-fuel-system"],
   },
   "hydration-sweat-testing-framework": {
-    laws: [4], maturity: "system", environment: "anderlecht",
+    topic: "hydration", laws: [4], maturity: "system", environment: "anderlecht",
   },
   "body-composition-monitoring": {
-    laws: [2], maturity: "system", environment: "leca",
+    topic: "composition", laws: [2], maturity: "system", environment: "leca",
   },
   "food-environment-catering": {
-    laws: [2], maturity: "system", environment: "anderlecht",
+    topic: "environment", laws: [2], maturity: "system", environment: "anderlecht",
   },
 
   // ── Tools ─────────────────────────────────────────────────────────
   "matchday-fuel": {
-    laws: [1, 5], maturity: "tool", environment: "independent",
+    topic: "matchday", laws: [1, 5], maturity: "tool", environment: "independent",
     grewFrom: ["matchday-fuel-system"],
   },
   "hydration-monitoring": {
-    laws: [4], maturity: "tool", environment: "anderlecht",
+    topic: "hydration", laws: [4], maturity: "tool", environment: "anderlecht",
     grewFrom: ["hydration-sweat-testing-framework"],
   },
   "snack-bag-agent": {
-    laws: [1, 5], maturity: "tool", environment: "independent",
+    topic: "matchday", laws: [1, 5], maturity: "tool", environment: "independent",
     grewFrom: ["matchday-fuel-system"],
   },
   "fuelops-ai": {
-    laws: [1, 2], maturity: "tool", environment: "independent",
+    topic: "framework", laws: [1, 2], maturity: "tool", environment: "independent",
     grewFrom: ["matchday-fuel-system", "hydration-sweat-testing-framework"],
   },
 };
@@ -176,6 +229,7 @@ export interface FieldNote {
   slug: string;
   title: string;
   body: string;
+  topic: Topic;
   laws: number[];
   environment: EnvironmentId;
   /** Defaults to "note". Use "idea" once it has taken a shape. */
@@ -208,7 +262,12 @@ export const workGraph: Record<string, WorkNode> = {
   ...Object.fromEntries(
     fieldNotes.map((n) => [
       n.slug,
-      { laws: n.laws, maturity: n.maturity ?? "note", environment: n.environment } as WorkNode,
+      {
+        topic: n.topic,
+        laws: n.laws,
+        maturity: n.maturity ?? "note",
+        environment: n.environment,
+      } as WorkNode,
     ])
   ),
 };
@@ -236,6 +295,23 @@ export const workByLaw = (law: number): Artefact[] => {
   return allWork
     .filter((a) => (workGraph[a.slug]?.laws ?? []).includes(law))
     .sort((a, b) => (rank[a.group] ?? 9) - (rank[b.group] ?? 9));
+};
+
+/**
+ * Everything inside one area of practice, anchored by the systems that were
+ * actually run, then the written work, then what was built on top. A reader
+ * meets the proof first and the products last.
+ */
+export const workByTopic = (topic: Topic): Artefact[] => {
+  const weight: Record<Maturity, number> = {
+    system: 0, guide: 1, series: 2, visual: 3, tool: 4, idea: 5, note: 6,
+  };
+  return allWork
+    .filter((a) => workGraph[a.slug]?.topic === topic)
+    .sort(
+      (a, b) =>
+        weight[workGraph[a.slug]!.maturity] - weight[workGraph[b.slug]!.maturity]
+    );
 };
 
 /** Work that came out of a given environment. */

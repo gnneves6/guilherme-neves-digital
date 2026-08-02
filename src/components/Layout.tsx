@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import PageTransition from "./PageTransition";
-import CinematicCursor from "./motion/CinematicCursor";
 import ScrollProgress from "./motion/ScrollProgress";
 
 interface LayoutProps {
@@ -23,7 +22,6 @@ const Layout = ({ children }: LayoutProps) => {
         Skip to content
       </a>
       <div className="grain-overlay" />
-      <CinematicCursor />
       <ScrollProgress />
       <Navbar />
       <PageTransition>

@@ -96,19 +96,6 @@
     color: hsl(var(--foreground));
   }
 
-  /* Custom cinematic cursor: hide the native cursor while it is active
-     (added only on fine-pointer, non-reduced-motion desktops), but keep the
-     text caret on form fields for usability. */
-  body.has-custom-cursor,
-  body.has-custom-cursor * {
-    cursor: none !important;
-  }
-  body.has-custom-cursor input,
-  body.has-custom-cursor textarea,
-  body.has-custom-cursor [contenteditable="true"] {
-    cursor: text !important;
-  }
-
   /* Keyboard-only focus ring, in the brand gold so it reads on both the
      ivory pages and the dark cinematic scenes. :focus-visible keeps it
      invisible for mouse users, so the design is untouched on click. */
