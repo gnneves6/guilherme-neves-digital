@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
 import LawSignal from "@/components/fuel-laws/LawSignal";
+import { workByLaw, groupMeta } from "@/data/artefacts";
 
 const laws = [
   {
@@ -230,6 +231,7 @@ const FuelLaws = () => {
                 {laws.map((law) => {
                   const isActive = activeLaw === law.number;
                   const actions = toActions(law.practical);
+                  const proof = workByLaw(Number(law.number));
                   return (
                     <div
                       key={law.number}
@@ -318,6 +320,48 @@ const FuelLaws = () => {
                                 </ul>
                               </div>
                             </div>
+
+                            {/* The spine: work that proves this law. Grows on
+                                its own as new pieces get tagged in the data. */}
+                            {proof.length > 0 && (
+                              <div
+                                className="px-4 md:px-6 pb-8 pt-6"
+                                style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}
+                              >
+                                <div className="flex items-baseline justify-between gap-4 mb-4">
+                                  <p className="text-[10px] tracking-[0.24em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.4)" }}>
+                                    Proven in the work
+                                  </p>
+                                  <span className="text-[10px] font-display tabular-nums" style={{ color: "hsl(var(--ivory) / 0.28)" }}>
+                                    {proof.length} {proof.length === 1 ? "piece" : "pieces"}
+                                  </span>
+                                </div>
+                                <div className="flex flex-wrap gap-2">
+                                  {proof.map((p, pi) => (
+                                    <motion.div
+                                      key={p.slug}
+                                      initial={{ opacity: 0, y: 6 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ delay: 0.1 + pi * 0.05 }}
+                                    >
+                                      <Link
+                                        to={`/work?a=${p.slug}`}
+                                        className="group flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors duration-300"
+                                        style={{ background: "hsl(var(--ivory) / 0.03)", border: "1px solid hsl(var(--ivory) / 0.08)" }}
+                                      >
+                                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: groupMeta[p.group].dot }} />
+                                        <span className="text-[12px] font-display" style={{ color: "hsl(var(--ivory) / 0.75)" }}>
+                                          {p.title}
+                                        </span>
+                                        <span className="text-[9px] tracking-[0.2em] uppercase" style={{ color: "hsl(var(--ivory) / 0.3)" }}>
+                                          {groupMeta[p.group].short}
+                                        </span>
+                                      </Link>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
                           </motion.div>
                         )}
                       </AnimatePresence>

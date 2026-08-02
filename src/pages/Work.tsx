@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import ResourceModal from "@/components/resource/ResourceModal";
 import {
   artefacts,
+  appliedWorkObjects,
   statusMeta,
   groupMeta,
   groupOrder,
@@ -133,6 +134,21 @@ const Work = () => {
   const [active, setActive] = useState<Filter>("All");
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState<Artefact | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Deep link from elsewhere on the site (a Fuel Law citing the work that
+  // proves it) opens that artefact directly, so the connection is followable
+  // rather than decorative.
+  useEffect(() => {
+    const slug = searchParams.get("a");
+    if (!slug) return;
+    const match =
+      artefacts.find((x) => x.slug === slug) ??
+      appliedWorkObjects.find((x) => x.slug === slug);
+    if (match) setOpen(match);
+    searchParams.delete("a");
+    setSearchParams(searchParams, { replace: true });
+  }, [searchParams, setSearchParams]);
 
   const visibleGroups = useMemo<ArtefactGroup[]>(
     () => (active === "All" ? groupOrder : [active]),
