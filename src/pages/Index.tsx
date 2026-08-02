@@ -6,6 +6,7 @@ import ScrollStatement from "@/components/sections/ScrollStatement";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
 import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSection";
+import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
 import SystemsBridgeSection from "@/components/sections/SystemsBridgeSection";
 import TheMethodSection from "@/components/sections/TheMethodSection";
 import SystemsArchitectureSection from "@/components/sections/SystemsArchitectureSection";
@@ -36,6 +37,9 @@ const Index = () => {
       <EnvironmentsSection />
       <FromWithinBridge />
       <SelectedArtefactsSection />
+      {/* Proof shown, then proof handed over. The one chapter driven by the
+          pointer rather than the scroll. */}
+      <MatchdayPlanner />
       <SystemsBridgeSection />
       <TheMethodSection />
       <SystemsArchitectureSection />
