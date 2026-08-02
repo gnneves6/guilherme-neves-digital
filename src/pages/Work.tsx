@@ -16,6 +16,7 @@ import {
   type ArtefactGroup,
 } from "@/data/artefacts";
 import Magnetic from "@/components/motion/Magnetic";
+import { nodeOf, maturityMeta, fieldNotes, environmentMeta } from "@/data/work-graph";
 
 type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup" | "tableMockup" | "seriesMockup";
 
@@ -168,6 +169,8 @@ const Work = () => {
     const isReceded = hasHover && !isHovered;
     const s = statusMeta[a.status];
     const g = groupMeta[a.group];
+    const node = nodeOf(a.slug);
+    const rung = node ? maturityMeta[node.maturity] : undefined;
 
     return (
       <motion.button
@@ -191,15 +194,15 @@ const Work = () => {
 
         <div className="p-7">
           <div className="flex items-center justify-between mb-4 gap-3">
+            {/* The card already sits under its group heading, so the group
+                name would only repeat itself. Where it stands on the making
+                ladder is the thing the reader does not already know. */}
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: g.dot }} />
               <span className="text-[9px] tracking-[0.25em] uppercase font-display opacity-65">
-                {g.short}
+                {rung ? rung.label : g.short}
               </span>
             </div>
-            {/* Status chip, only when it adds information beyond the group tag
-                (e.g. a Systems artefact that is Protected). For a Public
-                resource that is Public, the group tag alone already says it. */}
             {s.label !== g.short && (
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.dot }} />
@@ -346,6 +349,51 @@ const Work = () => {
           </AnimatePresence>
         </div>
       </section>
+
+      {/* Field notes, the raw end of the ladder. Kept deliberately plain:
+          these are observations, not products, and dressing them up as
+          cards would misrepresent what they are. Renders nothing until
+          there is something to show. */}
+      {fieldNotes.length > 0 && (
+        <section className="section-padding pb-4">
+          <div className="max-content">
+            <Reveal>
+              <div className="flex items-baseline justify-between gap-4 mb-8">
+                <p className="text-caption">From the floor</p>
+                <span className="text-caption text-[10px] opacity-50">
+                  {fieldNotes.length} {fieldNotes.length === 1 ? "note" : "notes"}
+                </span>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="text-body max-w-xl mb-10">
+                Observations caught inside real environments, kept raw on purpose.
+                Some stay notes. Some become the systems above.
+              </p>
+            </Reveal>
+            <ul className="max-w-3xl">
+              {fieldNotes.map((n, i) => (
+                <Reveal key={n.slug} delay={0.05 * i}>
+                  <li
+                    className="py-6 grid sm:grid-cols-[1fr,auto] gap-x-8 gap-y-2 items-baseline"
+                    style={{ borderTop: "1px solid hsl(var(--subtle-border))" }}
+                  >
+                    <div>
+                      <h3 className="font-display text-base font-medium text-foreground">
+                        {n.title}
+                      </h3>
+                      <p className="text-body text-sm mt-1.5">{n.body}</p>
+                    </div>
+                    <span className="text-caption text-[10px] opacity-55 whitespace-nowrap">
+                      {environmentMeta[n.environment].short}
+                    </span>
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <div className="section-padding max-content">

@@ -6,7 +6,8 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
 import LawSignal from "@/components/fuel-laws/LawSignal";
-import { workByLaw, groupMeta } from "@/data/artefacts";
+import { groupMeta } from "@/data/artefacts";
+import { workByLaw } from "@/data/work-graph";
 import LawKeep from "@/components/fuel-laws/LawKeep";
 
 // Single source of truth for the framework. The page and the printable

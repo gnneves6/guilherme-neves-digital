@@ -5,6 +5,7 @@ import type { Artefact, AppliedAccessType } from "@/data/artefacts";
 import { accessMeta } from "@/data/artefacts";
 import { supabase } from "@/integrations/supabase/client";
 import { LINKS } from "@/data/links";
+import WorkConnections from "@/components/resource/WorkConnections";
 
 interface Props {
   artefact: Artefact | null;
@@ -399,6 +400,13 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                       </div>
                     )}
                 </div>
+
+                {/* How this piece connects to the rest of the practice */}
+                <WorkConnections
+                  artefact={artefact}
+                  accent={meta.accent}
+                  onNavigate={onClose}
+                />
 
                 {/* Access panel */}
                 <div className="px-5 md:px-10 pt-8 md:pt-10 pb-8 md:pb-10">

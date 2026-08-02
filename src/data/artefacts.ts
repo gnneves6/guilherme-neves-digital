@@ -623,64 +623,6 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
   },
 ];
 
-/* ────────────────────────────────────────────────────────────────
-   THE SPINE
-
-   Which GN Fuel Law each piece of work proves. This is the single
-   place that connects the framework to the body of work, so the
-   Fuel Laws page can show evidence instead of assertion, and every
-   new artefact strengthens a law simply by being tagged here.
-
-   One entry can serve several laws. Keys are artefact slugs, values
-   are law numbers (1 to 5). Adding a new piece of work is a one-line
-   change: tag it, and it appears under its laws automatically.
-   ──────────────────────────────────────────────────────────────── */
-export const artefactLaws: Record<string, number[]> = {
-  // Fuelling and energy availability
-  "abc-of-football-nutrition": [1, 2],
-  "md-1-fuel-system": [1, 5],
-  "matchday-fuel": [1, 5],
-  "matchday-fuel-system": [1, 5],
-  "snack-bag-agent": [1, 5],
-  "football-nutrition-atlas": [1, 2],
-  "football-nutrition-education-tools": [1, 2],
-
-  // Daily base, habits and the food environment
-  "athlete-equivalent-bank": [2],
-  "athletes-food-pyramid": [2],
-  "athlete-orientation": [2],
-  "body-composition-monitoring": [2],
-  "food-environment-catering": [2],
-  "fuelops-ai": [1, 2],
-
-  // Hydration
-  "why-players-cramp": [1, 4],
-  "hydration-monitoring": [4],
-  "hydration-sweat-testing-framework": [4],
-  "team-monitoring-report": [2, 4],
-
-  // Rehearsed before competition
-  "supplementation-elite-football": [1, 5],
-
-  // The framework itself sits across all five
-  "fuel-laws-playbook": [1, 2, 3, 4, 5],
-};
-
-/** Every artefact and applied-work object, de-duplicated by slug. */
-const allWork: Artefact[] = (() => {
-  const seen = new Set<string>();
-  return [...artefacts, ...appliedWorkObjects].filter((a) => {
-    if (seen.has(a.slug)) return false;
-    seen.add(a.slug);
-    return true;
-  });
-})();
-
-/** The work that proves a given law, ordered public first so the
-    openly viewable evidence leads. */
-export const workByLaw = (law: number): Artefact[] => {
-  const rank: Record<string, number> = { public: 0, systems: 1, tools: 2, protected: 3 };
-  return allWork
-    .filter((a) => (artefactLaws[a.slug] ?? []).includes(law))
-    .sort((a, b) => (rank[a.group] ?? 9) - (rank[b.group] ?? 9));
-};
+/* Connections between these entries (laws, maturity, environment and
+   lineage) live in src/data/work-graph.ts, so this file stays a plain
+   catalogue and the graph stays the single place to feed. */
