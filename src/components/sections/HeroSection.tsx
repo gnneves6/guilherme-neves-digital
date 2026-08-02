@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Magnetic from "@/components/motion/Magnetic";
+import { gsap, SplitText, EASE_OUT as EASE } from "@/lib/gsap";
 
 import portrait from "@/assets/guilherme-portrait.webp";
 import pitchside from "@/assets/photos/leca-pitchside.webp";
@@ -32,38 +33,48 @@ const frames = [
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
-/** Letters that slide in from the side, staggered. Decorative only: the
-    heading carries an aria-label so it is announced as a name, not spelled. */
-const SlideWord = ({
-  word,
-  from,
-  delay,
-  reduce,
-}: {
-  word: string;
-  from: number;
-  delay: number;
-  reduce: boolean;
-}) => (
-  <span aria-hidden className="inline-flex overflow-hidden">
-    {word.split("").map((ch, i) => (
-      <motion.span
-        key={`${ch}-${i}`}
-        className="inline-block will-change-transform"
-        initial={reduce ? { opacity: 0 } : { x: from, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1.1, delay: delay + i * 0.035, ease: EASE_OUT }}
-      >
-        {ch}
-      </motion.span>
-    ))}
-  </span>
-);
-
 const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
   const reduce = !!useReducedMotion();
   const [frame, setFrame] = useState(0);
+
+  // SplitText handles the name: it splits into characters wrapped in masking
+  // lines, re-splits on resize so nothing breaks mid-word at a new width, and
+  // puts the original markup back on cleanup. Doing this by hand meant every
+  // character became inline-block, which lets a word wrap through its middle.
+  useLayoutEffect(() => {
+    const el = nameRef.current;
+    if (!el) return;
+    if (reduce) {
+      gsap.set(el, { autoAlpha: 1 });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const split = SplitText.create(el.querySelectorAll("[data-split]"), {
+        type: "chars",
+        charsClass: "gn-char",
+        mask: "chars",
+        autoSplit: true,
+        onSplit(self) {
+          return gsap.from(self.chars, {
+            xPercent: (i, target) =>
+              (target as HTMLElement).closest("[data-split='last']") ? 110 : -110,
+            autoAlpha: 0,
+            duration: 1.15,
+            ease: EASE,
+            stagger: { each: 0.035, from: "start" },
+            delay: 0.25,
+          });
+        },
+      });
+      gsap.set(el, { autoAlpha: 1 });
+      return () => split.revert();
+    }, el);
+
+    return () => ctx.revert();
+  }, [reduce]);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -114,11 +125,12 @@ const HeroSection = () => {
 
         {/* The name, with the work set into it */}
         <h1
+          ref={nameRef}
           aria-label="Guilherme Neves"
-          className="font-display font-semibold tracking-[-0.035em] leading-[0.92] text-foreground text-[clamp(2.75rem,11vw,9rem)]"
+          className="font-display font-semibold tracking-[-0.035em] leading-[0.92] text-foreground text-[clamp(2.75rem,11vw,9rem)] invisible"
         >
-          <span className="block">
-            <SlideWord word="GUILHERME" from={-120} delay={0.3} reduce={reduce} />
+          <span className="block" aria-hidden data-split="first">
+            GUILHERME
           </span>
           <span className="flex items-center gap-[0.14em]">
             {/* The window */}
@@ -153,7 +165,7 @@ const HeroSection = () => {
                 style={{ boxShadow: "inset 0 0 0 1px hsl(var(--foreground) / 0.08)" }}
               />
             </motion.span>
-            <SlideWord word="NEVES" from={120} delay={0.42} reduce={reduce} />
+            <span aria-hidden data-split="last">NEVES</span>
           </span>
         </h1>
 

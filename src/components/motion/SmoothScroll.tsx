@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Lenis from "lenis";
+import { ScrollTrigger } from "@/lib/gsap";
 
 /**
  * SmoothScroll.
@@ -49,6 +50,11 @@ const SmoothScroll = () => {
     });
     lenis = instance;
 
+    // Lenis moves the page on its own rAF loop, so ScrollTrigger has to be
+    // told on every one of those frames. Without this the two keep separate
+    // ideas of the scroll position and scrubbed animations lag behind.
+    instance.on("scroll", ScrollTrigger.update);
+
     // CSS smooth scrolling animates the same property Lenis drives every
     // frame, so the two cancel each other out and programmatic jumps land
     // short. Lenis owns the easing while it is mounted.
@@ -71,9 +77,13 @@ const SmoothScroll = () => {
     };
   }, []);
 
-  // A new page starts at the top, whichever scroller is in charge.
+  // A new page starts at the top, whichever scroller is in charge. Trigger
+  // positions were measured against the old page, so they have to be taken
+  // again once the new one has laid out.
   useEffect(() => {
     scrollToTop(true);
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
 
   return null;
