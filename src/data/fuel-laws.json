@@ -1,0 +1,42 @@
+[
+  {
+    "number": "01",
+    "title": "Fuel to Perform",
+    "tagline": "Energy is the currency of performance.",
+    "detail": "Without adequate energy availability, everything else breaks down, decision-making, recovery, adaptation, intensity. Fueling isn't about eating more. It's about eating enough, at the right times, to sustain the demands of training and competition. This is the foundation.",
+    "practical": "Match energy intake to training load. Periodise carbohydrate availability. Never under-fuel on high-demand days.",
+    "color": "150 30% 46%"
+  },
+  {
+    "number": "02",
+    "title": "Build Your Base",
+    "tagline": "Daily habits build or break the athlete.",
+    "detail": "Performance nutrition isn't a match-day intervention, it's a daily operating system. The habits athletes build around sleep, hydration, meal structure and consistency across the week are what create a resilient base. You can't out-supplement a broken routine.",
+    "practical": "Establish consistent meal timing. Build weekly nutrition rhythms. Create accountability through simple tracking.",
+    "color": "168 34% 46%"
+  },
+  {
+    "number": "03",
+    "title": "Recover Like a Pro",
+    "tagline": "Recovery prepares the next performance.",
+    "detail": "The hours after training or competition shape how quickly the body adapts and how prepared the athlete is for the next session. Recovery nutrition is a system, not an afterthought: protein, carbohydrate replenishment and hydration, prioritised most when the next session is close.",
+    "practical": "Prioritise protein and carbohydrate after the session, especially when recovery time is short. Rebuild glycogen across the day. Rehydrate with structure, not guesswork.",
+    "color": "192 42% 52%"
+  },
+  {
+    "number": "04",
+    "title": "Hydrate to Dominate",
+    "tagline": "Hydration supports physical and cognitive output.",
+    "detail": "Even mild dehydration impairs reaction time, concentration and physical capacity. Hydration monitoring and structured intake protocols should be as habitual as warm-ups. It's one of the simplest, most impactful systems to get right, and one of the most commonly neglected.",
+    "practical": "Monitor body weight changes. Use structured hydration protocols. Adapt intake to climate and session intensity.",
+    "color": "205 55% 56%"
+  },
+  {
+    "number": "05",
+    "title": "Test Before the Game",
+    "tagline": "Competition is not the place to experiment.",
+    "detail": "Every nutrition strategy, from match-day meals to supplement use to hydration plans, must be tested in training before it's used in competition. The match is the exam, not the practice session. If it hasn't been rehearsed, it doesn't belong on game day.",
+    "practical": "Rehearse match-day meals in training weeks. Trial supplements before competition. Build a proven pre-match routine.",
+    "color": "44 65% 55%"
+  }
+]
