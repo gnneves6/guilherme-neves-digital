@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import PageTransition from "./PageTransition";
 import ScrollProgress from "./motion/ScrollProgress";
+import SmoothScroll from "./motion/SmoothScroll";
 
 interface LayoutProps {
   children: ReactNode;
@@ -22,6 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
         Skip to content
       </a>
       <div className="grain-overlay" />
+      <SmoothScroll />
       <ScrollProgress />
       <Navbar />
       <PageTransition>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { scrollToTop } from "@/components/motion/SmoothScroll";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -20,7 +21,7 @@ const Navbar = () => {
   const handleHomeClick = useCallback((e: React.MouseEvent) => {
     if (isHome) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      scrollToTop(false);
     }
   }, [isHome]);
 

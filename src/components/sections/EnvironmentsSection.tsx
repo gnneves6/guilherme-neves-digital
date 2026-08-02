@@ -2,6 +2,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-
 import { lazy, Suspense, useRef, useState } from "react";
 import { usePointer } from "@/components/journey/PointerField";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { scrollToY } from "@/components/motion/SmoothScroll";
 import Chapter from "@/components/motion/Chapter";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
 import type { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
@@ -58,7 +59,7 @@ const EnvironmentsSection = () => {
     const totalScrollable = rect.height - window.innerHeight;
     const target = 0.1 + (idx + 0.5) * (0.8 / experiences.length);
     const top = window.scrollY + rect.top + totalScrollable * target;
-    window.scrollTo({ top, behavior: "smooth" });
+    scrollToY(top);
   };
   const goTo = (idx: number) => goToWithin(sectionRef, idx);
   const goToMobile = (idx: number) => goToWithin(mobileRef, idx);
