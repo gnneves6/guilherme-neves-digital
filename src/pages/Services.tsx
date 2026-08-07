@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
 import { motion } from "framer-motion";
 import sceneMethod from "@/assets/scene-method-podium.jpg";
+import AudienceSelector from "@/components/sections/AudienceSelector";
 
 type Service = {
   index: string;
@@ -169,15 +170,15 @@ const Services = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-5xl">
-              Strategic partnerships for environments that take nutrition seriously.
+              Work built for environments that take nutrition seriously.
             </h1>
           </Reveal>
           <Reveal delay={0.25}>
             <p className="text-body-lg max-w-2xl mt-8">
-              Three focused engagements for football clubs, performance
-              departments and elite environments. Each one is built around the
-              same question: is nutrition working as a system here, or only on
-              paper?
+              Clubs, the staff inside them, the athletes they carry, and the people
+              trying to get into this work. What I do changes with who is asking,
+              but the question underneath never does: is nutrition working as a
+              system here, or only on paper?
             </p>
           </Reveal>
           <Reveal delay={0.35}>
@@ -195,6 +196,9 @@ const Services = () => {
           </Reveal>
         </div>
       </section>
+
+      {/* Sorted by who is arriving, before anything is sold */}
+      <AudienceSelector />
 
       {/* Cinematic statement band */}
       <section className="relative overflow-hidden">

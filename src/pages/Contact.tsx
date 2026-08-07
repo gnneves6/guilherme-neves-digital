@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { audiences } from "@/data/audiences";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
@@ -19,6 +21,18 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchParams] = useSearchParams();
+
+  // Someone arriving from a specific audience on /services already told us why
+  // they came. Carrying that through means they do not restate it, and the
+  // enquiry lands already labelled.
+  const arrivedAbout = audiences.find((a) => a.anchor === searchParams.get("about"));
+
+  useEffect(() => {
+    if (arrivedAbout) {
+      setFormData((f) => (f.engagementType ? f : { ...f, engagementType: arrivedAbout.label }));
+    }
+  }, [arrivedAbout]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -149,10 +163,11 @@ const Contact = () => {
                     className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300"
                   >
                     <option value="">Select one</option>
-                    <option value="Embedded engagement">Embedded engagement</option>
-                    <option value="Diagnostic / audit">Diagnostic / audit</option>
-                    <option value="Education programme">Education programme</option>
-                    <option value="Advisory">Advisory</option>
+                    {audiences.map((a) => (
+                      <option key={a.id} value={a.label}>
+                        {a.label}
+                      </option>
+                    ))}
                     <option value="Other">Other</option>
                   </select>
                 </div>
