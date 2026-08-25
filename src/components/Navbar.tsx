@@ -34,8 +34,11 @@ const Navbar = () => {
     }
   }, [isHome]);
 
-  // Dark hero mode
-  const inDarkHero = isHome && !scrolled;
+  // The hero used to be a dark cinematic panel and the bar inverted to ivory
+  // over it. The hero is ivory now, so that inversion painted the wordmark and
+  // all three links in the background colour: from the moment someone landed,
+  // the navigation did not exist until they scrolled twenty pixels. One ink
+  // colour, everywhere, is the whole fix.
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -66,9 +69,7 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={handleHomeClick}
-            className={`font-display text-lg md:text-xl font-semibold tracking-tight transition-colors duration-500 ${
-              inDarkHero ? "text-[hsl(var(--ivory))]" : "text-foreground"
-            }`}
+            className="font-display text-lg md:text-xl font-semibold tracking-tight text-foreground transition-colors duration-500"
           >
             Guilherme Neves
           </Link>
@@ -82,19 +83,15 @@ const Navbar = () => {
                 aria-current={location.pathname === item.path ? "page" : undefined}
                 className={`relative text-sm font-body tracking-wide transition-colors duration-300 ${
                   location.pathname === item.path
-                    ? inDarkHero ? "text-[hsl(var(--ivory))]" : "text-foreground"
-                    : inDarkHero
-                      ? "text-[hsl(var(--ivory)/0.5)] hover:text-[hsl(var(--ivory)/0.9)]"
-                      : "text-muted-foreground hover:text-foreground"
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {item.label}
                 {location.pathname === item.path && (
                   <motion.div
                     layoutId="activeNav"
-                    className={`absolute -bottom-1 left-0 right-0 h-px ${
-                      inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"
-                    }`}
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-foreground"
                     transition={{ duration: 0.3 }}
                   />
                 )}
@@ -107,11 +104,7 @@ const Navbar = () => {
               to={CTA.path}
               aria-current={location.pathname === CTA.path ? "page" : undefined}
               className="ml-2 inline-flex items-center px-5 py-2 rounded-full text-sm font-display tracking-wide transition-all duration-300 hover:opacity-85"
-              style={
-                inDarkHero
-                  ? { background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }
-                  : { background: "hsl(var(--foreground))", color: "hsl(var(--background))" }
-              }
+              style={{ background: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
             >
               {CTA.label}
             </Link>
@@ -126,17 +119,17 @@ const Navbar = () => {
             aria-controls="mobile-menu"
           >
             <motion.span
-              className={`block w-6 h-px origin-center ${inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"}`}
+              className="block w-6 h-px origin-center bg-foreground"
               animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
             />
             <motion.span
-              className={`block w-6 h-px ${inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"}`}
+              className="block w-6 h-px bg-foreground"
               animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
               transition={{ duration: 0.2 }}
             />
             <motion.span
-              className={`block w-6 h-px origin-center ${inDarkHero ? "bg-[hsl(var(--ivory))]" : "bg-foreground"}`}
+              className="block w-6 h-px origin-center bg-foreground"
               animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
             />
