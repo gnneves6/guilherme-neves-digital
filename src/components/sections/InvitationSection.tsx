@@ -54,7 +54,7 @@ const InvitationSection = () => {
         </Reveal>
         <Reveal delay={0.55}>
           <p className="mt-10 text-[10px] tracking-[0.35em] uppercase font-display opacity-40">
-            GN Performance Systems, Porto · Brussels
+            Guilherme Neves · Porto, Brussels
           </p>
         </Reveal>
       </div>

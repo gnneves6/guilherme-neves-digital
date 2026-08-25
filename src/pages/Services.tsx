@@ -161,12 +161,12 @@ const ecosystem = [
 const Services = () => {
   return (
     <Layout>
-      <SEO title="Services, GN Performance Systems" description="Embedded engagements, diagnostics, education programmes and advisory for high-performance environments." path="/services" />
+      <SEO title="Working with me, Guilherme Neves" description="Embedded engagements, diagnostics, education programmes and advisory for high-performance environments." path="/services" />
       {/* Hero, Why */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Consulting · GN Performance Systems</p>
+            <p className="text-caption mb-6">Working with me</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-5xl">
@@ -502,7 +502,7 @@ const Services = () => {
             <div className="flex items-baseline justify-between gap-6 flex-wrap mb-3">
               <p className="text-caption">04, The Wider Ecosystem</p>
               <p className="text-caption text-[10px] text-muted-foreground">
-                GN Performance Systems
+                What I am building
               </p>
             </div>
           </Reveal>

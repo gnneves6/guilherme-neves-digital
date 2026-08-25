@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between gap-12">
           <div className="space-y-3 max-w-sm">
             <p className="font-display text-lg font-semibold text-foreground">
-              GN Performance Systems
+              Guilherme Neves
             </p>
             <p className="text-body text-sm">
               A practice for high-performance environments. Diagnosis, translation

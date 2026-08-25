@@ -413,8 +413,8 @@ export const accessMeta: Record<
     border: "rgba(210, 170, 90, 0.25)",
     ctaLabel: "Register interest",
     accessNote:
-      "This resource is being developed as part of the GN Performance Systems ecosystem.",
-    panelTitle: "Built as part of the GN Performance Systems ecosystem.",
+      "I am building this as part of the wider set of tools.",
+    panelTitle: "One of the tools I am building.",
     panelBody:
       "This concept is being developed into a future resource or product.",
     icon: "sparkle",

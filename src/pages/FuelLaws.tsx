@@ -51,7 +51,7 @@ const FuelLaws = () => {
 
   return (
     <Layout>
-      <SEO title="GN Fuel Laws, The Operating System for Performance Nutrition" description="Five applied principles that turn nutrition from information into repeatable performance behaviour." path="/fuel-laws" />
+      <SEO title="Five Fuel Laws, Guilherme Neves" description="Five applied principles that turn nutrition from information into behaviour an athlete repeats, with the work that proves each one." path="/fuel-laws" />
 
       {/* Header */}
       <section className="section-padding section-spacing">

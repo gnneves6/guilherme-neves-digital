@@ -68,7 +68,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <SEO title="Engagement Enquiry, GN Performance Systems" description="Enquire about an embedded engagement, diagnostic, education programme or advisory." path="/contact" />
+      <SEO title="Contact Guilherme Neves" description="Tell me what you are trying to solve. Every enquiry comes straight to me and I reply personally." path="/contact" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>

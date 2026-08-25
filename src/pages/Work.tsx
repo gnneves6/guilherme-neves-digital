@@ -235,7 +235,7 @@ const Work = () => {
 
   return (
     <Layout>
-      <SEO title="Work, GN Performance Systems" description="Applied resources, frameworks and tools developed inside real performance engagements." path="/work" />
+      <SEO title="Work, Guilherme Neves" description="Systems, tools and resources built inside real performance environments, grouped by the problem they solve." path="/work" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
