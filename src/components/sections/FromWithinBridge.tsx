@@ -64,7 +64,7 @@ const FromWithinBridge = () => {
                 style={{ color: "hsl(var(--foreground) / 0.78)" }}
               >
                 Most performance nutrition fails not because the science is wrong,
-                but because the delivery is fragile. The practice exists to close
+                but because the delivery is fragile. My work exists to close
                 that gap, turning evidence into structures that staff, athletes
                 and organisations can actually run.
               </p>

@@ -62,29 +62,29 @@ const awards = [
 const About = () => {
   return (
     <Layout>
-      <SEO title="About, GN Performance Systems" description="The practice and the principal: diagnosis, translation and embedded nutrition systems by Guilherme Neves." path="/about" />
-      {/* The Practice */}
+      <SEO title="About Guilherme Neves, Performance Nutrition & Systems" description="Performance nutrition learned inside elite football. Guilherme Neves on the work, the environments it came from, and why systems matter more than advice." path="/about" />
+      {/* The work */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">The Practice</p>
+            <p className="text-caption mb-6">The work</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">
-              A practice built where sport, science and systems meet.
+              Where sport, science and systems meet.
             </h1>
           </Reveal>
           <Reveal delay={0.25}>
             <p className="text-body-lg max-w-2xl mt-8">
-              GN Performance Systems is a performance nutrition practice for
-              high-performance environments. The work is not about giving advice, it is about{" "}
+              I work with high-performance environments, and the job is not giving
+              advice. It is{" "}
               <Em>translating science into systems that survive a real training week</Em>, a
               competition block, a travel day.
             </p>
           </Reveal>
           <Reveal delay={0.35}>
             <p className="text-body max-w-2xl mt-4">
-              Three disciplines hold the practice together: diagnosis of the
+              Three disciplines hold my work together: diagnosis of the
               environment as it actually operates, translation of evidence into
               decisions a staff can use, and embedded systems that keep nutrition
               consistent when intensity rises.
@@ -112,33 +112,34 @@ const About = () => {
         <div className="divider" />
       </div>
 
-      {/* The Principal */}
+      {/* Who I am */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <div className="grid md:grid-cols-[1fr,340px] lg:grid-cols-[1fr,400px] gap-12 md:gap-16 items-start">
             <div>
               <Reveal>
-                <p className="text-caption mb-6">The Principal</p>
+                <p className="text-caption mb-6">Who I am</p>
               </Reveal>
               <Reveal delay={0.1}>
                 <h2 className="text-headline max-w-3xl">
-                  Guilherme Neves leads the practice.
+                  Athlete by nature. Nutritionist by purpose.
                 </h2>
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="text-body-lg max-w-2xl mt-6">
-                  A final-year Nutrition Sciences student at FCNAUP, University of
-                  Porto, who has already worked inside <Em>elite professional
-                  football</Em>. Most recently at RSC Anderlecht, one of Europe's
-                  historic clubs, and before that alongside the first team at Leça FC.
+                  I hold a BSc in Nutrition Sciences from FCNAUP, University of Porto,
+                  and I am soon to be a registered nutritionist, with the professional
+                  licence pending. I learned the job inside <Em>elite professional
+                  football</Em> before I finished the degree: most recently at RSC
+                  Anderlecht, and before that alongside the first team at Leça FC.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="text-body max-w-2xl mt-4">
-                  His perspective comes from inside sport. Years lived across
-                  competitive disciplines shape how he reads environments, designs
-                  interventions and <Em>earns the trust of athletes and staff</Em>.
-                  That perspective carries into every engagement.
+                  My perspective comes from inside sport rather than from a lecture
+                  hall. More than fifteen years as an athlete shape how I read an
+                  environment, design an intervention and <Em>earn the trust of
+                  athletes and staff</Em>.
                 </p>
               </Reveal>
               <Reveal delay={0.4}>
@@ -149,7 +150,7 @@ const About = () => {
             </div>
             <Reveal delay={0.2} direction="right">
               <div className="relative mt-4 md:mt-12">
-                <PortraitPlaceholder caption="Guilherme Neves, Principal" />
+                <PortraitPlaceholder caption="Guilherme Neves, Porto" />
               </div>
             </Reveal>
           </div>
@@ -472,7 +473,7 @@ const About = () => {
                 <div className="space-y-2">
                   <h3 className="font-display text-lg font-medium text-foreground">BSc in Nutrition Sciences</h3>
                   <p className="text-body text-sm">FCNAUP, University of Porto</p>
-                  <p className="text-caption text-[10px] font-normal">2022–2026 · Final-year student</p>
+                  <p className="text-caption text-[10px] font-normal">2022–2026 · BSc, graduated July 2026</p>
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-display text-lg font-medium text-foreground">Erasmus+ Mobility Project</h3>
@@ -564,7 +565,7 @@ const About = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-md mx-auto mt-4">
-              The practice opens a limited number of conversations each season
+              I open a limited number of conversations each season
               with organisations and staff serious about performance nutrition.
             </p>
           </Reveal>
