@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 dist-artifact
+
+# Seeded design canvas: 2.5MB build output, regenerable from design/*.dc.html
+design/planta-site-guilherme-neves.html

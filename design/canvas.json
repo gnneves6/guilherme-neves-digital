@@ -1,0 +1,24 @@
+{
+  "artboards": [
+    { "file": "Sistema.dc.html", "x": 0, "y": 0, "w": 1180, "h": 860, "title": "00 Sistema" },
+    { "file": "Main.dc.html", "x": 1280, "y": 0, "w": 900, "h": 1500, "title": "01 Home" },
+    { "file": "Paginas.dc.html", "x": 2280, "y": 0, "w": 900, "h": 1060, "title": "02 Trabalho e Contacto" }
+  ],
+  "annotations": [
+    {
+      "id": "nota-showroom",
+      "x": 0,
+      "y": 920,
+      "w": 520,
+      "text": "O princípio que decide tudo:\n\nShowroom, não armazém.\n\nUma ferramenta nova não precisa de entrar no site. O site já provou a capacidade. A ferramenta vai para a lista e para as redes."
+    },
+    {
+      "id": "nota-ordem",
+      "x": 1280,
+      "y": 1560,
+      "w": 520,
+      "text": "A ordem contraria o instinto, de propósito.\n\nAs ferramentas (03) vêm antes da tua história (05). Ninguém te conhece ainda: primeiro entregas valor, depois ganhas o direito a contar quem és.\n\nÉ a diferença entre \"olhem para mim\" e \"toma, usa isto\"."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}
