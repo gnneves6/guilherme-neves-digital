@@ -1,35 +1,34 @@
 {
   "pages": [
-    { "id": "page-1", "name": "Direções" },
+    { "id": "page-1", "name": "Home" },
     { "id": "page-2", "name": "Estrutura" }
   ],
   "artboards": [
-    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 3060, "title": "A · Syne", "page": "page-1" },
-    { "file": "Editorial.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 2180, "title": "B · Editorial", "page": "page-1" },
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 3220, "title": "Home", "page": "page-1" },
     { "file": "Sistema.dc.html", "x": 0, "y": 0, "w": 1180, "h": 860, "title": "Sistema", "page": "page-2" },
     { "file": "Paginas.dc.html", "x": 1280, "y": 0, "w": 900, "h": 1060, "title": "Trabalho e Contacto", "page": "page-2" }
   ],
   "annotations": [
     {
-      "id": "dir-a",
-      "x": 0,
-      "y": 3120,
-      "w": 560,
-      "text": "A · Syne\n\nA tua tipografia atual, com a paleta nova.\n\nGeométrica, contemporânea, mais próxima de tecnologia e sistemas. Assina bem com \"construo ferramentas\"."
+      "id": "ordem-nova",
+      "x": 1560,
+      "y": 0,
+      "w": 520,
+      "text": "A ordem mudou, e tu tinhas razão.\n\nA ferramenta saiu da Home. Ela serve nutricionistas e clubes, não serve toda a gente, por isso não pode ser a primeira coisa que alguém encontra.\n\nAgora vive dentro de Soluções, na secção de quem a vai usar."
     },
     {
-      "id": "dir-b",
+      "id": "provas",
       "x": 1560,
-      "y": 2240,
-      "w": 560,
-      "text": "B · Editorial (Instrument Serif)\n\nMais quente, mais humana, mais próxima de revista.\n\nO itálico dá-te um registo de pessoa em vez de produto. Casa melhor com bege e verde cashmere, e com \"a minha história é o diferencial\".\n\nAqui só o topo da página, o suficiente para julgares o tipo."
+      "y": 420,
+      "w": 520,
+      "text": "O bloco 03 é o que ganha confiança.\n\nSão as tuas provas concretas, tiradas do CV mas escritas como história, não como currículo. O número puxa o olho, a frase por baixo mostra o critério.\n\nO ISAK e o painel de sangue mostram julgamento. O \"não é um ranking\" e o \"nenhum alimento demonizado\" mostram valores. É aí que está a humanidade."
     },
     {
       "id": "paleta",
-      "x": 3120,
-      "y": 0,
-      "w": 420,
-      "text": "Paleta\n\nCreme #F7F3EA (fundo)\nPapel #FCFAF5 (superfícies)\nAreia #EFE9DC (blocos)\nTinta #26261F (texto, preto quente)\nCashmere #8A9E86 (acento)\nCashmere fundo #56684F (botões)\nFloresta #2C352A (o instrumento)\n\nZero azul e zero cinzento frio. Os pretos e brancos são todos quentes."
+      "x": 1560,
+      "y": 960,
+      "w": 440,
+      "text": "Paleta\n\nCreme #F7F3EA\nPapel #FCFAF5\nAreia #EFE9DC\nTinta #26261F\nCashmere #8A9E86\nCashmere fundo #56684F\nFloresta #2C352A\n\nZero azul, zero cinzento frio."
     }
   ],
   "launch": { "view": "canvas", "page": "page-1" }
