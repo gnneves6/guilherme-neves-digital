@@ -150,9 +150,6 @@ const curatedGraph: Record<string, WorkNode> = {
   },
 
   // ── Written and structural work ───────────────────────────────────
-  "fuel-laws-playbook": {
-    topic: "framework", laws: [1, 2, 3, 4, 5], maturity: "guide", environment: "independent",
-  },
   "md-1-fuel-system": {
     topic: "matchday", laws: [1, 5], maturity: "guide", environment: "anderlecht",
   },
@@ -161,7 +158,6 @@ const curatedGraph: Record<string, WorkNode> = {
   },
   "football-nutrition-atlas": {
     topic: "framework", laws: [1, 2], maturity: "guide", environment: "independent",
-    grewFrom: ["fuel-laws-playbook"],
   },
   "athlete-orientation": {
     topic: "composition", laws: [2], maturity: "guide", environment: "leca",
@@ -186,18 +182,6 @@ const curatedGraph: Record<string, WorkNode> = {
   },
 
   // ── Tools ─────────────────────────────────────────────────────────
-  "matchday-fuel": {
-    topic: "matchday", laws: [1, 5], maturity: "tool", environment: "independent",
-    grewFrom: ["matchday-fuel-system"],
-  },
-  "hydration-monitoring": {
-    topic: "hydration", laws: [4], maturity: "tool", environment: "anderlecht",
-    grewFrom: ["hydration-sweat-testing-framework"],
-  },
-  "snack-bag-agent": {
-    topic: "matchday", laws: [1, 5], maturity: "tool", environment: "independent",
-    grewFrom: ["matchday-fuel-system"],
-  },
   "fuelops-ai": {
     topic: "framework", laws: [1, 2], maturity: "tool", environment: "independent",
     grewFrom: ["matchday-fuel-system", "hydration-sweat-testing-framework"],

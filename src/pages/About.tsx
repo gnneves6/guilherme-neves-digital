@@ -113,6 +113,25 @@ const About = () => {
               ))}
             </div>
           </Reveal>
+
+          {/* Four photographs of him inside two clubs raise exactly one
+              question, and until now the page made you scroll another four
+              thousand pixels before offering any answer. The door goes where
+              the curiosity is. */}
+          <Reveal delay={0.25}>
+            <Link
+              to="/work"
+              className="group inline-flex items-center gap-2.5 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              What I actually did in those rooms
+              <span
+                aria-hidden
+                className="inline-block transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -303,29 +322,44 @@ const About = () => {
         <div className="divider" />
       </div>
 
-      {/* CTA */}
+      {/* The close.
+          This page used to end on "Considering an engagement?" and a single
+          button to the contact form, which was also the only link in four and a
+          half thousand pixels. It asked the wrong question. Someone who has
+          just read who he is wants to know what he has actually done, not to
+          write to a stranger, so the work goes first and the conversation goes
+          second. About, then work, then contact, in that order. */}
       <section className="section-padding section-spacing">
         <div className="max-content text-center">
           <Reveal>
             <h2 className="text-headline max-w-2xl mx-auto">
-              Considering an engagement?
+              That's who I am. Here's what I've built.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-md mx-auto mt-4">
-              I open a limited number of conversations each season
-              with organisations and staff serious about performance nutrition.
+              The systems, tools and frameworks that came out of those rooms,
+              and what each one was actually for.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <Magnetic as="span" strength={7} className="mt-8">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <Magnetic as="span" strength={7}>
+                <Link
+                  to="/work"
+                  className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+                >
+                  See the work
+                </Link>
+              </Magnetic>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+                className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
-                Enquire about an engagement
+                Or start a conversation
+                <span aria-hidden>→</span>
               </Link>
-            </Magnetic>
+            </div>
           </Reveal>
         </div>
       </section>

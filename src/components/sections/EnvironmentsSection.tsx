@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { lazy, Suspense, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { usePointer } from "@/components/journey/PointerField";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { scrollToY } from "@/components/motion/SmoothScroll";
@@ -12,11 +13,39 @@ import anderlechtKit from "@/assets/kits/anderlecht-kit-transparent.png";
 import lecaKit from "@/assets/kits/leca-kit-transparent.png";
 import r4eKit from "@/assets/kits/run4excellence-kit-transparent.png";
 import { experiences, additionalExposure } from "@/data/experiences";
+import { workByEnvironment, type EnvironmentId } from "@/data/work-graph";
 
 const kitImages: Record<string, string> = {
   anderlecht: anderlechtKit,
   leca: lecaKit,
   r4e: r4eKit,
+};
+
+/**
+ * The door out of a club chapter, into the work that came out of that club.
+ *
+ * The count is read from the graph rather than written here, so a piece added
+ * to the archive with an environment on it changes this line by itself. An
+ * environment with nothing attached to it yet renders no link at all, because
+ * an invitation that leads to an empty page is worse than no invitation.
+ */
+const EnvironmentExit = ({ exp }: { exp: (typeof experiences)[number] }) => {
+  const count = workByEnvironment(exp.id as EnvironmentId).length;
+  if (count === 0) return null;
+  const accent = exp.kitColors.primary === "#0E0E10" ? "hsl(var(--ivory))" : exp.kitColors.primary;
+
+  return (
+    <Link
+      to={`/work?env=${exp.id}`}
+      className="group/exit inline-flex items-center gap-2.5 mt-7 py-2 font-display text-[13px] tracking-wide transition-colors duration-300 text-[hsl(var(--ivory)/0.6)] hover:text-[hsl(var(--ivory))]"
+    >
+      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: accent }} />
+      See the {count} {count === 1 ? "piece" : "pieces"} this produced
+      <span aria-hidden className="inline-block transition-transform duration-300 group-hover/exit:translate-x-1">
+        →
+      </span>
+    </Link>
+  );
 };
 
 const EnvironmentsSection = () => {
@@ -240,6 +269,19 @@ const EnvironmentsSection = () => {
               <span className="text-[hsl(var(--ivory)/0.28)]">{item.date}</span>
             </div>
           ))}
+
+          {/* The chapter closes on a phone here, so the way out belongs here
+              too. On desktop each club carries its own; on mobile the panel is
+              already tight against one screen, so it lands once at the end. */}
+          <Link
+            to="/work"
+            className="group/exit inline-flex items-center gap-2.5 mt-7 py-2 font-display text-[13px] tracking-wide text-[hsl(var(--ivory)/0.62)] hover:text-[hsl(var(--ivory))] transition-colors duration-300"
+          >
+            See what came out of these rooms
+            <span aria-hidden className="inline-block transition-transform duration-300 group-hover/exit:translate-x-1">
+              →
+            </span>
+          </Link>
         </div>
         {/* Cinematic bottom dissolve, into SelectedArtefactsSection (cinematic dark) */}
         <div
@@ -370,6 +412,12 @@ const EnvironmentsSection = () => {
                                 {exp.seasonNote}
                               </p>
                             )}
+                            {/* The way out of the most convincing thing here.
+                                This chapter had no link in it, and neither did
+                                the five thousand pixels of home around it, so
+                                the moment a visitor was most persuaded was the
+                                moment the page gave them nowhere to go. */}
+                            <EnvironmentExit exp={exp} />
                           </motion.div>
                         </div>
                       </motion.div>

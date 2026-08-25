@@ -19,10 +19,12 @@ import {
   maturityMeta,
   fieldNotes,
   environmentMeta,
+  workByEnvironment,
   workByTopic,
   topicMeta,
   topicOrder,
   type Topic,
+  type EnvironmentId,
 } from "@/data/work-graph";
 
 type PreviewType = "editorialPlaceholder" | "blurredProtected" | "toolMockup" | "documentMockup" | "tableMockup" | "seriesMockup";
@@ -181,6 +183,14 @@ const Work = () => {
     setSearchParams(searchParams, { replace: true });
   }, [searchParams, setSearchParams]);
 
+  // Arriving from a club chapter on the home page. Real Environments is the
+  // most persuasive thing on this site and it used to be a dead end: five and a
+  // half thousand pixels of the home had no link in it at all, so the moment
+  // someone was most convinced was the moment they had nowhere to go. Now each
+  // environment carries what came out of it, and this reads that through.
+  const env = searchParams.get("env") as EnvironmentId | null;
+  const fromEnvironment = env && env in environmentMeta ? env : null;
+
   const visibleTopics = useMemo<Topic[]>(
     () => (active === "All" ? topicOrder : [active]),
     [active]
@@ -190,10 +200,25 @@ const Work = () => {
   // lives here, including the applied systems that used to sit in a separate
   // collection of their own.
   const grouped = useMemo(() => {
+    const keep = fromEnvironment
+      ? new Set(workByEnvironment(fromEnvironment).map((a) => a.slug))
+      : null;
     const map = {} as Record<Topic, Artefact[]>;
-    for (const t of topicOrder) map[t] = workByTopic(t);
+    for (const t of topicOrder) {
+      const items = workByTopic(t);
+      map[t] = keep ? items.filter((a) => keep.has(a.slug)) : items;
+    }
     return map;
-  }, []);
+  }, [fromEnvironment]);
+
+  // Counted from what actually renders, not from the graph. The graph knows
+  // of eight pieces tied to Anderlecht but only six of them carry a topic, and
+  // the grid is built from topics, so quoting the graph would have printed a
+  // number two higher than the cards below it.
+  const envCount = useMemo(
+    () => Object.values(grouped).reduce((n, items) => n + items.length, 0),
+    [grouped]
+  );
 
   const renderCard = (a: Artefact, i: number, wide = false) => {
     const isHovered = hovered === a.slug;
@@ -266,27 +291,51 @@ const Work = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">
-              Applied work from inside performance environments.
+              {fromEnvironment
+                ? `What came out of ${environmentMeta[fromEnvironment].label}.`
+                : "Applied work from inside performance environments."}
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              A curated archive of resources, frameworks and tools developed
-              inside real engagements. Public artefacts are open.{" "}
-              <span className="text-foreground font-medium">Protected work exists as proof</span>,
-              shown privately when it's relevant.
+              {fromEnvironment ? (
+                <>
+                  {envCount} {envCount === 1 ? "piece" : "pieces"} of the archive
+                  were built inside this environment. Everything else is still
+                  here, one click away.
+                </>
+              ) : (
+                <>
+                  A curated archive of resources, frameworks and tools developed
+                  inside real engagements. Public artefacts are open.{" "}
+                  <span className="text-foreground font-medium">Protected work exists as proof</span>,
+                  shown privately when it's relevant.
+                </>
+              )}
             </p>
           </Reveal>
-          {/* The free thing, offered where someone is already browsing the
-              work rather than buried in the footer. */}
           <Reveal delay={0.3}>
-            <Link
-              to="/fuel-laws"
-              className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
-            >
-              Start with the five fuel laws
-              <span aria-hidden>→</span>
-            </Link>
+            {fromEnvironment ? (
+              /* Arriving filtered is only useful if leaving the filter is
+                 obvious. This is the way back to the whole archive. */
+              <Link
+                to="/work"
+                className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                <span aria-hidden>←</span>
+                See the full archive
+              </Link>
+            ) : (
+              /* The free thing, offered where someone is already browsing the
+                 work rather than buried in the footer. */
+              <Link
+                to="/fuel-laws"
+                className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Start with the five fuel laws
+                <span aria-hidden>→</span>
+              </Link>
+            )}
           </Reveal>
         </div>
       </section>
@@ -446,23 +495,42 @@ const Work = () => {
       <div className="section-padding max-content">
         <div className="divider" />
       </div>
+      {/* The close.
+          Someone who has scrolled the whole archive has seen what exists but
+          not how any of it is bought, and the only door here was the contact
+          form. Services answers the question this page raises, so it goes
+          first; the form stays for anyone who already knows what they want. */}
       <section className="section-padding section-spacing">
         <div className="max-content text-center">
           <Reveal>
-            <p className="text-body-lg max-w-md mx-auto">
-              Building a performance environment? Some of this work is shared
-              on request as part of an engagement conversation.
-            </p>
+            <h2 className="text-headline max-w-2xl mx-auto">
+              This is what gets built. Here's how it gets bought.
+            </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <Magnetic as="span" strength={7} className="mt-8">
+            <p className="text-body-lg max-w-md mx-auto mt-4">
+              Protected work is walked through privately as part of an
+              engagement conversation.
+            </p>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <Magnetic as="span" strength={7}>
+                <Link
+                  to="/services"
+                  className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+                >
+                  See how we'd work together
+                </Link>
+              </Magnetic>
               <Link
                 to="/contact"
-                className="group inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+                className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
-                Enquire about an engagement
+                Or enquire directly
+                <span aria-hidden>→</span>
               </Link>
-            </Magnetic>
+            </div>
           </Reveal>
         </div>
       </section>

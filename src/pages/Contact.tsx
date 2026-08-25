@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { audiences } from "@/data/audiences";
 import Layout from "@/components/Layout";
@@ -106,12 +106,26 @@ const Contact = () => {
                   Thank you for the note. I read every enquiry myself and will reply
                   personally, usually within a few working days. Talk soon.
                 </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-8 text-body text-sm link-underline hover:text-foreground transition-colors"
-                >
-                  Send another enquiry
-                </button>
+                {/* Someone has just written to him and now has days to wait.
+                    The only thing here used to be "send another enquiry", which
+                    almost nobody wants, so the page went quiet at the warmest
+                    moment it will ever have. Hand them the free thing instead. */}
+                <Magnetic as="span" strength={7} className="inline-block mt-8">
+                  <Link
+                    to="/fuel-laws"
+                    className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+                  >
+                    While you wait, take the five laws
+                  </Link>
+                </Magnetic>
+                <div className="mt-6">
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="text-body text-sm py-2 link-underline hover:text-foreground transition-colors"
+                  >
+                    Send another enquiry
+                  </button>
+                </div>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -267,10 +281,35 @@ const Contact = () => {
                     href={LINKS.LINKEDIN_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-body text-sm link-underline hover:text-foreground transition-colors"
+                    className="text-body text-sm py-2 link-underline hover:text-foreground transition-colors"
                   >
                     LinkedIn ↗
                   </a>
+                </div>
+
+                {/* Not everyone who reaches this page is ready to write, and
+                    until now the only way onward from here led off the site
+                    entirely. Two doors back into the work. */}
+                <div className="pt-6 border-t border-border/60 space-y-3">
+                  <p className="text-caption text-[10px]">Not ready yet</p>
+                  {[
+                    { to: "/work", label: "See the work first" },
+                    { to: "/fuel-laws", label: "Take the five fuel laws" },
+                  ].map((l) => (
+                    <Link
+                      key={l.to}
+                      to={l.to}
+                      className="group flex items-center justify-between gap-4 py-2 text-body text-sm hover:text-foreground transition-colors duration-300"
+                    >
+                      {l.label}
+                      <span
+                        aria-hidden
+                        className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                      >
+                        →
+                      </span>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
