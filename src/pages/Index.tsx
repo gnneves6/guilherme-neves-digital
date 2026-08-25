@@ -5,28 +5,38 @@ import ProofMarquee from "@/components/sections/ProofMarquee";
 import ScrollStatement from "@/components/sections/ScrollStatement";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
-import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSection";
 import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
-import SystemsBridgeSection from "@/components/sections/SystemsBridgeSection";
-import TheMethodSection from "@/components/sections/TheMethodSection";
-import SystemsArchitectureSection from "@/components/sections/SystemsArchitectureSection";
 import InvitationSection from "@/components/sections/InvitationSection";
 import PointerField from "@/components/journey/PointerField";
 
+/**
+ * The home carries the whole pitch, and nothing else.
+ *
+ * A visitor arriving from a video gives this page seconds, not minutes, so
+ * every block has to earn its place against one of two jobs: convert the few
+ * who are ready, or capture the many who are not. Four sections that served
+ * neither (two text bridges, the method walkthrough and the architecture
+ * diagram) were removed rather than reordered, along with the applied-work
+ * teaser, which had grown into a second catalogue beside /work.
+ *
+ * The order is deliberate and it puts the person before the product: who he
+ * is, then where he has been and what he did there, then why he does it, and
+ * only then the tool. Nobody knows him yet when they land, so the work has to
+ * earn the right to sell.
+ */
 const Index = () => {
   return (
     <PointerField>
     <Layout>
-      <SEO title="Guilherme Neves, GN Performance Systems" description="Embedded performance nutrition for clubs, federations and athletes. Diagnosis, translation and applied systems." path="/" />
-      {/*
-        Cinematic 6-scene journey, POV camera, no hard dividers.
-        01 Tunnel/Entrance → 02 Locker/Environments → 03 From Within Thesis
-        → 04 Proof Table → 05 Method Room → 06 Exit/Invitation.
-      */}
+      <SEO title="Guilherme Neves, Performance Nutrition & Systems" description="Performance nutrition learned inside elite football. Applied systems for athletes, practitioners and clubs, and the tools built along the way." path="/" />
+
+      {/* Who he is, in five seconds. */}
       <HeroSection />
-      {/* Credibility read at a glance, then the thesis stated with weight,
-          before the journey drops into the dark environments chapter. */}
+
+      {/* Where, read at a glance and moving on its own. */}
       <ProofMarquee />
+
+      {/* The premise, stated with weight before any evidence. */}
       <ScrollStatement
         caption="The premise"
         lines={[
@@ -34,15 +44,18 @@ const Index = () => {
           "It survives the meeting and dies in the week.",
         ]}
       />
+
+      {/* The evidence, walked through as the environments it was earned in.
+          Each kit now carries what was actually done at that club. */}
       <EnvironmentsSection />
+
+      {/* Why he does this, in his own voice. */}
       <FromWithinBridge />
-      <SelectedArtefactsSection />
-      {/* Proof shown, then proof handed over. The one chapter driven by the
-          pointer rather than the scroll. */}
+
+      {/* Proof handed over rather than described. The one chapter driven by
+          the pointer instead of the scroll. */}
       <MatchdayPlanner />
-      <SystemsBridgeSection />
-      <TheMethodSection />
-      <SystemsArchitectureSection />
+
       <InvitationSection />
     </Layout>
     </PointerField>

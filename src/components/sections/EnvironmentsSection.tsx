@@ -164,16 +164,21 @@ const EnvironmentsSection = () => {
                   <p className="text-[10px] tracking-[0.16em] uppercase font-display mt-2 text-[hsl(var(--ivory)/0.45)] leading-snug">
                     {activeExp.role}
                   </p>
-                  <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-2.5">
-                    {activeExp.focus.map((f) => (
-                      <span key={f} className="text-[9px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.5)]">
-                        · {f}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="font-display text-[15px] italic leading-snug text-[hsl(var(--ivory)/0.72)] mt-3.5">
+                  <p className="font-display text-[15px] italic leading-snug text-[hsl(var(--ivory)/0.72)] mt-3">
                     “{activeExp.chapter}”
                   </p>
+                  {/* Two proofs only on a phone, so the chapter still fits one screen. */}
+                  <ul className="mt-3.5 space-y-2">
+                    {activeExp.proofs.slice(0, 2).map((proof) => (
+                      <li key={proof} className="flex items-start gap-2.5">
+                        <span
+                          className="mt-[6px] w-1 h-1 rounded-full shrink-0"
+                          style={{ background: activeExp.kitColors.primary === "#0E0E10" ? "hsl(var(--ivory) / 0.45)" : activeExp.kitColors.primary }}
+                        />
+                        <span className="text-[11.5px] leading-snug text-[hsl(var(--ivory)/0.66)]">{proof}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -329,22 +334,31 @@ const EnvironmentsSection = () => {
                             <p className="text-[11px] tracking-[0.18em] uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)] leading-snug max-w-sm">
                               {exp.role}
                             </p>
-                            <p className="text-sm text-[hsl(var(--ivory)/0.6)] mt-3 max-w-md">
-                              {exp.context}
-                            </p>
-                            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 max-w-md">
-                              {exp.focus.map((f) => (
-                                <span
-                                  key={f}
-                                  className="text-[10px] tracking-wide uppercase font-display text-[hsl(var(--ivory)/0.55)]"
-                                >
-                                  · {f}
-                                </span>
-                              ))}
-                            </div>
-                            <p className="font-display text-base lg:text-lg italic max-w-md leading-relaxed text-[hsl(var(--ivory)/0.7)] mt-6">
+                            <p className="font-display text-base lg:text-lg italic max-w-md leading-relaxed text-[hsl(var(--ivory)/0.7)] mt-5">
                               “{exp.chapter}”
                             </p>
+                            {/* What was actually done here. This replaced a row
+                                of subject tags: a tag says the topic was touched,
+                                a proof says what came of it. */}
+                            <ul className="mt-6 space-y-2.5 max-w-md">
+                              {exp.proofs.map((proof, pi) => (
+                                <motion.li
+                                  key={proof}
+                                  className="flex items-start gap-3"
+                                  initial={{ opacity: 0, x: -8 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.5, delay: 0.24 + pi * 0.1 }}
+                                >
+                                  <span
+                                    className="mt-[7px] w-1.5 h-1.5 rounded-full shrink-0"
+                                    style={{ background: exp.kitColors.primary === "#0E0E10" ? "hsl(var(--ivory) / 0.45)" : exp.kitColors.primary }}
+                                  />
+                                  <span className="text-[13px] lg:text-sm leading-snug text-[hsl(var(--ivory)/0.72)]">
+                                    {proof}
+                                  </span>
+                                </motion.li>
+                              ))}
+                            </ul>
                             {exp.seasonNote && (
                               <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3 max-w-md">
                                 {exp.seasonNote}
