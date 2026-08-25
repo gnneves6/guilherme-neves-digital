@@ -114,21 +114,6 @@ export const artefacts: Artefact[] = [
     previewType: "single",
   },
   {
-    slug: "football-nutrition-atlas",
-    title: "The Football Nutrition Atlas",
-    category: "Product",
-    group: "systems",
-    type: "Premium Resource · In Development",
-    status: "In Development",
-    description:
-      "A functional fueling guide translating football nutrition into practical plates, timing maps and matchday decisions.",
-    whatItProves: "A scalable education product built from applied performance nutrition systems.",
-    ctaLabel: "Preview the Atlas",
-    ctaType: "early-access",
-    featured: true,
-    previewType: "blurred",
-  },
-  {
     slug: "supplementation-elite-football",
     title: "Supplementation in Elite Football",
     category: "Visual Guide",
@@ -172,62 +157,6 @@ export const artefacts: Artefact[] = [
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
-  },
-  {
-    slug: "matchday-fuel",
-    title: "Matchday Fuel",
-    category: "Interactive Tool",
-    group: "tools",
-    type: "Football Matchday Fueling System · In Development",
-    status: "In Development",
-    description:
-      "An interactive fueling system that adapts nutrition timing around kick-off, role, travel and matchday constraints.",
-    whatItProves: "Digital systems thinking applied to real football nutrition decisions.",
-    ctaLabel: "Explore the System",
-    ctaType: "waitlist",
-    featured: true,
-  },
-  {
-    slug: "hydration-monitoring",
-    title: "Hydration Monitoring Tool",
-    category: "Monitoring Tool",
-    group: "tools",
-    type: "Monitoring Tool · In Development",
-    status: "In Development",
-    description:
-      "A lightweight monitoring layer for individual and team-level hydration status, built for staff workflows.",
-    whatItProves: "Monitoring designed to support real staff decisions, not dashboards for show.",
-    ctaLabel: "Join the Build List",
-    ctaType: "waitlist",
-    featured: false,
-  },
-  {
-    slug: "snack-bag-agent",
-    title: "Matchday Snack Bag Agent",
-    category: "FuelOps Tool",
-    group: "tools",
-    type: "FuelOps Prototype · In Development",
-    status: "In Development",
-    description:
-      "A prototype agent that turns match context into snack bag suggestions, checklists and preparation routines.",
-    whatItProves: "Where applied nutrition meets performance operations and AI.",
-    ctaLabel: "Get Early Access",
-    ctaType: "waitlist",
-    featured: false,
-  },
-  {
-    slug: "fuel-laws-playbook",
-    title: "GN Fuel Laws Playbook",
-    category: "Framework",
-    group: "systems",
-    type: "Applied Framework · In Development",
-    status: "In Development",
-    description:
-      "The applied playbook behind the GN Fuel Laws, turning principles into tools, guides and repeatable routines.",
-    whatItProves: "A scalable system behind the public-facing education.",
-    ctaLabel: "Join the Build List",
-    ctaType: "waitlist",
-    featured: false,
   },
   {
     slug: "fuelops-ai",
@@ -281,7 +210,7 @@ export const statusMeta: Record<
 > = {
   Public: { dot: "hsl(var(--olive-light))", label: "Public" },
   Protected: { dot: "hsl(35, 28%, 62%)", label: "Protected" },
-  "In Development": { dot: "hsl(40, 55%, 60%)", label: "In Development" },
+  "In Development": { dot: "hsl(40, 55%, 60%)", label: "Building" },
 };
 
 export const groupMeta: Record<
@@ -307,7 +236,7 @@ export const groupMeta: Record<
     short: "Tools",
     anchor: "tools-product-lab",
     dot: "hsl(40, 38%, 58%)",
-    description: "Interactive tools, agents and in-development products, including FuelOps.",
+    description: "The product layer this work is heading toward, starting with FuelOps.",
   },
   protected: {
     label: "Protected Casework",
@@ -407,16 +336,16 @@ export const accessMeta: Record<
     icon: "lock",
   },
   "in-development": {
-    label: "In Development",
+    label: "Building",
     accent: "#D1A85A",
     background: "rgba(187, 143, 67, 0.10)",
     border: "rgba(210, 170, 90, 0.25)",
     ctaLabel: "Register interest",
     accessNote:
-      "I am building this as part of the wider set of tools.",
-    panelTitle: "One of the tools I am building.",
+      "Being built now. Register interest and you hear first when it opens.",
+    panelTitle: "Being built right now.",
     panelBody:
-      "This concept is being developed into a future resource or product.",
+      "The structure is there. Register interest and you get it the week it opens.",
     icon: "sparkle",
   },
 };
@@ -433,7 +362,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     category: "Matchday System",
     group: "systems",
     type: "Matchday nutrition · athletes & staff",
-    status: "In Development",
+    status: "Protected",
     context: "Matchday nutrition · athletes & staff",
     description:
       "Context-aware matchday fueling decisions, from MD-1 to recovery.",
@@ -466,7 +395,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     category: "Framework",
     group: "systems",
     type: "Sweat testing · sodium · hydration follow-up",
-    status: "In Development",
+    status: "Protected",
     context: "Sweat testing · sodium · hydration follow-up",
     description:
       "From sweat testing data to athlete-ready hydration decisions.",
@@ -592,7 +521,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     slug: "football-nutrition-atlas",
     number: "06",
     title: "Football Nutrition Atlas",
-    statusBadge: "In Development",
+    statusBadge: "Building",
     accessType: "in-development",
     positioningLine:
       "A scalable atlas connecting matchday, training, recovery, hydration and food decisions.",
@@ -616,7 +545,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     appliedPreview: "atlasBook",
     previewImage: atlasPreview,
     previewAlt:
-      "Football Nutrition Atlas preview, an open premium book spread showing the pre-match plate chapter, with additional in-development pages held back.",
+      "Football Nutrition Atlas preview, an open premium book spread showing the pre-match plate chapter, with the remaining pages held back.",
     previewObjectPosition: "top center",
     ctaLabel: "Preview atlas",
     ctaType: "early-access",

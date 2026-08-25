@@ -6,22 +6,11 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
-import sceneArchive from "@/assets/scene-environments-archive.jpg";
 import photoLockerRoom from "@/assets/photos/locker-room.webp";
 import photoPitchside from "@/assets/photos/leca-pitchside.webp";
 import photoArrival from "@/assets/photos/leca-arrival.webp";
 import photoTrophies from "@/assets/photos/anderlecht-trophies.webp";
 import photoSign from "@/assets/photos/anderlecht-sign.webp";
-import { experiences, additionalExposure } from "@/data/experiences";
-import logoAnderlecht from "@/assets/logos/anderlecht.png";
-import logoLeca from "@/assets/logos/leca.png";
-import logoR4e from "@/assets/logos/run4excellence.jpg";
-
-const clubLogos: Record<string, string> = {
-  anderlecht: logoAnderlecht,
-  leca: logoLeca,
-  r4e: logoR4e,
-};
 
 /** Highlights an essential phrase with a soft on-brand marker, so the eye
  *  catches the spine of the story without reading every line. */
@@ -63,56 +52,7 @@ const About = () => {
   return (
     <Layout>
       <SEO title="About Guilherme Neves, Performance Nutrition & Systems" description="Performance nutrition learned inside elite football. Guilherme Neves on the work, the environments it came from, and why systems matter more than advice." path="/about" />
-      {/* The work */}
-      <section className="section-padding section-spacing">
-        <div className="max-content">
-          <Reveal>
-            <p className="text-caption mb-6">The work</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">
-              Where sport, science and systems meet.
-            </h1>
-          </Reveal>
-          <Reveal delay={0.25}>
-            <p className="text-body-lg max-w-2xl mt-8">
-              I work with high-performance environments, and the job is not giving
-              advice. It is{" "}
-              <Em>translating science into systems that survive a real training week</Em>, a
-              competition block, a travel day.
-            </p>
-          </Reveal>
-          <Reveal delay={0.35}>
-            <p className="text-body max-w-2xl mt-4">
-              Three disciplines hold my work together: diagnosis of the
-              environment as it actually operates, translation of evidence into
-              decisions a staff can use, and embedded systems that keep nutrition
-              consistent when intensity rises.
-            </p>
-          </Reveal>
-          <Reveal delay={0.45}>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/40 mt-12 max-w-3xl">
-              {[
-                { k: "01", t: "Diagnosis", d: "Read the environment before prescribing." },
-                { k: "02", t: "Translation", d: "Convert evidence into operable decisions." },
-                { k: "03", t: "Systems", d: "Build structures that hold under pressure." },
-              ].map((p) => (
-                <div key={p.k} className="bg-background p-6">
-                  <p className="text-caption text-[10px] mb-3">{p.k}</p>
-                  <p className="font-display text-base font-medium text-foreground mb-2">{p.t}</p>
-                  <p className="text-body text-sm">{p.d}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <div className="section-padding max-content">
-        <div className="divider" />
-      </div>
-
-      {/* Who I am */}
+      {/* Who I am. The page opens on the person, not on a positioning line. */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <div className="grid md:grid-cols-[1fr,340px] lg:grid-cols-[1fr,400px] gap-12 md:gap-16 items-start">
@@ -121,12 +61,12 @@ const About = () => {
                 <p className="text-caption mb-6">Who I am</p>
               </Reveal>
               <Reveal delay={0.1}>
-                <h2 className="text-headline max-w-3xl">
+                <h1 className="text-display max-w-3xl">
                   Athlete by nature. Nutritionist by purpose.
-                </h2>
+                </h1>
               </Reveal>
               <Reveal delay={0.2}>
-                <p className="text-body-lg max-w-2xl mt-6">
+                <p className="text-body-lg max-w-2xl mt-8">
                   I hold a BSc in Nutrition Sciences from FCNAUP, University of Porto,
                   and I am soon to be a registered nutritionist, with the professional
                   licence pending. I learned the job inside <Em>elite professional
@@ -136,10 +76,9 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="text-body max-w-2xl mt-4">
-                  My perspective comes from inside sport rather than from a lecture
-                  hall. More than fifteen years as an athlete shape how I read an
-                  environment, design an intervention and <Em>earn the trust of
-                  athletes and staff</Em>.
+                  More than fifteen years as an athlete shape how I read a room and{" "}
+                  <Em>earn the trust of athletes and staff</Em>. The aim is
+                  international, and built to last.
                 </p>
               </Reveal>
               <Reveal delay={0.4}>
@@ -154,6 +93,26 @@ const About = () => {
               </div>
             </Reveal>
           </div>
+
+          {/* Where it happened. Four frames instead of a paragraph of CV. */}
+          <Reveal delay={0.15}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4 mt-14 md:mt-20">
+              {[
+                { src: photoSign, alt: "Guilherme at the RSC Anderlecht training centre.", cap: "RSC Anderlecht", pos: "center 30%" },
+                { src: photoTrophies, alt: "Guilherme inside the RSC Anderlecht club.", cap: "Brussels", pos: "center 20%" },
+                { src: photoPitchside, alt: "Guilherme pitchside with Leça FC.", cap: "Leça FC", pos: "center 22%" },
+                { src: photoArrival, alt: "Guilherme arriving with the Leça FC squad.", cap: "Matchday", pos: "center 25%" },
+              ].map((ph) => (
+                <figure key={ph.cap} className="relative overflow-hidden rounded-lg aspect-[3/4]">
+                  <img src={ph.src} alt={ph.alt} className="w-full h-full object-cover" style={{ objectPosition: ph.pos }} loading="lazy" />
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.6), transparent 50%)" }} />
+                  <figcaption className="absolute bottom-2.5 left-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.85)" }}>
+                    {ph.cap}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -221,134 +180,16 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="text-body">
-                  So much of what athletes struggle with is shared. Eating too much, or the
-                  wrong things, or trusting that healthy always means right, when the{" "}
-                  <Em>healthiest food at the wrong moment does nothing for performance</Em>. I
-                  went into nutrition sciences to understand something this present in our
-                  lives that most people never stop to see. Food shapes how we show up, how
-                  we recover, and quietly, how healthy we stay. It is not a diet and it is
-                  not the enemy. It is a tool, and <Em>it can be a friendly one</Em>.
-                </p>
-              </Reveal>
-              <Reveal delay={0.4}>
-                <p className="text-body">
                   Things changed for me the day I built <Em>a calm relationship with food</Em>.
                   No pressure, nothing forbidden, enjoying it while being smart with my body.
-                  That is what I want to hand to other athletes, and to as many people as I
-                  can: to take this seriously, drop the taboos, and treat nutrition as quality
-                  we get to enjoy, not something to fear. I want to be <Em>genuinely
-                  useful</Em>, give real value, and build this the right way.
+                  That is what I want to hand to other athletes: take it seriously, drop the
+                  taboos, and treat nutrition as quality you get to enjoy, not something to
+                  fear. The <Em>healthiest food at the wrong moment does nothing for
+                  performance</Em>, and almost nobody is told that.
                 </p>
               </Reveal>
             </div>
           </div>
-        </div>
-      </section>
-
-      <div className="section-padding max-content">
-        <div className="divider" />
-      </div>
-
-      {/* Experience */}
-      <section className="section-padding section-spacing">
-        <div className="max-content">
-          <Reveal>
-            <p className="text-caption mb-6">Experience</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="text-headline max-w-3xl">
-              Tested inside{" "}
-              <span style={{ color: "hsl(var(--olive-light))", fontStyle: "italic", fontWeight: 300 }}>
-                elite professional football
-              </span>.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="text-body-lg max-w-2xl mt-6">
-              Not theory from the outside. Time spent inside real first-team
-              environments, where nutrition has to <Em>hold up under the pressure of
-              a competitive season</Em>.
-            </p>
-          </Reveal>
-
-          {/* Real proof, inside the environments */}
-          <Reveal delay={0.25}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4 mt-10 md:mt-12">
-              {[
-                { src: photoSign, alt: "Guilherme at the RSC Anderlecht training centre.", cap: "RSC Anderlecht", pos: "center 30%" },
-                { src: photoTrophies, alt: "Guilherme inside the RSC Anderlecht club.", cap: "Brussels", pos: "center 20%" },
-                { src: photoPitchside, alt: "Guilherme pitchside with Leça FC.", cap: "Leça FC", pos: "center 22%" },
-                { src: photoArrival, alt: "Guilherme arriving with the Leça FC squad.", cap: "Matchday", pos: "center 25%" },
-              ].map((ph) => (
-                <figure key={ph.cap} className="relative overflow-hidden rounded-lg aspect-[3/4]">
-                  <img src={ph.src} alt={ph.alt} className="w-full h-full object-cover" style={{ objectPosition: ph.pos }} loading="lazy" />
-                  <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.6), transparent 50%)" }} />
-                  <figcaption className="absolute bottom-2.5 left-3 text-[9px] md:text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.85)" }}>
-                    {ph.cap}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </Reveal>
-
-          <div className="mt-12 md:mt-16">
-            {experiences.map((exp, i) => (
-              <Reveal key={exp.id} delay={i * 0.08}>
-                <div className="grid grid-cols-[auto,1fr] gap-5 md:gap-8 py-8 border-t border-border/60">
-                  {/* club crest as visual anchor */}
-                  <div
-                    className="w-16 h-16 md:w-[76px] md:h-[76px] rounded-xl bg-white flex items-center justify-center shrink-0 overflow-hidden"
-                    style={{ boxShadow: "0 8px 24px -12px rgba(0,0,0,0.35)", border: "1px solid hsl(var(--border) / 0.6)" }}
-                  >
-                    <img src={clubLogos[exp.id]} alt={exp.name} className="w-[80%] h-[80%] object-contain" loading="lazy" />
-                  </div>
-                  {/* details */}
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <h3 className="font-display text-xl md:text-2xl font-medium text-foreground">
-                        {exp.name}
-                      </h3>
-                      <span
-                        className="text-[10px] tracking-[0.22em] uppercase font-display"
-                        style={{ color: exp.kitColors.primary === "#0E0E10" ? "hsl(var(--muted-foreground))" : exp.kitColors.primary }}
-                      >
-                        {exp.period} · {exp.location}
-                      </span>
-                    </div>
-                    <p className="text-caption text-[10px] mt-2">{exp.role}</p>
-                    <p className="text-body text-sm mt-3 max-w-xl italic" style={{ color: "hsl(var(--muted-foreground))" }}>
-                      “{exp.chapter}”
-                    </p>
-                    <div className="flex flex-wrap gap-x-5 gap-y-1.5 mt-4">
-                      {exp.focus.map((f) => (
-                        <span key={f} className="inline-flex items-center gap-2 text-[11px] text-muted-foreground">
-                          <span
-                            className="w-1 h-1 rounded-full shrink-0"
-                            style={{ background: exp.kitColors.primary === "#0E0E10" ? "hsl(var(--foreground) / 0.5)" : exp.kitColors.primary }}
-                          />
-                          {f}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.1}>
-            <div className="mt-8 pt-6 border-t border-border/40">
-              <p className="text-caption text-[10px] mb-4">Additional exposure</p>
-              <div className="flex flex-wrap gap-x-8 gap-y-2">
-                {additionalExposure.map((a) => (
-                  <span key={a.name} className="font-display text-sm text-foreground">
-                    {a.name}
-                    <span className="text-muted-foreground text-xs"> · {a.date}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -394,66 +235,6 @@ const About = () => {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      <div className="section-padding max-content">
-        <div className="divider" />
-      </div>
-
-      {/* The Intersection */}
-      <section className="section-padding section-spacing">
-        <div className="max-content">
-          <Reveal>
-            <p className="text-caption mb-6">The Intersection</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="text-headline max-w-3xl">
-              Sport. Discipline. Education. Application.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="text-body-lg max-w-2xl mt-6">
-              My work sits where these worlds converge. I don't believe in
-              nutrition advice that exists in isolation. Real impact happens when{" "}
-              <Em>knowledge is embedded into systems</Em>, when education becomes a team
-              habit, and when discipline is designed into the structure, not left
-              to willpower.
-            </p>
-          </Reveal>
-
-          {/* Cinematic band, where the environments live */}
-          <Reveal delay={0.25}>
-            <figure className="relative mt-12 overflow-hidden rounded-lg">
-              <img
-                src={sceneArchive}
-                alt="A dimly lit professional locker room with an athlete standing ready."
-                className="w-full h-[34vh] md:h-[46vh] object-cover"
-                style={{ objectPosition: "center 42%" }}
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.55), transparent 60%)" }}
-              />
-              <figcaption
-                className="absolute bottom-4 left-5 text-[10px] tracking-[0.28em] uppercase font-display"
-                style={{ color: "hsl(var(--ivory) / 0.72)" }}
-              >
-                Where the standard is set
-              </figcaption>
-            </figure>
-          </Reveal>
-
-          <Reveal delay={0.3}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              {["Sport Performance", "Applied Education", "Lifestyle Discipline", "System Design"].map((item, i) => (
-                <div key={item} className="py-4 border-t border-border">
-                  <p className="text-caption text-[10px] mb-2">0{i + 1}</p>
-                  <p className="font-display text-sm font-medium text-foreground">{item}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
       </section>
 
@@ -515,39 +296,6 @@ const About = () => {
               </Reveal>
             </div>
           </div>
-        </div>
-      </section>
-
-      <div className="section-padding max-content">
-        <div className="divider" />
-      </div>
-
-      {/* Looking Outward */}
-      <section className="section-padding section-spacing">
-        <div className="max-content grid md:grid-cols-2 gap-16">
-          <Reveal>
-            <div>
-              <p className="text-caption mb-6">Looking Outward</p>
-              <h2 className="text-headline max-w-3xl">
-                The aim is international, and built to last.
-              </h2>
-            </div>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="space-y-6">
-              <p className="text-body-lg">
-                I'm building toward a career inside elite sport environments,
-                internationally. The ambition is clear: <Em>create genuinely useful
-                systems</Em>, work with high-performance organisations, and keep
-                raising the standard of what practical sport nutrition looks like.
-              </p>
-              <p className="text-body-lg">
-                Not for visibility, but for impact. Building things that last, and{" "}
-                <Em>environments that perform better because of how they think about
-                nutrition</Em>.
-              </p>
-            </div>
-          </Reveal>
         </div>
       </section>
 

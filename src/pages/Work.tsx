@@ -271,7 +271,7 @@ const Work = () => {
                 <div key={s} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusMeta[s].dot }} />
                   <span className="text-[10px] tracking-[0.25em] uppercase font-display opacity-55">
-                    {s}
+                    {statusMeta[s].label}
                   </span>
                 </div>
               ))}

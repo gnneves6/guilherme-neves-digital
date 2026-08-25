@@ -154,7 +154,7 @@ const ecosystem = [
   { label: "Applied Work", state: "Live", to: "/work", note: "Proof objects from real environments." },
   { label: "Consulting", state: "Live", to: "/services", note: "Strategic engagements for organisations." },
   { label: "Resources", state: "Live", to: "/work", note: "Public tools originated from applied work." },
-  { label: "Technology", state: "In Development", to: null, note: "FuelOps, operating tools for performance staff." },
+  { label: "Technology", state: "Building", to: null, note: "FuelOps, operating tools for performance staff." },
   { label: "Research", state: "Future", to: null, note: "Field-driven applied performance nutrition research." },
 ];
 
@@ -517,7 +517,7 @@ const Services = () => {
           <div className="space-y-3 md:space-y-4">
             {ecosystem.map((e, i) => {
               const live = e.state === "Live";
-              const dev = e.state === "In Development";
+              const dev = e.state === "Building";
               const border = live
                 ? "1px solid hsl(var(--foreground) / 0.22)"
                 : dev
