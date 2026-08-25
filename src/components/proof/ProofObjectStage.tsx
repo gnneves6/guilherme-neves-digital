@@ -17,8 +17,8 @@ interface ProofObjectStageProps {
 
 const stageBg: Record<ProofObjectType, string> = {
   document: "hsl(35, 18%, 22%)",
-  tool: "hsl(220, 16%, 14%)",
-  protected: "hsl(220, 22%, 9%)",
+  tool: "hsl(45, 11%, 14%)",
+  protected: "hsl(45, 12%, 9%)",
 };
 
 /**
@@ -36,14 +36,14 @@ const TypeFallback = ({ type }: { type: ProofObjectType }) => {
           style={{ background: "hsl(40 22% 90%)" }}
         >
           <div className="absolute inset-x-6 top-7 space-y-2">
-            <div className="h-px w-10" style={{ background: "hsl(220 15% 25% / 0.6)" }} />
-            <div className="h-1.5 w-20" style={{ background: "hsl(220 15% 25% / 0.85)" }} />
-            <div className="h-1 w-28" style={{ background: "hsl(220 15% 25% / 0.4)" }} />
+            <div className="h-px w-10" style={{ background: "hsl(45 12% 25% / 0.6)" }} />
+            <div className="h-1.5 w-20" style={{ background: "hsl(45 12% 25% / 0.85)" }} />
+            <div className="h-1 w-28" style={{ background: "hsl(45 12% 25% / 0.4)" }} />
           </div>
           <div className="absolute inset-x-6 bottom-6 space-y-1.5">
-            <div className="h-px w-full" style={{ background: "hsl(220 15% 25% / 0.15)" }} />
-            <div className="h-px w-3/4" style={{ background: "hsl(220 15% 25% / 0.15)" }} />
-            <div className="h-px w-1/2" style={{ background: "hsl(220 15% 25% / 0.15)" }} />
+            <div className="h-px w-full" style={{ background: "hsl(45 12% 25% / 0.15)" }} />
+            <div className="h-px w-3/4" style={{ background: "hsl(45 12% 25% / 0.15)" }} />
+            <div className="h-px w-1/2" style={{ background: "hsl(45 12% 25% / 0.15)" }} />
           </div>
         </div>
       </div>

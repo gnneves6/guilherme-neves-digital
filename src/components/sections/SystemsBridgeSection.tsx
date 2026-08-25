@@ -15,7 +15,7 @@ const SystemsBridgeSection = () => {
     <Scene
       tone="cinematic"
       spacing="lg"
-      overlayGradient="linear-gradient(180deg, hsl(var(--cinematic)) 0%, hsl(220 22% 9% / 0.97) 50%, hsl(var(--cinematic)) 100%)"
+      overlayGradient="linear-gradient(180deg, hsl(var(--cinematic)) 0%, hsl(45 12% 9% / 0.97) 50%, hsl(var(--cinematic)) 100%)"
       fadeTopFrom="hsl(var(--cinematic))"
       fadeBottomTo="hsl(var(--cinematic))"
       contentClassName="section-padding"

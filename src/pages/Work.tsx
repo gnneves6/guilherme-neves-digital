@@ -38,7 +38,7 @@ const getPreviewType = (status: ArtefactStatus, category: string): PreviewType =
 
 const previewColors: Record<PreviewType, string> = {
   editorialPlaceholder: "hsl(155, 18%, 22%)",
-  blurredProtected: "hsl(220, 14%, 18%)",
+  blurredProtected: "hsl(45, 10%, 18%)",
   toolMockup: "hsl(40, 28%, 28%)",
   documentMockup: "hsl(35, 22%, 38%)",
   tableMockup: "hsl(155, 15%, 25%)",

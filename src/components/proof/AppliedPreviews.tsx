@@ -13,14 +13,14 @@ const ivory = (a: number) => `hsl(var(--ivory) / ${a})`;
 const olive = (a: number) => `hsl(var(--olive-light) / ${a})`;
 const accent = (a: number) => `hsl(var(--accent) / ${a})`;
 const paper = (l = 92) => `hsl(38 22% ${l}%)`;
-const ink = (a: number) => `hsl(220 15% 22% / ${a})`;
+const ink = (a: number) => `hsl(45 10% 22% / ${a})`;
 
 const StageFrame = ({ children }: { children: React.ReactNode }) => (
   <div
     className="absolute inset-0 overflow-hidden"
     style={{
       background:
-        "radial-gradient(ellipse 100% 75% at 65% 38%, hsl(220 18% 13% / 0.95), hsl(220 24% 5% / 0.98))",
+        "radial-gradient(ellipse 100% 75% at 65% 38%, hsl(45 12% 13% / 0.95), hsl(45 12% 5% / 0.98))",
     }}
   >
     {/* very subtle diagonal desk texture */}
@@ -55,7 +55,7 @@ const StageFrame = ({ children }: { children: React.ReactNode }) => (
       className="absolute inset-0 pointer-events-none"
       style={{
         background:
-          "radial-gradient(ellipse 95% 75% at 50% 55%, transparent 25%, hsl(220 24% 4% / 0.75))",
+          "radial-gradient(ellipse 95% 75% at 50% 55%, transparent 25%, hsl(45 12% 4% / 0.75))",
       }}
     />
   </div>
@@ -86,7 +86,7 @@ const ImagePreview = ({
       className="absolute inset-0 pointer-events-none"
       style={{
         background:
-          "linear-gradient(180deg, hsl(220 24% 5% / 0.08) 0%, transparent 30%, transparent 72%, hsl(220 24% 4% / 0.2) 100%), radial-gradient(ellipse 90% 82% at 50% 52%, transparent 58%, hsl(220 24% 4% / 0.55) 100%)",
+          "linear-gradient(180deg, hsl(45 12% 5% / 0.08) 0%, transparent 30%, transparent 72%, hsl(45 12% 4% / 0.2) 100%), radial-gradient(ellipse 90% 82% at 50% 52%, transparent 58%, hsl(45 12% 4% / 0.55) 100%)",
       }}
     />
     <div
@@ -115,7 +115,7 @@ const PaperLines = ({
         className="h-px"
         style={{
           width: `${(widths[i % widths.length] ?? 0.8) * 100}%`,
-          background: `hsl(220 15% 22% / ${Math.max(0.06, shadeFrom - i * shadeStep)})`,
+          background: `hsl(45 10% 22% / ${Math.max(0.06, shadeFrom - i * shadeStep)})`,
         }}
       />
     ))}
@@ -128,13 +128,13 @@ const MatchdayFuel = () => (
     <div
       className="absolute left-[5%] top-[10%] w-[48%] aspect-[5/6.4] rounded-[3px] overflow-hidden shadow-[0_30px_60px_-18px_hsl(0_0%_0%/0.85)]"
       style={{
-        background: "linear-gradient(180deg, hsl(220 22% 12%), hsl(220 24% 7%))",
+        background: "linear-gradient(180deg, hsl(45 12% 12%), hsl(45 12% 7%))",
         border: `1px solid ${ivory(0.09)}`,
         transform: "perspective(900px) rotateY(4deg) rotateX(1deg)",
         transformOrigin: "right center",
       }}
     >
-      <div className="flex items-center justify-between px-2.5 py-1.5 border-b" style={{ borderColor: ivory(0.06), background: "hsl(220 24% 9%)" }}>
+      <div className="flex items-center justify-between px-2.5 py-1.5 border-b" style={{ borderColor: ivory(0.06), background: "hsl(45 12% 9%)" }}>
         <div className="flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: ivory(0.18) }} />
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: ivory(0.12) }} />
@@ -258,13 +258,13 @@ const HydrationDashboard = () => (
     <div
       className="absolute left-[5%] top-[10%] w-[60%] aspect-[5/3.2] rounded-[3px] overflow-hidden shadow-[0_30px_60px_-18px_hsl(0_0%_0%/0.85)]"
       style={{
-        background: "linear-gradient(180deg, hsl(220 22% 12%), hsl(220 24% 7%))",
+        background: "linear-gradient(180deg, hsl(45 12% 12%), hsl(45 12% 7%))",
         border: `1px solid ${ivory(0.09)}`,
         transform: "perspective(900px) rotateY(3deg)",
         transformOrigin: "right center",
       }}
     >
-      <div className="flex items-center justify-between px-2.5 py-1 border-b" style={{ borderColor: ivory(0.06), background: "hsl(220 24% 9%)" }}>
+      <div className="flex items-center justify-between px-2.5 py-1 border-b" style={{ borderColor: ivory(0.06), background: "hsl(45 12% 9%)" }}>
         <div className="flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: ivory(0.18) }} />
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: ivory(0.12) }} />
@@ -352,7 +352,7 @@ const HydrationDashboard = () => (
     {/* small report card bottom-left */}
     <div
       className="absolute left-[4%] bottom-[6%] w-[26%] aspect-[3/1.6] rounded-sm overflow-hidden shadow-[0_18px_30px_-12px_hsl(0_0%_0%/0.7)]"
-      style={{ background: "hsl(220 24% 10%)", border: `1px solid ${ivory(0.07)}` }}
+      style={{ background: "hsl(45 12% 10%)", border: `1px solid ${ivory(0.07)}` }}
     >
       <div className="px-2 py-1 flex items-center justify-between border-b" style={{ borderColor: ivory(0.05) }}>
         <span className="text-[5px] tracking-[0.22em] uppercase font-display" style={{ color: ivory(0.5) }}>Indiv. profile</span>
@@ -384,11 +384,11 @@ const RedactedReport = () => (
     <div
       className="absolute left-[6%] top-[8%] w-[70%] aspect-[5/4] rounded-[3px] overflow-hidden shadow-[0_30px_60px_-18px_hsl(0_0%_0%/0.85)]"
       style={{
-        background: "linear-gradient(180deg, hsl(220 22% 12%), hsl(220 24% 7%))",
+        background: "linear-gradient(180deg, hsl(45 12% 12%), hsl(45 12% 7%))",
         border: `1px solid ${ivory(0.09)}`,
       }}
     >
-      <div className="px-3 py-1.5 border-b flex items-center justify-between" style={{ borderColor: ivory(0.06), background: "hsl(220 24% 9%)" }}>
+      <div className="px-3 py-1.5 border-b flex items-center justify-between" style={{ borderColor: ivory(0.06), background: "hsl(45 12% 9%)" }}>
         <span className="text-[6px] tracking-[0.28em] uppercase font-display" style={{ color: ivory(0.6) }}>Team Report · Confidential</span>
         <div className="flex items-center gap-1">
           <span className="text-[5px] tracking-[0.22em] uppercase font-display" style={{ color: "hsl(35 40% 65%)" }}>Redacted</span>
@@ -527,7 +527,7 @@ const OperationsManual = () => (
 
     <div
       className="absolute left-[40%] bottom-[6%] flex items-center gap-1 px-1.5 py-0.5 rounded-sm"
-      style={{ background: "hsl(220 22% 8% / 0.7)", border: `1px solid ${ivory(0.15)}`, backdropFilter: "blur(3px)" }}
+      style={{ background: "hsl(45 12% 8% / 0.7)", border: `1px solid ${ivory(0.15)}`, backdropFilter: "blur(3px)" }}
     >
       <Lock className="w-2 h-2" style={{ color: ivory(0.75) }} />
       <span className="text-[5.5px] tracking-[0.28em] uppercase font-display" style={{ color: ivory(0.7) }}>Protected</span>
@@ -548,10 +548,10 @@ const EducationGrid = () => {
   const toneBg: Record<string, string> = {
     olive: "linear-gradient(135deg, hsl(155 32% 24%), hsl(155 22% 12%))",
     amber: "linear-gradient(135deg, hsl(35 50% 32%), hsl(30 30% 14%))",
-    blue: "linear-gradient(135deg, hsl(210 32% 26%), hsl(210 26% 12%))",
+    blue: "linear-gradient(135deg, hsl(45 12% 26%), hsl(45 12% 12%))",
     green: "linear-gradient(135deg, hsl(140 28% 22%), hsl(140 22% 10%))",
     rose: "linear-gradient(135deg, hsl(8 32% 28%), hsl(8 22% 12%))",
-    charcoal: "linear-gradient(135deg, hsl(220 18% 18%), hsl(220 22% 9%))",
+    charcoal: "linear-gradient(135deg, hsl(45 12% 18%), hsl(45 12% 9%))",
   };
   const renderIcon = (icon: string) => {
     switch (icon) {
@@ -654,7 +654,7 @@ const AtlasBook = () => (
         <span className="absolute bottom-1 left-2.5 text-[5px] font-display" style={{ color: ink(0.4) }}>p.24</span>
       </div>
 
-      <div className="w-[6px] relative" style={{ background: "linear-gradient(90deg, hsl(220 15% 18% / 0.5), hsl(220 15% 8% / 0.7), hsl(220 15% 18% / 0.5))" }}>
+      <div className="w-[6px] relative" style={{ background: "linear-gradient(90deg, hsl(45 12% 18% / 0.5), hsl(45 12% 8% / 0.7), hsl(45 12% 18% / 0.5))" }}>
         <div className="absolute inset-y-1 left-1/2 -translate-x-1/2 w-px" style={{ background: ink(0.4) }} />
       </div>
 
@@ -671,7 +671,7 @@ const AtlasBook = () => (
         </div>
         <div
           className="absolute inset-0 backdrop-blur-[3px] flex flex-col items-center justify-center gap-1"
-          style={{ background: "hsl(220 22% 8% / 0.42)" }}
+          style={{ background: "hsl(45 12% 8% / 0.42)" }}
         >
           <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: ivory(0.08), border: `1px solid ${ivory(0.22)}` }}>
             <Lock className="w-3 h-3" style={{ color: ivory(0.8) }} />

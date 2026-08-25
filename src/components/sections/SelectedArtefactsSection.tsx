@@ -69,7 +69,7 @@ const ProofCard = ({
       className="group relative text-left w-full h-full overflow-hidden rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ivory)/0.35)]"
       style={{
         background:
-          "linear-gradient(180deg, hsl(220 22% 9% / 0.92), hsl(220 24% 6% / 0.95))",
+          "linear-gradient(180deg, hsl(45 12% 9% / 0.92), hsl(45 12% 6% / 0.95))",
         border: `1px solid ${ivory(0.07)}`,
         boxShadow: "0 30px 80px -30px hsl(0 0% 0% / 0.7)",
       }}
@@ -98,7 +98,7 @@ const ProofCard = ({
             className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
             style={{
               background:
-                "linear-gradient(to bottom, transparent, hsl(220 24% 6% / 0.9))",
+                "linear-gradient(to bottom, transparent, hsl(45 12% 6% / 0.9))",
             }}
           />
           {/* subtle pointer glare */}
@@ -201,7 +201,7 @@ const SelectedArtefactsSection = () => {
       tone="cinematic"
       spacing="xl"
       grain
-      overlayGradient="radial-gradient(ellipse 90% 80% at 50% 20%, hsl(220 22% 9% / 0.6) 0%, hsl(var(--cinematic) / 0.95) 80%)"
+      overlayGradient="radial-gradient(ellipse 90% 80% at 50% 20%, hsl(45 12% 9% / 0.6) 0%, hsl(var(--cinematic) / 0.95) 80%)"
       fadeTopFrom="hsl(var(--cinematic))"
       fadeBottomTo="hsl(var(--cinematic))"
       className="scene-atmos-archive"

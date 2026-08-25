@@ -89,9 +89,9 @@ const FuelLaws = () => {
               className="relative rounded-2xl overflow-hidden"
               style={{
                 background:
-                  "radial-gradient(ellipse 80% 60% at 50% -10%, hsl(220 22% 15%), hsl(220 26% 7%) 70%)",
+                  "radial-gradient(ellipse 80% 60% at 50% -10%, hsl(45 12% 15%), hsl(45 12% 7%) 70%)",
                 border: "1px solid hsl(var(--ivory) / 0.08)",
-                boxShadow: "0 50px 100px -40px hsl(220 40% 3% / 0.7)",
+                boxShadow: "0 50px 100px -40px hsl(45 12% 3% / 0.7)",
               }}
             >
               {/* faint schematic grid */}

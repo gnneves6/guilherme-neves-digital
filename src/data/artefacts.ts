@@ -313,7 +313,7 @@ export const groupMeta: Record<
     label: "Protected Casework",
     short: "Protected",
     anchor: "protected-casework",
-    dot: "hsl(220, 8%, 52%)",
+    dot: "hsl(45, 8%, 52%)",
     description: "Confidential athlete, team and staff-facing work, shown as proof.",
   },
 };

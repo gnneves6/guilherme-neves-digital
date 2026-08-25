@@ -68,7 +68,7 @@ const LawSignal = ({ number, color }: Props) => {
           initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1, delay: 0.7, ease }} />
         {/* markers sit exactly on the flat plateau (y = 52) */}
         {[274, 296, 318].map((x, i) => (
-          <motion.circle key={x} cx={x} cy={52} r="2.6" fill={c} stroke="hsl(220 26% 9%)" strokeWidth="1"
+          <motion.circle key={x} cx={x} cy={52} r="2.6" fill={c} stroke="hsl(45 12% 9%)" strokeWidth="1"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 + i * 0.1 }} />
         ))}
         <text x="26" y="128" style={micro(dim)}>Fuelled</text>

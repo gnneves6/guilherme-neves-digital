@@ -52,7 +52,7 @@ const Block = ({
   <div
     className="rounded-sm p-5 md:p-6"
     style={{
-      background: "hsl(220 22% 8% / 0.55)",
+      background: "hsl(45 12% 8% / 0.55)",
       border: `1px solid ${ivory(0.06)}`,
     }}
   >
@@ -155,7 +155,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
           >
             <motion.div
               className="fixed inset-0 backdrop-blur-md"
-              style={{ background: "hsl(220 30% 4% / 0.85)" }}
+              style={{ background: "hsl(45 12% 4% / 0.85)" }}
               onClick={onClose}
             />
             <motion.div
@@ -165,7 +165,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
               className="relative w-full max-w-[1040px] my-4 md:my-0 rounded-md overflow-hidden"
               style={{
                 background:
-                  "linear-gradient(180deg, hsl(220 24% 8% / 0.98), hsl(220 28% 5% / 0.98))",
+                  "linear-gradient(180deg, hsl(45 12% 8% / 0.98), hsl(45 12% 5% / 0.98))",
                 border: `1px solid ${ivory(0.08)}`,
                 boxShadow: "0 60px 140px -40px hsl(0 0% 0% / 0.9)",
                 color: "hsl(var(--ivory))",
@@ -190,7 +190,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                 aria-label="Close"
                 className="absolute top-3 right-3 md:top-4 md:right-4 z-30 p-2 rounded-sm transition-all hover:bg-[hsl(var(--ivory)/0.08)]"
                 style={{
-                  background: "hsl(220 30% 4% / 0.6)",
+                  background: "hsl(45 12% 4% / 0.6)",
                   border: `1px solid ${ivory(0.12)}`,
                   color: ivory(0.8),
                 }}
@@ -215,7 +215,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                       className="absolute inset-0 pointer-events-none"
                       style={{
                         background:
-                          "linear-gradient(180deg, hsl(220 30% 4% / 0.15) 0%, hsl(220 30% 4% / 0) 35%, hsl(220 28% 5% / 0.85) 95%)",
+                          "linear-gradient(180deg, hsl(45 12% 4% / 0.15) 0%, hsl(45 12% 4% / 0) 35%, hsl(45 12% 5% / 0.85) 95%)",
                       }}
                     />
                     {/* vignette */}
@@ -224,7 +224,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                       className="absolute inset-0 pointer-events-none"
                       style={{
                         background:
-                          "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 55%, hsl(220 30% 4% / 0.5) 100%)",
+                          "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 55%, hsl(45 12% 4% / 0.5) 100%)",
                       }}
                     />
 
@@ -459,7 +459,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                           className="inline-flex items-center gap-2 px-5 py-3 rounded-sm text-[11px] tracking-[0.28em] uppercase font-display font-medium transition-all"
                           style={{
                             background: meta.accent,
-                            color: "hsl(220 30% 6%)",
+                            color: "hsl(45 12% 6%)",
                           }}
                         >
                           {meta.ctaLabel}
@@ -473,7 +473,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                           className="inline-flex items-center gap-2 px-5 py-3 rounded-sm text-[11px] tracking-[0.28em] uppercase font-display font-medium transition-all hover:tracking-[0.32em]"
                           style={{
                             background: ivory(0.92),
-                            color: "hsl(220 30% 6%)",
+                            color: "hsl(45 12% 6%)",
                             border: `1px solid ${meta.border}`,
                           }}
                         >
@@ -550,7 +550,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                               className="inline-flex items-center gap-2 px-5 py-3 rounded-sm text-[11px] tracking-[0.28em] uppercase font-display font-medium transition-all hover:tracking-[0.32em] disabled:opacity-50"
                               style={{
                                 background: meta.accent,
-                                color: "hsl(220 30% 6%)",
+                                color: "hsl(45 12% 6%)",
                               }}
                             >
                               {loading ? "Sending…" : meta.ctaLabel}
@@ -572,7 +572,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                         <div
                           className="mt-2 rounded-sm p-4 text-[13px]"
                           style={{
-                            background: "hsl(220 22% 8% / 0.5)",
+                            background: "hsl(45 12% 8% / 0.5)",
                             border: `1px solid ${meta.border}`,
                             color: ivory(0.8),
                           }}

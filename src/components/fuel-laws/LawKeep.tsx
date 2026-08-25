@@ -69,7 +69,7 @@ const LawKeep = () => {
               className="w-full h-auto rounded-sm"
               style={{
                 boxShadow:
-                  "0 30px 60px -25px hsl(220 40% 10% / 0.4), 0 4px 12px -4px hsl(220 40% 10% / 0.2)",
+                  "0 30px 60px -25px hsl(45 12% 10% / 0.4), 0 4px 12px -4px hsl(45 12% 10% / 0.2)",
                 border: "1px solid hsl(var(--subtle-border))",
               }}
             />

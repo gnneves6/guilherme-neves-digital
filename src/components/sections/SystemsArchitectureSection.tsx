@@ -70,7 +70,7 @@ const SystemsArchitectureSection = () => {
     <Scene
       tone="cinematic"
       spacing="xl"
-      overlayGradient="linear-gradient(180deg, hsl(var(--cinematic)) 0%, hsl(220 22% 8% / 0.98) 50%, hsl(var(--cinematic)) 100%)"
+      overlayGradient="linear-gradient(180deg, hsl(var(--cinematic)) 0%, hsl(45 12% 8% / 0.98) 50%, hsl(var(--cinematic)) 100%)"
       fadeTopFrom="hsl(var(--cinematic))"
       fadeBottomTo="hsl(var(--background))"
       contentClassName="section-padding"
@@ -151,7 +151,7 @@ const SystemsArchitectureSection = () => {
             const inner = (
               <div
                 className="h-full p-7 md:p-8 lg:p-7 xl:p-9 flex flex-col justify-between min-h-[260px] lg:min-h-[320px] transition-colors duration-700 group-hover:bg-[hsl(220_22%_10%/0.6)]"
-                style={{ background: "hsl(220 22% 7%)" }}
+                style={{ background: "hsl(45 12% 7%)" }}
               >
                 <div>
                   <div className="flex items-baseline justify-between mb-5">

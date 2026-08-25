@@ -83,7 +83,7 @@ const MatchdayPlanner = () => {
             className="rounded-2xl overflow-hidden"
             style={{
               background: "hsl(var(--charcoal-deep))",
-              boxShadow: "0 40px 80px -40px hsl(220 40% 6% / 0.45)",
+              boxShadow: "0 40px 80px -40px hsl(45 12% 6% / 0.45)",
             }}
           >
             {/* Controls */}
