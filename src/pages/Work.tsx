@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
@@ -14,16 +14,14 @@ import {
   type ArtefactStatus,
 } from "@/data/artefacts";
 import Magnetic from "@/components/motion/Magnetic";
+import { scrollToY } from "@/components/motion/SmoothScroll";
+import { experiences } from "@/data/experiences";
 import {
   nodeOf,
   maturityMeta,
   fieldNotes,
   environmentMeta,
   workByEnvironment,
-  workByTopic,
-  topicMeta,
-  topicOrder,
-  type Topic,
   type EnvironmentId,
 } from "@/data/work-graph";
 
@@ -157,14 +155,10 @@ const gridCols = (n: number) =>
 
 const isWide = (n: number, i: number) => n === 1 || (n % 3 !== 0 && n % 2 === 1 && i === n - 1);
 
-type Filter = "All" | Topic;
-
-const filters: Filter[] = ["All", ...topicOrder];
-
-const filterLabel = (f: Filter) => (f === "All" ? "All" : topicMeta[f].label);
+/** Environments that actually hold work, in the order the story runs. */
+const ENV_ORDER: EnvironmentId[] = ["anderlecht", "leca", "independent"];
 
 const Work = () => {
-  const [active, setActive] = useState<Filter>("All");
   const [hovered, setHovered] = useState<string | null>(null);
   const [open, setOpen] = useState<Artefact | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -183,41 +177,44 @@ const Work = () => {
     setSearchParams(searchParams, { replace: true });
   }, [searchParams, setSearchParams]);
 
-  // Arriving from a club chapter on the home page. Real Environments is the
-  // most persuasive thing on this site and it used to be a dead end: five and a
-  // half thousand pixels of the home had no link in it at all, so the moment
-  // someone was most convinced was the moment they had nowhere to go. Now each
-  // environment carries what came out of it, and this reads that through.
-  const env = searchParams.get("env") as EnvironmentId | null;
-  const fromEnvironment = env && env in environmentMeta ? env : null;
+  // Arriving from a club chapter on the home. The page is organised by
+  // environment now, so this scrolls to that chapter rather than filtering the
+  // page down to it: the visitor gets what they asked for and still sees that
+  // the rest exists.
+  const env = searchParams.get("env");
+  useEffect(() => {
+    if (!env) return;
+    const target = document.getElementById(`env-${env}`);
+    if (target) scrollToY(window.scrollY + target.getBoundingClientRect().top - 90);
+  }, [env]);
 
-  const visibleTopics = useMemo<Topic[]>(
-    () => (active === "All" ? topicOrder : [active]),
-    [active]
-  );
-
-  // One catalogue, organised by area of practice. Everything the site holds
-  // lives here, including the applied systems that used to sit in a separate
-  // collection of their own.
-  const grouped = useMemo(() => {
-    const keep = fromEnvironment
-      ? new Set(workByEnvironment(fromEnvironment).map((a) => a.slug))
-      : null;
-    const map = {} as Record<Topic, Artefact[]>;
-    for (const t of topicOrder) {
-      const items = workByTopic(t);
-      map[t] = keep ? items.filter((a) => keep.has(a.slug)) : items;
-    }
-    return map;
-  }, [fromEnvironment]);
-
-  // Counted from what actually renders, not from the graph. The graph knows
-  // of eight pieces tied to Anderlecht but only six of them carry a topic, and
-  // the grid is built from topics, so quoting the graph would have printed a
-  // number two higher than the cards below it.
-  const envCount = useMemo(
-    () => Object.values(grouped).reduce((n, items) => n + items.length, 0),
-    [grouped]
+  /**
+   * The archive, split by where it was built and then by whether it can be
+   * opened.
+   *
+   * It used to be fifteen near-identical cards grouped by subject, and eight of
+   * those fifteen were a locked box or an unbuilt promise. A visitor scanning
+   * that learned nothing: the strongest work here is the protected work, and as
+   * a card it shows a blurred rectangle and asks for an email.
+   *
+   * Protected work stops pretending to be a product. It becomes a line of
+   * evidence under the environment that produced it, which is what it actually
+   * is, and only the seven pieces someone can genuinely open stay as cards.
+   */
+  const chapters = useMemo(
+    () =>
+      ENV_ORDER.map((id) => {
+        const all = workByEnvironment(id);
+        return {
+          id,
+          meta: environmentMeta[id],
+          experience: experiences.find((e) => e.id === id) ?? null,
+          openable: all.filter((a) => a.status === "Public"),
+          protectedWork: all.filter((a) => a.status === "Protected"),
+          building: all.filter((a) => a.status === "In Development"),
+        };
+      }).filter((c) => c.openable.length + c.protectedWork.length + c.building.length > 0),
+    []
   );
 
   const renderCard = (a: Artefact, i: number, wide = false) => {
@@ -283,7 +280,7 @@ const Work = () => {
 
   return (
     <Layout>
-      <SEO title="Work, Guilherme Neves" description="Systems, tools and resources built inside real performance environments, grouped by the problem they solve." path="/work" />
+      <SEO title="Work, Guilherme Neves" description="What was built inside RSC Anderlecht, Leça FC and independent practice, and what came out of each." path="/work" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
@@ -291,51 +288,26 @@ const Work = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">
-              {fromEnvironment
-                ? `What came out of ${environmentMeta[fromEnvironment].label}.`
-                : "Applied work from inside performance environments."}
+              Three rooms, and what came out of them.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              {fromEnvironment ? (
-                <>
-                  {envCount} {envCount === 1 ? "piece" : "pieces"} of the archive
-                  were built inside this environment. Everything else is still
-                  here, one click away.
-                </>
-              ) : (
-                <>
-                  A curated archive of resources, frameworks and tools developed
-                  inside real engagements. Public artefacts are open.{" "}
-                  <span className="text-foreground font-medium">Protected work exists as proof</span>,
-                  shown privately when it's relevant.
-                </>
-              )}
+              Everything here was built inside a real environment, for people who
+              had to use it that week.{" "}
+              <span className="text-foreground font-medium">What can be opened is open.</span>{" "}
+              What belongs to a club stays with the club, and is named rather
+              than shown.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            {fromEnvironment ? (
-              /* Arriving filtered is only useful if leaving the filter is
-                 obvious. This is the way back to the whole archive. */
-              <Link
-                to="/work"
-                className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                <span aria-hidden>←</span>
-                See the full archive
-              </Link>
-            ) : (
-              /* The free thing, offered where someone is already browsing the
-                 work rather than buried in the footer. */
-              <Link
-                to="/fuel-laws"
-                className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                Start with the five fuel laws
-                <span aria-hidden>→</span>
-              </Link>
-            )}
+            <Link
+              to="/fuel-laws"
+              className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              Start with the five fuel laws
+              <span aria-hidden>→</span>
+            </Link>
           </Reveal>
         </div>
       </section>
@@ -344,105 +316,136 @@ const Work = () => {
         <div className="divider" />
       </div>
 
-      {/* Group + status legend & filters */}
-      <section className="section-padding pt-10">
-        <div className="max-content">
-          <Reveal>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
-              {(["Public", "Protected", "In Development"] as ArtefactStatus[]).map((s) => (
-                <div key={s} className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: statusMeta[s].dot }} />
-                  <span className="text-[10px] tracking-[0.25em] uppercase font-display opacity-55">
-                    {statusMeta[s].label}
+      {/* The archive, walked as three rooms rather than browsed as a
+          catalogue. Each chapter opens on what was done there, in his own
+          words, then shows what can be opened and names what cannot. */}
+      <section className="section-padding py-10 md:py-16">
+        <div className="max-content space-y-24 md:space-y-32">
+          {chapters.map((c, ci) => (
+            <section
+              key={c.id}
+              id={`env-${c.id}`}
+              className="scroll-mt-28"
+              aria-labelledby={`env-${c.id}-title`}
+            >
+              <Reveal>
+                <div className="flex items-baseline gap-4 flex-wrap">
+                  <span className="text-caption text-[10px] opacity-40 tabular-nums">
+                    {String(ci + 1).padStart(2, "0")}
                   </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.05}>
-            <p
-              className="text-body text-sm max-w-2xl mb-8 leading-relaxed"
-              style={{ color: "hsl(var(--muted-foreground))" }}
-            >
-              Some of the sharpest proof stays behind a line, because it belongs to
-              the athletes and clubs it was built for. What's here is the structure
-              and the standard. The detail is walked through privately, when it's
-              relevant.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="flex flex-wrap gap-2">
-              {filters.map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setActive(f)}
-                  className={`px-4 py-2 text-[11px] font-display tracking-wider uppercase transition-all duration-500 border ${
-                    active === f
-                      ? "bg-foreground text-background border-foreground"
-                      : "bg-transparent text-muted-foreground/60 border-border/50 hover:border-foreground/25 hover:text-foreground"
-                  }`}
-                >
-                  {filterLabel(f)}
-                </button>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Vault, grouped */}
-      <section className="section-padding py-16">
-        <div className="max-content space-y-20">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4 }}
-              className="space-y-20"
-            >
-              {visibleTopics.map((tKey, ti) => {
-                const t = topicMeta[tKey];
-                const items = grouped[tKey];
-                if (items.length === 0) return null;
-                const anchor = `topic-${tKey}`;
-                return (
-                  <section
-                    key={tKey}
-                    id={anchor}
-                    className="scroll-mt-24"
-                    aria-labelledby={`${anchor}-title`}
+                  <h2
+                    id={`env-${c.id}-title`}
+                    className="font-display text-2xl md:text-4xl font-semibold tracking-tight text-foreground"
                   >
-                    <div className="flex items-baseline justify-between mb-7 gap-4 flex-wrap">
-                      <div className="flex items-baseline gap-4">
-                        <span className="text-caption text-[10px] opacity-40 tabular-nums">
-                          {String(ti + 1).padStart(2, "0")}
-                        </span>
-                        <h2
-                          id={`${anchor}-title`}
-                          className="font-display text-xl md:text-2xl font-medium"
-                        >
-                          {t.label}
-                        </h2>
-                        <span className="text-caption text-[10px] opacity-40">
-                          {items.length}
-                        </span>
-                      </div>
-                      <p className="text-xs md:text-sm opacity-60 max-w-md">
-                        {t.description}
+                    {c.meta.label}
+                  </h2>
+                  {c.experience && (
+                    <span className="text-caption text-[10px] opacity-55">
+                      {c.experience.period} · {c.experience.location}
+                    </span>
+                  )}
+                </div>
+              </Reveal>
+
+              {/* What was done here. These lines are the strongest thing on
+                  the site and they were only ever on the home page. */}
+              {c.experience ? (
+                <Reveal delay={0.1}>
+                  <ul className="mt-7 space-y-3 max-w-2xl">
+                    {c.experience.proofs.map((proof) => (
+                      <li key={proof} className="flex items-start gap-3">
+                        <span
+                          className="mt-[9px] w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{
+                            background:
+                              c.experience!.kitColors.primary === "#0E0E10"
+                                ? "hsl(var(--olive))"
+                                : c.experience!.kitColors.primary,
+                          }}
+                        />
+                        <span className="text-body text-sm md:text-base leading-relaxed">{proof}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              ) : (
+                <Reveal delay={0.1}>
+                  <p className="text-body text-sm md:text-base leading-relaxed mt-7 max-w-2xl">
+                    Built outside any one club, from what kept repeating inside all
+                    of them. Open to anyone, because the point is that it travels.
+                  </p>
+                </Reveal>
+              )}
+
+              {c.openable.length > 0 && (
+                <div className="mt-12">
+                  <Reveal>
+                    <p className="text-caption text-[10px] mb-5">
+                      Open, {c.openable.length}
+                    </p>
+                  </Reveal>
+                  <div className={`grid gap-px bg-border/50 ${gridCols(c.openable.length)}`}>
+                    {c.openable.map((a, i) => renderCard(a, i, isWide(c.openable.length, i)))}
+                  </div>
+                </div>
+              )}
+
+              {/* Protected work stops being a blurred card asking for an email
+                  and becomes what it is: a named piece of evidence. */}
+              {c.protectedWork.length > 0 && (
+                <div className="mt-12">
+                  <Reveal>
+                    <div className="flex items-baseline gap-3 mb-1">
+                      <p className="text-caption text-[10px]">
+                        Protected, {c.protectedWork.length}
                       </p>
+                      <span className="text-caption text-[10px] opacity-45">
+                        walked through privately
+                      </span>
                     </div>
-                    <div className={`grid gap-px bg-border/50 ${gridCols(items.length)}`}>
-                      {items.map((a, i) => renderCard(a, i, isWide(items.length, i)))}
-                    </div>
-                  </section>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                  </Reveal>
+                  <ul className="max-w-3xl">
+                    {c.protectedWork.map((a, i) => (
+                      <Reveal key={a.slug} delay={0.05 * i}>
+                        <li
+                          className="py-5 grid sm:grid-cols-[1fr,auto] gap-x-8 gap-y-1.5 items-baseline"
+                          style={{ borderTop: "1px solid hsl(var(--subtle-border))" }}
+                        >
+                          <div>
+                            <h3 className="font-display text-base md:text-lg font-medium text-foreground">
+                              {a.title}
+                            </h3>
+                            <p className="text-body text-sm mt-1.5 max-w-xl">{a.whatItProves}</p>
+                          </div>
+                          <span className="text-caption text-[10px] opacity-50 whitespace-nowrap">
+                            {a.category}
+                          </span>
+                        </li>
+                      </Reveal>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Two unbuilt things, named once, in plain sentences. As cards
+                  they were two more locked boxes in a page that had eight. */}
+              {c.building.length > 0 && (
+                <Reveal delay={0.1}>
+                  <div className="mt-12 pt-7 border-t border-border/50 max-w-2xl">
+                    <p className="text-caption text-[10px] mb-4">Being built</p>
+                    <ul className="space-y-3">
+                      {c.building.map((a) => (
+                        <li key={a.slug} className="text-body text-sm leading-relaxed">
+                          <span className="text-foreground font-medium">{a.title}.</span>{" "}
+                          {a.description}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              )}
+            </section>
+          ))}
         </div>
       </section>
 
