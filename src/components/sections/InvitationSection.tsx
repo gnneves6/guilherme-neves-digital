@@ -4,6 +4,16 @@ import Magnetic from "@/components/motion/Magnetic";
 import Scene from "@/components/motion/Scene";
 import sceneInvitation from "@/assets/scene-invitation-exit.jpg";
 
+/**
+ * The photograph behind this block has words printed inside it. At the old
+ * 0.78 in the middle they were plainly legible: "DISCIPLINE BUILDS FREEDOM",
+ * "SAME STANDARD", the whole athlete-by-nature line. That put four messages on
+ * one screen at the exact moment someone decides whether to write to him.
+ * Raised until the picture is texture rather than reading matter.
+ */
+const OVERLAY =
+  "linear-gradient(to bottom, hsl(var(--background) / 0.985) 0%, hsl(var(--background) / 0.955) 45%, hsl(var(--background) / 0.985) 100%)";
+
 const InvitationSection = () => {
   return (
     <Scene
@@ -11,7 +21,7 @@ const InvitationSection = () => {
       spacing="xl"
       parallax={0.1}
       bgImage={sceneInvitation}
-      overlayGradient="linear-gradient(to bottom, hsl(var(--background) / 0.92) 0%, hsl(var(--background) / 0.78) 45%, hsl(var(--background) / 0.92) 100%)"
+      overlayGradient={OVERLAY}
       fadeTopFrom="hsl(var(--background))"
       contentClassName="section-padding"
     >

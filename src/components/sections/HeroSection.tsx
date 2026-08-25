@@ -21,6 +21,15 @@ import arrival from "@/assets/photos/leca-arrival.webp";
  *
  * Light ground on purpose. The dark chapters further down (Real Environments
  * especially) hit harder when they are the exception rather than the rule.
+ *
+ * The right third is a full-height photograph, bleeding off the edge and
+ * landing on the rule that was already drawn at 82%. Before it, every word sat
+ * in the left half of a 1440px screen and the other half was empty: the eye
+ * reached the end of the name and had nowhere to go, so it fell down the page
+ * for want of an alternative rather than because it was invited. A still frame
+ * on the right answers that. It also lets the two images divide the work
+ * instead of competing, the panel holding who he is while the window cut into
+ * the name keeps moving through where he has been.
  */
 
 const frames = [
@@ -104,6 +113,44 @@ const HeroSection = () => {
         <div className="absolute left-[82%] top-0 w-px h-full bg-foreground" />
       </div>
 
+      {/* The right third, held by a single still frame. It starts on the 66%
+          line and bleeds off the edge, so the composition ends at the screen
+          rather than stopping short of it. */}
+      <motion.div
+        aria-hidden
+        className="hidden md:block absolute right-0 top-0 bottom-0 w-[30%] lg:w-[32%] overflow-hidden"
+        initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.08 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.8, delay: 0.35, ease: EASE_OUT }}
+      >
+        <img
+          src={pitchside}
+          alt=""
+          className="w-full h-full object-cover"
+          style={{ objectPosition: "58% 32%" }}
+        />
+        {/* Dissolves the hard left edge so the photo reads as part of the page
+            and not as a panel dropped on top of it. */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background) / 0.55) 14%, transparent 42%)",
+          }}
+        />
+        {/* The navigation bar sits over this panel, and the last link landed
+            on the photograph where it lost most of its contrast. The top
+            fade gives the bar clean ground to sit on. */}
+        <div
+          className="absolute inset-x-0 top-0 h-28 md:h-32 pointer-events-none"
+          style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 8%, hsl(var(--background) / 0.72) 55%, transparent)" }}
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+          style={{ background: "linear-gradient(to top, hsl(var(--background) / 0.8), transparent)" }}
+        />
+      </motion.div>
+
       <motion.div
         className="section-padding max-content w-full relative z-10 pt-24 pb-16 md:pt-20"
         style={{ y: reduce ? 0 : contentY, opacity: contentOpacity }}
@@ -127,7 +174,7 @@ const HeroSection = () => {
         <h1
           ref={nameRef}
           aria-label="Guilherme Neves"
-          className="font-display font-semibold tracking-[-0.035em] leading-[0.92] text-foreground text-[clamp(2.75rem,11vw,9rem)] invisible"
+          className="font-display font-semibold tracking-[-0.035em] leading-[0.92] text-foreground text-[clamp(2.75rem,9.5vw,8.5rem)] invisible"
         >
           <span className="block" aria-hidden data-split="first">
             GUILHERME
@@ -169,8 +216,11 @@ const HeroSection = () => {
           </span>
         </h1>
 
+        {/* The line that separates him from every other practitioner was set
+            smaller and greyer than the sentence describing his services, which
+            is the hierarchy exactly backwards. It carries foreground ink now. */}
         <motion.p
-          className="font-display italic font-light text-lg md:text-2xl text-muted-foreground mt-7 md:mt-9"
+          className="font-display italic font-light text-2xl md:text-4xl text-foreground mt-8 md:mt-10"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.95, ease: EASE_OUT }}
@@ -194,29 +244,26 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.18, ease: EASE_OUT }}
         >
+          {/* One button. There were two here and a third in the bar above,
+              two of them saying the same thing, and three buttons is the same
+              as none. Proof comes before the sale, so the proof is the one
+              that stays; contact is already a pill in the navigation and the
+              whole closing chapter of this page. */}
           <Magnetic strength={8} as="span">
             <Link
               to="/work"
-              className="inline-flex items-center justify-center px-8 py-3.5 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+              className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
             >
               View Applied Work
-            </Link>
-          </Magnetic>
-          <Magnetic strength={8} as="span">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide text-foreground transition-all duration-500 hover:tracking-wider"
-              style={{ border: "1px solid hsl(var(--foreground) / 0.18)" }}
-            >
-              Start a Conversation
             </Link>
           </Magnetic>
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator, aligned to the text column rather than to the
+          middle of a screen whose right third is now a photograph. */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
+        className="absolute bottom-8 left-6 md:left-12 lg:left-20 xl:left-28 z-20 flex items-center gap-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.9, duration: 1 }}
@@ -225,8 +272,8 @@ const HeroSection = () => {
           Scroll
         </span>
         <motion.div
-          className="w-px h-8 bg-foreground/20"
-          animate={{ scaleY: [0, 1, 0] }}
+          className="h-px w-10 bg-foreground/25 origin-left"
+          animate={{ scaleX: [0, 1, 0] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.div>
