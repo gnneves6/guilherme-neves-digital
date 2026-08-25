@@ -3,7 +3,8 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import sceneMethod from "@/assets/scene-method-podium.jpg";
 import AudienceSelector from "@/components/sections/AudienceSelector";
 import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
@@ -113,51 +114,153 @@ const services: Service[] = [
   },
 ];
 
-const principles = [
-  {
-    label: "Diagnostic before prescription",
-    text: "Every engagement begins by understanding the environment as it actually operates, not as it appears on paper.",
-  },
-  {
-    label: "Built for the floor",
-    text: "Systems are judged by whether athletes and staff use them under fatigue, travel and competition pressure.",
-  },
-  {
-    label: "Quiet, long-horizon work",
-    text: "Partnerships are designed to compound. No noise, no hype, no products to download.",
-  },
-];
-
+/** The shape is the message: five stages, and the last returns to the first. */
 const processSteps = [
-  {
-    label: "Discover",
-    text: "Understand the environment, the people, the constraints and the real question behind the brief.",
-  },
-  {
-    label: "Audit",
-    text: "Map the current nutrition operation across performance, medical, catering and athlete touchpoints.",
-  },
-  {
-    label: "Design",
-    text: "Build the system, frameworks, tools, ownership, to fit the environment, not the textbook.",
-  },
-  {
-    label: "Implementation",
-    text: "Embed the system on the floor, with staff and athletes, through real training weeks.",
-  },
-  {
-    label: "Review",
-    text: "Measure adherence, surface friction, refine. Systems are revisited, not handed over and forgotten.",
-  },
+  { label: "Discover" },
+  { label: "Audit" },
+  { label: "Design" },
+  { label: "Implementation" },
+  { label: "Review" },
 ];
 
-const ecosystem = [
-  { label: "Applied Work", state: "Live", to: "/work", note: "Proof objects from real environments." },
-  { label: "Consulting", state: "Live", to: "/services", note: "Strategic engagements for organisations." },
-  { label: "Resources", state: "Live", to: "/work", note: "Public tools originated from applied work." },
-  { label: "Technology", state: "Building", to: null, note: "FuelOps, operating tools for performance staff." },
-  { label: "Research", state: "Future", to: null, note: "Field-driven applied performance nutrition research." },
-];
+/**
+ * One engagement, folded.
+ *
+ * Each of these cards carried the outcome, the positioning, the problem, four
+ * outcomes with tick marks, the full delivery list and the call to action, all
+ * open at once. Three of them ran about 2400px, on a page that was already the
+ * longest on the site, and almost nobody reads a proposal they did not ask for.
+ *
+ * What stays open is what a buyer scans on the way past: who it is for, how
+ * long it takes, what they walk away with, and how to start. The detail is one
+ * click away for the one reader in ten who is actually deciding, and it is the
+ * same detail as before, not a summary of it.
+ */
+const ServiceCard = ({ service: s }: { service: Service }) => {
+  const [open, setOpen] = useState(false);
+  const panelId = `service-detail-${s.index}`;
+
+  return (
+    <article
+      className={`group relative border border-border/60 bg-card/40 hover:bg-card/70 transition-colors duration-500 ${
+        s.flagship ? "border-foreground/25" : ""
+      }`}
+    >
+      {s.flagship && <div className="absolute top-0 left-0 h-px w-16 bg-foreground/60" />}
+      <div className="grid md:grid-cols-[180px,1fr] gap-8 md:gap-12 p-8 md:p-12">
+        {/* Index column */}
+        <div className="space-y-3 md:border-r md:border-border/40 md:pr-8">
+          <p className="font-display text-5xl md:text-6xl font-medium leading-none text-foreground/90">
+            {s.index}
+          </p>
+          <p className="text-caption text-[10px]">{s.tag}</p>
+        </div>
+
+        {/* Body */}
+        <div className="space-y-6">
+          {/* who it is for + format, sets expectation up front */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--olive))" }}>
+              {s.forWhom}
+            </span>
+            <span className="text-caption text-[10px] text-muted-foreground">{s.format}</span>
+          </div>
+
+          {/* the outcome, what the client actually walks toward */}
+          <h3 className="font-display text-2xl md:text-[28px] lg:text-[32px] font-semibold leading-[1.15] tracking-tight text-foreground max-w-3xl">
+            {s.outcome}
+          </h3>
+
+          <p className="text-body text-sm max-w-2xl leading-relaxed">
+            <span className="text-foreground font-medium">{s.title}.</span> {s.positioning}
+          </p>
+
+          <div className="flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-2.5">
+            <Magnetic as="span" strength={6}>
+              <Link
+                to="/contact"
+                className={`group/cta inline-flex items-center gap-2.5 px-6 py-3 rounded-md font-display text-sm font-medium tracking-wide transition-all duration-300 ${
+                  s.flagship
+                    ? "bg-foreground text-background hover:opacity-90"
+                    : "border border-foreground/25 text-foreground hover:border-foreground/50"
+                }`}
+              >
+                {s.cta}
+                <span aria-hidden className="inline-block transition-transform duration-300 group-hover/cta:translate-x-1">→</span>
+              </Link>
+            </Magnetic>
+            <span className="text-caption text-[10px] text-muted-foreground">{s.ctaMicro}</span>
+          </div>
+
+          <div className="pt-1">
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls={panelId}
+              className="inline-flex items-center gap-2.5 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              {open ? "Hide the detail" : "What's involved"}
+              <motion.span
+                aria-hidden
+                className="inline-block"
+                animate={{ rotate: open ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                ↓
+              </motion.span>
+            </button>
+
+            <AnimatePresence initial={false}>
+              {open && (
+                <motion.div
+                  id={panelId}
+                  key="panel"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-6 space-y-6">
+                    <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+                      <div className="space-y-2">
+                        <p className="text-caption text-[10px]">The problem we remove</p>
+                        <p className="text-body text-sm leading-relaxed">{s.problem}</p>
+                      </div>
+                      <div className="space-y-3">
+                        <p className="text-caption text-[10px]" style={{ color: "hsl(var(--olive))" }}>
+                          What you walk away with
+                        </p>
+                        <ul className="space-y-2.5">
+                          {s.outcomes.map((o) => (
+                            <li key={o} className="flex gap-2.5 text-body text-sm">
+                              <svg width="14" height="14" viewBox="0 0 14 14" className="mt-1 shrink-0" fill="none" aria-hidden>
+                                <path d="M3 7.5 L6 10.5 L11 4" stroke="hsl(var(--olive))" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                              <span>{o}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-caption text-[10px] mb-2">How it runs</p>
+                      <p className="text-body text-xs text-muted-foreground max-w-2xl leading-relaxed">
+                        {s.deliverables.join("   ·   ")}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
 
 const Services = () => {
   return (
@@ -233,38 +336,12 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Principles */}
-      <section className="section-padding section-spacing-sm">
-        <div className="max-content">
-          <Reveal>
-            <p className="text-caption mb-10">01, Philosophy</p>
-          </Reveal>
-          <div className="grid md:grid-cols-3 gap-10 md:gap-12">
-            {principles.map((p, i) => (
-              <Reveal key={p.label} delay={i * 0.08}>
-                <div className="space-y-3">
-                  <p className="text-caption text-[10px]">0{i + 1}</p>
-                  <h3 className="font-display text-lg font-medium text-foreground">
-                    {p.label}
-                  </h3>
-                  <p className="text-body text-sm">{p.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="section-padding max-content">
-        <div className="divider" />
-      </div>
-
       {/* Services */}
       <section className="section-padding section-spacing">
         <div className="max-content space-y-10 md:space-y-14">
           <div>
             <Reveal>
-              <p className="text-caption">02, Strategic Engagements</p>
+              <p className="text-caption">01, Strategic Engagements</p>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-headline max-w-3xl mt-5">
@@ -296,91 +373,7 @@ const Services = () => {
           <div className="space-y-8 md:space-y-10">
             {services.map((s, i) => (
               <Reveal key={s.index} delay={i * 0.08}>
-                <article
-                  className={`group relative border border-border/60 bg-card/40 hover:bg-card/70 transition-colors duration-500 ${
-                    s.flagship ? "border-foreground/25" : ""
-                  }`}
-                >
-                  {s.flagship && (
-                    <div className="absolute top-0 left-0 h-px w-16 bg-foreground/60" />
-                  )}
-                  <div className="grid md:grid-cols-[180px,1fr] gap-8 md:gap-12 p-8 md:p-12">
-                    {/* Index column */}
-                    <div className="space-y-3 md:border-r md:border-border/40 md:pr-8">
-                      <p className="font-display text-5xl md:text-6xl font-medium leading-none text-foreground/90">
-                        {s.index}
-                      </p>
-                      <p className="text-caption text-[10px]">{s.tag}</p>
-                    </div>
-
-                    {/* Body */}
-                    <div className="space-y-6">
-                      {/* who it is for + format, sets expectation up front */}
-                      <div className="flex flex-wrap items-center justify-between gap-3">
-                        <span className="text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--olive))" }}>
-                          {s.forWhom}
-                        </span>
-                        <span className="text-caption text-[10px] text-muted-foreground">{s.format}</span>
-                      </div>
-
-                      {/* the outcome, what the client actually walks toward */}
-                      <h3 className="font-display text-2xl md:text-[28px] lg:text-[32px] font-semibold leading-[1.15] tracking-tight text-foreground max-w-3xl">
-                        {s.outcome}
-                      </h3>
-
-                      <p className="text-body text-sm max-w-2xl leading-relaxed">
-                        <span className="text-foreground font-medium">{s.title}.</span>{" "}
-                        {s.positioning}
-                      </p>
-
-                      <div className="grid md:grid-cols-2 gap-8 md:gap-12 pt-2">
-                        <div className="space-y-2">
-                          <p className="text-caption text-[10px]">The problem we remove</p>
-                          <p className="text-body text-sm leading-relaxed">{s.problem}</p>
-                        </div>
-                        <div className="space-y-3">
-                          <p className="text-caption text-[10px]" style={{ color: "hsl(var(--olive))" }}>
-                            What you walk away with
-                          </p>
-                          <ul className="space-y-2.5">
-                            {s.outcomes.map((o) => (
-                              <li key={o} className="flex gap-2.5 text-body text-sm">
-                                <svg width="14" height="14" viewBox="0 0 14 14" className="mt-1 shrink-0" fill="none" aria-hidden>
-                                  <path d="M3 7.5 L6 10.5 L11 4" stroke="hsl(var(--olive))" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <span>{o}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-
-                      <div className="pt-1">
-                        <p className="text-caption text-[10px] mb-2">How it runs</p>
-                        <p className="text-body text-xs text-muted-foreground max-w-2xl leading-relaxed">
-                          {s.deliverables.join("   ·   ")}
-                        </p>
-                      </div>
-
-                      <div className="pt-3 flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-2.5">
-                        <Magnetic as="span" strength={6}>
-                          <Link
-                            to="/contact"
-                            className={`group/cta inline-flex items-center gap-2.5 px-6 py-3 rounded-md font-display text-sm font-medium tracking-wide transition-all duration-300 ${
-                              s.flagship
-                                ? "bg-foreground text-background hover:opacity-90"
-                                : "border border-foreground/25 text-foreground hover:border-foreground/50"
-                            }`}
-                          >
-                            {s.cta}
-                            <span aria-hidden className="inline-block transition-transform duration-300 group-hover/cta:translate-x-1">→</span>
-                          </Link>
-                        </Magnetic>
-                        <span className="text-caption text-[10px] text-muted-foreground">{s.ctaMicro}</span>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+                <ServiceCard service={s} />
               </Reveal>
             ))}
           </div>
@@ -404,99 +397,57 @@ const Services = () => {
       <section className="section-padding section-spacing-sm">
         <div className="max-content">
           <Reveal>
-            <div className="flex items-baseline justify-between gap-6 flex-wrap mb-14 md:mb-20">
-              <p className="text-caption">03, How Collaboration Works</p>
+            <div className="flex items-baseline justify-between gap-6 flex-wrap mb-10 md:mb-12">
+              <p className="text-caption">02, How Collaboration Works</p>
               <p className="text-caption text-[10px] text-muted-foreground">
                 A loop, not a handover
               </p>
             </div>
           </Reveal>
 
+          {/* Five steps used to carry a sentence each, a scroll-drawn rule and
+              an animated return curve, and took most of a screen to say
+              something a buyer reads in three seconds. The shape is the whole
+              message here: five stages, and the last one goes back to the
+              first. The words alone carry it. */}
           <div className="relative">
-            {/* forward line, drawn through the steps on scroll */}
             <motion.div
               aria-hidden
-              className="hidden md:block absolute top-[19px] left-[10%] right-[10%] h-px origin-left"
-              style={{ background: "hsl(var(--olive) / 0.6)" }}
+              className="hidden md:block absolute top-1/2 left-0 right-0 h-px origin-left"
+              style={{ background: "hsl(var(--olive) / 0.35)" }}
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 1.3, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
             />
-            <ol className="grid md:grid-cols-5 gap-5 md:gap-4">
+            <ol className="relative flex flex-wrap items-center gap-x-3 gap-y-4 md:justify-between">
               {processSteps.map((step, i) => (
-                <Reveal key={step.label} delay={i * 0.1}>
-                  <li className="relative flex md:flex-col items-stretch md:items-center gap-4 md:gap-0 md:text-center">
-                    {/* number, with a connector down to the next step on mobile */}
-                    <div className="relative flex flex-col items-center md:block shrink-0">
-                      <span
-                        className="relative z-[1] flex items-center justify-center w-10 h-10 rounded-full font-display text-[11px] tabular-nums"
-                        style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--olive) / 0.5)", color: "hsl(var(--olive))" }}
-                      >
-                        0{i + 1}
-                      </span>
-                      {i < processSteps.length - 1 && (
-                        <span
-                          aria-hidden
-                          className="md:hidden w-px flex-1 mt-1"
-                          style={{ background: "hsl(var(--olive) / 0.3)" }}
-                        />
-                      )}
-                    </div>
-                    <div className="md:mt-5 pb-1 md:pb-0">
-                      <h3 className="font-display text-base md:text-lg font-medium text-foreground tracking-tight">
-                        {step.label}
-                      </h3>
-                      <p className="text-body text-sm mt-2 md:mt-3 leading-relaxed md:px-1">
-                        {step.text}
-                      </p>
-                    </div>
-                  </li>
-                </Reveal>
+                <li key={step.label} className="flex items-center gap-3">
+                  <span
+                    className="font-display text-[10px] tabular-nums"
+                    style={{ color: "hsl(var(--olive) / 0.75)" }}
+                  >
+                    0{i + 1}
+                  </span>
+                  <span
+                    className="font-display text-base md:text-xl font-medium text-foreground tracking-tight md:px-3"
+                    style={{ background: "hsl(var(--background))" }}
+                  >
+                    {step.label}
+                  </span>
+                  {i < processSteps.length - 1 && (
+                    <span aria-hidden className="md:hidden text-muted-foreground">·</span>
+                  )}
+                </li>
               ))}
             </ol>
+          </div>
 
-            {/* mobile: the cycle, in one clear line */}
-            <div className="md:hidden mt-5 flex items-center gap-2.5 pl-[3px]">
-              <span className="text-base leading-none" style={{ color: "hsl(var(--olive))" }} aria-hidden>↺</span>
-              <span className="text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--olive))" }}>
-                Revisited, not handed over
-              </span>
-            </div>
-
-            {/* the loop, systems come back rather than getting handed over */}
-            <div className="hidden md:block relative mt-6" aria-hidden>
-              <svg viewBox="0 0 1000 92" className="w-full h-auto">
-                <motion.path
-                  d="M905 12 C 905 74, 640 82, 500 82 C 360 82, 95 74, 95 16"
-                  fill="none"
-                  stroke="hsl(var(--olive) / 0.45)"
-                  strokeWidth="1.4"
-                  strokeDasharray="5 6"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.6, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-                />
-                <motion.path
-                  d="M95 16 l -6 8 M95 16 l 6 8"
-                  fill="none"
-                  stroke="hsl(var(--olive) / 0.7)"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 2.1 }}
-                />
-              </svg>
-              <p
-                className="absolute left-1/2 -translate-x-1/2 bottom-0 px-3 text-caption text-[10px]"
-                style={{ color: "hsl(var(--olive))", background: "hsl(var(--background))" }}
-              >
-                Revisited, not handed over
-              </p>
-            </div>
+          <div className="mt-8 flex items-center gap-2.5">
+            <span className="text-base leading-none" style={{ color: "hsl(var(--olive))" }} aria-hidden>↺</span>
+            <span className="text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--olive))" }}>
+              Revisited, not handed over
+            </span>
           </div>
         </div>
       </section>
@@ -505,93 +456,13 @@ const Services = () => {
         <div className="divider" />
       </div>
 
-      {/* Ecosystem */}
-      <section className="section-padding section-spacing-sm">
-        <div className="max-content">
-          <Reveal>
-            <div className="flex items-baseline justify-between gap-6 flex-wrap mb-3">
-              <p className="text-caption">04, The Wider Ecosystem</p>
-              <p className="text-caption text-[10px] text-muted-foreground">
-                What I am building
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-body-lg max-w-2xl mb-12 md:mb-14">
-              Consulting is one layer of a longer-term ecosystem. Applied work feeds
-              public resources, operational tools and field-driven research. Some
-              layers are already standing, others are still being built.
-            </p>
-          </Reveal>
-
-          <div className="space-y-3 md:space-y-4">
-            {ecosystem.map((e, i) => {
-              const live = e.state === "Live";
-              const dev = e.state === "Building";
-              const border = live
-                ? "1px solid hsl(var(--foreground) / 0.22)"
-                : dev
-                ? "1px dashed hsl(var(--olive) / 0.55)"
-                : "1px dotted hsl(var(--foreground) / 0.28)";
-              const inner = (
-                <div
-                  className="relative flex items-center gap-4 md:gap-8 rounded-lg px-5 md:px-8 py-5 md:py-6 transition-colors duration-300"
-                  style={{
-                    border,
-                    background: live ? "hsl(var(--card) / 0.55)" : "transparent",
-                    opacity: live ? 1 : dev ? 0.72 : 0.5,
-                  }}
-                >
-                  <span className="text-caption text-[10px] tabular-nums w-6 shrink-0">0{i + 1}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-baseline gap-x-3 gap-y-1 flex-wrap">
-                      <h3 className="font-display text-lg md:text-xl font-medium text-foreground tracking-tight">
-                        {e.label}
-                      </h3>
-                      <span
-                        className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase font-display"
-                        style={{ color: live ? "hsl(var(--olive))" : "hsl(var(--muted-foreground))" }}
-                      >
-                        <span
-                          className="w-1.5 h-1.5 rounded-full shrink-0"
-                          style={{
-                            background: live ? "hsl(var(--olive))" : "transparent",
-                            border: live ? "none" : "1px solid hsl(var(--muted-foreground) / 0.7)",
-                          }}
-                        />
-                        {e.state}
-                      </span>
-                    </div>
-                    <p className="text-body text-sm mt-1.5">{e.note}</p>
-                  </div>
-                  {e.to && (
-                    <span aria-hidden className="shrink-0 text-foreground/70 opacity-0 group-hover:opacity-100 transition-opacity">
-                      →
-                    </span>
-                  )}
-                </div>
-              );
-              return (
-                <Reveal key={e.label} delay={i * 0.08}>
-                  {e.to ? (
-                    <Link to={e.to} className="block group">{inner}</Link>
-                  ) : (
-                    <div className="group">{inner}</div>
-                  )}
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Closing callout, full-width dark */}
       <section className="section-dark relative overflow-hidden">
         <div className="scene-grain absolute inset-0 pointer-events-none" />
         <div className="section-padding section-spacing relative">
           <div className="max-content">
             <Reveal>
-              <p className="text-caption mb-10">05, Invitation</p>
+              <p className="text-caption mb-10">03, Invitation</p>
             </Reveal>
             <Reveal delay={0.1}>
               <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight max-w-5xl text-[hsl(var(--ivory))]">
