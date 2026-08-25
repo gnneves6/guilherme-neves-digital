@@ -5,7 +5,6 @@ import ProofMarquee from "@/components/sections/ProofMarquee";
 import ScrollStatement from "@/components/sections/ScrollStatement";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
-import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
 import InvitationSection from "@/components/sections/InvitationSection";
 import PointerField from "@/components/journey/PointerField";
 
@@ -21,8 +20,13 @@ import PointerField from "@/components/journey/PointerField";
  *
  * The order is deliberate and it puts the person before the product: who he
  * is, then where he has been and what he did there, then why he does it, and
- * only then the tool. Nobody knows him yet when they land, so the work has to
+ * then the invitation. Nobody knows him yet when they land, so the work has to
  * earn the right to sell.
+ *
+ * The matchday planner used to close this page and now lives on /services,
+ * where someone has already decided they want something. A live tool is a
+ * strong answer to "what is this actually like", but it is a weak answer to
+ * "who are you", which is the only question being asked here.
  */
 const Index = () => {
   return (
@@ -51,10 +55,6 @@ const Index = () => {
 
       {/* Why he does this, in his own voice. */}
       <FromWithinBridge />
-
-      {/* Proof handed over rather than described. The one chapter driven by
-          the pointer instead of the scroll. */}
-      <MatchdayPlanner />
 
       <InvitationSection />
     </Layout>

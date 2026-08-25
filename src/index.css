@@ -312,7 +312,7 @@
       radial-gradient(ellipse 60% 60% at 50% 100%, hsl(150 35% 8% / 0.7), transparent 70%);
   }
 
-  /* Schematic grid line motif for Operating System chapter */
+  /* Schematic grid line motif for the fuel laws console */
   .schematic-grid {
     background-image:
       linear-gradient(to right, hsl(var(--foreground) / 0.04) 1px, transparent 1px);

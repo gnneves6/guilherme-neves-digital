@@ -5,8 +5,10 @@
 // canonical URL, social share tag and structured-data reference reads from this.
 export const SITE_URL = "https://gnneves6.github.io/guilherme-neves-digital";
 
+// The person is the brand. There is no separate company name to carry, and
+// inventing one made a one-man practice sound like an agency.
 export const SITE_NAME = "Guilherme Neves";
-export const SITE_BRAND = "GN Performance Systems";
+export const SITE_BRAND = "Guilherme Neves";
 
 // Open Graph / social share image, served from /public (see public/og-image.jpg).
 export const OG_IMAGE_PATH = "/og-image.jpg";

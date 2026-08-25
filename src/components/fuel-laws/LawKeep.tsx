@@ -14,7 +14,7 @@ import cardPreview from "@/assets/fuel-laws-reference-preview.png";
  * value has landed, which is the honest moment to ask.
  */
 const LawKeep = () => {
-  const cardUrl = `${import.meta.env.BASE_URL}gn-fuel-laws-reference.pdf`;
+  const cardUrl = `${import.meta.env.BASE_URL}fuel-laws-reference.pdf`;
 
   const [taken, setTaken] = useState(false);
   const [name, setName] = useState("");
@@ -33,8 +33,8 @@ const LawKeep = () => {
         created_at: new Date().toISOString(),
         name: name.trim().slice(0, 100) || "Not given",
         email: email.trim().slice(0, 255),
-        resource_slug: "gn-fuel-laws-reference-card",
-        resource_title: "GN Fuel Laws Reference Card",
+        resource_slug: "fuel-laws-reference-card",
+        resource_title: "Fuel Laws Reference Card",
         interest_type: "reference-card",
         message_optional: null,
         consent: true,
@@ -65,7 +65,7 @@ const LawKeep = () => {
           >
             <img
               src={cardPreview}
-              alt="The GN Fuel Laws reference card, a single printable page listing all five laws with their practical actions."
+              alt="The fuel laws reference card, a single printable page listing all five laws with their practical actions."
               className="w-full h-auto rounded-sm"
               style={{
                 boxShadow:

@@ -251,9 +251,19 @@ const Work = () => {
               A curated archive of resources, frameworks and tools developed
               inside real engagements. Public artefacts are open.{" "}
               <span className="text-foreground font-medium">Protected work exists as proof</span>,
-              shown privately when it's relevant. In-development tools accept
-              early interest.
+              shown privately when it's relevant.
             </p>
+          </Reveal>
+          {/* The free thing, offered where someone is already browsing the
+              work rather than buried in the footer. */}
+          <Reveal delay={0.3}>
+            <Link
+              to="/fuel-laws"
+              className="inline-flex items-center gap-2 mt-6 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              Start with the five fuel laws
+              <span aria-hidden>→</span>
+            </Link>
           </Reveal>
         </div>
       </section>

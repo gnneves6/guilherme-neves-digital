@@ -57,10 +57,10 @@ const FuelLaws = () => {
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Framework · The Operating System</p>
+            <p className="text-caption mb-6">Free · Five laws</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">GN Fuel Laws</h1>
+            <h1 className="text-display max-w-4xl">The five fuel laws.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-2xl mt-8">
@@ -117,7 +117,7 @@ const FuelLaws = () => {
                     <span className="w-2 h-2 rounded-full" style={{ background: "hsl(var(--ivory) / 0.14)" }} />
                   </span>
                   <span className="text-[10px] md:text-[11px] tracking-[0.28em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
-                    GN Fuel Laws · Operating System
+                    The five laws
                   </span>
                 </div>
                 <div className="flex items-center gap-3">

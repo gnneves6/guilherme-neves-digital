@@ -1,11 +1,11 @@
 /**
- * Generates the printable GN Fuel Laws reference card (A4, one page).
+ * Generates the printable fuel laws reference card (A4, one page).
  *
  * Reads the framework from src/data/fuel-laws.json, the same file the
  * website renders from, so the card can never drift from the site.
  *
  * Usage:  node scripts/generate-reference-card.mjs
- * Output: public/gn-fuel-laws-reference.pdf
+ * Output: public/fuel-laws-reference.pdf
  */
 import { chromium } from "playwright-core";
 import { readFileSync, mkdirSync } from "node:fs";
@@ -112,8 +112,8 @@ const html = `<!doctype html>
 </style></head>
 <body>
   <header>
-    <p class="caption">GN Performance Systems &middot; The Operating System</p>
-    <h1>GN Fuel Laws</h1>
+    <p class="caption">Guilherme Neves &middot; Performance Nutrition</p>
+    <h1>The Five Fuel Laws</h1>
     <p class="sub">Five principles that turn performance nutrition from information into
     repeatable behaviour, and keep it working long after the advice is forgotten.</p>
   </header>
@@ -139,7 +139,7 @@ await page.setContent(html, { waitUntil: "networkidle" });
 await page.evaluate(() => document.fonts.ready);
 
 mkdirSync(path.join(root, "public"), { recursive: true });
-const out = path.join(root, "public/gn-fuel-laws-reference.pdf");
+const out = path.join(root, "public/fuel-laws-reference.pdf");
 await page.pdf({ path: out, format: "A4", printBackground: true });
 
 // Also capture a PNG so the site can show a real preview of the card.

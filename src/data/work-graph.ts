@@ -12,7 +12,7 @@ import { artefacts, appliedWorkObjects, type Artefact } from "@/data/artefacts";
    which is why the site gets denser over time without lurching.
 
    Three axes:
-     laws         which GN Fuel Law the piece proves (the spine)
+     laws         which fuel law the piece proves (the spine)
      maturity     how far up the making ladder it sits
      environment  where in the practice it actually came from
      grewFrom     the earlier pieces it developed out of (lineage)

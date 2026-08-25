@@ -6,6 +6,7 @@ import Magnetic from "@/components/motion/Magnetic";
 import { motion } from "framer-motion";
 import sceneMethod from "@/assets/scene-method-podium.jpg";
 import AudienceSelector from "@/components/sections/AudienceSelector";
+import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
 
 type Service = {
   index: string;
@@ -385,6 +386,15 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      <div className="section-padding max-content">
+        <div className="divider" />
+      </div>
+
+      {/* A sample of the work itself, sitting between what can be bought and
+          how it runs. It answers "what is it actually like" without a single
+          extra paragraph of claim. */}
+      <MatchdayPlanner />
 
       <div className="section-padding max-content">
         <div className="divider" />

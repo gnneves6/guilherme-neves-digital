@@ -3,14 +3,23 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollToTop } from "@/components/motion/SmoothScroll";
 
+/**
+ * Three destinations, and one action.
+ *
+ * Six links asked a stranger to choose before they knew what any of it was.
+ * These three answer the only three questions someone actually arrives with:
+ * what has he done, what can I get, and who is he. Home is the wordmark, so
+ * it does not need a seventh slot, and Fuel Laws is a thing you are handed on
+ * the way past rather than a place you go looking for, so it lives in the
+ * page bodies and the footer where the links to it already are.
+ */
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
   { label: "Work", path: "/work" },
-  { label: "Fuel Laws", path: "/fuel-laws" },
   { label: "Services", path: "/services" },
-  { label: "Contact", path: "/contact" },
+  { label: "About", path: "/about" },
 ];
+
+const CTA = { label: "Get in touch", path: "/contact" };
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,7 +79,6 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                onClick={item.path === "/" ? handleHomeClick : undefined}
                 aria-current={location.pathname === item.path ? "page" : undefined}
                 className={`relative text-sm font-body tracking-wide transition-colors duration-300 ${
                   location.pathname === item.path
@@ -92,6 +100,21 @@ const Navbar = () => {
                 )}
               </Link>
             ))}
+
+            {/* The action, given a shape the three links do not have, so the
+                one thing worth doing never competes with navigation. */}
+            <Link
+              to={CTA.path}
+              aria-current={location.pathname === CTA.path ? "page" : undefined}
+              className="ml-2 inline-flex items-center px-5 py-2 rounded-full text-sm font-display tracking-wide transition-all duration-300 hover:opacity-85"
+              style={
+                inDarkHero
+                  ? { background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }
+                  : { background: "hsl(var(--foreground))", color: "hsl(var(--background))" }
+              }
+            >
+              {CTA.label}
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -154,6 +177,22 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.05 + 0.1, duration: 0.4 }}
+                className="pt-2"
+              >
+                <Link
+                  to={CTA.path}
+                  onClick={() => setIsOpen(false)}
+                  aria-current={location.pathname === CTA.path ? "page" : undefined}
+                  className="inline-flex items-center px-6 py-3 rounded-full font-display text-base font-medium tracking-wide bg-foreground text-background"
+                >
+                  {CTA.label}
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}

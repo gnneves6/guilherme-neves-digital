@@ -72,7 +72,7 @@ export const audiences: Audience[] = [
     problem:
       "You already know the science. What is hard to find is the football-specific version: what to do on MD-1, what half-time actually needs, how to make any of it survive a bus at midnight.",
     offer:
-      "I hand over the applied systems rather than the theory. Frameworks, matchday structures and the Fuel Laws playbook, built for the environment you work in and yours to run.",
+      "I hand over the applied systems rather than the theory. Frameworks, matchday structures and the five fuel laws, built for the environment you work in and yours to run.",
     gains: [
       "Applied systems you can operate without a nutritionist on staff",
       "The reasoning behind each decision, so you can adapt it",
