@@ -22,9 +22,10 @@ const pick = (re) => {
   return out;
 };
 
-const title = (html.match(/<title>[\s\S]*?<\/title>/i) || [
-  "<title>Guilherme Neves</title>",
-])[0];
+// Fixed on purpose. The site's own <title> is SEO copy that changes with the
+// positioning, but the artifact keeps one name so the browser tab and the
+// gallery card stay recognisable across every redeploy.
+const title = "<title>Guilherme Neves · Digital (Preview)</title>";
 
 const styles = pick(/<style[\s\S]*?<\/style>/gi);
 const fontLinks = pick(/<link[^>]+fonts\.(?:googleapis|gstatic)\.com[^>]*>/gi);
