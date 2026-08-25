@@ -62,7 +62,7 @@ const InvitationSection = () => {
             </Magnetic>
             <Link
               to="/fuel-laws"
-              className="inline-flex items-center gap-2 font-display text-sm tracking-wide transition-colors duration-300 text-muted-foreground hover:text-foreground"
+              className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide transition-colors duration-300 text-muted-foreground hover:text-foreground"
             >
               Not yet? Take the five laws
               <span aria-hidden>→</span>

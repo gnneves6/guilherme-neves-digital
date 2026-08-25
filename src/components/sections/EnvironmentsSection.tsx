@@ -190,11 +190,17 @@ const EnvironmentsSection = () => {
                   const isActive = activeIndex === i;
                   return (
                     <li key={exp.name}>
+                      {/* The dot stays 7px because that is the design. The
+                          button around it does not: at 7 by 23 the control that
+                          switches between the three clubs, the main thing there
+                          is to do in this chapter, was too small for a thumb to
+                          land on. The padding grows the target and leaves the
+                          mark exactly where it was. */}
                       <button
                         onClick={() => goToMobile(i)}
                         aria-current={isActive ? "true" : undefined}
                         aria-label={`Open ${exp.name} environment`}
-                        className="flex items-center py-2"
+                        className="flex items-center justify-center py-3 px-3 -my-1"
                       >
                         <motion.span
                           className="block rounded-full"

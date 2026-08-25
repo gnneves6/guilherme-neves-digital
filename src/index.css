@@ -24,7 +24,11 @@
     --muted: 41 37% 90%;
     /* Darkened from 50% → 42% L to meet WCAG AA (4.5:1) for captions
        and secondary text on the ivory background. */
-    --muted-foreground: 42 10% 42%;
+    /* 42% landed at 4.39:1 against the ivory ground, just under the 4.5 that
+       normal text needs. This token carries every caption, every small label
+       and every navigation link on the site, so those few percent were the
+       single largest legibility problem here. 40% reads at 4.73:1. */
+    --muted-foreground: 42 10% 40%;
 
     --accent: 110 11% 57%;
     --accent-foreground: 60 10% 12%;

@@ -259,7 +259,7 @@ const Work = () => {
           <Reveal delay={0.3}>
             <Link
               to="/fuel-laws"
-              className="inline-flex items-center gap-2 mt-6 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+              className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               Start with the five fuel laws
               <span aria-hidden>→</span>
