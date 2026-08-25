@@ -1,24 +1,36 @@
 {
+  "pages": [
+    { "id": "page-1", "name": "Direções" },
+    { "id": "page-2", "name": "Estrutura" }
+  ],
   "artboards": [
-    { "file": "Sistema.dc.html", "x": 0, "y": 0, "w": 1180, "h": 860, "title": "00 Sistema" },
-    { "file": "Main.dc.html", "x": 1280, "y": 0, "w": 900, "h": 1500, "title": "01 Home" },
-    { "file": "Paginas.dc.html", "x": 2280, "y": 0, "w": 900, "h": 1060, "title": "02 Trabalho e Contacto" }
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 3060, "title": "A · Syne", "page": "page-1" },
+    { "file": "Editorial.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 2180, "title": "B · Editorial", "page": "page-1" },
+    { "file": "Sistema.dc.html", "x": 0, "y": 0, "w": 1180, "h": 860, "title": "Sistema", "page": "page-2" },
+    { "file": "Paginas.dc.html", "x": 1280, "y": 0, "w": 900, "h": 1060, "title": "Trabalho e Contacto", "page": "page-2" }
   ],
   "annotations": [
     {
-      "id": "nota-showroom",
+      "id": "dir-a",
       "x": 0,
-      "y": 920,
-      "w": 520,
-      "text": "O princípio que decide tudo:\n\nShowroom, não armazém.\n\nUma ferramenta nova não precisa de entrar no site. O site já provou a capacidade. A ferramenta vai para a lista e para as redes."
+      "y": 3120,
+      "w": 560,
+      "text": "A · Syne\n\nA tua tipografia atual, com a paleta nova.\n\nGeométrica, contemporânea, mais próxima de tecnologia e sistemas. Assina bem com \"construo ferramentas\"."
     },
     {
-      "id": "nota-ordem",
-      "x": 1280,
-      "y": 1560,
-      "w": 520,
-      "text": "A ordem contraria o instinto, de propósito.\n\nAs ferramentas (03) vêm antes da tua história (05). Ninguém te conhece ainda: primeiro entregas valor, depois ganhas o direito a contar quem és.\n\nÉ a diferença entre \"olhem para mim\" e \"toma, usa isto\"."
+      "id": "dir-b",
+      "x": 1560,
+      "y": 2240,
+      "w": 560,
+      "text": "B · Editorial (Instrument Serif)\n\nMais quente, mais humana, mais próxima de revista.\n\nO itálico dá-te um registo de pessoa em vez de produto. Casa melhor com bege e verde cashmere, e com \"a minha história é o diferencial\".\n\nAqui só o topo da página, o suficiente para julgares o tipo."
+    },
+    {
+      "id": "paleta",
+      "x": 3120,
+      "y": 0,
+      "w": 420,
+      "text": "Paleta\n\nCreme #F7F3EA (fundo)\nPapel #FCFAF5 (superfícies)\nAreia #EFE9DC (blocos)\nTinta #26261F (texto, preto quente)\nCashmere #8A9E86 (acento)\nCashmere fundo #56684F (botões)\nFloresta #2C352A (o instrumento)\n\nZero azul e zero cinzento frio. Os pretos e brancos são todos quentes."
     }
   ],
-  "launch": { "view": "canvas" }
+  "launch": { "view": "canvas", "page": "page-1" }
 }
