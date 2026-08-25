@@ -45,10 +45,16 @@ const previewColors: Record<PreviewType, string> = {
   seriesMockup: "hsl(30, 20%, 30%)",
 };
 
-const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number }) => {
+const CardPreview = ({ artefact, index, wide }: { artefact: Artefact; index: number; wide?: boolean }) => {
   const pt = getPreviewType(artefact.status, artefact.category);
   return (
-    <div className="aspect-[16/9] relative overflow-hidden" style={{ background: previewColors[pt] }}>
+    <div
+      /* A full-width card keeps a 16/9 preview about 660px tall, which turns a
+         card into a billboard. Widening the ratio keeps its height in the same
+         family as the cards above it. */
+      className={`${wide ? "aspect-[16/9] sm:aspect-[32/9]" : "aspect-[16/9]"} relative overflow-hidden`}
+      style={{ background: previewColors[pt] }}
+    >
       {pt === "blurredProtected" && (
         <div className="absolute inset-0 backdrop-blur-[2px] flex items-center justify-center">
           <div className="space-y-1.5 text-center opacity-30">
@@ -132,6 +138,23 @@ const CardPreview = ({ artefact, index }: { artefact: Artefact; index: number })
   );
 };
 
+/**
+ * Picks a column count that leaves no hole in the last row.
+ *
+ * Three of the six families hold two items in a fixed three-column grid, so
+ * each of them ended on a bare cream cell where a third card should be. It did
+ * not read as deliberate space, it read as a card that failed to load.
+ *
+ * Three columns only when the count divides by three; otherwise two, which is
+ * exact for every even count and leaves at most one card over. That last card
+ * goes full width, and because it has no neighbour in its row there is no
+ * height to mismatch, which is the trap in widening one card of a pair.
+ */
+const gridCols = (n: number) =>
+  n === 1 ? "grid-cols-1" : n % 3 === 0 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2";
+
+const isWide = (n: number, i: number) => n === 1 || (n % 3 !== 0 && n % 2 === 1 && i === n - 1);
+
 type Filter = "All" | Topic;
 
 const filters: Filter[] = ["All", ...topicOrder];
@@ -172,7 +195,7 @@ const Work = () => {
     return map;
   }, []);
 
-  const renderCard = (a: Artefact, i: number) => {
+  const renderCard = (a: Artefact, i: number, wide = false) => {
     const isHovered = hovered === a.slug;
     const hasHover = hovered !== null;
     const isReceded = hasHover && !isHovered;
@@ -190,7 +213,7 @@ const Work = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: isReceded ? 0.4 : 1, y: 0 }}
         transition={{ duration: 0.5, delay: i * 0.04 }}
-        className="group block w-full text-left bg-background relative overflow-hidden"
+        className={`group block w-full text-left bg-background relative overflow-hidden ${wide ? "sm:col-span-2" : ""}`}
       >
         <motion.div
           className="absolute top-0 left-0 right-0 h-px z-10"
@@ -199,7 +222,7 @@ const Work = () => {
           transition={{ duration: 0.5 }}
         />
 
-        <CardPreview artefact={a} index={i} />
+        <CardPreview artefact={a} index={i} wide={wide} />
 
         <div className="p-7">
           <div className="flex items-center justify-between mb-4 gap-3">
@@ -363,8 +386,8 @@ const Work = () => {
                         {t.description}
                       </p>
                     </div>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50">
-                      {items.map((a, i) => renderCard(a, i))}
+                    <div className={`grid gap-px bg-border/50 ${gridCols(items.length)}`}>
+                      {items.map((a, i) => renderCard(a, i, isWide(items.length, i)))}
                     </div>
                   </section>
                 );
