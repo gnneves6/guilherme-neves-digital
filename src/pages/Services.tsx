@@ -32,6 +32,16 @@ type Service = {
   ctaMicro: string;
   image: string;
   imageAlt: string;
+  /**
+   * Where to sit the crop inside the photograph.
+   *
+   * These are dense documents at 1536px wide. Shown whole in a 420px column
+   * they lose every piece of detail that makes them convincing and read as a
+   * grey rectangle, which is what "the images look low quality" actually is:
+   * not compression, a 3.6x downscale of eight-point type. Framing a region
+   * instead, at roughly half the reduction, keeps the thing legible.
+   */
+  imageFocus: { scale: number; origin: string };
   flagship?: boolean;
 };
 
@@ -66,6 +76,7 @@ const services: Service[] = [
     image: auditImage,
     imageAlt:
       "An operations review sheet showing meal service checkpoints, compliance scoring and who owns each one, beside a printed catering operations manual.",
+    imageFocus: { scale: 1.75, origin: "34% 44%" },
     flagship: true,
   },
   {
@@ -98,6 +109,7 @@ const services: Service[] = [
     image: systemsImage,
     imageAlt:
       "A matchday fuelling dashboard with the timeline from breakfast to recovery, beside the printed MD-1 plan and matchday timeline sheets.",
+    imageFocus: { scale: 1.7, origin: "26% 48%" },
   },
   {
     index: "03",
@@ -129,6 +141,7 @@ const services: Service[] = [
     image: educationImage,
     imageAlt:
       "Six football nutrition education cards laid out on a desk, covering the basics, hydration, supplements, recovery and fructose intolerance.",
+    imageFocus: { scale: 1.65, origin: "22% 34%" },
   },
 ];
 
@@ -174,7 +187,12 @@ const ServiceCard = ({ service: s }: { service: Service }) => {
             <img
               src={s.image}
               alt={s.imageAlt}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out"
+              style={{
+                transform: `scale(${s.imageFocus.scale})`,
+                transformOrigin: s.imageFocus.origin,
+                imageRendering: "auto",
+              }}
               loading="lazy"
             />
             <div
@@ -453,23 +471,28 @@ const Services = () => {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
             />
-            <ol className="relative flex flex-wrap items-center gap-x-3 gap-y-4 md:justify-between">
+            {/* The knockout has to sit on the whole item, not on the label
+                alone. With the background only behind the word, the rule ran
+                straight through the step number and through the gap beside it,
+                which read as a line drawn over the text by mistake. */}
+            <ol className="relative flex flex-wrap items-center gap-x-1 gap-y-4 md:justify-between">
               {processSteps.map((step, i) => (
-                <li key={step.label} className="flex items-center gap-3">
+                <li
+                  key={step.label}
+                  className="flex items-center gap-2.5 md:px-3"
+                  style={{ background: "hsl(var(--background))" }}
+                >
                   <span
                     className="font-display text-[10px] tabular-nums"
                     style={{ color: "hsl(var(--olive) / 0.75)" }}
                   >
                     0{i + 1}
                   </span>
-                  <span
-                    className="font-display text-base md:text-xl font-medium text-foreground tracking-tight md:px-3"
-                    style={{ background: "hsl(var(--background))" }}
-                  >
+                  <span className="font-display text-base md:text-xl font-medium text-foreground tracking-tight">
                     {step.label}
                   </span>
                   {i < processSteps.length - 1 && (
-                    <span aria-hidden className="md:hidden text-muted-foreground">·</span>
+                    <span aria-hidden className="md:hidden text-muted-foreground pl-1.5">·</span>
                   )}
                 </li>
               ))}

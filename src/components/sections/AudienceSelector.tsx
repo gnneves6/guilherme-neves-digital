@@ -2,7 +2,33 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "@/components/Reveal";
+import {
+  ShieldCheck,
+  ClipboardList,
+  GraduationCap,
+  Trophy,
+  Users,
+  Handshake,
+} from "lucide-react";
 import { audiences, audienceStatusMeta, audienceByAnchor } from "@/data/audiences";
+
+/**
+ * One mark per audience, so the six lines stop being six lines.
+ *
+ * A stack of similar-length phrases in the same weight is read word by word,
+ * which is the slowest way to answer "which of these is me". A shape in front
+ * of each one is recognised before the words are, so the eye lands on its own
+ * row first and reads only that. Kept to plain outlines at a single stroke
+ * weight; anything more decorative would compete with the type.
+ */
+const audienceIcons: Record<string, typeof ShieldCheck> = {
+  clubs: ShieldCheck,
+  staff: ClipboardList,
+  students: GraduationCap,
+  athletes: Trophy,
+  youth: Users,
+  brands: Handshake,
+};
 
 /**
  * AudienceSelector.
@@ -85,13 +111,28 @@ const AudienceSelector = () => {
                       <motion.span
                         className="block h-px shrink-0"
                         animate={{
-                          width: isActive ? 26 : 10,
+                          width: isActive ? 18 : 8,
                           backgroundColor: isActive
                             ? "hsl(var(--foreground))"
                             : "hsl(var(--foreground) / 0.2)",
                         }}
                         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                       />
+                      {(() => {
+                        const Icon = audienceIcons[a.id];
+                        return Icon ? (
+                          <Icon
+                            aria-hidden
+                            strokeWidth={1.5}
+                            className="w-[18px] h-[18px] shrink-0 transition-colors duration-300"
+                            style={{
+                              color: isActive
+                                ? "hsl(var(--olive))"
+                                : "hsl(var(--muted-foreground) / 0.55)",
+                            }}
+                          />
+                        ) : null;
+                      })()}
                       <span
                         className="font-display text-sm md:text-[15px] leading-snug transition-colors duration-300"
                         style={{
@@ -139,7 +180,18 @@ const AudienceSelector = () => {
                   </span>
                 </div>
 
-                <h3 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+                <h3 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-foreground flex items-center gap-3">
+                  {(() => {
+                    const Icon = audienceIcons[active.id];
+                    return Icon ? (
+                      <Icon
+                        aria-hidden
+                        strokeWidth={1.5}
+                        className="w-6 h-6 md:w-7 md:h-7 shrink-0"
+                        style={{ color: "hsl(var(--olive))" }}
+                      />
+                    ) : null;
+                  })()}
                   {active.label}
                 </h3>
                 <p className="text-body mt-3 max-w-xl">{active.who}</p>
