@@ -2,7 +2,6 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import HeroSection from "@/components/sections/HeroSection";
 import ProofMarquee from "@/components/sections/ProofMarquee";
-import ScrollStatement from "@/components/sections/ScrollStatement";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
 import InvitationSection from "@/components/sections/InvitationSection";
@@ -40,20 +39,12 @@ const Index = () => {
       {/* Where, read at a glance and moving on its own. */}
       <ProofMarquee />
 
-      {/* The premise, stated with weight before any evidence. */}
-      <ScrollStatement
-        caption="The premise"
-        lines={[
-          "Most nutrition advice is correct and useless.",
-          "It survives the meeting and dies in the week.",
-        ]}
-      />
-
       {/* The evidence, walked through as the environments it was earned in.
-          Each kit now carries what was actually done at that club. */}
+          It now starts five hundred pixels earlier, because the premise that
+          used to sit here has moved down to join the answer it belongs with. */}
       <EnvironmentsSection />
 
-      {/* Why he does this, in his own voice. */}
+      {/* The argument, in one place: the problem, the answer, the method. */}
       <FromWithinBridge />
 
       <InvitationSection />

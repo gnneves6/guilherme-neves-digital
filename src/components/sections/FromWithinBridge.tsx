@@ -49,14 +49,18 @@ const FromWithinBridge = () => {
           />
         </Reveal>
 
-        {/* The three pillars used to live in the right column of a two-column
-            grid, aligned to its top, which parked them seven hundred pixels
-            away from the paragraph they belong to and near the ceiling of an
-            otherwise empty half. They read as debris rather than as the shape
-            of the method. They now sit directly under the words they describe,
-            across the full width, where the eye already is. */}
+        {/* The premise used to be its own chapter, five hundred pixels for two
+            sentences, sitting between the hero and the environments. Splitting
+            the argument in half and putting the whole Real Environments chapter
+            between the problem and the answer weakened both, and it delayed the
+            best thing on the page by five hundred pixels. Stated together, the
+            problem and the answer are one thought. */}
         <Reveal>
           <div className="max-w-3xl">
+            <p className="font-display text-2xl md:text-3xl lg:text-[2.5rem] font-light leading-[1.2] tracking-tight mb-7 md:mb-9" style={{ color: "hsl(var(--foreground) / 0.5)" }}>
+              Most nutrition advice is correct and useless.
+              <br className="hidden sm:block" /> It survives the meeting and dies in the week.
+            </p>
             <SplitReveal
               text={"Performance nutrition,\nstructured as a system."}
               as="h2"
@@ -83,6 +87,10 @@ const FromWithinBridge = () => {
           </div>
         </Reveal>
 
+        {/* The three pillars used to live in the right column of a two-column
+            grid, aligned to its top, which parked them seven hundred pixels
+            from the paragraph they belong to. They sit under the words they
+            describe now, across the full width, where the eye already is. */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 md:gap-10 mt-12 md:mt-16 pt-10 border-t border-border/50">
           {pillars.map((p, i) => (
             <motion.div
