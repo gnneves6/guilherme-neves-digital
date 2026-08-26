@@ -29,10 +29,16 @@ export const scrollToTop = (immediate = true) => {
  * Animate to an absolute Y. Anything that used to call
  * window.scrollTo({ behavior: "smooth" }) has to come through here, otherwise
  * the browser's easing and Lenis's easing drive the same value at once.
+ *
+ * `immediate` jumps instead of easing, and exists for landings that happen
+ * across a navigation. This instance is torn down and rebuilt on every route
+ * change, so an eased scrollTo started around that moment is killed halfway by
+ * the destroy and the reader ends up at the top of a page they asked to arrive
+ * partway down.
  */
-export const scrollToY = (top: number) => {
-  if (lenis) lenis.scrollTo(top);
-  else window.scrollTo({ top, behavior: "smooth" });
+export const scrollToY = (top: number, immediate = false) => {
+  if (lenis) lenis.scrollTo(top, { immediate });
+  else window.scrollTo({ top, behavior: immediate ? "auto" : "smooth" });
 };
 
 const SmoothScroll = () => {

@@ -58,7 +58,10 @@ const MatchdayPlanner = () => {
   );
 
   return (
-    <section className="section-padding section-spacing">
+    // Anchored, because the ladder on the home page sends people straight
+    // here. A link that lands at the top of a six thousand pixel page is not a
+    // link to the planner, it is a link to the page the planner is on.
+    <section id="run-the-system" className="section-padding section-spacing scroll-mt-24">
       <div className="max-content">
         <Reveal>
           <div className="flex items-baseline justify-between gap-6 flex-wrap mb-6">

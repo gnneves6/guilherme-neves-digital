@@ -182,6 +182,13 @@ const curatedGraph: Record<string, WorkNode> = {
   },
 
   // ── Tools ─────────────────────────────────────────────────────────
+  "evidence-radar": {
+    topic: "education", laws: [1], maturity: "tool", environment: "independent",
+  },
+  "matchday-fuel-planner": {
+    topic: "matchday", laws: [1, 5], maturity: "tool", environment: "independent",
+    grewFrom: ["matchday-fuel-system"],
+  },
   "fuelops-ai": {
     topic: "framework", laws: [1, 2], maturity: "tool", environment: "independent",
     grewFrom: ["matchday-fuel-system", "hydration-sweat-testing-framework"],

@@ -173,6 +173,35 @@ export const artefacts: Artefact[] = [
     featured: true,
   },
   {
+    slug: "evidence-radar",
+    title: "The Evidence Radar",
+    category: "Applied Tool",
+    group: "tools",
+    type: "AI research routine · built and given away",
+    status: "Public",
+    description:
+      "A weekly research routine run through an AI assistant against rules I wrote, so a practitioner stays current on the literature in one sitting instead of losing an hour a day they do not have.",
+    whatItProves:
+      "Built for a problem I had myself, then handed over: other practitioners asked for the prompt and the steps, and got both.",
+    ctaLabel: "How it works",
+    ctaType: "view-sample",
+    featured: true,
+  },
+  {
+    slug: "matchday-fuel-planner",
+    title: "Matchday Fuel Planner",
+    category: "Interactive Tool",
+    group: "tools",
+    type: "Live on this site",
+    status: "Public",
+    description:
+      "Set a kick-off and a body weight and the week resolves around it: carbohydrate, fluid and sodium targets, and the six moments that decide the match. Built at home after seeing the same question asked over and over inside a club.",
+    whatItProves: "A decision someone actually has to make, turned into something they can run in thirty seconds.",
+    ctaLabel: "Run it",
+    ctaType: "view-sample",
+    featured: true,
+  },
+  {
     slug: "athlete-orientation",
     title: "Individual Athlete Nutrition Orientation",
     category: "Athlete Resource",
