@@ -209,12 +209,17 @@ const FuelLaws = () => {
                           {law.number}
                         </span>
                         <span className="min-w-0 flex-1">
-                          <span
+                          {/* A heading, not a span. These five are the entire
+                              subject of the page and had no heading element at
+                              all, so the document outline went from the h1
+                              straight to the download offer: to a screen reader
+                              or a crawler, the five laws were not on the page. */}
+                          <h2
                             className="block font-display text-lg md:text-2xl font-semibold transition-colors duration-300"
                             style={{ color: isActive ? "hsl(var(--ivory))" : "hsl(var(--ivory) / 0.82)" }}
                           >
                             {law.title}
-                          </span>
+                          </h2>
                           <span className="block text-[13px] md:text-sm mt-1" style={{ color: "hsl(var(--ivory) / 0.45)" }}>
                             {law.tagline}
                           </span>
@@ -399,7 +404,12 @@ const FuelLaws = () => {
                   <div className="absolute top-0 left-0 right-0 h-px">
                     <div className="w-0 h-full bg-foreground/20 group-hover:w-full transition-all duration-700 ease-out" />
                   </div>
-                  <p className="text-caption text-[10px] mb-4 opacity-40">0{i + 1}</p>
+                  <p
+                    className="font-display text-[11px] tracking-[0.3em] mb-4"
+                    style={{ color: "hsl(var(--olive))" }}
+                  >
+                    0{i + 1}
+                  </p>
                   <h3 className="font-display text-lg font-medium text-foreground mb-3 group-hover:text-olive-light transition-colors duration-500">
                     {item.title}
                   </h3>
@@ -413,31 +423,49 @@ const FuelLaws = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* The close.
+          This page is the top of the funnel now: the ladder on the home sends
+          "take something and go" straight here, so most people arriving have
+          just been handed something free and are nowhere near hiring anyone.
+          Ending on "interested in applying the framework" asked them to buy at
+          the exact moment they were least ready, and it was the only door out.
+
+          The honest next step is the work these laws came from. Contact stays,
+          quieter, for the few who did arrive ready. */}
       <div className="section-padding max-content">
         <div className="divider" />
       </div>
-      <section className="section-padding py-32 md:py-40">
+      <section className="section-padding section-spacing">
         <div className="max-content text-center">
           <Reveal>
-            <h2 className="text-headline max-w-lg mx-auto">
-              Interested in applying the framework?
+            <h2 className="text-headline max-w-2xl mx-auto">
+              Five laws are the easy half. Making them survive a season is the work.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-md mx-auto mt-5">
-              Whether for your team, club or individual practice, let's explore how the framework fits.
+              Every one of these came out of a real environment. The systems,
+              tools and casework they turned into are open on the work page.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <Magnetic as="span" strength={7} className="mt-10">
+            <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <Magnetic as="span" strength={7}>
+                <Link
+                  to="/work"
+                  className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
+                >
+                  See where they came from
+                </Link>
+              </Magnetic>
               <Link
                 to="/contact"
-                className="group inline-flex items-center justify-center px-12 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+                className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
-                Get in Touch
+                Or talk about applying them
+                <span aria-hidden>→</span>
               </Link>
-            </Magnetic>
+            </div>
           </Reveal>
         </div>
       </section>
