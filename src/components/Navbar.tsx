@@ -4,18 +4,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { scrollToTop } from "@/components/motion/SmoothScroll";
 
 /**
- * Three destinations, and one action.
+ * Four destinations, and one action.
  *
- * Six links asked a stranger to choose before they knew what any of it was.
- * These three answer the only three questions someone actually arrives with:
- * what has he done, what can I get, and who is he. Home is the wordmark, so
- * it does not need a seventh slot, and Fuel Laws is a thing you are handed on
- * the way past rather than a place you go looking for, so it lives in the
- * page bodies and the footer where the links to it already are.
+ * Six links asked a stranger to choose before they knew what any of it was,
+ * and three was the right correction. But leaving Fuel Laws out was wrong for
+ * one specific reason: it is the only thing here that is free, and most people
+ * who land are not buying anything. Their path existed only as a quiet line at
+ * the bottom of the home page, which is a lot of scrolling to reach the
+ * lowest-commitment thing on the site.
+ *
+ * So: what has he done, what can I get, who is he, and the thing you can have
+ * right now for nothing. Home stays the wordmark rather than a fifth slot.
  */
 const navItems = [
   { label: "Work", path: "/work" },
   { label: "Services", path: "/services" },
+  { label: "Fuel Laws", path: "/fuel-laws" },
   { label: "About", path: "/about" },
 ];
 

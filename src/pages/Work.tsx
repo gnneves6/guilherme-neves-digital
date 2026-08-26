@@ -282,11 +282,8 @@ const Work = () => {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              Everything here was built inside a real environment, for people who
-              had to use it that week.{" "}
-              <span className="text-foreground font-medium">What can be opened is open.</span>{" "}
-              What belongs to a club stays with the club, and is named rather
-              than shown.
+              Built inside real environments, for people who had to use it that
+              week. What can be opened is open.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
@@ -438,7 +435,6 @@ const Work = () => {
                                 {a.title}
                               </h3>
                               <p className="text-body text-sm mt-1.5 max-w-xl">{a.whatItProves}</p>
-                              <p className="text-caption text-[10px] opacity-50 mt-2.5">{a.category}</p>
                             </div>
                           </li>
                         </Reveal>

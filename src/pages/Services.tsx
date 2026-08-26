@@ -6,6 +6,13 @@ import Magnetic from "@/components/motion/Magnetic";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import sceneMethod from "@/assets/scene-method-podium.jpg";
+// A photograph of what each engagement actually produces. Not decoration: the
+// page that has to sell was 7% visual across seven and a half screens, and the
+// most persuasive thing available was a real picture of the real deliverable,
+// sitting unused while the offer was described in paragraphs.
+import auditImage from "@/assets/work-previews/food-catering-operations-preview.webp";
+import systemsImage from "@/assets/work-previews/matchday-fuel-preview.webp";
+import educationImage from "@/assets/work-previews/education-tools-preview.webp";
 import AudienceSelector from "@/components/sections/AudienceSelector";
 import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
 
@@ -23,6 +30,8 @@ type Service = {
   deliverables: string[];
   cta: string;
   ctaMicro: string;
+  image: string;
+  imageAlt: string;
   flagship?: boolean;
 };
 
@@ -54,6 +63,9 @@ const services: Service[] = [
       "Closing presentation with prioritised roadmap",
     ],
     cta: "Request the audit overview",
+    image: auditImage,
+    imageAlt:
+      "An operations review sheet showing meal service checkpoints, compliance scoring and who owns each one, beside a printed catering operations manual.",
     flagship: true,
   },
   {
@@ -83,6 +95,9 @@ const services: Service[] = [
       "Recurring review cycles and adjustments",
     ],
     cta: "Discuss a partnership",
+    image: systemsImage,
+    imageAlt:
+      "A matchday fuelling dashboard with the timeline from breakfast to recovery, beside the printed MD-1 plan and matchday timeline sheets.",
   },
   {
     index: "03",
@@ -111,6 +126,9 @@ const services: Service[] = [
       "Optional integration with an ongoing systems engagement",
     ],
     cta: "Plan a programme",
+    image: educationImage,
+    imageAlt:
+      "Six football nutrition education cards laid out on a desk, covering the basics, hydration, supplements, recovery and fructose intolerance.",
   },
 ];
 
@@ -147,12 +165,27 @@ const ServiceCard = ({ service: s }: { service: Service }) => {
       }`}
     >
       {s.flagship && <div className="absolute top-0 left-0 h-px w-16 bg-foreground/60" />}
-      <div className="grid md:grid-cols-[180px,1fr] gap-8 md:gap-12 p-8 md:p-12">
-        {/* Index column */}
-        <div className="space-y-3 md:border-r md:border-border/40 md:pr-8">
-          <p className="font-display text-5xl md:text-6xl font-medium leading-none text-foreground/90">
-            {s.index}
-          </p>
+      <div className="grid md:grid-cols-[300px,1fr] lg:grid-cols-[420px,1fr] gap-8 md:gap-10 lg:gap-12 p-8 md:p-10 lg:p-12">
+        {/* The index column used to be a number and a tag in a lot of empty
+            space. It carries the photograph now, with the number on top of it,
+            so the visual costs no extra height on a page that is long enough. */}
+        <div className="space-y-4">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-[hsl(var(--charcoal-deep))]">
+            <img
+              src={s.image}
+              alt={s.imageAlt}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.7), transparent 55%)" }}
+            />
+            <span className="absolute bottom-3 left-4 font-display text-4xl md:text-5xl font-medium leading-none text-[hsl(var(--ivory)/0.9)]">
+              {s.index}
+            </span>
+          </div>
           <p className="text-caption text-[10px]">{s.tag}</p>
         </div>
 

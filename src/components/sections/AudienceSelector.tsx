@@ -117,7 +117,7 @@ const AudienceSelector = () => {
           </Reveal>
 
           {/* The answer */}
-          <div className="relative min-h-[26rem]">
+          <div className="relative min-h-[18rem]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}
@@ -144,18 +144,12 @@ const AudienceSelector = () => {
                 </h3>
                 <p className="text-body mt-3 max-w-xl">{active.who}</p>
 
-                <div className="mt-9 grid md:grid-cols-2 gap-8 md:gap-10 max-w-3xl">
-                  <div>
-                    <p className="text-caption text-[10px] mb-3">What usually brings you here</p>
-                    <p className="text-body text-sm leading-relaxed">{active.problem}</p>
-                  </div>
-                  <div>
-                    <p className="text-caption text-[10px] mb-3">What I do</p>
-                    <p className="text-body text-sm leading-relaxed">{active.offer}</p>
-                  </div>
-                </div>
-
-                <div className="mt-9 max-w-xl">
+                {/* "What usually brings you here" and "What I do" were two more
+                    paragraphs restating the line above and the list below. A
+                    person choosing between six options needs two things: is
+                    this me, and what do I get. Both survive; the restating
+                    does not. */}
+                <div className="mt-8 max-w-xl">
                   <p className="text-caption text-[10px] mb-4">What you walk away with</p>
                   <ul className="space-y-2.5">
                     {active.gains.map((g) => (

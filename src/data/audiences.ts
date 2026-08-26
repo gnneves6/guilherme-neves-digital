@@ -25,7 +25,15 @@ export interface Audience {
   label: string;
   /** Who this is, in their own words rather than a market segment. */
   who: string;
-  /** The problem they arrive with. */
+  /**
+   * The problem they arrive with, and what he does about it.
+   *
+   * Kept, not rendered. The selector showed both as paragraphs above the gains
+   * list, which restated the line above them and the list below them, and a
+   * person choosing between six options needs only "is this me" and "what do I
+   * get". The copy stays here because it is worth having if the panel ever
+   * needs to say more, but nothing prints it today.
+   */
   problem: string;
   /** What I actually do for them. */
   offer: string;
