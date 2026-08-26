@@ -387,8 +387,19 @@ const EnvironmentsSection = () => {
                             </p>
                             {/* What was actually done here. This replaced a row
                                 of subject tags: a tag says the topic was touched,
-                                a proof says what came of it. */}
-                            <ul className="mt-6 space-y-2.5 max-w-md">
+                                a proof says what came of it.
+
+                                The scope line goes first because three sharp
+                                specifics, alone, read as everything he did in a
+                                season. Said after the breadth, they read as
+                                examples of it. */}
+                            <p className="mt-5 text-[13px] lg:text-sm leading-relaxed text-[hsl(var(--ivory)/0.55)] max-w-md">
+                              {exp.scope}
+                            </p>
+                            <p className="mt-6 text-[9px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.35)]">
+                              For example
+                            </p>
+                            <ul className="mt-3 space-y-2.5 max-w-md">
                               {exp.proofs.map((proof, pi) => (
                                 <motion.li
                                   key={proof}

@@ -11,6 +11,15 @@ export interface Experience {
   context: string;
   focus: string[];
   /**
+   * The breadth of the role, in one sentence.
+   *
+   * Without it the proofs below read as the complete inventory of what he did
+   * in a whole season, which makes a serious job sound like three small tasks.
+   * This says what the work covered; the proofs are then read as examples of
+   * it rather than as the whole of it.
+   */
+  scope: string;
+  /**
    * What was actually done inside this environment, in the first person.
    * These replace the generic focus tags on the home chapter: a tag says
    * the subject was touched, a proof says what came of it. Kept to the few
@@ -32,6 +41,8 @@ export const experiences: Experience[] = [
     chapter: "Elite football taught me that nutrition must be clear enough to survive pressure.",
     context: "Elite first-team football environment",
     focus: ["Hydration", "Matchday fueling", "Scientific reviews", "Athlete & staff education"],
+    scope:
+      "Inside the first-team performance department, the work ran across hydration and sweat testing, matchday and travel fuelling, reviewing the evidence behind what the club was being sold, and what the kitchen actually put in front of players on the road.",
     proofs: [
       "Cut an estimated 75% from a proposed blood panel, keeping only the markers that could actually change a decision.",
       "Wrote the hydration and sweat loss protocol, a stock calculator and the catering manual for away and European fixtures, built for a hotel kitchen to sign off and execute.",
@@ -50,6 +61,8 @@ export const experiences: Experience[] = [
     chapter: "Senior football turned theory into daily decisions, monitoring and accountability.",
     context: "Senior first-team football environment",
     focus: ["Body composition", "Matchweek routines", "Athlete education", "Practical fueling"],
+    scope:
+      "Day to day responsibility for a senior first team's nutrition through a promotion campaign: the matchweek, the supplementation protocol, body composition monitoring, individual follow-up, and the education that made players able to decide for themselves.",
     proofs: [
       "Ran the first team's nutrition day to day while still an undergraduate, from matchday and hydration to the supplementation protocol and preparing the isotonics.",
       "Assessed the full squad on the ISAK eight site protocol, reading each player's change over time rather than ranking them against one another.",
@@ -68,6 +81,8 @@ export const experiences: Experience[] = [
     chapter: "Performance is broader than football: training, recovery, health and consistency.",
     context: "Human-performance environment beyond football",
     focus: ["Health", "Habits", "Endurance", "Recovery", "Long-term development"],
+    scope:
+      "Performance nutrition outside football, with people training seriously around ordinary lives. Endurance, recovery, health markers and the habits that decide whether any of it holds for more than a month.",
     proofs: [
       "Performance read wider than football: health, habits, endurance and the long view on an athlete's development.",
     ],
