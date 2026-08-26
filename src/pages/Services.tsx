@@ -418,7 +418,7 @@ const Services = () => {
         <div className="max-content space-y-10 md:space-y-14 relative">
           <div>
             <Reveal>
-              <p className="text-caption">01, Strategic Engagements</p>
+              <p className="text-caption">Strategic engagements</p>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-headline max-w-3xl mt-5">
@@ -476,7 +476,7 @@ const Services = () => {
         <div className="max-content">
           <Reveal>
             <div className="flex items-baseline justify-between gap-6 flex-wrap mb-10 md:mb-12">
-              <p className="text-caption">02, How Collaboration Works</p>
+              <p className="text-caption">How collaboration works</p>
               <p className="text-caption text-[10px] text-muted-foreground">
                 A loop, not a handover
               </p>
@@ -545,7 +545,7 @@ const Services = () => {
         <div className="section-padding section-spacing relative">
           <div className="max-content">
             <Reveal>
-              <p className="text-caption mb-10">03, Invitation</p>
+              <p className="text-caption mb-10">Invitation</p>
             </Reveal>
             <Reveal delay={0.1}>
               <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight max-w-5xl text-[hsl(var(--ivory))]">

@@ -112,9 +112,14 @@ const CardPreview = ({ artefact, index, wide }: { artefact: Artefact; index: num
           {artefact.category}
         </span>
         <div className="flex items-end justify-between gap-4">
-          <span className="font-display text-lg md:text-2xl font-semibold leading-[1.12] tracking-tight text-[hsl(var(--ivory)/0.9)] max-w-[85%]">
+          {/* A heading, not a span. When the cover carries the title the card
+              body drops its h3, and five of the seven cards were left with no
+              heading element at all: a screen reader heard a list of
+              descriptions with nothing naming them. Whichever half shows the
+              title, it is the same level of heading. */}
+          <h3 className="font-display text-lg md:text-2xl font-semibold leading-[1.12] tracking-tight text-[hsl(var(--ivory)/0.9)] max-w-[85%]">
             {artefact.title}
-          </span>
+          </h3>
           <span className="font-display text-4xl md:text-5xl font-bold leading-none text-[hsl(var(--ivory)/0.16)] shrink-0">
             {String(index + 1).padStart(2, "0")}
           </span>
@@ -350,7 +355,7 @@ const Work = () => {
                   <p className="text-body-lg mt-7 max-w-2xl leading-relaxed">
                     {c.experience.scope}
                   </p>
-                  <p className="text-caption text-[10px] mt-8 mb-4">For example</p>
+                  <p className="text-caption text-[10px] mt-8 mb-4">In practice</p>
                   <ul className="space-y-3 max-w-2xl">
                     {c.experience.proofs.map((proof) => (
                       <li key={proof} className="flex items-start gap-3">

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
+import PlanGrid from "@/components/motion/PlanGrid";
 import Magnetic from "@/components/motion/Magnetic";
 import LawSignal from "@/components/fuel-laws/LawSignal";
 import { groupMeta } from "@/data/artefacts";
@@ -54,8 +55,9 @@ const FuelLaws = () => {
       <SEO title="Five Fuel Laws, Guilherme Neves" description="Five applied principles that turn nutrition from information into behaviour an athlete repeats, with the work that proves each one." path="/fuel-laws" />
 
       {/* Header */}
-      <section className="section-padding section-spacing">
-        <div className="max-content">
+      <section className="section-padding section-spacing relative">
+        <PlanGrid />
+        <div className="max-content relative">
           <Reveal>
             <p className="text-caption mb-6">Free · Five laws</p>
           </Reveal>

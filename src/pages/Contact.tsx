@@ -73,7 +73,7 @@ const Contact = () => {
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Chapter 04, Engagement</p>
+            <p className="text-caption mb-6">Engagement</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">Tell me what you're trying to solve.</h1>

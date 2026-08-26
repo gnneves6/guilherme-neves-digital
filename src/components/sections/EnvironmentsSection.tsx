@@ -397,7 +397,7 @@ const EnvironmentsSection = () => {
                               {exp.scope}
                             </p>
                             <p className="mt-6 text-[9px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                              For example
+                              In practice
                             </p>
                             <ul className="mt-3 space-y-2.5 max-w-md">
                               {exp.proofs.map((proof, pi) => (

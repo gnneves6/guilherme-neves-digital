@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
 import Em from "@/components/text/Em";
+import PlanGrid from "@/components/motion/PlanGrid";
 import photoLockerRoom from "@/assets/photos/locker-room.webp";
 import photoPitchside from "@/assets/photos/leca-pitchside.webp";
 import photoArrival from "@/assets/photos/leca-arrival.webp";
@@ -122,8 +123,9 @@ const About = () => {
       </div>
 
       {/* Why this work */}
-      <section className="section-padding section-spacing">
-        <div className="max-content">
+      <section className="section-padding section-spacing relative">
+        <PlanGrid />
+        <div className="max-content relative">
           <Reveal>
             <p className="text-caption mb-6">Why this work</p>
           </Reveal>
