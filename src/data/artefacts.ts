@@ -74,8 +74,8 @@ export const artefacts: Artefact[] = [
     type: "Athlete-facing Education",
     status: "Public",
     description:
-      "A visual series turning core football nutrition principles into three memorable lessons athletes can repeat.",
-    whatItProves: "Translation of complex science into clear, athlete-facing behaviour.",
+      "Athletes get handed the technical answer before they own the basics, so it never sticks. Three lessons, in order, that have to be in place before anything specific is worth teaching.",
+    whatItProves: "Getting the foundation in place first, so the specific work later actually lands.",
     ctaLabel: "View Preview",
     ctaType: "view-sample",
     notionUrl: "https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa",

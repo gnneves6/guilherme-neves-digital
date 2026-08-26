@@ -18,6 +18,7 @@ import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
 import Lightbox from "@/components/media/Lightbox";
 import Em from "@/components/text/Em";
 import PlanGrid from "@/components/motion/PlanGrid";
+import StandardStatement from "@/components/sections/StandardStatement";
 
 type Service = {
   index: string;
@@ -393,22 +394,7 @@ const Services = () => {
           style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)), hsl(var(--charcoal-deep) / 0.5) 45%, hsl(var(--charcoal-deep)))" }}
         />
         <div className="relative section-padding py-24 md:py-36">
-          <div className="max-content">
-            <Reveal>
-              <p className="text-caption mb-6" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
-                The standard
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2
-                className="font-display text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight max-w-4xl"
-                style={{ color: "hsl(var(--ivory))" }}
-              >
-                A system that holds when the season gets loud, not a document that
-                looks good in a meeting.
-              </h2>
-            </Reveal>
-          </div>
+          <StandardStatement />
         </div>
       </section>
 

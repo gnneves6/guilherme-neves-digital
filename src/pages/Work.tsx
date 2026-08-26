@@ -16,6 +16,40 @@ import {
 import Magnetic from "@/components/motion/Magnetic";
 import Em from "@/components/text/Em";
 import PlanGrid from "@/components/motion/PlanGrid";
+import ProtectedGlimpse, { type GlimpseKind } from "@/components/proof/ProtectedGlimpse";
+import logoAnderlecht from "@/assets/logos/anderlecht.png";
+import logoLeca from "@/assets/logos/leca.png";
+
+/**
+ * The crest beside the name.
+ *
+ * A club is recognised as a mark long before it is read as a word, and these
+ * three chapters are the spine of the page. Independent practice has no crest
+ * and gets none: an invented mark there would be the only thing on this page
+ * standing in for something that does not exist.
+ */
+const envLogos: Partial<Record<EnvironmentId, string>> = {
+  anderlecht: logoAnderlecht,
+  leca: logoLeca,
+};
+
+/**
+ * Which shape stands in for which protected piece.
+ *
+ * The photograph of the real artefact cannot be shown, and a uniform blur tells
+ * the reader nothing. Each of these draws the kind of tool it was: monitoring
+ * as a sheet of cells, an individual assessment as skinfolds tracked down a
+ * timeline, a catering review as a status ring and a run of checks. Recognisable
+ * as a type of work, unreadable as information.
+ */
+const glimpseOf: Record<string, GlimpseKind> = {
+  "matchday-fuel-system": "matchday",
+  "hydration-sweat-testing-framework": "hydration",
+  "food-environment-catering": "operations",
+  "body-composition-monitoring": "spreadsheet",
+  "athlete-orientation": "longitudinal",
+  "team-monitoring-report": "spreadsheet",
+};
 import { scrollToY } from "@/components/motion/SmoothScroll";
 import { experiences } from "@/data/experiences";
 import {
@@ -63,8 +97,46 @@ const previewColors: Record<PreviewType, string> = {
  */
 const CardPreview = ({ artefact, index, wide }: { artefact: Artefact; index: number; wide?: boolean }) => {
   const pt = getPreviewType(artefact.status, artefact.category);
-  const image = artefact.previewImage ?? artefact.previewImages?.[0];
+  const gallery = artefact.previewImages ?? [];
+  const image = artefact.previewImage ?? gallery[0];
   const ratio = wide ? "aspect-[16/9] sm:aspect-[32/9]" : "aspect-[16/9]";
+
+  // A series of three shown as one of the three is not the artefact. Where a
+  // gallery exists, all of it is on the cover, fanned so the count reads before
+  // the titles do.
+  if (gallery.length > 1) {
+    return (
+      <div className={`${ratio} relative overflow-hidden bg-[hsl(var(--charcoal-deep))]`}>
+        <div className="absolute inset-0 flex items-center justify-center gap-2 px-5">
+          {gallery.slice(0, 3).map((src, i) => (
+            <span
+              key={src}
+              className="relative flex-1 h-[76%] overflow-hidden rounded-sm transition-transform duration-700 ease-out"
+              style={{
+                transform: `rotate(${(i - 1) * 2.2}deg) translateY(${Math.abs(i - 1) * 5}px)`,
+                boxShadow: "0 10px 26px -14px rgba(0,0,0,0.7)",
+              }}
+            >
+              <img src={src} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            </span>
+          ))}
+        </div>
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(to top, hsl(var(--charcoal-deep) / 0.9) 0%, hsl(var(--charcoal-deep) / 0.1) 40%, transparent 65%)" }}
+        />
+        <div className="absolute inset-0 flex flex-col justify-between p-5">
+          <span className="text-[9px] tracking-[0.4em] uppercase font-display text-[hsl(var(--ivory)/0.8)]">
+            {artefact.category} · {gallery.length} parts
+          </span>
+          <span className="font-display text-5xl md:text-6xl font-bold leading-none text-[hsl(var(--ivory)/0.28)]">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   if (image) {
     return (
@@ -323,10 +395,27 @@ const Work = () => {
               aria-labelledby={`env-${c.id}-title`}
             >
               <Reveal>
-                <div className="flex items-baseline gap-4 flex-wrap">
-                  <span className="text-caption text-[10px] opacity-40 tabular-nums">
+                <div className="flex items-center gap-4 md:gap-5 flex-wrap">
+                  <span className="text-caption text-[10px] opacity-40 tabular-nums self-start pt-1">
                     {String(ci + 1).padStart(2, "0")}
                   </span>
+                  {envLogos[c.id] && (
+                    <span
+                      className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-lg bg-white shrink-0 overflow-hidden"
+                      style={{
+                        boxShadow: "0 8px 22px -14px rgba(0,0,0,0.4)",
+                        border: "1px solid hsl(var(--border) / 0.6)",
+                      }}
+                    >
+                      <img
+                        src={envLogos[c.id]}
+                        alt=""
+                        aria-hidden
+                        className="w-[78%] h-[78%] object-contain"
+                        loading="lazy"
+                      />
+                    </span>
+                  )}
                   <h2
                     id={`env-${c.id}-title`}
                     className="font-display text-2xl md:text-4xl font-semibold tracking-tight text-foreground"
@@ -334,7 +423,7 @@ const Work = () => {
                     {c.meta.label}
                   </h2>
                   {c.experience && (
-                    <span className="text-caption text-[10px] opacity-55">
+                    <span className="text-caption text-[10px] opacity-55 self-end pb-1.5">
                       {c.experience.period} · {c.experience.location}
                     </span>
                   )}
@@ -423,22 +512,26 @@ const Work = () => {
                                 the picture shows the shape of the thing and
                                 nothing that can be read off it. */}
                             <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-[hsl(var(--charcoal-deep))]">
-                              {image && (
-                                <img
-                                  src={image}
-                                  alt=""
-                                  aria-hidden
-                                  className="absolute inset-0 w-full h-full object-cover"
-                                  style={{ filter: "blur(3px) saturate(0.75)", transform: "scale(1.08)" }}
-                                  loading="lazy"
-                                />
+                              {glimpseOf[a.slug] ? (
+                                <ProtectedGlimpse kind={glimpseOf[a.slug]} />
+                              ) : (
+                                image && (
+                                  <img
+                                    src={image}
+                                    alt=""
+                                    aria-hidden
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                    style={{ filter: "blur(3px) saturate(0.75)", transform: "scale(1.08)" }}
+                                    loading="lazy"
+                                  />
+                                )
                               )}
                               <div
                                 aria-hidden
                                 className="absolute inset-0"
-                                style={{ background: "hsl(var(--charcoal-deep) / 0.45)" }}
+                                style={{ background: "hsl(var(--charcoal-deep) / 0.4)" }}
                               />
-                              <span className="absolute inset-0 flex items-center justify-center text-[8px] tracking-[0.35em] uppercase font-display text-[hsl(var(--ivory)/0.7)]">
+                              <span className="absolute inset-0 flex items-center justify-center text-[8px] tracking-[0.35em] uppercase font-display text-[hsl(var(--ivory)/0.75)]">
                                 Protected
                               </span>
                             </div>
