@@ -9,6 +9,7 @@ import Magnetic from "@/components/motion/Magnetic";
 import { LINKS } from "@/data/links";
 import { supabase } from "@/integrations/supabase/client";
 import portrait from "@/assets/guilherme-portrait.webp";
+import PlanGrid from "@/components/motion/PlanGrid";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -91,8 +92,9 @@ const Contact = () => {
         <div className="divider" />
       </div>
 
-      <section className="section-padding section-spacing">
-        <div className="max-content grid md:grid-cols-[1fr,320px] lg:grid-cols-[1fr,400px] gap-12 md:gap-20">
+      <section className="section-padding section-spacing relative">
+        <PlanGrid />
+        <div className="max-content grid md:grid-cols-[1fr,320px] lg:grid-cols-[1fr,400px] gap-12 md:gap-20 relative">
           {/* Form */}
           <Reveal>
             {submitted ? (

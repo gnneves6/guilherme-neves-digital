@@ -14,6 +14,8 @@ import {
   type ArtefactStatus,
 } from "@/data/artefacts";
 import Magnetic from "@/components/motion/Magnetic";
+import Em from "@/components/text/Em";
+import PlanGrid from "@/components/motion/PlanGrid";
 import { scrollToY } from "@/components/motion/SmoothScroll";
 import { experiences } from "@/data/experiences";
 import {
@@ -282,8 +284,8 @@ const Work = () => {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              Built inside real environments, for people who had to use it that
-              week. What can be opened is open.
+              Built inside real environments, for people who{" "}
+              <Em>had to use it that week</Em>. What can be opened is open.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
@@ -305,8 +307,9 @@ const Work = () => {
       {/* The archive, walked as three rooms rather than browsed as a
           catalogue. Each chapter opens on what was done there, in his own
           words, then shows what can be opened and names what cannot. */}
-      <section className="section-padding py-10 md:py-16">
-        <div className="max-content space-y-24 md:space-y-32">
+      <section className="section-padding py-10 md:py-16 relative">
+        <PlanGrid />
+        <div className="max-content space-y-24 md:space-y-32 relative">
           {chapters.map((c, ci) => (
             <section
               key={c.id}
@@ -369,7 +372,8 @@ const Work = () => {
                 <Reveal delay={0.1}>
                   <p className="text-body text-sm md:text-base leading-relaxed mt-7 max-w-2xl">
                     Built outside any one club, from what kept repeating inside all
-                    of them. Open to anyone, because the point is that it travels.
+                    of them. Open to anyone, because <Em>the point is that it
+                    travels</Em>.
                   </p>
                 </Reveal>
               )}
@@ -410,6 +414,9 @@ const Work = () => {
                       return (
                         <Reveal key={a.slug} delay={0.05 * i}>
                           <li className="grid grid-cols-[104px,1fr] sm:grid-cols-[200px,1fr] gap-5 sm:gap-8 items-center bg-background p-4 sm:p-5">
+                            {/* Stays blurred. This one belongs to a club, so
+                                the picture shows the shape of the thing and
+                                nothing that can be read off it. */}
                             <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-[hsl(var(--charcoal-deep))]">
                               {image && (
                                 <img
@@ -530,9 +537,9 @@ const Work = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-lg mx-auto mt-5">
-              None of it was built in advance. If something here looks like the
-              thing your environment is missing, that's usually the beginning of
-              the conversation.
+              None of it was built in advance. If something here looks like{" "}
+              <Em>the thing your environment is missing</Em>, that's usually the
+              beginning of the conversation.
             </p>
           </Reveal>
           <Reveal delay={0.2}>

@@ -6,6 +6,7 @@ import { accessMeta } from "@/data/artefacts";
 import { supabase } from "@/integrations/supabase/client";
 import { LINKS } from "@/data/links";
 import WorkConnections from "@/components/resource/WorkConnections";
+import Lightbox from "@/components/media/Lightbox";
 
 interface Props {
   artefact: Artefact | null;
@@ -78,6 +79,7 @@ const Block = ({
 );
 
 const ResourceModal = ({ artefact, onClose }: Props) => {
+  const [zoom, setZoom] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -201,7 +203,15 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
               <div className="relative max-h-[92vh] overflow-y-auto">
                 {/* Hero visual */}
                 {heroImage && (
-                  <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+                  /* 21/9 over a 3:2 photograph crops the top and bottom off a
+                     document, so even here the whole thing could not be seen.
+                     The banner stays as the banner and opens the full frame. */
+                  <button
+                    type="button"
+                    onClick={() => setZoom(true)}
+                    aria-label={`Open the full image: ${artefact.title}`}
+                    className="group/hero relative block w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden cursor-zoom-in"
+                  >
                     <img
                       src={heroImage}
                       alt={artefact.previewAlt ?? artefact.title}
@@ -209,6 +219,13 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                       loading="lazy"
                       decoding="async"
                     />
+                    <span
+                      aria-hidden
+                      className="absolute top-4 left-4 z-[2] flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[9px] tracking-[0.2em] uppercase font-display opacity-0 group-hover/hero:opacity-100 transition-opacity duration-300 text-[hsl(var(--ivory)/0.9)]"
+                      style={{ background: "hsl(45 12% 4% / 0.7)" }}
+                    >
+                      View full
+                    </span>
                     {/* dark gradient bottom */}
                     <div
                       aria-hidden
@@ -266,7 +283,7 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                         </span>
                       )}
                     </div>
-                  </div>
+                  </button>
                 )}
 
                 {/* Header */}
@@ -585,6 +602,13 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
                 </div>
               </div>
             </motion.div>
+
+            <Lightbox
+              src={zoom && heroImage ? heroImage : null}
+              alt={artefact.previewAlt ?? artefact.title}
+              caption={artefact.title}
+              onClose={() => setZoom(false)}
+            />
           </motion.div>
         );
       })()}

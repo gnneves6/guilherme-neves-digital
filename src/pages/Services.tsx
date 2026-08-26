@@ -15,6 +15,9 @@ import systemsImage from "@/assets/work-previews/matchday-fuel-preview.webp";
 import educationImage from "@/assets/work-previews/education-tools-preview.webp";
 import AudienceSelector from "@/components/sections/AudienceSelector";
 import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
+import Lightbox from "@/components/media/Lightbox";
+import Em from "@/components/text/Em";
+import PlanGrid from "@/components/motion/PlanGrid";
 
 type Service = {
   index: string;
@@ -169,6 +172,7 @@ const processSteps = [
  */
 const ServiceCard = ({ service: s }: { service: Service }) => {
   const [open, setOpen] = useState(false);
+  const [zoom, setZoom] = useState(false);
   const panelId = `service-detail-${s.index}`;
 
   return (
@@ -183,7 +187,15 @@ const ServiceCard = ({ service: s }: { service: Service }) => {
             space. It carries the photograph now, with the number on top of it,
             so the visual costs no extra height on a page that is long enough. */}
         <div className="space-y-4">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-[hsl(var(--charcoal-deep))]">
+          {/* The crop is a door, not a limit. Clicking opens the whole
+              document at full size, which is where the compliance table and
+              the printed targets can actually be read. */}
+          <button
+            type="button"
+            onClick={() => setZoom(true)}
+            aria-label={`Open the full image: ${s.title}`}
+            className="group/zoom relative block w-full aspect-[16/10] overflow-hidden rounded-sm bg-[hsl(var(--charcoal-deep))] cursor-zoom-in"
+          >
             <img
               src={s.image}
               alt={s.imageAlt}
@@ -191,7 +203,6 @@ const ServiceCard = ({ service: s }: { service: Service }) => {
               style={{
                 transform: `scale(${s.imageFocus.scale})`,
                 transformOrigin: s.imageFocus.origin,
-                imageRendering: "auto",
               }}
               loading="lazy"
             />
@@ -203,7 +214,21 @@ const ServiceCard = ({ service: s }: { service: Service }) => {
             <span className="absolute bottom-3 left-4 font-display text-4xl md:text-5xl font-medium leading-none text-[hsl(var(--ivory)/0.9)]">
               {s.index}
             </span>
-          </div>
+            <span
+              aria-hidden
+              className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[9px] tracking-[0.2em] uppercase font-display opacity-0 group-hover/zoom:opacity-100 transition-opacity duration-300 text-[hsl(var(--ivory)/0.9)]"
+              style={{ background: "hsl(var(--charcoal-deep) / 0.75)" }}
+            >
+              View full
+            </span>
+          </button>
+
+          <Lightbox
+            src={zoom ? s.image : null}
+            alt={s.imageAlt}
+            caption={s.title}
+            onClose={() => setZoom(false)}
+          />
           <p className="text-caption text-[10px]">{s.tag}</p>
         </div>
 
@@ -332,8 +357,8 @@ const Services = () => {
             <p className="text-body-lg max-w-2xl mt-8">
               Clubs, the staff inside them, the athletes they carry, and the people
               trying to get into this work. What I do changes with who is asking,
-              but the question underneath never does: is nutrition working as a
-              system here, or only on paper?
+              but the question underneath never does:{" "}
+              <Em>is nutrition working as a system here, or only on paper?</Em>
             </p>
           </Reveal>
           <Reveal delay={0.35}>
@@ -388,8 +413,9 @@ const Services = () => {
       </section>
 
       {/* Services */}
-      <section className="section-padding section-spacing">
-        <div className="max-content space-y-10 md:space-y-14">
+      <section className="section-padding section-spacing relative">
+        <PlanGrid />
+        <div className="max-content space-y-10 md:space-y-14 relative">
           <div>
             <Reveal>
               <p className="text-caption">01, Strategic Engagements</p>
@@ -405,8 +431,9 @@ const Services = () => {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="text-body-lg max-w-2xl mt-6">
-                Each one starts inside your environment and ends with something your
-                staff and athletes actually use. Chosen with you, scoped to fit.
+                Each one starts inside your environment and ends with{" "}
+                <Em>something your staff and athletes actually use</Em>. Chosen
+                with you, scoped to fit.
               </p>
             </Reveal>
             <Reveal delay={0.3}>

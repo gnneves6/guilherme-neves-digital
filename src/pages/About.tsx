@@ -6,31 +6,13 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
+import Em from "@/components/text/Em";
 import photoLockerRoom from "@/assets/photos/locker-room.webp";
 import photoPitchside from "@/assets/photos/leca-pitchside.webp";
 import photoArrival from "@/assets/photos/leca-arrival.webp";
 import photoTrophies from "@/assets/photos/anderlecht-trophies.webp";
 import photoSign from "@/assets/photos/anderlecht-sign.webp";
 
-/** Highlights an essential phrase with a soft on-brand marker, so the eye
- *  catches the spine of the story without reading every line. */
-const Em = ({ children }: { children: ReactNode }) => (
-  <span
-    style={{
-      backgroundImage:
-        "linear-gradient(hsl(var(--olive-light) / 0.22), hsl(var(--olive-light) / 0.22))",
-      backgroundSize: "100% 0.4em",
-      backgroundPosition: "0 90%",
-      backgroundRepeat: "no-repeat",
-      WebkitBoxDecorationBreak: "clone",
-      boxDecorationBreak: "clone",
-      fontWeight: 500,
-      color: "hsl(var(--foreground))",
-    }}
-  >
-    {children}
-  </span>
-);
 
 const certifications = [
   "ISAK Level 1, Certified Anthropometrist",
