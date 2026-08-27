@@ -170,12 +170,26 @@ when the cursor stops on them.
 Written straight to the element through GSAP or custom properties, never React
 state. These run every frame the mouse is moving.
 
-**The statement is a sequence, not a stack.** "The standard" pins one screen
-and puts the three wrong answers through a single position, struck one at a
-time, with the claim landing in the same place they left. Stacked, the whole
-correction was visible before the eye arrived and the three wrong answers sat
-next to the right one competing with it. Any pinned section owes the reader a
-visible length: the counter and the rail exist so nobody thinks the page broke.
+**The statement is a sequence, not a stack.** "The standard" puts the three
+wrong answers and the claim through a single position, one at a time, each one
+struck and then blurred away while the next rises into the same spot. Stacked,
+the whole correction was visible before the eye arrived and the three wrong
+answers sat next to the right one competing with it.
+
+*Reversed once:* it was first built as a pinned screen scrubbed against scroll
+position, which is the better idea in a browser and worthless anywhere else.
+It now takes whatever input it can get, in this order: the wheel, a click or
+tap, the dots, and failing all of those a timer that starts when the section
+comes into view and stops the instant the reader does anything. The wheel never
+takes the page scroll away. The timer is the one thing on this site that moves
+on its own, and it is here because an argument nobody ever sees is worse than
+an argument that introduces itself. No viewport units either: `svh` resolves to
+the height of the whole page inside a frame sized to its content.
+
+**Changing a panel moves it sideways.** The six doors used to cross-fade in
+place, which read as one panel whose words kept changing, so choosing felt like
+nothing had happened. The panel now travels laterally, in the direction the
+choice was made in the list.
 
 **No rendered brand scenes.** The band used to sit on a rendered poster of a
 "GN LIFE & LEGACY OS", coat of arms and trademark included, invisible only

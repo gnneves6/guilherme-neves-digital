@@ -1,20 +1,13 @@
-import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionTemplate,
-  useReducedMotion,
-  type MotionValue,
-} from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 // A real dressing room, minutes before a real match, with him in it.
 //
 // This band used to sit on a rendered poster of a "GN LIFE & LEGACY OS", coat
 // of arms and trademark included. It survived the branding pass because at a
-// band 700px tall nobody could read it. Pinned to a full screen it is legible,
-// and what it says is an invented company that does not exist, next to a claim
-// about ending up out of the room. A photograph of the room is the honest
-// version of the same idea and it is already in the repository.
+// short band nobody could read it. Given a whole screen it is legible, and what
+// it says is an invented company that does not exist, next to a claim about
+// ending up out of the room. A photograph of the room is the honest version of
+// the same idea and it was already in the repository.
 import sceneRoom from "@/assets/photos/locker-room.webp";
 
 /**
@@ -22,30 +15,44 @@ import sceneRoom from "@/assets/photos/locker-room.webp";
  *
  * A single line stating what the work is asks to be agreed with. Showing the
  * assumption first, then drawing a line through it, makes the reader watch
- * their own reference get corrected, which is a different and much stickier
- * kind of persuasion: they do not receive a claim, they revise one.
+ * their own reference get corrected: they do not receive a claim, they revise
+ * one.
  *
- * This used to be a stack: three struck sentences, then the standard below
- * them. Everything was on screen at once, so the correction had already
- * happened before the eye arrived, and the three wrong answers stayed visible
- * next to the right one, competing with it.
+ * There is one position and four things pass through it. Each wrong answer
+ * arrives, gets a rule drawn through it at reading speed, then blurs and lifts
+ * away while the next one is already rising into the same spot. The standard
+ * arrives last, in the place the wrong answers just left, and takes its
+ * highlight there. Nothing is ever printed above or below anything else, which
+ * was the whole problem with the stack this replaces: with all four on screen
+ * the correction had already happened before the eye arrived, and three wrong
+ * answers sat next to the right one competing with it.
  *
- * It is now one position and the scroll is what moves through it. Each wrong
- * answer rises into the slot, gets a line drawn through it at reading speed,
- * and rolls out as the next one rises. The standard arrives last, into the
- * same spot the wrong answers just left, and takes its highlight there. The
- * argument is not read, it is watched happening, and the reader's own scroll
- * is what performs it.
+ * It is deliberately not driven by scroll position.
  *
- * The section is a tall track with a sticky panel inside it. That is what buys
- * the scroll distance the sequence needs without the page appearing to freeze:
- * the panel is pinned, the reader is still scrolling, and the rail at the
- * bottom shows how much of the sequence is left, so nobody thinks the page has
- * broken.
+ * A first version pinned a screen and scrubbed the sequence against scroll.
+ * That is the better idea in a browser and it is worthless anywhere else: the
+ * preview this site is reviewed in runs inside a frame the host sizes to its
+ * own content, so the inner document cannot scroll, `100svh` resolves to the
+ * height of the whole page, and scroll progress is zero forever. The sequence
+ * existed and could not be seen. Anything that only exists on scroll cannot be
+ * reviewed, and if it cannot be reviewed it does not get better.
  *
- * Under reduced motion none of this exists. The track collapses, the panel
- * stops being sticky, and the three struck lines and the standard are simply
- * printed in order. The meaning survives, the movement does not.
+ * So it takes whatever input it can get, and there is always one:
+ *
+ *   the wheel, which advances a beat per notch without ever taking the page
+ *   scroll away, so on a real site scrolling through this section is what runs
+ *   it, exactly as if it were scrubbed;
+ *
+ *   a click or a tap anywhere on it, which advances and wraps, so it can be
+ *   replayed and so a phone is not left out;
+ *
+ *   the dots, which jump;
+ *
+ *   and failing all of those, a timer that starts when the section comes into
+ *   view and stops the moment the reader does anything at all. This is the one
+ *   place on the site where something moves on its own, and it is here because
+ *   an argument nobody ever sees is worse than an argument that introduces
+ *   itself.
  */
 const struck = [
   "Not a document that looks good in a meeting.",
@@ -53,91 +60,28 @@ const struck = [
   "Not advice that dates the week after it lands.",
 ];
 
-/**
- * Where each beat sits along the scroll of the track, as a fraction.
- *
- * The three wrong answers own the first two thirds; the standard owns the
- * last, and starts before the third one has finished leaving, so it reads as
- * arriving over the correction rather than after it.
- */
-const SLOTS: [number, number][] = [
-  [0.02, 0.26],
-  [0.24, 0.48],
-  [0.46, 0.72],
-];
-const CLAIM_IN = 0.66;
+const STEPS = struck.length + 1;
+const CLAIM = STEPS - 1;
 
-// Sized for a full screen rather than for a band. The wrong answers sit a step
-// below the standard, so that when the standard lands in the same slot it is
-// visibly the larger thing and not just the last thing.
+/** Long enough to read the line and watch it get cut, short enough to hold. */
+const DWELL = 2600;
+/** Wheel travel that buys one beat. About one notch on most mice. */
+const NOTCH = 90;
+
 const lineClass =
-  "font-display text-2xl md:text-4xl font-light leading-snug tracking-tight";
+  "font-display text-[1.6rem] md:text-4xl lg:text-[2.6rem] font-light leading-snug tracking-tight";
 const claimClass =
   "font-display text-[1.9rem] md:text-5xl lg:text-[3.4rem] font-semibold leading-[1.1] tracking-tight max-w-5xl";
 
-/**
- * One wrong answer, for the length of its slot.
- *
- * Its own component so the transforms are declared once per line rather than
- * in a loop, which is the only way hooks are allowed to be written and also
- * the only way this stays readable.
- */
-const ReelLine = ({
-  progress,
-  line,
-  slot,
-}: {
-  progress: MotionValue<number>;
-  line: string;
-  slot: [number, number];
-}) => {
-  const [from, to] = slot;
-  const settled = from + 0.06;
-  const strikeStart = settled + 0.015;
-  const strikeEnd = strikeStart + 0.075;
-  const leaving = to - 0.07;
+const ruleStyle = {
+  backgroundImage: "linear-gradient(hsl(var(--ivory) / 0.8), hsl(var(--ivory) / 0.8))",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "0 55%",
+  WebkitBoxDecorationBreak: "clone",
+  boxDecorationBreak: "clone",
+} as const;
 
-  const opacity = useTransform(progress, [from, settled, leaving, to], [0, 1, 1, 0]);
-  const y = useTransform(progress, [from, settled, leaving, to], [38, 0, 0, -38]);
-  // Drawn, not placed. The rule travels at about the speed the sentence is
-  // read, so the correction lands as the reader finishes it.
-  //
-  // It is a background on the text rather than a bar over it, because these
-  // sentences wrap on a phone. An absolutely positioned rule at half the
-  // height of a two-line block is drawn between the lines, which reads as an
-  // underline of the first one. Cloning the decoration per line fragment
-  // gives every line its own rule, drawn together.
-  const drawn = useTransform(progress, [strikeStart, strikeEnd], [0, 100]);
-  const ruled = useMotionTemplate`${drawn}% 1px`;
-  // Once struck, the sentence stops being worth looking at and says so.
-  const dim = useTransform(progress, [strikeStart, strikeEnd], [0.55, 0.34]);
-
-  return (
-    <motion.p
-      className={`absolute inset-x-0 top-0 max-w-3xl ${lineClass}`}
-      style={{ opacity, y }}
-      aria-hidden
-    >
-      <motion.span
-        style={{
-          color: "hsl(var(--ivory))",
-          opacity: dim,
-          backgroundImage:
-            "linear-gradient(hsl(var(--ivory) / 0.75), hsl(var(--ivory) / 0.75))",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "0 55%",
-          backgroundSize: ruled,
-          WebkitBoxDecorationBreak: "clone",
-          boxDecorationBreak: "clone",
-        }}
-      >
-        {line}
-      </motion.span>
-    </motion.p>
-  );
-};
-
-/** The printed version: no track, no pinning, nothing moves. */
+/** The printed version: no sequence, nothing moves, everything is there. */
 const StaticStatement = () => (
   <div className="max-content">
     <p className="text-caption mb-8" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
@@ -146,19 +90,7 @@ const StaticStatement = () => (
     <ul className="space-y-3 mb-9">
       {struck.map((line) => (
         <li key={line} className={lineClass}>
-          {/* Same per-line rule as the animated version, already drawn. */}
-          <span
-            style={{
-              color: "hsl(var(--ivory) / 0.4)",
-              backgroundImage:
-                "linear-gradient(hsl(var(--ivory) / 0.75), hsl(var(--ivory) / 0.75))",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "0 55%",
-              backgroundSize: "100% 1px",
-              WebkitBoxDecorationBreak: "clone",
-              boxDecorationBreak: "clone",
-            }}
-          >
+          <span style={{ ...ruleStyle, backgroundSize: "100% 1px", color: "hsl(var(--ivory) / 0.4)" }}>
             {line}
           </span>
         </li>
@@ -176,44 +108,79 @@ const StaticStatement = () => (
 );
 
 const StandardStatement = () => {
-  const track = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const reduce = !!useReducedMotion();
+  const [step, setStep] = useState(0);
+  // Which way the last change went, so the slot moves with it rather than
+  // always throwing upwards.
+  const [dir, setDir] = useState(1);
+  const [engaged, setEngaged] = useState(false);
+  const [touched, setTouched] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: track,
-    offset: ["start start", "end end"],
-  });
+  const go = useCallback((next: number, direction: number) => {
+    setDir(direction);
+    setStep(next);
+  }, []);
 
-  // The photograph drifts and settles across the whole sequence, so the panel
-  // is never a still image behind moving text. Small numbers on purpose: this
-  // is depth, not an effect.
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1.14, 1.02]);
+  // Plays itself once, if it is never touched.
+  useEffect(() => {
+    if (reduce || !engaged || touched || step >= CLAIM) return;
+    const id = window.setTimeout(() => go(step + 1, 1), DWELL);
+    return () => window.clearTimeout(id);
+  }, [reduce, engaged, touched, step, go]);
 
-  const claimOpacity = useTransform(scrollYProgress, [CLAIM_IN, CLAIM_IN + 0.13], [0, 1]);
-  const claimY = useTransform(scrollYProgress, [CLAIM_IN, CLAIM_IN + 0.13], [44, 0]);
-  const markScaleX = useTransform(scrollYProgress, [CLAIM_IN + 0.12, CLAIM_IN + 0.22], [0, 1]);
-  const tailOpacity = useTransform(scrollYProgress, [CLAIM_IN + 0.2, CLAIM_IN + 0.3], [0, 1]);
-  const railScaleX = useTransform(scrollYProgress, [0, 0.96], [0, 1]);
-  // The eyebrow steps up as each wrong answer is dealt with, which is the only
-  // counter in the panel and the reason the pinning does not feel open-ended.
-  const beat = useTransform(scrollYProgress, (p) =>
-    p < SLOTS[1][0] ? "01" : p < SLOTS[2][0] ? "02" : p < CLAIM_IN ? "03" : "04"
-  );
+  useEffect(() => {
+    if (reduce) return;
+    const el = ref.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([e]) => setEngaged(e.isIntersecting),
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+
+    // The wheel drives it without ever being taken away from the page. No
+    // preventDefault anywhere here: the reader keeps their scroll, and the
+    // section is tall enough that passing through it spends several notches.
+    let travel = 0;
+    const onWheel = (e: WheelEvent) => {
+      travel += e.deltaY;
+      if (Math.abs(travel) < NOTCH) return;
+      const direction = travel > 0 ? 1 : -1;
+      travel = 0;
+      setTouched(true);
+      setStep((s) => {
+        const next = Math.min(CLAIM, Math.max(0, s + direction));
+        if (next !== s) setDir(direction);
+        return next;
+      });
+    };
+    el.addEventListener("wheel", onWheel, { passive: true });
+
+    return () => {
+      io.disconnect();
+      el.removeEventListener("wheel", onWheel);
+    };
+  }, [reduce]);
+
+  // A press anywhere advances, and wraps, so it can be watched twice and so a
+  // phone gets the whole thing.
+  const onPress = () => {
+    if (reduce) return;
+    setTouched(true);
+    go(step >= CLAIM ? 0 : step + 1, 1);
+  };
 
   const band = (children: React.ReactNode) => (
     <>
-      <motion.div
+      <div
         aria-hidden
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url(${sceneRoom})`,
-          // Held well under the type. A daylight photograph needs more taking
-          // down than the rendered scene did, and the point of it is presence,
-          // not subject matter.
+          // Held well under the type. The point of it is presence, not subject.
           filter: "brightness(0.26) contrast(1.05) saturate(0.45)",
-          y: reduce ? 0 : bgY,
-          scale: reduce ? 1 : bgScale,
         }}
       />
       <div
@@ -226,8 +193,7 @@ const StandardStatement = () => {
       />
       {/* A bed for the type, and only for the type. The words live in the left
           two thirds, so the scrim is heaviest there and lets go of the picture
-          on the right, where the room can stay a room. A flat wash over the
-          whole frame would have taken the photograph down to a texture. */}
+          on the right, where the room can stay a room. */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -252,97 +218,158 @@ const StandardStatement = () => {
     );
   }
 
+  const isClaim = step === CLAIM;
+
   return (
-    <section ref={track} className="relative" style={{ height: "300vh" }}>
-      <div className="sticky top-0 h-[100svh] overflow-hidden flex items-center">
-        {band(
-          <div className="relative w-full section-padding">
-            <div className="max-content">
-              <div className="flex items-baseline gap-3 mb-10 md:mb-14">
-                <motion.span
-                  className="text-caption tabular-nums"
-                  // Not --olive-light. That token is tuned for the ivory pages
-                  // and reads under the 4.5 a 14px label needs once it is on
-                  // this charcoal. Lifted to 62% here, sampled from the
-                  // rendered pixels at 6.7:1 against the darkest part of the
-                  // photograph it sits over. The rail below can stay on the
-                  // token: it carries no text.
-                  style={{ color: "hsl(110 14% 62%)" }}
-                >
-                  {beat}
-                </motion.span>
-                <span className="text-caption" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
-                  The standard
-                </span>
-              </div>
+    <section
+      ref={ref}
+      onClick={onPress}
+      className="relative overflow-hidden cursor-pointer select-none"
+      // A fixed height, not a viewport one. `svh` is meaningless in a frame
+      // sized to its content, where it resolves to the height of everything.
+      style={{ minHeight: "clamp(560px, 78vh, 760px)" }}
+    >
+      {band(
+        <div className="relative section-padding py-20 md:py-24 flex items-center min-h-[inherit]">
+          <div className="max-content w-full">
+            <div className="flex items-baseline gap-3 mb-10 md:mb-14">
+              <span
+                className="text-caption tabular-nums"
+                // Not --olive-light, which is tuned for the ivory pages and
+                // reads under 4.5:1 on this charcoal. 62% samples at 6.7:1
+                // against the darkest part of the photograph.
+                style={{ color: "hsl(110 14% 62%)" }}
+              >
+                {String(step + 1).padStart(2, "0")}
+              </span>
+              <span className="text-caption" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
+                The standard
+              </span>
+            </div>
 
-              {/* The slot. Everything happens in this one place: the wrong
-                  answers pass through it and the standard lands in it. Its
-                  height is reserved so nothing below shifts as lines swap. */}
-              <div className="relative min-h-[13rem] md:min-h-[15rem]">
-                {struck.map((line, i) => (
-                  <ReelLine
-                    key={line}
-                    line={line}
-                    slot={SLOTS[i]}
-                    progress={scrollYProgress}
-                  />
-                ))}
-
-                <motion.h2
-                  className={`absolute inset-x-0 top-0 ${claimClass}`}
-                  style={{ color: "hsl(var(--ivory))", opacity: claimOpacity, y: claimY }}
-                >
-                  A system that holds when the season gets loud, and{" "}
-                  <span className="relative whitespace-nowrap">
+            {/* The slot. One position, four things through it, nothing above
+                or below anything else. The height is reserved so the page does
+                not shuffle as they swap. */}
+            <div className="relative min-h-[12rem] md:min-h-[15rem]">
+              {/* Sync, not wait: both are mounted through the change, which is
+                  the whole effect. The one leaving blurs and lifts off the
+                  slot while the one arriving is already rising into it, so the
+                  new line appears over the old rather than after it. */}
+              <AnimatePresence initial={false}>
+                {isClaim ? (
+                  <motion.h2
+                    key="claim"
+                    className={`absolute inset-x-0 top-0 ${claimClass}`}
+                    style={{ color: "hsl(var(--ivory))" }}
+                    initial={{ opacity: 0, y: 44 * dir, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -44, filter: "blur(10px)" }}
+                    transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    A system that holds when the season gets loud, and{" "}
+                    <span className="relative whitespace-nowrap">
+                      <motion.span
+                        aria-hidden
+                        className="absolute left-[-0.08em] right-[-0.08em] bottom-[0.2em] h-[0.4em] origin-left"
+                        style={{ background: "hsl(var(--olive) / 0.72)" }}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.55, delay: 0.45, ease: [0.4, 0, 0.2, 1] }}
+                      />
+                      <span className="relative">keeps holding</span>
+                    </span>{" "}
+                    long after I have stopped being in the room.
+                  </motion.h2>
+                ) : (
+                  <motion.p
+                    key={step}
+                    className={`absolute inset-x-0 top-0 max-w-3xl ${lineClass}`}
+                    initial={{ opacity: 0, y: 40 * dir, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -40 * dir, filter: "blur(10px)" }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {/* The rule is a cloned background on the text, not a bar
+                        over it: these sentences wrap on a phone, and a bar at
+                        half the height of a two-line block is drawn between
+                        the lines, which reads as underlining the first one. */}
                     <motion.span
-                      aria-hidden
-                      // Sat on the baseline, not on the box: 0.2em is roughly
-                      // where the descender space ends, so the band reads as a
-                      // highlighter stroke rather than a bar behind the words.
-                      // Same 0.4em height the Em marker uses elsewhere.
-                      className="absolute left-[-0.08em] right-[-0.08em] bottom-[0.2em] h-[0.4em] origin-left"
-                      style={{
-                        background: "hsl(var(--olive) / 0.72)",
-                        scaleX: markScaleX,
+                      style={{ ...ruleStyle, color: "hsl(var(--ivory) / 0.55)" }}
+                      initial={{ backgroundSize: "0% 1px" }}
+                      animate={{
+                        backgroundSize: "100% 1px",
+                        color: "hsl(var(--ivory) / 0.34)",
                       }}
-                    />
-                    <span className="relative">keeps holding</span>
-                  </span>{" "}
-                  long after I have stopped being in the room.
-                </motion.h2>
-              </div>
+                      transition={{ duration: 0.55, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                    >
+                      {struck[step]}
+                    </motion.span>
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
 
-              <motion.p
-                className="text-body-lg mt-8 md:mt-10 max-w-xl"
-                style={{ color: "hsl(var(--ivory) / 0.6)", opacity: tailOpacity }}
-              >
-                I work with few environments, closely, for a long time. That is
-                the only way any of this compounds.
-              </motion.p>
+            <div className="mt-8 md:mt-10 min-h-[3.5rem]">
+              <AnimatePresence>
+                {isClaim && (
+                  <motion.p
+                    className="text-body-lg max-w-xl"
+                    style={{ color: "hsl(var(--ivory) / 0.6)" }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
+                    I work with few environments, closely, for a long time. That
+                    is the only way any of this compounds.
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
 
-              {/* How much is left. A pinned panel with no length showing is
-                  the one thing that makes a reader think the page is stuck. */}
-              <div
-                aria-hidden
-                className="mt-12 md:mt-16 h-px w-full max-w-md"
-                style={{ background: "hsl(var(--ivory) / 0.14)" }}
+            {/* Where you are, and a way to get anywhere. A sequence with no
+                visible length reads as a thing that might be stuck. */}
+            <div className="mt-10 md:mt-12 flex items-center gap-2.5">
+              {Array.from({ length: STEPS }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setTouched(true);
+                    go(i, i > step ? 1 : -1);
+                  }}
+                  aria-label={
+                    i === CLAIM ? "The standard" : `What it is not, ${i + 1} of ${struck.length}`
+                  }
+                  // Padded so the narrowest dot still clears a 24px target.
+                  className="h-6 px-1 flex items-center"
+                >
+                  <motion.span
+                    className="block h-px"
+                    animate={{
+                      width: i === step ? 40 : 16,
+                      backgroundColor:
+                        i === step ? "hsl(110 14% 62%)" : "hsl(var(--ivory) / 0.28)",
+                    }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                </button>
+              ))}
+              <span
+                className="ml-3 text-[10px] tracking-[0.2em] uppercase font-display"
+                style={{ color: "hsl(var(--ivory) / 0.3)" }}
               >
-                <motion.div
-                  className="h-px origin-left"
-                  style={{ background: "hsl(var(--olive-light))", scaleX: railScaleX }}
-                />
-              </div>
+                {isClaim ? "Again" : "Scroll or tap"}
+              </span>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* The three wrong answers are aria-hidden above, because a rule drawn
-          through a sentence means nothing read aloud and the fragments would
-          arrive as three claims. They are given here once, in the order the
-          sequence makes them, with the correction stated rather than drawn.
-          The standard itself is not repeated: the heading above is real. */}
+      {/* The three wrong answers pass through aria-hidden markup that changes
+          under a screen reader's feet. They are given here once, in order,
+          with the correction stated rather than drawn. The standard itself is
+          not repeated: the heading in the slot is real when it is there. */}
       <p className="sr-only">
         What this is not: a document that looks good in a meeting, a plan that
         fits everyone and no one, or advice that dates the week after it lands.

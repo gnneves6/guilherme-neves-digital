@@ -69,6 +69,7 @@ const toneStyles = {
 const AudienceSelector = () => {
   const { hash } = useLocation();
   const [activeId, setActiveId] = useState(audiences[0].id);
+  const [dir, setDir] = useState(1);
 
   // A link from elsewhere (a video description, a post) selects directly.
   useEffect(() => {
@@ -82,6 +83,12 @@ const AudienceSelector = () => {
   const tone = toneStyles[state.tone];
 
   const select = (id: string, anchor: string) => {
+    // Which way the panel should travel. Picking a door further down the list
+    // sends the old panel left and brings the new one in from the right, so
+    // the movement agrees with the movement of your own eye down the column.
+    const from = audiences.findIndex((a) => a.id === activeId);
+    const to = audiences.findIndex((a) => a.id === id);
+    if (to !== from) setDir(to > from ? 1 : -1);
     setActiveId(id);
     // replaceState keeps the address shareable without trapping the back button.
     window.history.replaceState(null, "", `#${anchor}`);
@@ -198,14 +205,21 @@ const AudienceSelector = () => {
           </Reveal>
 
           {/* The answer */}
-          <div className="relative min-h-[18rem]">
-            <AnimatePresence mode="wait">
+          {/* Sideways, not up. Six panels that all faded in place read as one
+              panel whose words keep changing, which is why choosing felt like
+              nothing happened. Travelling laterally says a different card was
+              brought in, and the direction it comes from says where it came
+              from in the list. `overflow-hidden` because a panel on its way out
+              must not be visible in the margin. */}
+          <div className="relative min-h-[18rem] overflow-hidden">
+            <AnimatePresence mode="wait" custom={dir}>
               <motion.div
                 key={active.id}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                custom={dir}
+                initial={{ opacity: 0, x: 70 * dir, filter: "blur(6px)" }}
+                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, x: -70 * dir, filter: "blur(6px)" }}
+                transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="flex items-center gap-2.5 mb-5">
                   <span
