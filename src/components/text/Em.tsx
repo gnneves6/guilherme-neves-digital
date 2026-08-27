@@ -13,23 +13,14 @@ import { type ReactNode } from "react";
  * the eye has nothing left to land on. Lived on the About page alone until now;
  * moved here so the whole site can use the same one rather than growing three
  * slightly different versions of it.
+ *
+ * Put the cursor on one and the stroke fills the word. The styling moved to a
+ * class in index.css to make that possible: hover cannot be expressed in an
+ * inline style, and these are precisely the words worth rewarding someone for
+ * stopping on.
  */
 const Em = ({ children }: { children: ReactNode }) => (
-  <span
-    style={{
-      backgroundImage:
-        "linear-gradient(hsl(var(--olive-light) / 0.22), hsl(var(--olive-light) / 0.22))",
-      backgroundSize: "100% 0.4em",
-      backgroundPosition: "0 90%",
-      backgroundRepeat: "no-repeat",
-      WebkitBoxDecorationBreak: "clone",
-      boxDecorationBreak: "clone",
-      fontWeight: 500,
-      color: "hsl(var(--foreground))",
-    }}
-  >
-    {children}
-  </span>
+  <span className="gn-em">{children}</span>
 );
 
 export default Em;

@@ -239,6 +239,41 @@
     );
   }
 
+  /*
+   * The olive marker, and what it does when you put the cursor on it.
+   *
+   * At rest it is a highlighter stroke sitting behind the spine of a sentence,
+   * at the height a real one would leave. On hover the stroke fills the whole
+   * word, which is the smallest possible way of saying the page noticed. It is
+   * on the marked words specifically because those are the words worth
+   * stopping on, so the reward for exploring with the cursor lands exactly
+   * where the argument is.
+   *
+   * Behind a hover query, so a phone does not inherit a stuck highlight from a
+   * tap, and the transition is dropped entirely under reduced motion.
+   */
+  .gn-em {
+    background-image: linear-gradient(hsl(var(--olive-light) / 0.22), hsl(var(--olive-light) / 0.22));
+    background-size: 100% 0.4em;
+    background-position: 0 90%;
+    background-repeat: no-repeat;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+  }
+  @media (hover: hover) {
+    .gn-em {
+      transition: background-size 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gn-em:hover {
+      background-size: 100% 1.05em;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gn-em { transition: none; }
+  }
+
   /* Scene tones */
   .scene-light { background: hsl(var(--background)); color: hsl(var(--foreground)); }
   .scene-dim   { background: hsl(var(--ivory-dim)); color: hsl(var(--foreground)); }

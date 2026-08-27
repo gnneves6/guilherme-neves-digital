@@ -146,11 +146,29 @@ mockup standing in for a document that exists.
 **One deliberate accent.** Olive marks the thing that matters in a block. It is
 not decoration and does not get spread around.
 
-**Motion is driven by scroll, never by a clock.** Nothing on this site loops or
-plays on its own. The grid drifts against the page, the measure mark travels
-down the margin, and the statement band runs its sequence, all as a function of
-where the reader is. A thing that moves while the reader is still is asking for
-attention it has not earned; a thing that moves because they moved is depth.
+**Motion answers the reader, it never plays on its own.** Pointer, click and
+scroll, in that order of importance. A thing that moves while the reader is
+still is asking for attention it has not earned; a thing that moves because
+they moved is depth.
+
+The order matters and was learned the hard way. Scroll was built first and was
+invisible, because the preview the site is reviewed in runs inside a frame
+sized to its own content, so the inner document never scrolls: everything
+scroll-driven sits at frame zero and every reveal fires at once on load. Any
+effect that only exists on scroll cannot be reviewed and may not be seen.
+Pointer and click work in any container, so they carry the site and scroll
+decorates it.
+
+What answers today: the name on the home lifts, grows and takes olive under the
+cursor, as a field with a falloff rather than a hover, so moving anywhere near
+it moves several letters at once. The plan grid is lit by the pointer, three
+and a half times its resting strength inside a soft circle that follows the
+cursor, with a warm wash under it. A click opens a ring from where it landed,
+including clicks that hit nothing. Olive-marked words fill with their highlight
+when the cursor stops on them.
+
+Written straight to the element through GSAP or custom properties, never React
+state. These run every frame the mouse is moving.
 
 **The statement is a sequence, not a stack.** "The standard" pins one screen
 and puts the three wrong answers through a single position, struck one at a

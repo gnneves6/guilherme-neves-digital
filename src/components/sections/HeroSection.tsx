@@ -42,11 +42,27 @@ const frames = [
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
+/** How far from the cursor a letter still feels it, as a share of the name's height. */
+const REACH = 0.85;
+
 const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const reduce = !!useReducedMotion();
   const [frame, setFrame] = useState(0);
+
+  /**
+   * The letters of the name, and where each one rests.
+   *
+   * Filled once the entrance has finished, and refilled whenever SplitText
+   * re-splits at a new width. Centres are stored relative to the heading and
+   * measured while every letter is still at rest, so the pointer loop reads
+   * one rectangle a frame instead of eighteen, and reads none of the boxes it
+   * is in the middle of moving.
+   */
+  const letters = useRef<
+    { el: HTMLElement; cx: number; cy: number; t: number }[]
+  >([]);
 
   // SplitText handles the name: it splits into characters wrapped in masking
   // lines, re-splits on resize so nothing breaks mid-word at a new width, and
@@ -67,6 +83,9 @@ const HeroSection = () => {
         mask: "chars",
         autoSplit: true,
         onSplit(self) {
+          // The previous split's elements are gone. Stop driving them before
+          // the entrance starts writing to their replacements.
+          letters.current = [];
           return gsap.from(self.chars, {
             xPercent: (i, target) =>
               (target as HTMLElement).closest("[data-split='last']") ? 110 : -110,
@@ -75,6 +94,31 @@ const HeroSection = () => {
             ease: EASE,
             stagger: { each: 0.035, from: "start" },
             delay: 0.25,
+            onComplete() {
+              // The mask that made the entrance possible has to go, or every
+              // letter is trapped in a box the height of itself and lifting it
+              // just clips it off. It has done its job by now.
+              const chars = self.chars as HTMLElement[];
+              chars.forEach((c) => {
+                if (c.parentElement) c.parentElement.style.overflow = "visible";
+              });
+              const box = el.getBoundingClientRect();
+              letters.current = chars.map((c) => {
+                const r = c.getBoundingClientRect();
+                // GSAP has finished with this element, so the pointer loop can
+                // own its transform outright. Two quickTo tweens were tried
+                // first, one for the lift and one for the scale, and only the
+                // lift ever appeared: they write the same transform and the
+                // second never composed. One string, written by one loop.
+                c.style.willChange = "transform";
+                return {
+                  el: c,
+                  cx: r.left - box.left + r.width / 2,
+                  cy: r.top - box.top + r.height / 2,
+                  t: 0,
+                };
+              });
+            },
           });
         },
       });
@@ -83,6 +127,102 @@ const HeroSection = () => {
     }, el);
 
     return () => ctx.revert();
+  }, [reduce]);
+
+  /**
+   * The name answers the cursor.
+   *
+   * Letters near the pointer lift and grow, letters further away less so, and
+   * the whole thing settles back when the pointer leaves. It is the first
+   * thing on the site and now the first thing that proves the site is not a
+   * picture: you move, it moves, before you have read a word or clicked
+   * anything.
+   *
+   * Deliberately a field rather than a hover. A letter that only reacts when
+   * the cursor is exactly on it gives you one letter at a time; a falloff
+   * across the whole name means moving anywhere near it moves several, which
+   * is what makes it read as a surface with weight rather than as eighteen
+   * separate buttons.
+   *
+   * Driven straight through GSAP, never through React state, because this runs
+   * every frame the mouse is moving and re-rendering the page underneath it
+   * sixty times a second would cost more than the effect is worth.
+   */
+  useEffect(() => {
+    if (reduce) return;
+    const host = heroRef.current;
+    const name = nameRef.current;
+    if (!host || !name) return;
+
+    let raf = 0;
+    let px = 0;
+    let py = 0;
+    let inside = false;
+    let settled = true;
+
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
+      px = e.clientX;
+      py = e.clientY;
+      inside = true;
+      settled = false;
+    };
+    const onLeave = () => {
+      inside = false;
+      settled = false;
+    };
+
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      const set = letters.current;
+      if (!set.length || settled) return;
+
+      const box = name.getBoundingClientRect();
+      const x = px - box.left;
+      const y = py - box.top;
+      const reach = Math.max(box.height * REACH, 120);
+
+      let moving = false;
+
+      for (let i = 0; i < set.length; i++) {
+        const l = set[i];
+
+        let want = 0;
+        if (inside) {
+          const dx = l.cx - x;
+          const dy = l.cy - y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          // Squared falloff: close letters do nearly all of the moving, so the
+          // shape under the cursor is a peak and not a bulge.
+          want = d >= reach ? 0 : (1 - d / reach) ** 2;
+        }
+
+        // Eased towards the target rather than snapped to it, which is what
+        // gives the name weight: it catches up to the cursor instead of being
+        // welded to it.
+        l.t += (want - l.t) * 0.16;
+        if (Math.abs(want - l.t) > 0.002) moving = true;
+
+        const t = l.t;
+        l.el.style.transform = `translate3d(0, ${(-26 * t).toFixed(2)}px, 0) scale(${(1 + 0.13 * t).toFixed(4)})`;
+        // Olive arrives only at the peak, so it marks one letter rather than
+        // washing the whole name.
+        l.el.style.color = t < 0.02 ? "" : `color-mix(in srgb, hsl(var(--olive)) ${Math.round(t * 78)}%, hsl(var(--foreground)))`;
+      }
+
+      // Stop running the loop once every letter has arrived home.
+      if (!inside && !moving) settled = true;
+    };
+
+    host.addEventListener("pointermove", onMove, { passive: true });
+    host.addEventListener("pointerleave", onLeave, { passive: true });
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      host.removeEventListener("pointermove", onMove);
+      host.removeEventListener("pointerleave", onLeave);
+      cancelAnimationFrame(raf);
+    };
   }, [reduce]);
 
   const { scrollYProgress } = useScroll({
