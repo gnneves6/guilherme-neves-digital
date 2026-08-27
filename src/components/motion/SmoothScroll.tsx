@@ -41,6 +41,22 @@ export const scrollToY = (top: number, immediate = false) => {
   else window.scrollTo({ top, behavior: immediate ? "auto" : "smooth" });
 };
 
+/**
+ * Hand the page's scroll to a section, and take it back.
+ *
+ * A section that wants to hold the screen still while something happens on it
+ * has to stop two scrollers, not one: the browser's, by preventing the wheel
+ * event, and Lenis, which is running its own animation loop and would keep
+ * moving the page underneath a cancelled event. Only Lenis knows how to be
+ * paused, so it is asked here rather than fought with.
+ *
+ * Whoever locks is responsible for unlocking, including on unmount. There is
+ * no timeout and no rescue: a page that cannot be scrolled is the worst thing
+ * this site could do to somebody.
+ */
+export const lockScroll = () => lenis?.stop();
+export const unlockScroll = () => lenis?.start();
+
 const SmoothScroll = () => {
   const { pathname } = useLocation();
 

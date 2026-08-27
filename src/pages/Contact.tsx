@@ -10,6 +10,7 @@ import { LINKS } from "@/data/links";
 import { supabase } from "@/integrations/supabase/client";
 import portrait from "@/assets/guilherme-portrait.webp";
 import PlanGrid from "@/components/motion/PlanGrid";
+import ArrivingLetter from "@/components/motion/ArrivingLetter";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -92,11 +93,13 @@ const Contact = () => {
         <div className="divider" />
       </div>
 
-      <section className="section-padding section-spacing relative">
+      {/* Clipped, because the sheet flies in from off the right edge and a
+          page that scrolls sideways for a second is worse than no animation. */}
+      <section className="section-padding section-spacing relative overflow-hidden">
         <PlanGrid />
         <div className="max-content grid md:grid-cols-[1fr,320px] lg:grid-cols-[1fr,400px] gap-12 md:gap-20 relative">
-          {/* Form */}
-          <Reveal>
+          {/* Form, delivered rather than displayed */}
+          <ArrivingLetter>
             {submitted ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -228,7 +231,7 @@ const Contact = () => {
                 </div>
               </form>
             )}
-          </Reveal>
+          </ArrivingLetter>
 
           {/* Who you're reaching, and what happens next */}
           <Reveal delay={0.2}>

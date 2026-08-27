@@ -186,6 +186,23 @@ on its own, and it is here because an argument nobody ever sees is worse than
 an argument that introduces itself. No viewport units either: `svh` resolves to
 the height of the whole page inside a frame sized to its content.
 
+**One place takes the scroll, and only one.** On "The standard", when the
+section fills the screen and the reader keeps scrolling down, the wheel is
+consumed: the page holds still and the sentence changes instead. Three notches,
+then it is handed back for the rest of the visit. Taking someone's scroll is
+the most hostile thing a page can do, so it only ever takes it downward, only
+while the section really fills the screen, only once, and it stops Lenis as
+well as the browser, releasing on every exit path including unmount. A reader
+who meets one moment where the surface behaves differently reads the rest of
+the site looking for the next one; a reader who meets five of them leaves.
+
+**The enquiry form is delivered, not displayed.** It arrives as a sheet from
+off the bottom right, overshoots, settles square, and only then accepts typing.
+A contact form is the least interesting object on any site and the one thing
+that asks a stranger to do real work. Watching a blank sheet be put in front of
+you is a different invitation from finding one already lying there, and it
+costs about a second.
+
 **Changing a panel moves it sideways.** The six doors used to cross-fade in
 place, which read as one panel whose words kept changing, so choosing felt like
 nothing had happened. The panel now travels laterally, in the direction the

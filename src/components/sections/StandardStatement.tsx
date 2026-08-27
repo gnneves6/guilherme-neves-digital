@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { lockScroll, unlockScroll } from "@/components/motion/SmoothScroll";
 // A real dressing room, minutes before a real match, with him in it.
 //
 // This band used to sit on a rendered poster of a "GN LIFE & LEGACY OS", coat
@@ -27,32 +28,41 @@ import sceneRoom from "@/assets/photos/locker-room.webp";
  * the correction had already happened before the eye arrived, and three wrong
  * answers sat next to the right one competing with it.
  *
- * It is deliberately not driven by scroll position.
+ * The page stops here. That is the point of it.
  *
- * A first version pinned a screen and scrubbed the sequence against scroll.
- * That is the better idea in a browser and it is worthless anywhere else: the
- * preview this site is reviewed in runs inside a frame the host sizes to its
- * own content, so the inner document cannot scroll, `100svh` resolves to the
- * height of the whole page, and scroll progress is zero forever. The sequence
- * existed and could not be seen. Anything that only exists on scroll cannot be
- * reviewed, and if it cannot be reviewed it does not get better.
+ * When the section fills the screen and you keep scrolling down, the scroll is
+ * taken: the page does not move, and your wheel spends itself changing the
+ * sentence instead. Three notches, then it is handed back and the page carries
+ * on. It is the only place on this site where scrolling does something other
+ * than move down a page, and it is that on purpose: a reader who has met one
+ * moment where the surface behaves differently reads the rest of it looking
+ * for the next one.
  *
- * So it takes whatever input it can get, and there is always one:
+ * Taking someone's scroll is the most hostile thing a page can do, so the
+ * rules are strict and there is no way to get stuck:
  *
- *   the wheel, which advances a beat per notch without ever taking the page
- *   scroll away, so on a real site scrolling through this section is what runs
- *   it, exactly as if it were scrubbed;
+ *   it only takes it downward, and only while the section really is filling
+ *   the screen, so it can never grab a page someone is passing through;
  *
- *   a click or a tap anywhere on it, which advances and wraps, so it can be
- *   replayed and so a phone is not left out;
+ *   it takes it exactly three times and then never again for the rest of the
+ *   visit, so coming back up and going down a second time costs nothing;
  *
- *   the dots, which jump;
+ *   scrolling up always passes straight through;
  *
- *   and failing all of those, a timer that starts when the section comes into
- *   view and stops the moment the reader does anything at all. This is the one
- *   place on the site where something moves on its own, and it is here because
- *   an argument nobody ever sees is worse than an argument that introduces
- *   itself.
+ *   and it stops two scrollers, not one. Preventing the wheel event stops the
+ *   browser. Lenis is running its own loop and would keep moving the page
+ *   underneath a cancelled event, so it is paused through lockScroll and
+ *   restarted on release and on unmount, with no timeout and no rescue path
+ *   because nothing here is allowed to fail into a page that will not scroll.
+ *
+ * Nothing about the sequence itself depends on scrolling, which is the second
+ * reason it is written this way. A click or tap anywhere advances it and wraps
+ * it, the marks jump to any beat, and if none of that happens a timer starts
+ * when the section comes into view and stops the instant the reader touches
+ * anything. So it still plays on a phone, on a trackpad, for somebody using a
+ * keyboard, and inside the frame this site is previewed in, where the document
+ * cannot scroll at all and a version scrubbed against scroll position sat at
+ * frame zero forever, real and invisible.
  */
 const struck = [
   "Not a document that looks good in a meeting.",
@@ -65,8 +75,10 @@ const CLAIM = STEPS - 1;
 
 /** Long enough to read the line and watch it get cut, short enough to hold. */
 const DWELL = 2600;
-/** Wheel travel that buys one beat. About one notch on most mice. */
-const NOTCH = 90;
+/** Wheel travel that buys one beat. Around one notch of a mouse, a flick of a trackpad. */
+const NOTCH = 110;
+/** No more than one beat per this, so a hard flick cannot blow through the whole thing. */
+const COOLDOWN = 320;
 
 const lineClass =
   "font-display text-[1.6rem] md:text-4xl lg:text-[2.6rem] font-light leading-snug tracking-tight";
@@ -117,7 +129,13 @@ const StandardStatement = () => {
   const [engaged, setEngaged] = useState(false);
   const [touched, setTouched] = useState(false);
 
+  // The wheel handler is created once and has to know where the sequence is
+  // without being rebuilt on every beat, which would mean adding and removing
+  // a non-passive listener four times a section.
+  const stepRef = useRef(0);
+
   const go = useCallback((next: number, direction: number) => {
+    stepRef.current = next;
     setDir(direction);
     setStep(next);
   }, []);
@@ -134,35 +152,85 @@ const StandardStatement = () => {
     const el = ref.current;
     if (!el) return;
 
-    const io = new IntersectionObserver(
-      ([e]) => setEngaged(e.isIntersecting),
-      { threshold: 0.35 }
-    );
+    let held = false;
+    let travel = 0;
+    const hold = () => {
+      if (held) return;
+      held = true;
+      lockScroll();
+    };
+    const release = () => {
+      if (!held) return;
+      held = false;
+      travel = 0;
+      unlockScroll();
+    };
+
+    // Two thresholds, doing two different jobs. `engaged` is loose and only
+    // decides whether the sequence may introduce itself. `filling` is strict
+    // and is the only thing that lets the section touch anybody's scroll: the
+    // section has to genuinely own the screen before it is allowed to.
+    const io = new IntersectionObserver(([e]) => setEngaged(e.isIntersecting), {
+      threshold: 0.35,
+    });
     io.observe(el);
 
-    // The wheel drives it without ever being taken away from the page. No
-    // preventDefault anywhere here: the reader keeps their scroll, and the
-    // section is tall enough that passing through it spends several notches.
-    let travel = 0;
+    let filling = false;
+    const fillObserver = new IntersectionObserver(
+      ([e]) => {
+        filling = e.intersectionRatio > 0.9;
+        if (!filling) release();
+      },
+      { threshold: [0, 0.9, 1] }
+    );
+    fillObserver.observe(el);
+
+    let spent = false; // takes the scroll once per visit, then never again
+    let last = 0;
+
     const onWheel = (e: WheelEvent) => {
-      travel += e.deltaY;
-      if (Math.abs(travel) < NOTCH) return;
-      const direction = travel > 0 ? 1 : -1;
-      travel = 0;
+      // Up always passes. So does a section that has already had its turn, one
+      // that is not really on screen, and one already showing its last beat.
+      if (spent || !filling || e.deltaY <= 0 || stepRef.current >= CLAIM) {
+        if (stepRef.current >= CLAIM) spent = true;
+        release();
+        return;
+      }
+
+      // From here the scroll belongs to this section.
+      e.preventDefault();
+      e.stopPropagation();
+      hold();
       setTouched(true);
-      setStep((s) => {
-        const next = Math.min(CLAIM, Math.max(0, s + direction));
-        if (next !== s) setDir(direction);
-        return next;
-      });
+
+      travel += e.deltaY;
+      const now = performance.now();
+      if (travel < NOTCH || now - last < COOLDOWN) return;
+      travel = 0;
+      last = now;
+
+      const next = Math.min(CLAIM, stepRef.current + 1);
+      go(next, 1);
+      if (next >= CLAIM) {
+        // The last beat is shown, and the page is handed back at once, so the
+        // reader is never left pushing against a screen that has finished.
+        spent = true;
+        release();
+      }
     };
-    el.addEventListener("wheel", onWheel, { passive: true });
+
+    // Non-passive, or preventDefault is ignored. stopPropagation in the handler
+    // keeps the event from reaching Lenis's own listener on the window.
+    el.addEventListener("wheel", onWheel, { passive: false });
 
     return () => {
       io.disconnect();
+      fillObserver.disconnect();
       el.removeEventListener("wheel", onWheel);
+      // Unmounting mid-hold would leave the whole site unscrollable.
+      release();
     };
-  }, [reduce]);
+  }, [reduce, go]);
 
   // A press anywhere advances, and wraps, so it can be watched twice and so a
   // phone gets the whole thing.
