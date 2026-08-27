@@ -10,7 +10,12 @@ import {
   Users,
   Handshake,
 } from "lucide-react";
-import { audiences, audienceStatusMeta, audienceByAnchor } from "@/data/audiences";
+import {
+  audiences,
+  audiencesByState,
+  audienceStateMeta,
+  audienceByAnchor,
+} from "@/data/audiences";
 
 /**
  * One mark per audience, so the six lines stop being six lines.
@@ -42,13 +47,22 @@ const audienceIcons: Record<string, typeof ShieldCheck> = {
  * page. Changing selection rewrites the hash without adding history entries,
  * so the back button still leaves the page rather than stepping through tabs.
  *
+ * The six are grouped by when they open rather than listed flat. Six doors in
+ * the same weight look equally available, so someone picks the one that sounds
+ * most like them, reads a full panel, and only at the end finds a sentence
+ * saying it waits on registration. The grouping puts that fact before the
+ * choice instead of after it, which costs the visitor nothing and is the only
+ * honest order.
+ *
  * Nothing here scrolls. Choosing is a pointer gesture and the page stays put,
  * which keeps scroll meaning one thing only.
  */
 
 const toneStyles = {
   live: { dot: "hsl(var(--olive-light))", text: "hsl(var(--olive))" },
-  soon: { dot: "hsl(40, 55%, 55%)", text: "hsl(38, 45%, 38%)" },
+  // 38% lightness measured 4.31:1 against the ivory, under the 4.5 that 10px
+  // uppercase needs. 35% reads 4.87 and is the same amber to the eye.
+  soon: { dot: "hsl(40, 55%, 55%)", text: "hsl(38, 45%, 35%)" },
   open: { dot: "hsl(var(--muted-foreground))", text: "hsl(var(--muted-foreground))" },
 } as const;
 
@@ -64,8 +78,8 @@ const AudienceSelector = () => {
   }, [hash]);
 
   const active = audiences.find((a) => a.id === activeId) ?? audiences[0];
-  const status = audienceStatusMeta[active.status];
-  const tone = toneStyles[status.tone];
+  const state = audienceStateMeta[active.state];
+  const tone = toneStyles[state.tone];
 
   const select = (id: string, anchor: string) => {
     setActiveId(id);
@@ -87,74 +101,89 @@ const AudienceSelector = () => {
         <Reveal delay={0.15}>
           <p className="text-body-lg max-w-xl mt-5">
             The work looks different depending on who is asking, so rather than
-            list everything at once, pick the line that sounds like you.
+            list everything at once, pick the line that sounds like you. They
+            are grouped by what can happen now and what waits on registration,
+            so you know before you read.
           </p>
         </Reveal>
 
         <div className="mt-12 grid lg:grid-cols-[minmax(230px,300px)_1fr] gap-8 lg:gap-16">
           {/* Chooser */}
           <Reveal delay={0.2}>
-            <ul className="flex flex-col gap-px bg-border/50 lg:bg-transparent lg:gap-0">
-              {audiences.map((a) => {
-                const isActive = a.id === active.id;
-                const st = audienceStatusMeta[a.status];
-                return (
-                  <li key={a.id}>
-                    <button
-                      onClick={() => select(a.id, a.anchor)}
-                      aria-pressed={isActive}
-                      className="group w-full text-left px-4 py-4 lg:px-0 lg:py-3.5 bg-background flex items-center gap-3 transition-colors duration-300"
-                      style={{
-                        borderBottom: "1px solid hsl(var(--subtle-border))",
-                      }}
+            <div className="flex flex-col gap-7">
+              {audiencesByState.map((group) => (
+                <div key={group.state}>
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span
+                      className="w-1.5 h-1.5 rounded-full shrink-0 translate-y-[-1px]"
+                      style={{ background: toneStyles[group.meta.tone].dot }}
+                    />
+                    <span
+                      className="text-[10px] tracking-[0.24em] uppercase font-display"
+                      style={{ color: toneStyles[group.meta.tone].text }}
                     >
-                      <motion.span
-                        className="block h-px shrink-0"
-                        animate={{
-                          width: isActive ? 18 : 8,
-                          backgroundColor: isActive
-                            ? "hsl(var(--foreground))"
-                            : "hsl(var(--foreground) / 0.2)",
-                        }}
-                        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                      />
-                      {(() => {
-                        const Icon = audienceIcons[a.id];
-                        return Icon ? (
-                          <Icon
-                            aria-hidden
-                            strokeWidth={1.5}
-                            className="w-[18px] h-[18px] shrink-0 transition-colors duration-300"
+                      {group.meta.group}
+                    </span>
+                  </div>
+                  <p className="text-[11px] leading-snug text-muted-foreground mb-3 pl-[14px] max-w-[19rem]">
+                    {group.meta.groupNote}
+                  </p>
+                  <ul className="flex flex-col gap-px bg-border/50 lg:bg-transparent lg:gap-0">
+                    {group.items.map((a) => {
+                      const isActive = a.id === active.id;
+                      return (
+                        <li key={a.id}>
+                          <button
+                            onClick={() => select(a.id, a.anchor)}
+                            aria-pressed={isActive}
+                            className="group w-full text-left px-4 py-4 lg:px-0 lg:py-3.5 bg-background flex items-center gap-3 transition-colors duration-300"
                             style={{
-                              color: isActive
-                                ? "hsl(var(--olive))"
-                                : "hsl(var(--muted-foreground) / 0.55)",
+                              borderBottom: "1px solid hsl(var(--subtle-border))",
                             }}
-                          />
-                        ) : null;
-                      })()}
-                      <span
-                        className="font-display text-sm md:text-[15px] leading-snug transition-colors duration-300"
-                        style={{
-                          color: isActive
-                            ? "hsl(var(--foreground))"
-                            : "hsl(var(--muted-foreground))",
-                        }}
-                      >
-                        {a.label}
-                      </span>
-                      {a.status !== "open" && (
-                        <span
-                          className="ml-auto w-1.5 h-1.5 rounded-full shrink-0"
-                          style={{ background: toneStyles[st.tone].dot }}
-                          title={st.label}
-                        />
-                      )}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+                          >
+                            <motion.span
+                              className="block h-px shrink-0"
+                              animate={{
+                                width: isActive ? 18 : 8,
+                                backgroundColor: isActive
+                                  ? "hsl(var(--foreground))"
+                                  : "hsl(var(--foreground) / 0.2)",
+                              }}
+                              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                            />
+                            {(() => {
+                              const Icon = audienceIcons[a.id];
+                              return Icon ? (
+                                <Icon
+                                  aria-hidden
+                                  strokeWidth={1.5}
+                                  className="w-[18px] h-[18px] shrink-0 transition-colors duration-300"
+                                  style={{
+                                    color: isActive
+                                      ? "hsl(var(--olive))"
+                                      : "hsl(var(--muted-foreground) / 0.55)",
+                                  }}
+                                />
+                              ) : null;
+                            })()}
+                            <span
+                              className="font-display text-sm md:text-[15px] leading-snug transition-colors duration-300"
+                              style={{
+                                color: isActive
+                                  ? "hsl(var(--foreground))"
+                                  : "hsl(var(--muted-foreground))",
+                              }}
+                            >
+                              {a.label}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </Reveal>
 
           {/* The answer */}
@@ -176,7 +205,7 @@ const AudienceSelector = () => {
                     className="text-[10px] tracking-[0.24em] uppercase font-display"
                     style={{ color: tone.text }}
                   >
-                    {status.label}
+                    {state.label}
                   </span>
                 </div>
 
@@ -194,6 +223,9 @@ const AudienceSelector = () => {
                   })()}
                   {active.label}
                 </h3>
+                {active.labelNote && (
+                  <p className="text-caption text-[10px] mt-2.5">{active.labelNote}</p>
+                )}
                 <p className="text-body mt-3 max-w-xl">{active.who}</p>
 
                 {/* "What usually brings you here" and "What I do" were two more
@@ -215,6 +247,23 @@ const AudienceSelector = () => {
                     ))}
                   </ul>
                 </div>
+
+                {/* Why the door is not open yet, in the door's own words. It
+                    sits after the gains and before the button, which is the
+                    only place it belongs: hiding it would be dishonest, and
+                    leading with it would bury an offer someone can still put
+                    their name to today. */}
+                {active.legal && (
+                  <p
+                    className="mt-8 max-w-xl text-sm leading-relaxed pl-4"
+                    style={{
+                      borderLeft: "2px solid hsl(40, 55%, 55%)",
+                      color: "hsl(var(--graphite))",
+                    }}
+                  >
+                    {active.legal}
+                  </p>
+                )}
 
                 <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-3">
                   <Link

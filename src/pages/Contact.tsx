@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { audiences } from "@/data/audiences";
+import { audiences, audiencesByState } from "@/data/audiences";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
@@ -179,10 +179,17 @@ const Contact = () => {
                     className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300"
                   >
                     <option value="">Select one</option>
-                    {audiences.map((a) => (
-                      <option key={a.id} value={a.label}>
-                        {a.label}
-                      </option>
+                    {/* Grouped the same way /services groups them, so someone
+                        who chose a door there does not meet a flat list here
+                        and wonder whether it is the same six. */}
+                    {audiencesByState.map((group) => (
+                      <optgroup key={group.state} label={group.meta.group}>
+                        {group.items.map((a) => (
+                          <option key={a.id} value={a.label}>
+                            {a.label}
+                          </option>
+                        ))}
+                      </optgroup>
                     ))}
                     <option value="Other">Other</option>
                   </select>

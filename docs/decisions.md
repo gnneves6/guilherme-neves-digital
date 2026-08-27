@@ -43,6 +43,17 @@ Where an audience implies regulated work, the site shows a waitlist line rather
 than an offer, and says why. This is not hedging, it is the difference between
 taking names and practising. Do not remove it to make a page read stronger.
 
+**The six audiences are grouped by when they open**, not listed flat: open now,
+opens with registration, open to proposals. Six doors in the same weight look
+equally available, so someone picks the one that sounds most like them, reads a
+whole panel, and only at the end meets a sentence saying it waits. The state
+belongs before the choice. The sentence explaining why still prints inside the
+panel, after what the person would get and before the button.
+
+Non-clinical work is not affected by this. A generic tool with its assumptions
+and its limits stated is not an individual act, and can be sold now; what stops
+it today is fiscal, not the Ordem.
+
 ---
 
 ## What the site is for
@@ -137,6 +148,37 @@ not decoration and does not get spread around.
 
 ---
 
+## The offer, settled
+
+Recorded because these were decided once and cost real thinking. A later
+session that finds them undocumented will want to decide them again.
+
+**Matchfuel is a tool, not a platform.** It plans a matchday. The accompanied
+athlete (wellness check-ins, their own history, a direct line) is a different
+thing and does not exist yet. It is not built ahead of demand.
+
+**The individual practice runs by hand first.** Software gets built when there
+are enough athletes to justify it, and by then what it has to do is known,
+because a year was spent doing it manually. Building the platform before the
+offer is validated is the failure mode, not the plan.
+
+**Relocation lives inside "Professional athletes".** It is not a seventh door.
+Moving club or country is when that athlete needs this most, not a different
+kind of person, and a separate card would split one audience into two half-full
+ones. It is framed as accompaniment through a season, not an assessment trip:
+week one on site, then a standing line and re-assessment as the season moves.
+
+**The five fuel laws are the free offer.** They keep their place in the
+navigation and their content. What changed is who owes whom: a method says "I
+am important enough to have a method", a gift says "this is what I actually
+use, take it". The proof sitting beside each law is what earns the word.
+
+**Not decided, do not invent.** Prices, which wait until there is one real case
+in each arm. And the name of the client space, which waits until the platform
+exists.
+
+---
+
 ## Currently parked
 
 **FuelOps stays a positioning promise, not a build project.** The market for
@@ -162,6 +204,9 @@ earned. The navigation item serves distribution, not branding.
 - The services page describes three engagements. The way the work is actually
   intended to run, close and long-term rather than transactional, is not yet
   fully reflected there.
+- The five laws do not capture an email yet. When they do, the privacy policy
+  has to cover the list before the form ships, not after: a mailing list is a
+  separate purpose under GDPR and the current policy does not name it.
 
 ---
 

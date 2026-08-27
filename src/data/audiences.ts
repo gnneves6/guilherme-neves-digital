@@ -10,67 +10,96 @@
  * (/services#students) instead of at the top of a page the viewer then has to
  * search through.
  *
- * `status` separates what is running from what is being prepared. Work that
- * amounts to individual dietary prescription is a regulated act in Portugal
- * and sits behind professional registration, so it is shown honestly as in
- * preparation rather than either hidden or over-promised.
+ * There are two axes here and they are not the same question.
+ *
+ * `state` is time: can this happen now, does it wait on professional
+ * registration, or is it something that follows later. Six doors that look
+ * identical make a visitor knock on the wrong one and then read a paragraph
+ * explaining why the door does not open. The state is shown before the copy,
+ * so nobody spends attention on a door that is not theirs yet.
+ *
+ * Work that amounts to individual dietary prescription is a regulated act in
+ * Portugal and sits behind registration. That is the whole of the `waiting`
+ * state, and it is stated rather than implied.
  */
 
-export type AudienceStatus = "open" | "preparing" | "conversation";
+export type AudienceState = "now" | "waiting" | "later";
 
 export interface Audience {
   id: string;
   /** Anchor used in URLs, kept short enough to say out loud in a video. */
   anchor: string;
   label: string;
+  /** A qualifier printed next to the label, where the door covers more than its name. */
+  labelNote?: string;
   /** Who this is, in their own words rather than a market segment. */
   who: string;
   /**
-   * The problem they arrive with, and what he does about it.
+   * The problem they arrive with.
    *
-   * Kept, not rendered. The selector showed both as paragraphs above the gains
-   * list, which restated the line above them and the list below them, and a
-   * person choosing between six options needs only "is this me" and "what do I
-   * get". The copy stays here because it is worth having if the panel ever
-   * needs to say more, but nothing prints it today.
+   * Kept, not rendered. The selector showed both this and the offer as
+   * paragraphs above the gains list, which restated the line above them and
+   * the list below them, and a person choosing between six options needs only
+   * "is this me" and "what do I get". The copy stays here because it is worth
+   * having if the panel ever needs to say more, but nothing prints it today.
    */
   problem: string;
   /** What I actually do for them. */
   offer: string;
   /** What they leave with. */
   gains: string[];
-  status: AudienceStatus;
+  state: AudienceState;
+  /** Why this door is not open yet. Printed only where it exists. */
+  legal?: string;
   cta: string;
   ctaMicro: string;
 }
 
-export const audienceStatusMeta: Record<
-  AudienceStatus,
-  { label: string; tone: "live" | "soon" | "open" }
+export const audienceStateMeta: Record<
+  AudienceState,
+  { label: string; group: string; groupNote: string; tone: "live" | "soon" | "open" }
 > = {
-  open: { label: "Working now", tone: "live" },
-  preparing: { label: "In preparation", tone: "soon" },
-  conversation: { label: "Open to conversations", tone: "open" },
+  now: {
+    label: "Open now",
+    group: "Open now",
+    groupNote: "Non-clinical work: systems, tools, education.",
+    tone: "live",
+  },
+  waiting: {
+    label: "Opens with registration",
+    group: "Opens with registration",
+    groupNote: "Regulated work. I take names now and start the day it clears.",
+    tone: "soon",
+  },
+  later: {
+    label: "Open to proposals",
+    group: "Open to proposals",
+    groupNote: "Read personally and answered honestly. Never chased.",
+    tone: "open",
+  },
 };
+
+export const stateOrder: AudienceState[] = ["now", "waiting", "later"];
 
 export const audiences: Audience[] = [
   {
     id: "clubs",
     anchor: "clubs",
     label: "Clubs & performance departments",
-    who: "Professional clubs, academies, federations and the staff inside them.",
+    who: "Professional clubs, academies and federations, and the staff carrying this inside them.",
     problem:
-      "Nutrition is usually not missing. It is scattered across performance, medical, catering and the players themselves, and nobody owns the whole picture.",
+      "Nutrition is rarely missing. It is scattered across performance, medical, catering and the players themselves, and nobody owns the whole picture. So it works when someone happens to push it, and quietly stops working the week everyone is busy. Then it becomes somebody's fault.",
     offer:
-      "I come in, read how it actually operates, and build the parts that hold under a real week. Sometimes that is a diagnostic. Sometimes it is a system installed and handed over. Sometimes it is a season alongside the staff.",
+      "I read how your environment actually operates, not how the manual says it should, and I build the parts that hold under a real week. Assessment protocols, matchday and travel structures, catering standards, monitoring your staff can run and interpret. Then I hand it over and it keeps running when I am not in the room.",
     gains: [
-      "A clear read on where nutrition is quietly leaking",
-      "Systems your staff run without me in the room",
-      "Matchday, travel and training-week structures that survive fixture congestion",
+      "One person owning the whole picture instead of four departments half-owning it",
+      "Systems your staff run without me there, not a document that dies in a drive",
+      "The performance layer most clubs are quietly leaking, closed",
+      "Nutrition handled properly without adding headcount",
     ],
-    status: "open",
+    state: "now",
     cta: "Start a conversation",
-    ctaMicro: "Begins with a short scoping call, no obligation.",
+    ctaMicro: "Begins with how your week actually runs.",
   },
   {
     id: "staff",
@@ -78,15 +107,16 @@ export const audiences: Audience[] = [
     label: "Coaches & performance staff",
     who: "Strength and conditioning coaches, physios, analysts and nutritionists working in sport.",
     problem:
-      "You already know the science. What is hard to find is the football-specific version: what to do on MD-1, what half-time actually needs, how to make any of it survive a bus at midnight.",
+      "You already know the science. What is hard to find is the football-specific version: what MD-1 actually needs, what half-time is for, how any of it survives a bus at midnight. So when a player asks, you improvise or you deflect, and neither is the answer you want to be giving.",
     offer:
-      "I hand over the applied systems rather than the theory. Frameworks, matchday structures and the five fuel laws, built for the environment you work in and yours to run.",
+      "I hand over the applied systems instead of the theory. Matchday structures, hydration protocols, the frameworks I use inside elite environments, with the reasoning attached so you can defend every call you make with them. Yours to run.",
     gains: [
-      "Applied systems you can operate without a nutritionist on staff",
-      "The reasoning behind each decision, so you can adapt it",
-      "Someone to check your thinking against real elite practice",
+      "The football-specific version, not the textbook version",
+      "Answers you can defend if a specialist ever checks your work",
+      "Structures that survive fixture congestion, travel and late arrivals",
+      "Your athletes better prepared, and the credit is yours",
     ],
-    status: "open",
+    state: "now",
     cta: "Talk about your environment",
     ctaMicro: "For departments and individual practitioners.",
   },
@@ -96,15 +126,16 @@ export const audiences: Audience[] = [
     label: "Students & early career",
     who: "Nutrition students and recent graduates who want to work in football.",
     problem:
-      "Nobody teaches the part that actually matters: how you get inside an elite environment, and what the job really looks like once you are there.",
+      "The degree teaches the science and none of the part that decides it: how you get inside an elite environment, what the job actually is once you are there, and what makes a club say yes to someone who does not have a title yet.",
     offer:
-      "I walk you through the route I took, honestly, including what I would do differently. We look at where you are, what is missing, and what the next concrete step is.",
+      "I walk you through the route I took, honestly, including what I got wrong and what I would do differently. We look at where you are, what is missing, and what the next concrete step is. Not a lecture. One session, your situation, a plan you leave with.",
     gains: [
-      "A real picture of the work, not the version on social media",
-      "An honest read on your positioning and what to build next",
-      "The things I wish someone had told me at your stage",
+      "The route from someone who took it recently, not from someone who took it in 2005",
+      "An honest read on where you actually stand right now",
+      "One concrete next step instead of a vague ambition",
+      "The parts nobody tells you, including the mistakes",
     ],
-    status: "open",
+    state: "now",
     cta: "Book a session",
     ctaMicro: "One to one. Limited slots, because these are real hours.",
   },
@@ -112,17 +143,22 @@ export const audiences: Audience[] = [
     id: "athletes",
     anchor: "athletes",
     label: "Professional athletes",
-    who: "Senior professionals who want their nutrition handled properly.",
+    labelNote: "including a move to a new club or country",
+    who: "Senior professionals whose income depends on a body they cannot afford to guess about, including players moving to a new club or a new country.",
     problem:
-      "Generic plans, conflicting advice from three different people, and nothing built around your actual calendar.",
+      "You already have a club nutritionist. She does not know you skip breakfast when you are nervous, that your partner cooks on Sundays, or that you quietly hate half the food you have been assigned. A plan built without your actual life in it does not survive your actual life, and your actual life is where the career gets decided. Move country and it gets worse: the food that was working simply is not there any more.",
     offer:
-      "Individual performance nutrition, built around your season rather than a template. This is regulated work and I am completing professional registration, so I am taking names now and starting as soon as that is finalised.",
+      "If you have just moved, I come to you. Week one on site: assessment, mapping what you can actually buy and eat where you now live, and setting the standard your season runs on. After that I stay in your corner. Message me when your sleep goes, when your gut is off, when the week went badly, not at the next scheduled call. We re-assess and adjust as the season moves, because a number from August means nothing in February.",
     gains: [
-      "A plan shaped by your fixtures, travel and role",
-      "Hydration and body composition monitored, not guessed",
-      "One person accountable instead of four opinions",
+      "A specialist who knows you, your habits, your family, your real life, not just your numbers",
+      "A direct line. Reach me when something is off, not at the next appointment",
+      "A standard built around food you can actually get, wherever you are playing",
+      "Re-assessed and adjusted through the season instead of going stale in week three",
+      "One person accountable for the whole picture, home or away",
     ],
-    status: "preparing",
+    state: "waiting",
+    legal:
+      "This is regulated work and I am completing professional registration, so I am taking names now and starting as soon as that is finalised.",
     cta: "Register your interest",
     ctaMicro: "I will come back to you personally when this opens.",
   },
@@ -130,17 +166,20 @@ export const audiences: Audience[] = [
     id: "youth",
     anchor: "young-athletes",
     label: "Young athletes & families",
-    who: "Academy players and the parents trying to get it right.",
+    who: "Parents who can see the talent is real, and do not want the foundation left to guesswork.",
     problem:
-      "The internet is full of advice written for grown professionals, and almost none of it is safe or sensible for a growing athlete.",
+      "Almost everything out there is written for grown professionals chasing marginal gains. Almost none of it is safe or sensible for a body that is still growing, and the stakes are different: what he eats now shapes how he grows, how he concentrates at school, and whether the body holds up long enough for the talent to matter at all.",
     offer:
-      "Long-horizon support that puts health and development first, and performance second, because at this age they are the same thing. Also regulated work, so it opens alongside the individual practice.",
+      "Long-horizon support that puts health and development first and performance second, because at this age they are the same thing. I work with you and your child, not around you. Habits built to fit family life, explained so he understands why and not just what, adjusted as he grows.",
     gains: [
-      "Guidance appropriate to growth, not scaled-down professional advice",
-      "Habits that hold through school, travel and family life",
-      "A calm answer to what you are being told elsewhere",
+      "Habits that fit family life, not a professional's routine forced onto a growing kid",
+      "A foundation that protects growth, school and long-term health at the same time",
+      "Explained in language he will actually use, not rules he will rebel against",
+      "Someone watching the long game while everyone else optimises this week",
     ],
-    status: "preparing",
+    state: "waiting",
+    legal:
+      "Also regulated work, so it opens alongside the individual practice. Families and academies are both welcome to ask now.",
     cta: "Register your interest",
     ctaMicro: "Families and academies both welcome to ask.",
   },
@@ -150,15 +189,16 @@ export const audiences: Audience[] = [
     label: "Brands & partnerships",
     who: "Companies building something in sport, performance or nutrition.",
     problem:
-      "Most partnerships in this space trade credibility for reach, and the practitioner ends up saying things they cannot defend.",
+      "Most partnerships in this space trade credibility for reach, and the practitioner ends up saying things they cannot defend. Everyone can tell. It costs the brand more than it buys.",
     offer:
-      "I work with products I would use and claims I can stand behind. If the evidence is not there I will say so, which is precisely why the endorsement is worth something.",
+      "I work with products I would use and claims I can stand behind. If the evidence is not there I will say so, which is precisely why the endorsement is worth something. What you get is a practitioner working inside real elite environments, not a media account with a nutrition label.",
     gains: [
-      "An honest technical read on what you are building",
+      "An endorsement that survives scrutiny, because it was filtered before it was given",
+      "Someone inside real environments, testing what you are building where it matters",
       "Content and education that does not overstate the science",
-      "A practitioner inside real elite environments, not a media account",
+      "A no when it should be a no, which is what makes the yes worth having",
     ],
-    status: "conversation",
+    state: "later",
     cta: "Send a proposal",
     ctaMicro: "I read every one personally, and say no often.",
   },
@@ -166,3 +206,12 @@ export const audiences: Audience[] = [
 
 export const audienceByAnchor = (anchor: string) =>
   audiences.find((a) => a.anchor === anchor);
+
+/** The six doors, grouped by when they open. Empty groups are dropped. */
+export const audiencesByState = stateOrder
+  .map((state) => ({
+    state,
+    meta: audienceStateMeta[state],
+    items: audiences.filter((a) => a.state === state),
+  }))
+  .filter((g) => g.items.length > 0);
