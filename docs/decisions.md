@@ -146,6 +146,25 @@ mockup standing in for a document that exists.
 **One deliberate accent.** Olive marks the thing that matters in a block. It is
 not decoration and does not get spread around.
 
+**Motion is driven by scroll, never by a clock.** Nothing on this site loops or
+plays on its own. The grid drifts against the page, the measure mark travels
+down the margin, and the statement band runs its sequence, all as a function of
+where the reader is. A thing that moves while the reader is still is asking for
+attention it has not earned; a thing that moves because they moved is depth.
+
+**The statement is a sequence, not a stack.** "The standard" pins one screen
+and puts the three wrong answers through a single position, struck one at a
+time, with the claim landing in the same place they left. Stacked, the whole
+correction was visible before the eye arrived and the three wrong answers sat
+next to the right one competing with it. Any pinned section owes the reader a
+visible length: the counter and the rail exist so nobody thinks the page broke.
+
+**No rendered brand scenes.** The band used to sit on a rendered poster of a
+"GN LIFE & LEGACY OS", coat of arms and trademark included, invisible only
+because the band was short. It is a photograph of a real dressing room now.
+Nothing that shows a company, a monogram or merchandise that does not exist
+goes on this site, however good it looks.
+
 ---
 
 ## The offer, settled
@@ -204,6 +223,13 @@ earned. The navigation item serves distribution, not branding.
 - The services page describes three engagements. The way the work is actually
   intended to run, close and long-term rather than transactional, is not yet
   fully reflected there.
+- `scene-invitation-exit.jpg`, behind the home invitation, still carries the
+  invented branding the statement band just lost: a `gn.` monogram on a shaker,
+  a gym bag and a notebook, and three slogans on the wall. It is dark enough
+  that most people will not read it, which is exactly why it survived the
+  branding pass. Decide whether it goes, and to what: there are five real
+  photographs in `src/assets/photos`. (`scene-environments-archive.jpg` was
+  checked at the same time and is clean: a rendered room, no branding.)
 - The five laws do not capture an email yet. When they do, the privacy policy
   has to cover the list before the form ships, not after: a mailing list is a
   separate purpose under GDPR and the current policy does not name it.

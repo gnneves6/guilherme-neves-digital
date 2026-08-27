@@ -90,6 +90,17 @@ const AudienceSelector = () => {
   return (
     <section className="section-padding section-spacing">
       <div className="max-content">
+        {/* A landing point for every anchor.
+            The hash already chose the right panel, but nothing on the page
+            carried these ids, so /services#athletes selected professional
+            athletes and then left the reader at the top of a nine thousand
+            pixel page with no idea it had happened. Six zero-height marks at
+            the head of the section give the scroll something to find. They sit
+            at the same position on purpose: the anchor decides which panel is
+            open, not where on the page you land. */}
+        {audiences.map((a) => (
+          <span key={a.anchor} id={a.anchor} aria-hidden className="block h-0" />
+        ))}
         <Reveal>
           <p className="text-caption mb-6">Who I work with</p>
         </Reveal>

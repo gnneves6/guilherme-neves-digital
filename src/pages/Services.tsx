@@ -5,7 +5,6 @@ import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import sceneMethod from "@/assets/scene-method-podium.jpg";
 // A photograph of what each engagement actually produces. Not decoration: the
 // page that has to sell was 7% visual across seven and a half screens, and the
 // most persuasive thing available was a real picture of the real deliverable,
@@ -381,22 +380,9 @@ const Services = () => {
       {/* Sorted by who is arriving, before anything is sold */}
       <AudienceSelector />
 
-      {/* Cinematic statement band */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${sceneMethod})`, filter: "brightness(0.3) contrast(1.1) saturate(0.65)" }}
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)), hsl(var(--charcoal-deep) / 0.5) 45%, hsl(var(--charcoal-deep)))" }}
-        />
-        <div className="relative section-padding py-24 md:py-36">
-          <StandardStatement />
-        </div>
-      </section>
+      {/* The statement band owns its own scene and its own scroll length now,
+          because the sequence inside it is what decides both. */}
+      <StandardStatement />
 
       {/* Services */}
       <section className="section-padding section-spacing relative">
