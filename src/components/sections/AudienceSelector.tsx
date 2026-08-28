@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import {
@@ -67,7 +67,8 @@ const toneStyles = {
 } as const;
 
 const AudienceSelector = () => {
-  const { hash } = useLocation();
+  const { hash, pathname, search } = useLocation();
+  const navigate = useNavigate();
   const [activeId, setActiveId] = useState(audiences[0].id);
   const [dir, setDir] = useState(1);
 
@@ -90,8 +91,18 @@ const AudienceSelector = () => {
     const to = audiences.findIndex((a) => a.id === id);
     if (to !== from) setDir(to > from ? 1 : -1);
     setActiveId(id);
-    // replaceState keeps the address shareable without trapping the back button.
-    window.history.replaceState(null, "", `#${anchor}`);
+
+    // Through the router, never through history directly.
+    //
+    // This used to be `history.replaceState(null, "", "#" + anchor)`, which is
+    // wrong twice. It writes `null` over the state object react-router keeps
+    // its own stack index in. And under HashRouter, which is what the shared
+    // preview build uses, the entire route lives in the hash: replacing the
+    // hash with `#students` deleted `/services` outright, so the next
+    // navigation or back button resolved a path called `/students` and landed
+    // on the 404. Replacing through the router produces the right URL under
+    // either router and leaves its bookkeeping intact.
+    navigate({ pathname, search, hash: `#${anchor}` }, { replace: true });
   };
 
   return (

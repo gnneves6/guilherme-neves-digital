@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { useLocation, useNavigationType } from "react-router-dom";
 import { scrollToTop, scrollToY } from "@/components/motion/SmoothScroll";
 
 /**
@@ -21,8 +21,21 @@ import { scrollToTop, scrollToY } from "@/components/motion/SmoothScroll";
  */
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
+  const navigationType = useNavigationType();
+  const lastPath = useRef(pathname);
 
   useEffect(() => {
+    const samePage = lastPath.current === pathname;
+    lastPath.current = pathname;
+
+    // A component rewriting the address to say which panel is open is not a
+    // navigation and must not move anybody. The audience selector replaces the
+    // hash on every choice so the address stays shareable; scrolling to the
+    // anchor each time would drag the reader to the top of the section they are
+    // already reading. Real arrivals still land: a link from elsewhere is a
+    // PUSH, the back button is a POP, and both are honoured.
+    if (samePage && navigationType === "REPLACE") return;
+
     if (!hash) {
       scrollToTop(true);
       return;
@@ -60,7 +73,7 @@ const ScrollToTop = () => {
 
     raf = requestAnimationFrame(attempt);
     return () => cancelAnimationFrame(raf);
-  }, [pathname, hash]);
+  }, [pathname, hash, navigationType]);
 
   return null;
 };
