@@ -15,7 +15,10 @@ import {
   audiencesByState,
   audienceStateMeta,
   audienceByAnchor,
+  proofFor,
 } from "@/data/audiences";
+import { engagements } from "@/data/engagements";
+import { environmentOfArtefact } from "@/data/work-graph";
 
 /**
  * One mark per audience, so the six lines stop being six lines.
@@ -82,6 +85,10 @@ const AudienceSelector = () => {
   const active = audiences.find((a) => a.id === activeId) ?? audiences[0];
   const state = audienceStateMeta[active.state];
   const tone = toneStyles[state.tone];
+  const proof = proofFor(active);
+  // Deep link into the environment chapter the piece belongs to, so the
+  // archive opens on the right room rather than at the top of a long page.
+  const proofEnv = proof ? environmentOfArtefact(proof.artefact.slug) : null;
 
   const select = (id: string, anchor: string) => {
     // Which way the panel should travel. Picking a door further down the list
@@ -283,6 +290,81 @@ const AudienceSelector = () => {
                     ))}
                   </ul>
                 </div>
+
+                {/* How it runs.
+                    These are the three engagements that used to be a section of
+                    their own further down this page, under six doors that
+                    described the same work a second way. A stranger had to read
+                    both and map one onto the other, which is what made the page
+                    heavy. Each door names its own now, with the photograph of
+                    what that format actually produces. */}
+                <div className="mt-9 max-w-2xl">
+                  <p className="text-caption text-[10px] mb-4">How it runs</p>
+                  <ul className="flex flex-col divide-y" style={{ borderColor: "hsl(var(--subtle-border))" }}>
+                    {active.formats.map((id) => {
+                      const f = engagements[id];
+                      return (
+                        <li key={id} className="flex items-start gap-4 py-3.5 first:pt-0">
+                          <span
+                            className="hidden sm:block w-16 h-12 shrink-0 overflow-hidden"
+                            style={{ border: "1px solid hsl(var(--subtle-border))" }}
+                          >
+                            <img
+                              src={f.image}
+                              alt=""
+                              aria-hidden
+                              className="w-full h-full object-cover"
+                              style={{
+                                transform: `scale(${f.imageFocus.scale})`,
+                                transformOrigin: f.imageFocus.origin,
+                              }}
+                            />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="flex flex-wrap items-baseline gap-x-3">
+                              <span className="font-display text-[15px] font-medium text-foreground">
+                                {f.title}
+                              </span>
+                              <span className="text-caption text-[10px] text-muted-foreground">
+                                {f.shape}
+                              </span>
+                            </span>
+                            <span className="block text-sm leading-snug mt-1" style={{ color: "hsl(var(--graphite))" }}>
+                              {active.formatNotes?.[id] ?? f.outcome}
+                            </span>
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                {/* One real piece of work, named. Every door makes a claim, and
+                    this is the cheapest honest way to back it: the archive
+                    already records what each piece proves, so this costs no new
+                    writing and cannot drift from the truth. */}
+                {proof && (
+                  <div
+                    className="mt-8 max-w-2xl p-5"
+                    style={{ background: "hsl(41 40% 96%)", border: "1px solid hsl(var(--subtle-border))" }}
+                  >
+                    <p className="text-caption text-[10px] mb-3">Proof</p>
+                    <Link
+                      to={`/work?env=${proofEnv ?? ""}`}
+                      className="font-display text-base font-medium text-foreground link-underline"
+                    >
+                      {proof.artefact.title}
+                    </Link>
+                    <p className="text-sm leading-snug mt-2" style={{ color: "hsl(var(--graphite))" }}>
+                      {proof.why}
+                    </p>
+                    <p className="text-caption text-[10px] mt-3 text-muted-foreground">
+                      {proof.artefact.status === "Protected"
+                        ? "Built inside a club, so it is named rather than opened"
+                        : "Open to read in the archive"}
+                    </p>
+                  </div>
+                )}
 
                 {/* Why the door is not open yet, in the door's own words. It
                     sits after the gains and before the button, which is the

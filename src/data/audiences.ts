@@ -23,6 +23,9 @@
  * state, and it is stated rather than implied.
  */
 
+import type { EngagementId } from "./engagements";
+import { entryOf } from "./work-graph";
+
 export type AudienceState = "now" | "waiting" | "later";
 
 export interface Audience {
@@ -48,6 +51,33 @@ export interface Audience {
   offer: string;
   /** What they leave with. */
   gains: string[];
+  /**
+   * The shapes the work takes for this door, in the order they are offered.
+   *
+   * Replaces a separate section of three engagement cards that sat under these
+   * six and described the same work a second way. A door that names its own
+   * formats needs no cross-reference.
+   */
+  formats: EngagementId[];
+  /**
+   * Where a format means something different behind this door.
+   *
+   * The three formats were written for a club, because that is where they were
+   * built. Printed unchanged under "Professional athletes", "System installed"
+   * promised structures "your staff run without me in the room", to somebody
+   * who has no staff. One shared set of formats is still right; a line per door
+   * where the shared one would lie is the price of keeping it.
+   */
+  formatNotes?: Partial<Record<EngagementId, string>>;
+  /**
+   * One real piece of work, and why it belongs to this door.
+   *
+   * Every door claims something; exactly one artefact per door is the cheapest
+   * honest way to back the claim, and it costs no new writing because the
+   * archive already holds what each piece proves. Named, never described in
+   * the abstract.
+   */
+  proof: { slug: string; why: string };
   state: AudienceState;
   /** Why this door is not open yet. Printed only where it exists. */
   legal?: string;
@@ -97,6 +127,11 @@ export const audiences: Audience[] = [
       "The performance layer most clubs are quietly leaking, closed",
       "Nutrition handled properly without adding headcount",
     ],
+    formats: ["audit", "systems", "education"],
+    proof: {
+      slug: "food-environment-catering",
+      why: "Operating standards written for a real catering and hotel week, not for a manual.",
+    },
     state: "now",
     cta: "Start a conversation",
     ctaMicro: "Begins with how your week actually runs.",
@@ -116,6 +151,11 @@ export const audiences: Audience[] = [
       "Structures that survive fixture congestion, travel and late arrivals",
       "Your athletes better prepared, and the credit is yours",
     ],
+    formats: ["systems", "education"],
+    proof: {
+      slug: "md-1-fuel-system",
+      why: "The football-specific version of a matchday, in the form you would actually run it.",
+    },
     state: "now",
     cta: "Talk about your environment",
     ctaMicro: "For departments and individual practitioners.",
@@ -135,6 +175,15 @@ export const audiences: Audience[] = [
       "One concrete next step instead of a vague ambition",
       "The parts nobody tells you, including the mistakes",
     ],
+    formats: ["education"],
+    formatNotes: {
+      education:
+        "One session on your situation, and a concrete next step you leave with.",
+    },
+    proof: {
+      slug: "evidence-radar",
+      why: "Built for a problem I had myself, then given away when other practitioners asked for it.",
+    },
     state: "now",
     cta: "Book a session",
     ctaMicro: "One to one. Limited slots, because these are real hours.",
@@ -156,6 +205,15 @@ export const audiences: Audience[] = [
       "Re-assessed and adjusted through the season instead of going stale in week three",
       "One person accountable for the whole picture, home or away",
     ],
+    formats: ["systems"],
+    formatNotes: {
+      systems:
+        "Week one on site, then a standing line and a standard that is re-read as the season moves.",
+    },
+    proof: {
+      slug: "athlete-orientation",
+      why: "One athlete's context turned into behaviour, which is the whole of this work.",
+    },
     state: "waiting",
     legal:
       "This is regulated work and I am completing professional registration, so I am taking names now and starting as soon as that is finalised.",
@@ -177,6 +235,15 @@ export const audiences: Audience[] = [
       "Explained in language he will actually use, not rules he will rebel against",
       "Someone watching the long game while everyone else optimises this week",
     ],
+    formats: ["education"],
+    formatNotes: {
+      education:
+        "Habits built around how your family actually eats, explained so he understands why.",
+    },
+    proof: {
+      slug: "abc-of-football-nutrition",
+      why: "The foundation first, in language a young athlete will actually use.",
+    },
     state: "waiting",
     legal:
       "Also regulated work, so it opens alongside the individual practice. Families and academies are both welcome to ask now.",
@@ -198,6 +265,15 @@ export const audiences: Audience[] = [
       "Content and education that does not overstate the science",
       "A no when it should be a no, which is what makes the yes worth having",
     ],
+    formats: ["education"],
+    formatNotes: {
+      education:
+        "Content and education that says what the evidence supports, and stops there.",
+    },
+    proof: {
+      slug: "supplementation-elite-football",
+      why: "Evidence filtered before anything is said about it, which is what makes a yes worth having.",
+    },
     state: "later",
     cta: "Send a proposal",
     ctaMicro: "I read every one personally, and say no often.",
@@ -215,3 +291,17 @@ export const audiencesByState = stateOrder
     items: audiences.filter((a) => a.state === state),
   }))
   .filter((g) => g.items.length > 0);
+
+/**
+ * The named piece of work behind a door, resolved from the archive.
+ *
+ * Through the graph rather than through `artefacts`, because the archive is
+ * two lists: `artefacts` holds the resources, `appliedWorkObjects` holds the
+ * pieces built inside clubs, and the graph is the only place that has both.
+ * Resolving from `artefacts` alone silently dropped the clubs door's proof,
+ * which is the one door most likely to be read by somebody who can buy.
+ */
+export const proofFor = (a: Audience) => {
+  const artefact = entryOf(a.proof.slug);
+  return artefact ? { artefact, why: a.proof.why } : null;
+};

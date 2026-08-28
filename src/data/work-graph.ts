@@ -305,6 +305,10 @@ export const workByTopic = (topic: Topic): Artefact[] => {
     );
 };
 
+/** Which room a piece came out of, so a link can open the archive on it. */
+export const environmentOfArtefact = (slug: string): EnvironmentId | null =>
+  workGraph[slug]?.environment ?? null;
+
 /** Work that came out of a given environment. */
 export const workByEnvironment = (env: EnvironmentId): Artefact[] =>
   allWork

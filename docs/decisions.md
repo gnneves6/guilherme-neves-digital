@@ -100,6 +100,29 @@ argument, the invitation. The premise and the method are one section, not two,
 because splitting them put the whole environments chapter between a problem and
 its answer.
 
+**One taxonomy on the offer page, not two.** `/services` carried six audience
+doors and, underneath them, three engagement cards describing the same work a
+second way. A stranger had to read both and work out how they mapped onto each
+other, which is what actually made that page heavy. The doors are the primary
+axis, because "which of these am I" is the question people arrive with; the
+three formats now live inside the door they belong to, under "How it runs",
+each with the photograph of what it produces. The page lost about a third of
+its height and nothing it was saying.
+
+The formats were written for a club, because that is where they were built, so
+a door can override the line where the shared one would lie: "System installed"
+promising structures "your staff run without me in the room" is false to an
+athlete who has no staff.
+
+**Every door names one real piece of work.** Each door makes a claim, and one
+named artefact under it is the cheapest honest way to back the claim: the
+archive already records what each piece proves, so it costs no new writing and
+cannot drift. Resolved through the graph, not through `artefacts`, because the
+archive is two lists and resolving from one silently dropped the clubs door's
+proof, which is the door most likely to be read by somebody who can buy. The
+link opens the archive on the room the piece came out of, and the caption says
+plainly whether it can be opened or only named.
+
 **The archive is organised by environment, not by subject.** Three chapters:
 RSC Anderlecht, Leça FC, independent practice. Each opens on what was actually
 done there. Subject filters were removed; seven openable items do not need
