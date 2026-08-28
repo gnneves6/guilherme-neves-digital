@@ -4,22 +4,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import { scrollToTop } from "@/components/motion/SmoothScroll";
 
 /**
- * Four destinations, and one action.
+ * Three destinations, and one action.
  *
- * Six links asked a stranger to choose before they knew what any of it was,
- * and three was the right correction. But leaving Fuel Laws out was wrong for
- * one specific reason: it is the only thing here that is free, and most people
- * who land are not buying anything. Their path existed only as a quiet line at
- * the bottom of the home page, which is a lot of scrolling to reach the
- * lowest-commitment thing on the site.
+ * What has he done, what can I get, who is he. Home stays the wordmark rather
+ * than a fourth slot.
  *
- * So: what has he done, what can I get, who is he, and the thing you can have
- * right now for nothing. Home stays the wordmark rather than a fifth slot.
+ * Fuel Laws was here and is not any more, and the reason is worth keeping.
+ * It was added because it is the only free thing on the site and most people
+ * who land are not buying anything, so it was distribution. But a fifth slot
+ * next to Work, Services and About puts a named method at the same level as
+ * the practice itself, and a law is a claim. Claiming one at twenty-one, with
+ * no public cases behind it, is the cart in front of the horse.
+ *
+ * Deleting it would have thrown away the better decision, which is that the
+ * five checks are the free offer. So it moved instead of going: it is the
+ * first button in the hero now, where the page previously named a category and
+ * offered nothing. That is better distribution than a fifth tab, and it stops
+ * the navigation announcing a methodology before there is one to announce.
  */
 const navItems = [
   { label: "Work", path: "/work" },
   { label: "Services", path: "/services" },
-  { label: "Fuel Laws", path: "/fuel-laws" },
   { label: "About", path: "/about" },
 ];
 

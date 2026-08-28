@@ -26,9 +26,9 @@ const rungs = [
   {
     cost: "Free",
     title: "Take something and go",
-    body: "The five fuel laws, the ABC series, and the weekly research routine I built for myself and then gave away. No email, no form.",
+    body: "The five checks I run first, the ABC series, and the weekly research routine I built for myself and then gave away. No email, no form.",
     to: "/fuel-laws",
-    cta: "Start with the five laws",
+    cta: "Take the five checks",
     forWhom: "Anyone",
   },
   {

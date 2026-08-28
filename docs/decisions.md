@@ -73,12 +73,27 @@ is wrong.
 **Six routes**: `/`, `/work`, `/services`, `/fuel-laws`, `/about`, `/contact`,
 plus a 404 that wears the site and offers three real destinations.
 
-**Navigation is Work, Services, Fuel Laws, About, and a contact button.** Six
-links asked a stranger to choose before they knew what anything was; three was
-the correction. Fuel Laws was then added back deliberately: it is the only free
-thing here and most people who land are not buying anything, so leaving it out
-put their path at the bottom of a long page. Home stays the wordmark rather
-than a fifth slot.
+**Navigation is Work, Services, About, and a contact button.** Six links asked
+a stranger to choose before they knew what anything was; three was the
+correction. Home stays the wordmark rather than a fourth slot.
+
+*Reversed once:* Fuel Laws was added back as a fifth item because it is the
+only free thing here and most people who land are not buying anything, so
+leaving it out put their path at the bottom of a long page. That reasoning was
+right about distribution and wrong about the slot. A named method sitting level
+with Work, Services and About reads as a methodology being announced, and a law
+is a claim; claiming one at twenty-one with no public cases is the cart in
+front of the horse. So it moved rather than went: it is the first button in the
+hero now, which is better distribution than a fifth tab and costs the
+navigation nothing.
+
+**The first screen makes a promise, not a category.** It said "Applied
+performance nutrition systems for athletes and teams", which names a field and
+offers nothing: thirty-eight words on the first screen and not one of them told
+a stranger what they could have. It now says who it is for and what changes for
+them, in one sentence, and carries two buttons for two different people, the
+free one leading because almost everybody who lands is eligible for it. The
+first mention of anything on offer used to be at five thousand pixels.
 
 **The home is five blocks**: who he is, where he has been, the evidence, the
 argument, the invitation. The premise and the method are one section, not two,
@@ -255,10 +270,14 @@ defensible idea is the decision layer, and the cheapest honest way to build it
 is as the deliverable of a paid audit rather than as a separate product effort.
 The site names it and does not oversell it.
 
-**Fuel Laws keeps its content and lost its branding.** "GN Fuel Laws" and
-"Operating System" are gone; it is "The five fuel laws". The earlier decision to
-park the method stands in spirit: no method is claimed before it has been
-earned. The navigation item serves distribution, not branding.
+**Fuel Laws keeps its content and lost its branding, twice.** "GN Fuel Laws"
+and "Operating System" went first. The word "laws" went next: the page is "The
+five checks I run before anything else", framed as something handed over rather
+than a framework declared. The five did not change and neither did the proof
+beside each one. What changed is who owes whom: a method says "I am important
+enough to have a method", a gift says "this is what I actually use, take it".
+Inside the page the word "laws" can stay, because what makes it arrogant is
+claiming it without proof, and the proof is next to each one.
 
 ---
 

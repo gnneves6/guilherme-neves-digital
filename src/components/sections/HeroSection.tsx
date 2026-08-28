@@ -368,35 +368,52 @@ const HeroSection = () => {
           Built from within.
         </motion.p>
 
+        {/* The promise, which this screen did not have.
+            It said "Applied performance nutrition systems for athletes and
+            teams, rooted in football and built to survive a real week", which
+            names a category and promises nothing. Thirty-eight words on the
+            first screen and not one of them told a stranger what they could
+            have. This says who it is for and what changes for them, and it is
+            one sentence because nobody reads two. */}
         <motion.p
           className="text-body-lg max-w-xl mt-5"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.05, ease: EASE_OUT }}
         >
-          Applied performance nutrition systems for athletes and teams, rooted in
-          football and built to survive a real week.
+          I make nutrition work as a system inside football clubs, so it holds
+          through a congested week instead of living in a document nobody opens.
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-12"
+          className="flex flex-col sm:flex-row sm:items-center gap-4 mt-10 md:mt-12"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.18, ease: EASE_OUT }}
         >
-          {/* One button. There were two here and a third in the bar above,
-              two of them saying the same thing, and three buttons is the same
-              as none. Proof comes before the sale, so the proof is the one
-              that stays; contact is already a pill in the navigation and the
-              whole closing chapter of this page. */}
+          {/* Two buttons, and they are two because they are for two different
+              people: the many who are not buying anything today, and the few
+              who are. The free one leads, because it is the one almost
+              everybody who lands is eligible for.
+
+              This slot used to hold "View Applied Work" alone, which sends a
+              stranger to look at proof before they have been told what is
+              being proved. Work is still one click away in the bar above. */}
           <Magnetic strength={8} as="span">
             <Link
-              to="/work"
+              to="/fuel-laws"
               className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
             >
-              View Applied Work
+              Take the five checks, free
             </Link>
           </Magnetic>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 py-4 font-display text-sm text-foreground link-underline"
+          >
+            Or tell me about your environment
+            <span aria-hidden>&rarr;</span>
+          </Link>
         </motion.div>
       </motion.div>
 

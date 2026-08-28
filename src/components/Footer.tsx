@@ -27,7 +27,7 @@ const Footer = () => {
                   { label: "Home", path: "/" },
                   { label: "About", path: "/about" },
                   { label: "Work", path: "/work" },
-                  { label: "Fuel Laws", path: "/fuel-laws" },
+                  { label: "The five checks", path: "/fuel-laws" },
                   { label: "Services", path: "/services" },
                   { label: "Contact", path: "/contact" },
                 ].map((item) => (

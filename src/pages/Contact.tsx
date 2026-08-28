@@ -120,7 +120,7 @@ const Contact = () => {
                     to="/fuel-laws"
                     className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
                   >
-                    While you wait, take the five laws
+                    While you wait, take the five checks
                   </Link>
                 </Magnetic>
                 <div className="mt-6">
@@ -306,7 +306,7 @@ const Contact = () => {
                   <p className="text-caption text-[10px]">Not ready yet</p>
                   {[
                     { to: "/work", label: "See the work first" },
-                    { to: "/fuel-laws", label: "Take the five fuel laws" },
+                    { to: "/fuel-laws", label: "Take the five checks" },
                   ].map((l) => (
                     <Link
                       key={l.to}

@@ -370,7 +370,7 @@ const Work = () => {
               to="/fuel-laws"
               className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
-              Start with the five fuel laws
+              Start with the five checks
               <span aria-hidden>→</span>
             </Link>
           </Reveal>

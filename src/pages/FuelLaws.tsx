@@ -52,22 +52,33 @@ const FuelLaws = () => {
 
   return (
     <Layout>
-      <SEO title="Five Fuel Laws, Guilherme Neves" description="Five applied principles that turn nutrition from information into behaviour an athlete repeats, with the work that proves each one." path="/fuel-laws" />
+      <SEO title="The five checks, Guilherme Neves" description="The five things I check before anything else in a performance environment, free, each one with the work behind it." path="/fuel-laws" />
 
       {/* Header */}
       <section className="section-padding section-spacing relative">
         <PlanGrid />
         <div className="max-content relative">
+          {/* Given, not declared.
+              This was "The five fuel laws", framed as a practical framework.
+              A law is a claim, and claiming one before there are public cases
+              behind it reads as a method being announced rather than a thing
+              being handed over. The content did not change and neither did the
+              five: what changed is who owes whom. Take this, it is what I
+              actually run, and here is the work behind each one. */}
           <Reveal>
-            <p className="text-caption mb-6">Free · Five laws</p>
+            <p className="text-caption mb-6">Free · Yours to keep</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">The five fuel laws.</h1>
+            <h1 className="text-display max-w-4xl">
+              The five checks I run before anything else.
+            </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-2xl mt-8">
-              A practical framework that turns nutrition from information into usable
-              performance behaviour, and keeps it working long after the advice is forgotten.
+              Whatever the environment, these five come first, and most of what
+              goes wrong is one of them being skipped. Each one has the work
+              behind it, so you can see where it came from rather than take my
+              word for it. Take them and use them.
             </p>
           </Reveal>
           <Reveal delay={0.3}>

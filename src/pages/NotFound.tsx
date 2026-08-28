@@ -19,7 +19,7 @@ const NotFound = () => {
 
   const routes = [
     { to: "/work", label: "The work", note: "Systems and tools from real environments." },
-    { to: "/fuel-laws", label: "The five fuel laws", note: "The framework, free and open." },
+    { to: "/fuel-laws", label: "The five checks", note: "What I run first, free and yours." },
     { to: "/about", label: "Who I am", note: "How this started, and where it goes." },
   ];
 
