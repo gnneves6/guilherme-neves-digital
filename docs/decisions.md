@@ -56,6 +56,15 @@ Where an audience implies regulated work, the site shows a waitlist line rather
 than an offer, and says why. This is not hedging, it is the difference between
 taking names and practising. Do not remove it to make a page read stronger.
 
+**The block is Portuguese, and the copy has to say so.** It read as though the
+door were shut everywhere: "I am completing professional registration, so I am
+taking names now" was shown to every reader, including readers in countries
+where a graduate may practise on the degree alone. That is turning away work
+that could start immediately. The lines now name Portugal and invite everyone
+else to ask. They deliberately do not state what any other country requires,
+because that has to be checked one country at a time and a website is the wrong
+place to guess.
+
 **The six audiences are grouped by when they open**, not listed flat: open now,
 opens with registration, open to proposals. Six doors in the same weight look
 equally available, so someone picks the one that sounds most like them, reads a

@@ -21,6 +21,14 @@
  * Work that amounts to individual dietary prescription is a regulated act in
  * Portugal and sits behind registration. That is the whole of the `waiting`
  * state, and it is stated rather than implied.
+ *
+ * `waiting` is a Portuguese fact, not a universal one, and the copy used to
+ * read as though the door were shut everywhere. Several countries let a
+ * graduate practise without a separate professional registration, so a reader
+ * abroad was being turned away from work that could start immediately. The
+ * lines now say where the block applies and invite the rest to ask. They do
+ * not state what any other country's rules are, because that has to be checked
+ * per country and a website is the wrong place to guess.
  */
 
 import type { EngagementId } from "./engagements";
@@ -107,7 +115,7 @@ export const audienceStateMeta: Record<
   waiting: {
     label: "Opens with registration",
     group: "Opens with registration",
-    groupNote: "Regulated work. I take names now and start the day it clears.",
+    groupNote: "Regulated work in Portugal. Elsewhere, ask.",
     tone: "soon",
   },
   later: {
@@ -241,7 +249,7 @@ export const audiences: Audience[] = [
     },
     state: "waiting",
     legal:
-      "This is regulated work and I am completing professional registration, so I am taking names now and starting as soon as that is finalised.",
+      "In Portugal this is regulated work and my registration is in progress, so here I am taking names now. Outside Portugal the rules are not the same, so if you are abroad, ask and we will look at it.",
     cta: "Register your interest",
     ctaMicro: "I will come back to you personally when this opens.",
   },
@@ -271,7 +279,7 @@ export const audiences: Audience[] = [
     },
     state: "waiting",
     legal:
-      "Also regulated work, so it opens alongside the individual practice. Families and academies are both welcome to ask now.",
+      "Also regulated work in Portugal, so here it opens alongside the individual practice. Outside Portugal, ask. Families and academies are both welcome either way.",
     cta: "Register your interest",
     ctaMicro: "Families and academies both welcome to ask.",
   },
