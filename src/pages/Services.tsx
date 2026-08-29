@@ -42,6 +42,37 @@ const Services = () => {
               <Em>is nutrition working as a system here, or only on paper?</Em>
             </p>
           </Reveal>
+          {/* The filter, stated before the offer.
+              The six doors answer "which of these am I". They do not answer
+              the question that actually decides whether the work goes well,
+              which is not what somebody does for a living but how they think
+              about spending money on getting better. Somebody weighing price
+              against their bank balance and somebody weighing it against what
+              it returns are two different clients, and only one of them
+              finishes. Saying so here costs the wrong client a click and saves
+              both of us a season.
+
+              The guarantee is the other half of it. Selectivity without risk
+              on my side is just a way of sounding expensive. */}
+          <Reveal delay={0.3}>
+            <div
+              className="mt-10 max-w-2xl p-6 md:p-7"
+              style={{ background: "hsl(41 40% 96%)", border: "1px solid hsl(var(--subtle-border))" }}
+            >
+              <p className="text-caption text-[10px] mb-3">Who this works for</p>
+              <p className="text-body">
+                People with a purpose, who read a number against what it gives
+                back rather than against what it costs, and who are willing to
+                be disciplined about the part that is theirs. Not everybody, and
+                not the people who need convincing.
+              </p>
+              <p className="text-body mt-4">
+                If I do not add value, I give the money back. I would rather
+                carry that risk than have you carry it, because if I am not sure
+                I can help you, I should not be taking the work.
+              </p>
+            </div>
+          </Reveal>
           <Reveal delay={0.35}>
             <div className="mt-10 flex items-center gap-6 flex-wrap">
               <Link
