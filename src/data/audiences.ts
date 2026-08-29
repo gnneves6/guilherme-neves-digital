@@ -35,6 +35,15 @@ export interface Audience {
   label: string;
   /** A qualifier printed next to the label, where the door covers more than its name. */
   labelNote?: string;
+  /**
+   * A word in the list, where the door differs from the ones around it.
+   *
+   * Three doors sit under "Open now" and one of them does not sell anything.
+   * Without a mark they scan as three equivalent offers, and a student decides
+   * whether to click based on whether they think they can afford it, which is
+   * the exact hesitation this door exists to remove.
+   */
+  badge?: string;
   /** Who this is, in their own words rather than a market segment. */
   who: string;
   /**
@@ -164,6 +173,7 @@ export const audiences: Audience[] = [
     id: "students",
     anchor: "students",
     label: "Students & early career",
+    badge: "Free",
     who: "Nutrition students and recent graduates who want to work in football.",
     /*
      * This door does not sell anything, on purpose.

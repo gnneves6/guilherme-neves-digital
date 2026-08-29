@@ -212,6 +212,17 @@ const AudienceSelector = () => {
                             >
                               {a.label}
                             </span>
+                            {a.badge && (
+                              <span
+                                className="ml-auto shrink-0 text-[9px] tracking-[0.18em] uppercase font-display px-1.5 py-0.5"
+                                style={{
+                                  color: "hsl(var(--olive))",
+                                  border: "1px solid hsl(var(--olive) / 0.35)",
+                                }}
+                              >
+                                {a.badge}
+                              </span>
+                            )}
                           </button>
                         </li>
                       );
