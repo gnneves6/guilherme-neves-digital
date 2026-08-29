@@ -25,6 +25,19 @@ Structured data treats the Person as the primary entity, with the site as a
 professional licence is pending. The site says this plainly wherever
 credentials appear. It is never implied to be complete.
 
+**There is a mark, and it is not a company.** A GN monogram sits beside the
+wordmark in the navigation, in the favicon and on the installed icon. That is
+not a reversal of the line above: a monogram is identity, the thing that was
+removed was an invented corporation, complete with a trademark symbol, a coat
+of arms and a product name for something that does not exist.
+
+It is used as a CSS mask rather than placed as an image, so it keeps only its
+shape and takes the site's own ink. The file is a near-black raster and a fixed
+near-black beside warm ink reads as a sticker dropped on the page. It is never
+put in the hero: the first screen's job is to say what a stranger can have, and
+a mark says nothing, so spending that space on it makes the site less clear,
+not more like a business.
+
 **English throughout**, because the work is aimed internationally.
 
 **The person comes before the product.** The home opens on who he is, not on a
@@ -99,6 +112,17 @@ first mention of anything on offer used to be at five thousand pixels.
 argument, the invitation. The premise and the method are one section, not two,
 because splitting them put the whole environments chapter between a problem and
 its answer.
+
+**The students door gives and does not sell.** It was written as a paid
+one-to-one session and an earlier note called it the first offer that could
+take money this week. That was wrong about this market: students do not pay.
+What they do is decide, across years, who the reference is, and a good number
+of them become the practitioners and staff who can buy. Charging them today to
+lose that is a bad trade. So the door gives the route, the tools and a straight
+answer, for nothing, and says out loud where the paid work lives: the
+practitioner door above it, for when they are the person inside the building.
+The position is earned by being useful now and by the career being worth
+following.
 
 **One taxonomy on the offer page, not two.** `/services` carried six audience
 doors and, underneath them, three engagement cards describing the same work a
@@ -184,10 +208,18 @@ mockup standing in for a document that exists.
 **One deliberate accent.** Olive marks the thing that matters in a block. It is
 not decoration and does not get spread around.
 
-**Motion answers the reader, it never plays on its own.** Pointer, click and
-scroll, in that order of importance. A thing that moves while the reader is
-still is asking for attention it has not earned; a thing that moves because
-they moved is depth.
+**Motion answers the reader.** Pointer, click and scroll, in that order of
+importance. A thing that moves because the reader moved is depth.
+
+*Reversed in part:* the rule used to be that nothing moves on its own. A page
+left completely alone reads as switched off, and the exceptions kept arriving
+anyway, so the rule is now narrower and honest. Exactly one thing on the ivory
+runs by itself: the measure mark on the plan grid, a plotter head working down
+the margin over twenty-two seconds, breathing between 0.2 and 0.42 opacity. It
+is set to be caught in peripheral vision rather than watched, its scroll
+position still applies so moving the page moves it too, and it stops dead under
+reduced motion. Anything else that wants to move on its own has to argue for
+itself against this one.
 
 The order matters and was learned the hard way. Scroll was built first and was
 invisible, because the preview the site is reviewed in runs inside a frame

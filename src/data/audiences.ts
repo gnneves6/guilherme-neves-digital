@@ -165,28 +165,43 @@ export const audiences: Audience[] = [
     anchor: "students",
     label: "Students & early career",
     who: "Nutrition students and recent graduates who want to work in football.",
+    /*
+     * This door does not sell anything, on purpose.
+     *
+     * It was written as a paid one-to-one session, and an earlier note called
+     * it the first offer that could take money this week. That was wrong about
+     * this market: students do not pay. What they do is decide, over years,
+     * who the reference is, and a good number of them become the practitioners
+     * and the staff who can buy. Charging them fifty euros today to lose that
+     * is a bad trade.
+     *
+     * So it gives, and it says out loud where the paid work lives: the door
+     * above this one, for when they are the person inside the building. The
+     * position is earned by being useful now and by the career being worth
+     * following, not by monetising people who have no money.
+     */
     problem:
       "The degree teaches the science and none of the part that decides it: how you get inside an elite environment, what the job actually is once you are there, and what makes a club say yes to someone who does not have a title yet.",
     offer:
-      "I walk you through the route I took, honestly, including what I got wrong and what I would do differently. We look at where you are, what is missing, and what the next concrete step is. Not a lecture. One session, your situation, a plan you leave with.",
+      "Everything I would have wanted at your stage, for nothing. The route I took, honestly, including what I got wrong. The tools I build, as I build them. And an answer when you ask me something, because at your stage the answer is usually one sentence and nobody will give it to you.",
     gains: [
       "The route from someone who took it recently, not from someone who took it in 2005",
-      "An honest read on where you actually stand right now",
-      "One concrete next step instead of a vague ambition",
+      "The tools as they get built, not a version cut down for students",
+      "A straight answer to the question you cannot ask your professor",
       "The parts nobody tells you, including the mistakes",
     ],
     formats: ["education"],
     formatNotes: {
       education:
-        "One session on your situation, and a concrete next step you leave with.",
+        "Open, and free. When you are the practitioner in the building, the door above this one is where we would work together.",
     },
     proof: {
       slug: "evidence-radar",
       why: "Built for a problem I had myself, then given away when other practitioners asked for it.",
     },
     state: "now",
-    cta: "Book a session",
-    ctaMicro: "One to one. Limited slots, because these are real hours.",
+    cta: "Ask me the thing nobody answers",
+    ctaMicro: "No charge and no pitch at the end.",
   },
   {
     id: "athletes",

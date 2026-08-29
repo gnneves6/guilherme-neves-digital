@@ -234,6 +234,14 @@ const PlanGrid = ({ size = 88, opacity = 0.045, feather = true, className = "" }
         className="absolute inset-y-0 right-[6%] w-px hidden md:block"
         style={{ background: "hsl(var(--foreground))", opacity: opacity * 1.6 }}
       />
+      {/* The measure mark, which moves whether or not anybody does.
+          Everything else here waits to be provoked, and a page left alone is
+          a page that looks switched off. This is the one thing on the ivory
+          that runs on its own: a plotter head working slowly down the margin,
+          twenty-two seconds top to bottom, at an opacity where it is caught in
+          peripheral vision rather than watched. Its scroll position still
+          applies, so moving the page moves it too and the two read as one
+          instrument rather than two. Stops dead under reduced motion. */}
       <motion.div
         className="absolute left-[6%] h-px hidden md:block w-6"
         style={{
@@ -241,6 +249,26 @@ const PlanGrid = ({ size = 88, opacity = 0.045, feather = true, className = "" }
           opacity: 0.35,
           top: reduce ? "50%" : tickTop,
         }}
+        animate={reduce ? undefined : { y: [0, 130, 0], opacity: [0.2, 0.42, 0.2] }}
+        transition={
+          reduce
+            ? undefined
+            : { duration: 22, repeat: Infinity, ease: "easeInOut" }
+        }
+      />
+      {/* The rule it draws as it passes. Faint enough to be a suggestion of a
+          line being measured, not a line. */}
+      <motion.div
+        className="absolute left-[6%] right-[6%] h-px hidden md:block"
+        style={{ background: "hsl(var(--foreground))", top: reduce ? "50%" : tickTop }}
+        animate={
+          reduce ? undefined : { y: [0, 130, 0], opacity: [0, opacity * 1.1, 0] }
+        }
+        transition={
+          reduce
+            ? undefined
+            : { duration: 22, repeat: Infinity, ease: "easeInOut" }
+        }
       />
 
       {/* Sounding the plan. */}

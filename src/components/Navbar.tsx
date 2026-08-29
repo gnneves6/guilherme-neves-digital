@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollToTop } from "@/components/motion/SmoothScroll";
+import gnMark from "@/assets/logos/gn-mark.png";
 
 /**
  * Three destinations, and one action.
@@ -78,8 +79,30 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={handleHomeClick}
-            className="font-display text-lg md:text-xl font-semibold tracking-tight text-foreground transition-colors duration-500"
+            className="flex items-center gap-2.5 font-display text-lg md:text-xl font-semibold tracking-tight text-foreground transition-colors duration-500"
           >
+            {/* The mark, painted rather than placed.
+                The file is a near-black raster, and a fixed near-black next to
+                warm ink reads as a sticker someone dropped on the page. Used as
+                a mask it keeps only its shape and takes the site's own colour,
+                so it belongs to the palette and follows the wordmark wherever
+                that goes. Sized off the type, so it always sits on the same
+                optical line as the name beside it. */}
+            <span
+              aria-hidden
+              className="block shrink-0 w-[2.05em] h-[0.92em]"
+              style={{
+                background: "currentColor",
+                maskImage: `url(${gnMark})`,
+                WebkitMaskImage: `url(${gnMark})`,
+                maskSize: "contain",
+                WebkitMaskSize: "contain",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskPosition: "center",
+              }}
+            />
             Guilherme Neves
           </Link>
 
