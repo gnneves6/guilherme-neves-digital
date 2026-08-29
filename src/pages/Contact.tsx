@@ -226,7 +226,12 @@ const Contact = () => {
                     </motion.button>
                   </Magnetic>
                   <p className="text-caption text-[10px] text-muted-foreground max-w-[16rem] leading-relaxed">
-                    No obligation. Read personally, usually answered within a few working days.
+                    No obligation. Read personally, usually answered within a few
+                    working days.{" "}
+                    <Link to="/privacy" className="link-underline">
+                      What happens to what you send
+                    </Link>
+                    .
                   </p>
                 </div>
               </form>

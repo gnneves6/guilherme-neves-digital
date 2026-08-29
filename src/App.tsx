@@ -13,6 +13,7 @@ const Work = lazy(() => import("./pages/Work.tsx"));
 const Services = lazy(() => import("./pages/Services.tsx"));
 const FuelLaws = lazy(() => import("./pages/FuelLaws.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
+const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/fuel-laws" element={<FuelLaws />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

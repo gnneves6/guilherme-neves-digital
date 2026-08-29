@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import Magnetic from "@/components/motion/Magnetic";
@@ -166,8 +167,18 @@ const LawKeep = () => {
                       >
                         {loading ? "Sending..." : "Send them my way"}
                       </button>
-                      <p className="text-caption text-[10px] text-muted-foreground max-w-[18rem] leading-relaxed">
-                        No newsletter, no forwarding your address. Only the work.
+                      {/* The consent line, which the record already claimed and
+                          the page never showed. `consent: true` was being
+                          written to the database on a form that told nobody
+                          what it was consenting to, and gave them nowhere to
+                          look it up. */}
+                      <p className="text-caption text-[10px] text-muted-foreground max-w-[19rem] leading-relaxed">
+                        Your address is kept by me, used only to send you the
+                        work, and dropped the moment you ask.{" "}
+                        <Link to="/privacy" className="link-underline">
+                          What I do with it
+                        </Link>
+                        .
                       </p>
                     </div>
                   </form>

@@ -92,8 +92,10 @@ is wrong.
 
 ## Structure
 
-**Six routes**: `/`, `/work`, `/services`, `/fuel-laws`, `/about`, `/contact`,
-plus a 404 that wears the site and offers three real destinations.
+**Seven routes**: `/`, `/work`, `/services`, `/fuel-laws`, `/about`,
+`/contact`, `/privacy`, plus a 404 that wears the site and offers three real
+destinations. Privacy is not a page anybody wants; it is the page that makes
+the two forms legal, and it is linked from both of them and from the footer.
 
 **Navigation is Work, Services, About, and a contact button.** Six links asked
 a stranger to choose before they knew what anything was; three was the
@@ -362,9 +364,13 @@ claiming it without proof, and the proof is next to each one.
   branding pass. Decide whether it goes, and to what: there are five real
   photographs in `src/assets/photos`. (`scene-environments-archive.jpg` was
   checked at the same time and is clean: a rendered room, no branding.)
-- The five laws do not capture an email yet. When they do, the privacy policy
-  has to cover the list before the form ships, not after: a mailing list is a
-  separate purpose under GDPR and the current policy does not name it.
+- ~~The five laws do not capture an email yet.~~ They do, through `LawKeep`,
+  and it was writing `consent: true` to the database on a form that told nobody
+  what they were consenting to and gave them nowhere to look it up. `/privacy`
+  now exists, names the mailing list as a mailing list, and is linked from both
+  forms. It is written as a description of what the code does, not from a
+  template, so it stays true only as long as somebody updates it when the
+  behaviour changes. It has not been read by a lawyer.
 
 ---
 
