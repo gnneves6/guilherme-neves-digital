@@ -149,6 +149,39 @@ a door can override the line where the shared one would lie: "System installed"
 promising structures "your staff run without me in the room" is false to an
 athlete who has no staff.
 
+**One door has a price, and it is the practitioner door.** It is the only one
+that is neither blocked by Portuguese registration nor dependent on a referral,
+so it is the one place money can arrive without waiting for anything, and it
+was the least built of the six.
+
+What may honestly be sold decided what is sold. Club work belongs to the clubs
+and is named, never opened. Everything already public here is given away, and
+selling it back would cost more trust than the money is worth. So the product
+is neither: a generic structure built from the same method, holding no club's
+data and no individual's, which is what makes it a tool rather than a regulated
+act. Its limits are printed beside its price, because a structure for a group
+sold as a plan for a person is the one thing this site refuses to do.
+
+Eighty-nine euros is a judgement and easy to change. A professional tool price
+rather than an impulse one, above the range where practitioner resources become
+disposable, and seventeen a month clears the stated floor. The guarantee
+carries the risk the price creates, which is the only thing that makes a number
+this specific defensible from somebody with no public cases yet.
+
+It does not take payment. Card details need accounts that are not ours to open,
+so the button reserves a copy at the stated price and writes to
+`resource_interest` beside the rest of the list. Somebody who leaves an address
+at eighty-nine euros has told us something no amount of reasoning about this
+market could.
+
+**Doors name the moment, not only the person.** A door named after a job title
+gets "yes, that is me" and no action, because the problem underneath it is
+chronic and chronic problems do not get funded. Events do: a new sporting
+director, a run of soft tissue injuries, a signing who arrived out of
+condition, a new caterer, a player who said something to the manager. Naming
+them lets a reader recognise their own week rather than their own job
+description.
+
 **Every door names one real piece of work.** Each door makes a claim, and one
 named artefact under it is the cheapest honest way to back the claim: the
 archive already records what each piece proves, so it costs no new writing and

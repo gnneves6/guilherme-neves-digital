@@ -18,6 +18,8 @@ import {
   proofFor,
 } from "@/data/audiences";
 import { engagements } from "@/data/engagements";
+import { productOf } from "@/data/products";
+import ProductCard from "@/components/sections/ProductCard";
 import { environmentOfArtefact } from "@/data/work-graph";
 
 /**
@@ -89,6 +91,7 @@ const AudienceSelector = () => {
   // Deep link into the environment chapter the piece belongs to, so the
   // archive opens on the right room rather than at the top of a long page.
   const proofEnv = proof ? environmentOfArtefact(proof.artefact.slug) : null;
+  const product = productOf(active.product);
 
   const select = (id: string, anchor: string) => {
     // Which way the panel should travel. Picking a door further down the list
@@ -302,6 +305,29 @@ const AudienceSelector = () => {
                   </ul>
                 </div>
 
+                {/* The moment, before the offer.
+                    A door named after a job title gets "yes, that is me" and no
+                    action, because the problem underneath it is chronic and
+                    chronic problems do not get funded. These are the weeks that
+                    do. Somebody standing in one of them recognises their own
+                    situation rather than their own job description. */}
+                {active.triggers && (
+                  <div className="mt-9 max-w-xl">
+                    <p className="text-caption text-[10px] mb-4">This usually starts when</p>
+                    <ul className="space-y-2.5">
+                      {active.triggers.map((t) => (
+                        <li key={t} className="flex items-start gap-3 text-sm leading-snug">
+                          <span
+                            className="mt-[8px] h-px w-3 shrink-0"
+                            style={{ background: "hsl(var(--olive) / 0.7)" }}
+                          />
+                          <span style={{ color: "hsl(var(--graphite))" }}>{t}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {/* How it runs.
                     These are the three engagements that used to be a section of
                     their own further down this page, under six doors that
@@ -376,6 +402,8 @@ const AudienceSelector = () => {
                     </p>
                   </div>
                 )}
+
+                {product && <ProductCard product={product} />}
 
                 {/* Why the door is not open yet, in the door's own words. It
                     sits after the gains and before the button, which is the

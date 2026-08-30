@@ -95,6 +95,19 @@ export interface Audience {
    * the abstract.
    */
   proof: { slug: string; why: string };
+  /**
+   * The moments that release a budget.
+   *
+   * A door that names a job title is answered with "yes, that is me" and no
+   * action. Chronic problems do not get funded; clubs have lived with nutrition
+   * being scattered for twenty years. Events get funded. Naming the events lets
+   * somebody standing in one of them recognise not just themselves but their
+   * week, which is a completely different level of specificity from naming who
+   * they are.
+   */
+  triggers?: string[];
+  /** A thing with a price, for the doors where one can honestly be sold. */
+  product?: string;
   state: AudienceState;
   /** Why this door is not open yet. Printed only where it exists. */
   legal?: string;
@@ -145,6 +158,13 @@ export const audiences: Audience[] = [
       "Nutrition handled properly without adding headcount",
     ],
     formats: ["audit", "systems", "education"],
+    triggers: [
+      "A new sporting director or head of performance, and nutrition is suddenly somebody's problem to own",
+      "A run of soft tissue injuries, and the question of what else could be contributing",
+      "A signing who arrived in a condition nobody wants to talk about",
+      "A new training ground or a new caterer, and one chance to set the standard before habits form",
+      "A player, or a parent, who said something to the manager",
+    ],
     proof: {
       slug: "food-environment-catering",
       why: "Operating standards written for a real catering and hotel week, not for a manual.",
@@ -169,6 +189,13 @@ export const audiences: Audience[] = [
       "Your athletes better prepared, and the credit is yours",
     ],
     formats: ["systems", "education"],
+    triggers: [
+      "A player asked you something on the pitch and you improvised the answer",
+      "A congested run of fixtures, and the plan that worked in August stopped working",
+      "Travel, late kick-offs and midnight arrivals, none of which the textbook covers",
+      "A specialist is about to look at what you have been doing",
+    ],
+    product: "matchday-week",
     proof: {
       slug: "md-1-fuel-system",
       why: "The football-specific version of a matchday, in the form you would actually run it.",
