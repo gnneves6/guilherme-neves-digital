@@ -212,6 +212,18 @@ before every commit.
 were removed rather than labelled. What is genuinely being built says
 "Building" and is a plain sentence, not a card.
 
+*This rule was being broken and nobody noticed.* Seven entries were marked
+Public and offered "View Sample", and exactly one of them, the ABC series, had
+a URL of its own. The other six fell back to the general Notion portfolio, so a
+promise of a specific sample was answered with a directory listing everything.
+The fallback is gone: where there is nothing specific to open, the modal shows
+what the piece is and offers no button, and the cards say "What it covers"
+rather than "View Sample". Before adding a link fallback again, note that it
+cost more trust than the click was worth.
+
+The five artefacts still have no document behind them. That is now visible
+rather than papered over, which is the right state until they exist.
+
 **Protected work is named, never teased.** It belongs to the club it was built
 for. It gets a title, what it proves, and a drawing of the kind of tool it was.
 It never gets a blurred photograph pretending to be openable, and it never gets

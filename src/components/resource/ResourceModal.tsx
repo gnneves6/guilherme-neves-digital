@@ -4,7 +4,6 @@ import { X, Lock, Globe, Layers, Sparkles, ArrowRight, ArrowUpRight } from "luci
 import type { Artefact, AppliedAccessType } from "@/data/artefacts";
 import { accessMeta } from "@/data/artefacts";
 import { supabase } from "@/integrations/supabase/client";
-import { LINKS } from "@/data/links";
 import WorkConnections from "@/components/resource/WorkConnections";
 import Lightbox from "@/components/media/Lightbox";
 
@@ -138,9 +137,19 @@ const ResourceModal = ({ artefact, onClose }: Props) => {
         const heroImage =
           (artefact as Artefact & { previewImage?: string }).previewImage ??
           (artefact.previewImages && artefact.previewImages[0]);
+        // Only a link that actually leads to this piece.
+        //
+        // The fallback used to be the general Notion portfolio, which meant six
+        // of the seven public entries offered "View Sample" and delivered a
+        // homepage listing everything. Measured, not guessed: only the ABC
+        // series carries a URL of its own. A promise of a sample answered with
+        // a directory is exactly the thing the copy rules forbid, and it costs
+        // more trust than the click is worth. Where there is nothing specific
+        // to open, the modal now shows what the piece is and offers no button,
+        // and the card below stops saying "sample".
         const externalCta =
           accessType === "public"
-            ? artefact.notionUrl || artefact.externalUrl || LINKS.NOTION_PORTFOLIO_URL
+            ? artefact.notionUrl || artefact.externalUrl || null
             : null;
         const useForm = accessType !== "public";
         const number = (artefact as Artefact & { number?: string }).number;

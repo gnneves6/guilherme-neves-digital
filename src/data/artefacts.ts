@@ -93,7 +93,7 @@ export const artefacts: Artefact[] = [
     description:
       "A practical matchday-minus-one structure for carbohydrate loading, hydration and familiar meals, built to survive real match weeks.",
     whatItProves: "Matchday evidence translated into a protocol staff and athletes can actually run.",
-    ctaLabel: "View Sample",
+    ctaLabel: "What it covers",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -108,7 +108,7 @@ export const artefacts: Artefact[] = [
     description:
       "A food substitution system that lets athletes adapt meals on the road or at home without losing nutritional structure.",
     whatItProves: "Flexibility designed for real life, without breaking the plan.",
-    ctaLabel: "View Sample",
+    ctaLabel: "What it covers",
     ctaType: "view-sample",
     featured: true,
     previewType: "single",
@@ -123,7 +123,7 @@ export const artefacts: Artefact[] = [
     description:
       "An evidence-led visual guide on what actually moves the needle in football supplementation, and what doesn't.",
     whatItProves: "Evidence filtering and clear staff/athlete communication.",
-    ctaLabel: "View Sample",
+    ctaLabel: "What it covers",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -138,7 +138,7 @@ export const artefacts: Artefact[] = [
     description:
       "A short visual lesson on the real drivers of late-game cramping, beyond the hydration cliché.",
     whatItProves: "Sharp educational thinking on a real, recurring performance problem.",
-    ctaLabel: "View Sample",
+    ctaLabel: "What it covers",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -153,7 +153,7 @@ export const artefacts: Artefact[] = [
     description:
       "A reframed food pyramid built around training load, recovery and athlete-specific demands.",
     whatItProves: "Foundational education adapted to the athlete, not the average.",
-    ctaLabel: "View Sample",
+    ctaLabel: "What it covers",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -543,7 +543,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewAlt:
       "Football Nutrition Education Tools preview, a premium dark grid of six visual learning objects covering matchday nutrition, hydration, recovery and supplements.",
     previewObjectPosition: "center",
-    ctaLabel: "Open collection",
+    ctaLabel: "What is in it",
     ctaType: "view-sample",
   },
   {
