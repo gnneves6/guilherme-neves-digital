@@ -219,6 +219,21 @@ mockup standing in for a document that exists.
 **One deliberate accent.** Olive marks the thing that matters in a block. It is
 not decoration and does not get spread around.
 
+**The site counts pages, and never people.** Every decision here was made by
+reasoning with no numbers behind it, which was affordable while nobody was
+arriving and stops being affordable the week a daily posting habit starts
+pointing people here. Four non-identifying facts per view: the path, the host
+that referred it, whether the screen is a phone, tablet or desktop, and a
+random value in `sessionStorage` that dies with the tab and exists only to tell
+one person reading five pages from five people reading one.
+
+Deliberately not a third-party product. Those set cookies, profile across
+sites, and would put a consent banner on a site that was just stripped back.
+This writes to the same database as the forms, with the same insert-only policy
+and the same denial of reads. `/privacy` describes it in the same words, and
+that page has to be corrected in the same commit as any change here, or it
+becomes a lie rather than merely out of date.
+
 **Motion answers the reader.** Pointer, click and scroll, in that order of
 importance. A thing that moves because the reader moved is depth.
 

@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import PageViews from "./components/PageViews.tsx";
 
 const About = lazy(() => import("./pages/About.tsx"));
 const Work = lazy(() => import("./pages/Work.tsx"));
@@ -31,6 +32,7 @@ const App = () => (
       <Sonner />
       <Router {...routerProps}>
         <ScrollToTop />
+        <PageViews />
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />

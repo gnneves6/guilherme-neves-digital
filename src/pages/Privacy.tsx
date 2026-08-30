@@ -147,12 +147,23 @@ const Privacy = () => (
         <Reveal>
           <div>
             <h2 className="font-display text-xl font-semibold text-foreground">
-              Cookies
+              Cookies, and what I do count
             </h2>
             <p className="text-body mt-3">
-              None that track you. The site does not run advertising or
-              analytics profiles. Fonts are loaded from Google Fonts, which
-              means your browser makes a request to Google to fetch them.
+              No cookies, no advertising, and nothing that follows you to
+              another site. I do count pages, because otherwise I am rebuilding
+              this thing blind. Each view records four things: which page, which
+              site sent you if any, whether your screen is a phone, a tablet or
+              a desktop, and a random number that lives in your tab and
+              disappears when you close it. That number exists only so I can
+              tell one person reading five pages from five people reading one.
+              No address, no name, nothing that survives the visit, and no
+              third party involved: it goes into the same database as the forms
+              above and nowhere else.
+            </p>
+            <p className="text-body mt-3">
+              Fonts are loaded from Google Fonts, which means your browser makes
+              a request to Google to fetch them.
             </p>
           </div>
         </Reveal>
