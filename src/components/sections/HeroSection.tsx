@@ -32,12 +32,36 @@ import arrival from "@/assets/photos/leca-arrival.webp";
  * the name keeps moving through where he has been.
  */
 
+/**
+ * What the window shows, and how each photograph is cropped into it.
+ *
+ * The window is 0.94em by 0.8em, so it is landscape at a ratio of 1.175, and
+ * four of these five photographs are portrait. object-fit: cover therefore
+ * throws away most of their height, and where the surviving band sits is the
+ * whole difference between a frame with a person in it and a frame with a
+ * chin in it. Two of them were landing on the second thing: the matchday
+ * arrival opened its band at 19.8% of the image when his chin is at 23.5%, so
+ * the frame began below his mouth, and the pitchside photograph opened at
+ * 14.5% against a head running 7.8% to 19.5%, cutting it across the eyes.
+ *
+ * `zoom` is the scale the frame enters at. It matters here because the scale
+ * transform closes in on the centre of the element, not on `position`, so the
+ * band you carefully chose is not the band that is on screen for the first
+ * two seconds — it is a tighter one around its middle. Every value below is
+ * chosen so the subject survives at the zoom, not merely at rest.
+ *
+ * The Anderlecht frame is the one deliberate absence. He is standing thirty
+ * metres from the camera there, so at the size of this window his face is a
+ * few pixels wide: not a portrait, just a smudge that has to be cropped
+ * through. The sign is what that photograph is actually for, so the band
+ * holds the sign and lets him go rather than half-showing him.
+ */
 const frames = [
-  { src: portrait, alt: "Guilherme Neves", position: "center 26%" },
-  { src: pitchside, alt: "Pitchside during a session", position: "center 40%" },
-  { src: lockerRoom, alt: "Inside the locker room", position: "center 50%" },
-  { src: anderlechtSign, alt: "At RSC Anderlecht", position: "center 45%" },
-  { src: arrival, alt: "Matchday arrival with the first team", position: "center 38%" },
+  { src: portrait, alt: "Guilherme Neves", position: "center 0%", zoom: 1.12 },
+  { src: pitchside, alt: "Pitchside during a session", position: "center 6%", zoom: 1.12 },
+  { src: lockerRoom, alt: "Inside the locker room", position: "center 50%", zoom: 1.14 },
+  { src: anderlechtSign, alt: "At RSC Anderlecht", position: "center 10%", zoom: 1.1 },
+  { src: arrival, alt: "Matchday arrival with the first team", position: "center 0%", zoom: 1.05 },
 ];
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
@@ -267,7 +291,7 @@ const HeroSection = () => {
           src={pitchside}
           alt=""
           className="w-full h-full object-cover"
-          style={{ objectPosition: "58% 32%" }}
+          style={{ objectPosition: "40% 30%" }}
         />
         {/* Dissolves the hard left edge so the photo reads as part of the page
             and not as a panel dropped on top of it. */}
@@ -336,7 +360,7 @@ const HeroSection = () => {
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{ objectPosition: current.position }}
-                  initial={{ opacity: 0, scale: frame === 0 ? 1.9 : 1.14 }}
+                  initial={{ opacity: 0, scale: current.zoom }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{
