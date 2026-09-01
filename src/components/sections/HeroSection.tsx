@@ -7,7 +7,7 @@ import { gsap, SplitText, EASE_OUT as EASE } from "@/lib/gsap";
 import portrait from "@/assets/guilherme-portrait.webp";
 import pitchside from "@/assets/photos/leca-pitchside.webp";
 import lockerRoom from "@/assets/photos/locker-room.webp";
-import anderlechtSign from "@/assets/photos/anderlecht-sign.webp";
+import anderlechtTrophies from "@/assets/photos/anderlecht-trophies.webp";
 import arrival from "@/assets/photos/leca-arrival.webp";
 
 /**
@@ -50,17 +50,22 @@ import arrival from "@/assets/photos/leca-arrival.webp";
  * two seconds — it is a tighter one around its middle. Every value below is
  * chosen so the subject survives at the zoom, not merely at rest.
  *
- * The Anderlecht frame is the one deliberate absence. He is standing thirty
- * metres from the camera there, so at the size of this window his face is a
- * few pixels wide: not a portrait, just a smudge that has to be cropped
- * through. The sign is what that photograph is actually for, so the band
- * holds the sign and lets him go rather than half-showing him.
+ * The Anderlecht frame is a different photograph than it was, because the one
+ * before it could not be cropped into this window at all. In it the RSCA sign
+ * sits at 18.5% of the image height and he stands from 60% to 95%, so holding
+ * both would need 76.5% of the height against the 47.9% this window shows.
+ * There was no framing that kept the club and the person: it was the sign or
+ * it was him, and choosing the sign left the frame with no one in it.
+ *
+ * The trophy room answers both. He is front on and close, the crest is on the
+ * shirt, and the silverware is behind him - so the frame says Anderlecht
+ * without spending its whole height climbing a building to reach a word.
  */
 const frames = [
   { src: portrait, alt: "Guilherme Neves", position: "center 0%", zoom: 1.12 },
   { src: pitchside, alt: "Pitchside during a session", position: "center 6%", zoom: 1.12 },
   { src: lockerRoom, alt: "Inside the locker room", position: "center 50%", zoom: 1.14 },
-  { src: anderlechtSign, alt: "At RSC Anderlecht", position: "center 10%", zoom: 1.1 },
+  { src: anderlechtTrophies, alt: "In the trophy room at RSC Anderlecht", position: "center 60%", zoom: 1.1 },
   { src: arrival, alt: "Matchday arrival with the first team", position: "center 0%", zoom: 1.05 },
 ];
 
