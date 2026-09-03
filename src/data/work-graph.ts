@@ -135,14 +135,14 @@ const curatedGraph: Record<string, WorkNode> = {
     topic: "education", laws: [1, 2], maturity: "series", environment: "independent",
   },
   "supplementation-elite-football": {
-    topic: "education", laws: [1, 5], maturity: "visual", environment: "anderlecht",
+    topic: "education", laws: [1, 5], maturity: "idea", environment: "anderlecht",
   },
   "why-players-cramp": {
-    topic: "hydration", laws: [1, 4], maturity: "series", environment: "anderlecht",
+    topic: "hydration", laws: [1, 4], maturity: "idea", environment: "anderlecht",
     grewFrom: ["hydration-sweat-testing-framework"],
   },
   "athletes-food-pyramid": {
-    topic: "environment", laws: [2], maturity: "visual", environment: "independent",
+    topic: "environment", laws: [2], maturity: "idea", environment: "independent",
   },
   "football-nutrition-education-tools": {
     topic: "education", laws: [1, 2], maturity: "series", environment: "leca",
@@ -151,10 +151,10 @@ const curatedGraph: Record<string, WorkNode> = {
 
   // ── Written and structural work ───────────────────────────────────
   "md-1-fuel-system": {
-    topic: "matchday", laws: [1, 5], maturity: "guide", environment: "anderlecht",
+    topic: "matchday", laws: [1, 5], maturity: "idea", environment: "anderlecht",
   },
   "athlete-equivalent-bank": {
-    topic: "environment", laws: [2], maturity: "guide", environment: "leca",
+    topic: "environment", laws: [2], maturity: "idea", environment: "leca",
   },
   "football-nutrition-atlas": {
     topic: "framework", laws: [1, 2], maturity: "guide", environment: "independent",

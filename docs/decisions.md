@@ -388,6 +388,46 @@ exists.
 
 ---
 
+## Aligned with gui-os
+
+The positioning repository (`gnneves6/gui-os`, private) is the source of truth
+for who he is, who he speaks to, and what may be claimed. This site derives
+that; it does not decide it. A site session that wants to change audience,
+promise or credential takes it back there first. Both repositories are opened
+together from now on, which is what this session was for.
+
+**Who the site speaks to: athletes.** Decided by Guilherme, 3 September 2026,
+reaffirming what the positioning repository settled on 11 August and this
+repository had drifted from. `strategy.md` framed the niche as an open archive
+for practitioners, with practitioners as the contribution engine. That is a
+second answer to a question already answered, and two answers is how a site
+stops sounding like one person.
+
+The reversal is recorded rather than edited away: practitioners are not the
+audience, they are the bridge. Building in public is what brings them, and the
+evidence for that is real (the research-radar post is the best performing piece
+so far, and it reached athletes and practitioners at once). But the copy speaks
+to athletes, and an archive framed as a practitioner resource has to be
+reframed before it ships. `strategy.md` sections 2 and 4 are not yet rewritten
+to match, and must be before that copy goes live.
+
+**Maturity now tells the truth about five pieces.** MD-1 Fuel System, Athlete
+Equivalent Bank, Supplementation in Elite Football, Why Players Cramp and the
+Athlete's Food Pyramid were marked `guide`, `visual` or `series`, whose labels
+read "finished, and made to be kept". Nothing is written behind any of them.
+They are now `idea`, which reads "shaped thinking, not yet built", and the
+ladder's `intent` carries the rest, so the invitation degrades with the claim
+instead of being patched separately.
+
+This is the same rule the positioning repository applies to testimonials, in
+`05-NEGOCIO/prova-social.md`: promising nine things and delivering two spends
+exactly the trust that giving things away is supposed to build. Free does not
+exempt a promise from being kept. Each of the five is promoted back up the
+ladder as it gets written, and the promotion is visible, which makes writing
+them worth watching rather than a silent backfill.
+
+---
+
 ## Currently parked
 
 **FuelOps stays a positioning promise, not a build project.** The market for
