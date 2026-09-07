@@ -2,6 +2,7 @@
 // Produces ONE index.html with every script, style, font and image inlined,
 // because the artifact sandbox blocks all external requests.
 // Usage: npx vite build --config vite.artifact.config.ts
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { viteSingleFile } from "vite-plugin-singlefile";
@@ -11,9 +12,13 @@ import fs from "fs";
 // CSS with the site's Google Fonts embedded as data URIs. Generate it with
 // any tool that downloads the woff2 files referenced by the fonts.googleapis
 // stylesheet and swaps the URLs for base64 data URIs, then point this at it.
+// The default used to be an absolute path into one session's scratchpad, and
+// that directory is gone the moment its container is reclaimed, so the next
+// session's build died on a missing file. Resolve it beside this config
+// instead, which is where scripts/inline-fonts.mjs writes it.
 const inlineFontsPath =
   process.env.INLINE_FONTS_CSS ??
-  "/tmp/claude-0/-home-user-guilherme-neves-digital/844446b3-26fe-5897-aa1f-c6cf76b65abf/scratchpad/fonts-inline.css";
+  fileURLToPath(new URL("./fonts-inline.css", import.meta.url));
 
 export default defineConfig({
   plugins: [
