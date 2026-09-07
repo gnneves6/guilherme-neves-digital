@@ -58,6 +58,50 @@ Porque é que esta posição aguenta:
   praticantes. É o comportamento natural da profissão, não é um mecanismo que
   temos de inventar.
 
+### Revisão: a audiência foi escolhida pela procura, não pela análise
+
+A proposta de mesa era apontar às academias, com base em lacunas documentadas
+no futebol inglês: 15% das academias de Categoria 1 sem nutricionista, só 64%
+das restantes a tempo inteiro, e as horas de apoio a desabar nos escalões mais
+novos. Continua a ser verdade e continua a ser um mercado real.
+
+Mas ele trouxe dados melhores: o que as pessoas já lhe pedem sem ele oferecer.
+
+- **Ferramentas** para nutricionistas, profissionais de desporto e clubes. O
+  Radar de Evidência e a ferramenta de hidratação e teste de suor foram as que
+  pegaram.
+- **O caminho.** Estudantes a perguntar-lhe sobre o estágio porque viram o
+  percurso dele. Outros a perguntar como foi para fora, como arranjou, qual foi
+  o processo.
+
+Procura não solicitada é o sinal mais forte que existe — vale mais do que uma
+lacuna documentada num país que não é este. Por isso a audiência é essa.
+
+**São a mesma pessoa em dois momentos: quem quer fazer o que ele faz.** Um quer
+a ferramenta para hoje; o outro quer o mapa para lá chegar. A promessa única:
+
+> Mostro-te o que está mesmo dentro do futebol de elite, e como lá entrar.
+
+Há imensa gente a ensinar nutrição desportiva. Não há quase ninguém a mostrar
+como se entra, pela mesma razão da secção 1: quem entrou não escreve.
+
+Duas notas que não se devem perder:
+
+**A IA é vantagem dentro deste nicho, não um tema à parte.** Ferramentas
+assistidas por IA é uma coisa que os pares dele não têm. FuelOps AI e o Atlas
+deixam de ser curiosidades em desenvolvimento e passam a ser a linha de
+produto.
+
+**Isto não resolve o dinheiro sozinho, e é preciso dizê-lo.** Foi ele que
+disse que os estudantes não pagam. Mas "como é que foste para fora e
+arranjaste isso?" é a única coisa desta lista que as pessoas costumam pagar, e
+está a ser respondida de graça, uma a uma, por mensagem. É o candidato mais
+óbvio a primeira oferta real — e é honesto, porque ele fez mesmo aquilo.
+
+O sinal fino sobre o que está a funcionar vive nas sessões do `gui-os`. Quando
+esse repositório estiver ligado, esta secção deve ser reescrita contra ele em
+vez de contra um resumo de memória.
+
 ---
 
 ## 3. O diferencial que não se copia
