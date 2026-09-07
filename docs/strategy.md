@@ -366,3 +366,64 @@ orçamento, e **cinco a dez transcrições de entrevistas a clientes**.
 Não temos nenhuma. Transcrever mais podcasts dele não preenche isto —
 transcrever cinco a dez conversas com praticantes e com quem decide em clubes
 preenche. É o mesmo esforço aplicado ao lado certo.
+
+---
+
+## 11. Onde estamos no roadmap dele, e o que isso obriga
+
+Ele mandou o Stage 0 do $100M Scaling Roadmap da ACQ. É a peça que resolve, com
+material do próprio Hormozi, a discussão sobre preço da secção 10.
+
+**Estágio 0: IMPROVISE.** Papel: *Researcher*. Bottom line: *"Nothing is
+happening"*. Gradua-se por: **pôr pessoas a experimentar as tuas coisas de
+graça.**
+
+Instruções textuais do estágio: não te preocupes ainda com dinheiro; foca-te em
+ajudar e em recolher feedback; mantém tudo simples; muda com base no que te
+dizem; não gastes dinheiro, usa ferramentas grátis; tecnologia é o básico,
+*nothing fancy*. E sobre vendas: *"Since you don't know how to sell yet, you're
+just asking people to try your free stuff. When they try it, you ask them what
+they think and what would make it better."*
+
+**Estágio 1: MONETIZE.** Papel: *Starter*. Gradua-se pela primeira venda. O
+desafio central é o produto: ainda não é bom o suficiente para alguém pagar, e
+faz-se uma V1 que não precisa de ser perfeita, só suficientemente boa. As
+vendas fazem-se com os resultados dos utilizadores gratuitos como prova, a
+começar por quem gostou do que era grátis.
+
+### O que isto encerra
+
+A atracção pelo "ser o mais caro" é conselho de um estágio muito à frente. O
+roadmap põe-nos no 0. Não é a nossa opinião contra a dele; é o mapa dele.
+
+E as entrevistas que pareciam impossíveis por não haver clientes são, à letra,
+a descrição do cargo actual: *Researcher*.
+
+### O que isto obriga no site
+
+1. **Tirar o preço da Matchday Week.** Um produto pago é artefacto do Estágio 1.
+   Passa a gratuito em troca de feedback; o preço volta quando houver prova.
+2. **O CTA principal deixa de ser "fala comigo"** e passa a ser "usa isto com um
+   atleta real e diz-me o que falhou".
+3. **Falta a peça central do estágio: não há recolha de feedback.** Existem
+   `contact_messages`, `resource_interest` e `page_views`, e nada que pergunte o
+   que a pessoa melhoraria. É a funcionalidade mais importante em falta — e é o
+   mesmo mecanismo do Banco de Equivalências da secção 4. A contribuição é o
+   feedback; é uma feature, não duas.
+4. **Os testemunhos são a ponte para o Estágio 1**, porque a prova vem dos
+   utilizadores gratuitos. A sequência que o site tem de percorrer é:
+   ferramenta grátis → feedback → resultado → testemunho → primeira venda V1.
+5. **Entidade e conta bancária** estão listadas no Estágio 0, não no 1.
+
+### A parte desconfortável
+
+O estágio manda entregar grátis e recolher feedback, com tecnologia básica. Nós
+temos gasto sessões a afinar recortes de fotografias e efeitos de cursor com
+dezasseis dos dezassete artefactos sem nada por trás. Pelo critério do
+documento, isso é design a substituir a única coisa que gradua o estágio.
+
+### Ressalva sobre a fonte
+
+É uma peça de marketing da ACQ, com um anúncio ao Skool a meio. O conteúdo é
+sólido e útil, mas é simplificado e existe para levar o leitor ao ecossistema
+deles. Vale como mapa, não como escritura.
