@@ -219,3 +219,106 @@ do que já sabe; é legal sem cédula; é a semente do ciclo de contribuição; 
 útil às três audiências ao mesmo tempo.
 
 Um artefacto entregue por inteiro vale mais do que cinco prometidos.
+
+---
+
+## 10. O que adoptamos do Hormozi, e o que não
+
+Fui às fontes em vez de trabalhar de memória. O que se segue confronta os
+frameworks dele com este caso concreto, incluindo — sobretudo — onde não
+servem.
+
+### A equação de valor
+
+    Valor = (Resultado dos sonhos × Probabilidade percebida)
+            ─────────────────────────────────────────────────
+                (Tempo até ao resultado × Esforço e sacrifício)
+
+O detalhe que decide tudo aqui: **é um produto, não uma soma.** A
+probabilidade percebida é um multiplicador, e alimenta-se de prova,
+testemunhos, credenciais e garantias. Ele não tem cédula, não tem histórico
+de trabalho pago e o site não tem **um único testemunho** — verificado, não
+existe a palavra em lado nenhum do código.
+
+Multiplicar um resultado enorme por uma probabilidade percebida perto de zero
+dá perto de zero. É por isso que a conclusão "cobra caro" está errada *para
+já*, e está errada segundo o próprio framework, não contra ele.
+
+### O que aplicamos, e onde o site falha hoje
+
+**A dor antes da solução.** "The pain is the pitch": quanto melhor
+descreveres a dor de alguém, mais essa pessoa assume que tens a cura. O site
+abre com o nome dele e "Built from within" — descreve-o a ele. A linguagem de
+dor existe (`triggers`, em `audiences.ts`) mas vive no selector de
+audiências, dentro de `/services`, e **a home não liga uma única vez para
+`/services`**. A dor está enterrada a dois cliques.
+
+**Prova.** Testemunhos no formato antes / depois / ponte. Zero no site, e ele
+tem quem os dê: professores, colegas do Leça e do Anderlecht, e um
+fisioterapeuta com empresa e atletas profissionais. É o item de maior
+alavancagem da lista inteira e não é sequer trabalho de código.
+
+**Tempo e esforço, para baixo.** O denominador. A Matchday Week acerta nisto
+— uma semana, não uma época. Os artefactos prometidos sem documento são o
+oposto: tempo de espera infinito, porque nunca chegam.
+
+**Warm outreach primeiro.** Das quatro formas de gerar procura, ele é
+explícito que se começa por quem já te conhece — e que não se vende, pergunta-
+se quem mais poderia beneficiar. É exactamente a lista que o Guilherme já
+descreveu ter e não está a trabalhar.
+
+**Regra dos 100.** Cem contactos, ou cem minutos de conteúdo, ou cem euros de
+anúncios, por dia. Dá dosagem concreta ao "focar nas redes sociais".
+
+**Camadas.** Um serviço partido em níveis explícitos, com o *pitch* sempre no
+nível mais alto e adaptação para baixo se o orçamento não chegar. Temos um
+produto único a €89 e três formatos de trabalho que não são níveis. Isto é
+construível já.
+
+**Garantias.** Ele lista quatro tipos: incondicional, condicional (ligada a
+acções do cliente), anti-garantia (venda final, por escassez), e implícita
+(pagamento por desempenho). A nossa é a incondicional e vaga. A condicional é
+mais forte aqui, porque obriga a escrever o resultado antes. E a implícita já
+foi instinto dele — "pode haver serviços cujo pagamento é com base no valor
+extra".
+
+### O que não aplicamos, e porquê
+
+**1. "Sê o mais caro."** A documentação do próprio framework exclui a fase
+pré-validação e as indústrias reguladas. Ele é as duas coisas: sem clientes
+pagantes que sirvam de prova, e sem cédula num país onde a profissão é
+regulada. Preço de topo sem prova não é posicionamento premium — é um
+desconhecido caro.
+
+**2. Value stacking com preços inventados.** "Valor total €2.250, o teu
+investimento €599". Funciona em ginásios e infoprodutos. Aqui destrói a
+posição: o diferencial dele é ser a pessoa que documenta com honestidade, e
+números de ancoragem fabricados contradizem isso à primeira leitura. Clubes e
+outros profissionais — as audiências que interessam — reconhecem o truque.
+
+**3. O teste da "multidão esfomeada" — ele falha-o, e isso é informação.**
+Os três critérios são dor, poder de compra e capacidade de alcance.
+Estudantes têm dor e alcance, não têm dinheiro. Praticantes têm dor e
+alcance, têm pouco orçamento. Clubes têm dor e dinheiro, mas o alcance é
+péssimo — é relacional e são poucos lugares. **Nenhuma audiência passa nos
+três.** É precisamente por isso que a arquitectura da secção 5 separa quem
+paga em dinheiro de quem paga em contribuição e de quem não paga: é a
+resposta a uma falha real do teste, não uma maneira de a contornar.
+
+**4. Anúncios pagos.** Um dos quatro canais, e errado agora. Não há para onde
+converter.
+
+**5. A lógica de volume.** O modelo dele pressupõe muitos clientes. O
+Guilherme quer quatro clubes e disse que a selectividade é uma premissa. São
+jogos diferentes; a selectividade aproxima-se mais da anti-garantia e da
+escassez dele do que do manual de escala.
+
+### O pré-requisito que nos falta
+
+O framework exige, antes de se construir a oferta: mercado validado, o
+resultado dos sonhos escrito **nas palavras do cliente**, validação de
+orçamento, e **cinco a dez transcrições de entrevistas a clientes**.
+
+Não temos nenhuma. Transcrever mais podcasts dele não preenche isto —
+transcrever cinco a dez conversas com praticantes e com quem decide em clubes
+preenche. É o mesmo esforço aplicado ao lado certo.
