@@ -428,6 +428,82 @@ them worth watching rather than a silent backfill.
 
 ---
 
+## Where the tools live
+
+The question was whether the tools belong on this site, on a site of their
+own, or on several. The answer is neither one building nor many: **one front
+door, and rooms that do not all have to be in the same building yet.**
+
+**This site is the front door, and the only place that captures.** Not a page
+per tool: the showroom rule above already settled that, and a page per tool is
+exactly the weekly maintenance it warns against. **One destination that every
+tool points at**, wherever the tool is hosted, so a tool travelling on social
+has somewhere to send the people it collects. Today it collects hundreds and
+sends them nowhere, which is the actual hole, and it is one page wide, not
+seventeen.
+
+This is the showroom rule kept and the gap in it closed. "New tools go to social
+and to the list" was right, and there was no list.
+
+**The matchday planner keeps its own deployment.** It has pricing, accounts and
+entitlements, and it is the closest thing to revenue. Moving it to prove a
+point about architecture would risk the one working product to tidy a diagram.
+It gets a real page here instead, and this site becomes the top of its funnel.
+
+**The rule for anything built from here on**, so this does not need deciding
+again each time:
+
+| Build it inside this site | Give it its own deployment |
+|---|---|
+| Computes in the browser | Needs accounts or login |
+| No login, no payment | Takes payment |
+| No stored per-user state | Stores per-user data over time |
+| Small dependencies | Heavy or unusual dependencies |
+
+Either way the page, the explanation and the capture live here. The tool is
+never the entry point.
+
+This extends the decision already recorded in `strategy.md` section 7, that
+every artefact gets a page of its own here and Notion stops being the public
+surface. It is the same rule applied to tools rather than documents.
+
+**Not yet built, deliberately:** the index itself. It is one page listing what
+exists and taking an email, not a platform, and adding a tool to it is a line,
+not a build. It earns its place the moment the list it feeds exists. Building a
+hub before the rooms is the failure this repository has already made once, with
+seventeen artefacts and two documents behind them.
+
+## How data gets shown
+
+Numbers on their own do not build trust, and a page of them reads as
+marketing. Three rules, because the difference between a reference and a
+brochure is method, subject and time.
+
+**Show the method, not just the conclusion.** A number without a visible method
+is a claim. "The evidence says X" is worth less than X with the studies behind
+it and the reason each one counts. This is slower to build and it is the
+difference between being read and being believed.
+
+**Make the subject the reader, not him.** "Ten thousand views" is a fact about
+him. The same dataset says something about them, and that version is the one
+worth publishing. Reach numbers are the weakest thing a dataset can be asked to
+prove, and they are what everybody publishes.
+
+**Date it, and let it change in public.** Every figure carries when it was true.
+A number that quietly stops being accurate is the same failure as a claim that
+never was. `strategy.md` section 3 already argues that a versioned protocol
+showing what changed and why is proof of practice that cannot be faked; the
+same is true of data. A dated record that visibly corrects itself reads as a
+reference. A static infographic reads as an advertisement.
+
+**The precondition, which is not met:** presenting data requires collecting it,
+and `supabase/migrations/20260829120000_page_views.sql` has not been applied.
+`src/lib/analytics.ts` is written and waiting on it. Until it runs there is no
+data about this site to present, and every claim about what works here is
+reasoning rather than measurement.
+
+---
+
 ## Currently parked
 
 **FuelOps stays a positioning promise, not a build project.** The market for
