@@ -124,7 +124,12 @@ argument, the invitation. The premise and the method are one section, not two,
 because splitting them put the whole environments chapter between a problem and
 its answer.
 
-**The students door gives and does not sell.** It was written as a paid
+**The students door gives and does not sell.** *Confirmed 8 September 2026,
+against the private repository, which still had it written as the first paid
+offer. The consequence was not obvious and is worth stating: if this door does
+not charge, the first paid offer is the practitioners and clubs door, which is
+sellable today and carries the larger ticket. The reasoning below is what
+settled it.* It was written as a paid
 one-to-one session and an earlier note called it the first offer that could
 take money this week. That was wrong about this market: students do not pay.
 What they do is decide, across years, who the reference is, and a good number
