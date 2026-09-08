@@ -4,6 +4,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import FromWithinBridge from "@/components/sections/FromWithinBridge";
+import Reception from "@/components/sections/Reception";
 import TheLadder from "@/components/sections/TheLadder";
 import InvitationSection from "@/components/sections/InvitationSection";
 import PointerField from "@/components/journey/PointerField";
@@ -47,6 +48,11 @@ const Index = () => {
 
       {/* The argument, in one place: the problem, the answer, the method. */}
       <FromWithinBridge />
+
+      {/* What other people did about it. The argument above is his; this is
+          the only part a stranger has reason to believe, so it sits directly
+          before the first ask. */}
+      <Reception />
 
       {/* The first moment the page offers instead of explaining. Everything
           before this is who he is and what he thinks; the invitation after it
