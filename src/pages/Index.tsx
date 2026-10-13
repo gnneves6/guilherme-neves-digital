@@ -4,7 +4,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import CincoDimensoes from "@/components/sections/home/CincoDimensoes";
-import TresPortas from "@/components/sections/home/TresPortas";
+import Servicos from "@/components/sections/home/Servicos";
 import Captura from "@/components/sections/home/Captura";
 import PointerField from "@/components/journey/PointerField";
 
@@ -17,9 +17,14 @@ import PointerField from "@/components/journey/PointerField";
  *   1. HeroSection         Arrive fuelled, not full, e o que é em duas linhas
  *   2. ProofMarquee        onde, lido num relance e a mexer
  *   3. EnvironmentsSection o manequim com as cores de cada clube, um de cada vez
- *   4. CincoDimensoes      as cinco frases onde alguém reconhece o próprio clube
- *   5. TresPortas          o que se compra, uma linha cada, sem preços
+ *   4. Servicos            três colunas, uma luz e um ícone por serviço
+ *   5. CincoDimensoes      as cinco frases onde alguém reconhece o próprio clube
  *   6. Captura             a grelha, em troca do email
+ *
+ * Os serviços vêm antes do diagnóstico, e a ordem é deliberada: a página
+ * mostra primeiro o que há para ter e só depois como é que eu descubro o que
+ * falta. A secção das cinco dimensões passa a ser a demonstração da coluna
+ * 02, e é para lá que ela aponta.
  *
  * Saíram duas coisas desta página, e as duas por um motivo só: descreviam em
  * vez de darem.
@@ -51,8 +56,8 @@ const Index = () => {
       <HeroSection />
       <ProofMarquee />
       <EnvironmentsSection />
+      <Servicos />
       <CincoDimensoes />
-      <TresPortas />
       <Captura />
     </Layout>
     </PointerField>

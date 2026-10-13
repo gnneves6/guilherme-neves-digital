@@ -24,12 +24,12 @@ import gnMark from "@/assets/logos/gn-mark.png";
  * the navigation announcing a methodology before there is one to announce.
  */
 const navItems = [
-  { label: "Work", path: "/work" },
-  { label: "Services", path: "/services" },
-  { label: "About", path: "/about" },
+  { label: "Trabalho", path: "/work" },
+  { label: "Serviços", path: "/services" },
+  { label: "Sobre", path: "/about" },
 ];
 
-const CTA = { label: "Get in touch", path: "/contact" };
+const CTA = { label: "Falar comigo", path: "/contact" };
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

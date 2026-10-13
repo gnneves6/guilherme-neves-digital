@@ -430,7 +430,7 @@ const HeroSection = () => {
               being proved. Work is still one click away in the bar above. */}
           <Magnetic strength={8} as="span">
             <a
-              href="#portas"
+              href="#servicos"
               className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
             >
               Ver o que faço
