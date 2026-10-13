@@ -64,14 +64,14 @@ const InvitationSection = () => {
               to="/fuel-laws"
               className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide transition-colors duration-300 text-muted-foreground hover:text-foreground"
             >
-              Not yet? Take the five laws
+              Not yet? Take the five checks
               <span aria-hidden>→</span>
             </Link>
           </div>
         </Reveal>
         <Reveal delay={0.55}>
           <p className="mt-10 text-[10px] tracking-[0.35em] uppercase font-display opacity-40">
-            Guilherme Neves · Porto, Brussels
+            Guilherme Neves · Porto
           </p>
         </Reveal>
       </div>

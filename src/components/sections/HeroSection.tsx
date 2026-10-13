@@ -47,7 +47,7 @@ import arrival from "@/assets/photos/leca-arrival.webp";
  * `zoom` is the scale the frame enters at. It matters here because the scale
  * transform closes in on the centre of the element, not on `position`, so the
  * band you carefully chose is not the band that is on screen for the first
- * two seconds — it is a tighter one around its middle. Every value below is
+ * two seconds, it is a tighter one around its middle. Every value below is
  * chosen so the subject survives at the zoom, not merely at rest.
  *
  * The Anderlecht frame is a different photograph than it was, because the one
