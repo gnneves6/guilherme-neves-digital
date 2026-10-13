@@ -2,37 +2,39 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import HeroSection from "@/components/sections/HeroSection";
 import ProofMarquee from "@/components/sections/ProofMarquee";
-import Problema from "@/components/sections/home/Problema";
 import Prova from "@/components/sections/home/Prova";
 import TresPortas from "@/components/sections/home/TresPortas";
-import Sobre from "@/components/sections/home/Sobre";
+import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
 import Captura from "@/components/sections/home/Captura";
 import PointerField from "@/components/journey/PointerField";
 
 /**
- * A home, construída ao brief de 12 de outubro.
+ * A home mostra o valor. Não conta a história.
  *
- * Seis blocos, nesta ordem, e a ordem é o argumento: a promessa, o problema
- * que a merece, a prova de que o problema foi resolvido por dentro, o que se
- * pode comprar, quem ele é, e a lista. As credenciais chegam depois da ideia
- * que estão a provar, nunca antes, porque uma credencial não faz ninguém
- * ficar e um ciclo que a pessoa reconhece faz.
+ * A versão anterior tinha o ciclo do problema em três parágrafos e o percurso
+ * em seis, e isso é um currículo com boa tipografia. Quem chega não quer
+ * explicações, quer ver o que há para ter. A história continua a ser a melhor
+ * coisa que ele escreveu e por isso merece uma página onde alguém a vá ler de
+ * propósito, não a primeira, onde é um obstáculo entre a pessoa e a oferta.
  *
- * Em português, porque é onde está a conversão e porque o texto todo já
- * estava escrito em português no documento-mãe da história. O inglês serve
- * alcance e LinkedIn, e sai daqui traduzido, nunca escrito de raiz.
+ * Cinco blocos, e a ordem é promessa, prova, oferta, demonstração, lista:
  *
- * As quatro regras que esta página cumpre e que não se negoceiam: o título
- * protegido não aparece em lado nenhum, o produto de atleta não é nomeado
- * nem ligado, o trabalho internacional é uma linha sem nome, clube nem
- * valor, e não há preços, porque publicá-los antes de o enquadramento do
- * estágio estar fechado cria um conflito que ainda não existe.
+ *   1. HeroSection      Arrive fuelled, not full, e o que é em duas linhas
+ *   2. ProofMarquee     onde, lido num relance e a mexer
+ *   3. Prova            três números, cada um atribuído, mais o passo de agora
+ *   4. TresPortas       o que se compra, uma linha cada, sem preços
+ *   5. MatchdayPlanner  a parte útil, que se usa em vez de se ler
+ *   6. Captura          a lista
  *
- * O que a página anterior tinha e esta não tem, com a razão: a caminhada
- * pelos três ambientes era currículo e não caso; os números de alcance
- * estavam datados de setembro e as citações não têm autorização; a escada de
- * ofertas ordenava por preço, que é trabalho de outra página. Esses três
- * ficheiros continuam no repositório e não estão montados em lado nenhum.
+ * O planeador é o bloco que mudou tudo e já existia, parado numa página
+ * interior. É a única coisa aqui que entrega valor em vez de o descrever:
+ * escolhe-se uma hora de jogo e o dia resolve-se à frente da pessoa. Também
+ * é o único painel escuro e com cor numa página que, sem ele, é texto preto
+ * sobre osso do princípio ao fim.
+ *
+ * Problema.tsx e Sobre.tsx continuam no repositório e não estão montados.
+ * São o texto de /historia quando essa página existir, e é por isso que não
+ * foram apagados.
  */
 const Index = () => {
   return (
@@ -40,29 +42,15 @@ const Index = () => {
     <Layout>
       <SEO
         title="Guilherme Neves, Game Nutrition"
-        description="Construo o sistema de nutrição que uma equipa usa à volta da competição: matchday, viagem, hidratação, recuperação. Simples ao ponto de os jogadores o cumprirem."
+        description="O sistema de nutrição que uma equipa usa à volta da competição. Simples ao ponto de os jogadores o cumprirem."
         path="/"
       />
 
-      {/* 1. A promessa. Fuelled, not full. */}
       <HeroSection />
-
-      {/* Onde, lido num relance e a andar sozinho. */}
       <ProofMarquee />
-
-      {/* 2. O problema, que é o que faz ficar. */}
-      <Problema />
-
-      {/* 3. A prova, com cada número atribuído a onde foi feito. */}
       <Prova />
-
-      {/* 4. As três portas, sem preços. */}
       <TresPortas />
-
-      {/* 5. Quem sou, cortado da história e não escrito de novo. */}
-      <Sobre />
-
-      {/* 6. A captura, que é a razão de a página existir. */}
+      <MatchdayPlanner />
       <Captura />
     </Layout>
     </PointerField>

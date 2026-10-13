@@ -25,21 +25,21 @@ const portas = [
     titulo: "Auditoria das cinco dimensões",
     para: "Clubes · Academias · Centros de alto rendimento",
     corpo:
-      "Entro no clube e meço as cinco dimensões que decidem se a nutrição pega ou se fica no papel: conhecimento, contexto organizacional, calendário competitivo, cultura do balneário e capacidade de adaptação. Sai um relatório e um plano de implementação.",
+      "Meço as cinco dimensões que decidem se a nutrição pega ou fica no papel. Sai um relatório e um plano de implementação.",
   },
   {
     n: "02",
     titulo: "Sistema de nutrição de equipa",
     para: "Clubes · Academias · Equipas técnicas",
     corpo:
-      "Monta-se o que a equipa usa à volta da competição: matchday, viagem, hidratação, recuperação, catering. Fica a funcionar sem eu lá estar, que é a única forma de saber que está mesmo construído.",
+      "Matchday, viagem, hidratação, recuperação, catering. Fica a funcionar sem eu lá estar.",
   },
   {
     n: "03",
     titulo: "Formação",
     para: "Atletas · Pais · Equipas técnicas",
     corpo:
-      "Sessões e workshops sobre o que a equipa precisar: hidratação, dia de jogo, suplementação, o que comer quando se viaja. A literacia que me faltou, dada a quem ainda está a tempo de a usar.",
+      "Hidratação, dia de jogo, suplementação, comer em viagem. A literacia que me faltou, dada a tempo.",
   },
 ];
 

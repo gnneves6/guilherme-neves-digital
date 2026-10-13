@@ -394,7 +394,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.95, ease: EASE_OUT }}
         >
-          Fuelled, not full.
+          Arrive fuelled, not full.
         </motion.p>
 
         {/* The promise, which this screen did not have.
@@ -410,9 +410,8 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.05, ease: EASE_OUT }}
         >
-          Construo o sistema de nutrição que uma equipa usa à volta da
-          competição: matchday, viagem, hidratação, recuperação. E faço-o
-          simples ao ponto de os jogadores o cumprirem.
+          O sistema de nutrição que uma equipa usa à volta da competição.
+          Simples ao ponto de os jogadores o cumprirem.
         </motion.p>
 
         <motion.div

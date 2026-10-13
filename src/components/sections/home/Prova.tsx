@@ -1,26 +1,32 @@
 import Reveal from "@/components/Reveal";
 
 /**
- * A prova, em números que são todos verificáveis e todos atribuídos.
+ * A prova, em números, e cada um diz onde foi feito.
  *
- * Os três números são do estágio no RSC Anderlecht e dizem-no, porque um
- * número sem dono é uma alegação. A faixa de clubes logo acima já diz onde,
- * portanto esta secção só tem de dizer quanto.
+ * Um número sem dono é uma alegação. Estes três são do estágio no RSC
+ * Anderlecht e a secção diz isso, em vez de os deixar a pairar sobre a
+ * carreira toda.
  *
- * O que não está aqui é deliberado: nada do conteúdo dos materiais, que foram
- * feitos para o clube. Diz-se que existem e o que são.
+ * Sem parágrafos: a faixa de escudos logo acima já diz onde, e esta secção
+ * só tem de dizer quanto. Explicar o que cada número significa é trabalho de
+ * outra página.
  */
 const numeros = [
-  { figura: "630", label: "horas dentro do departamento de performance, RSC Anderlecht" },
-  { figura: "+100", label: "atletas acompanhados, da equipa principal aos sub-16" },
-  { figura: "22", label: "protocolos e materiais construídos, do sweat testing ao catering de deslocação" },
+  { figura: "630", unidade: "horas", label: "dentro do departamento de performance" },
+  { figura: "+100", unidade: "atletas", label: "da equipa principal aos sub-16" },
+  { figura: "22", unidade: "protocolos", label: "do teste de suor ao catering de deslocação" },
 ];
 
 const Prova = () => (
   <section className="section-padding section-spacing-sm">
     <div className="max-content">
       <Reveal>
-        <p className="text-caption mb-10">Onde é que isto foi aprendido</p>
+        <div className="flex items-baseline justify-between gap-6 flex-wrap mb-10">
+          <p className="text-caption">RSC Anderlecht, 2026</p>
+          <p className="text-caption text-[10px] opacity-55">
+            Antes, equipa principal do Leça FC
+          </p>
+        </div>
       </Reveal>
 
       <dl className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8">
@@ -29,8 +35,11 @@ const Prova = () => (
             <div>
               <dt className="font-display text-5xl md:text-6xl font-medium tracking-tight text-foreground">
                 {n.figura}
+                <span className="block font-sans text-[11px] tracking-[0.22em] uppercase mt-2" style={{ color: "hsl(var(--olive))" }}>
+                  {n.unidade}
+                </span>
               </dt>
-              <dd className="text-body text-sm leading-relaxed mt-4 max-w-[30ch]">
+              <dd className="text-body text-sm leading-relaxed mt-3 max-w-[28ch]">
                 {n.label}
               </dd>
             </div>
@@ -38,11 +47,25 @@ const Prova = () => (
         ))}
       </dl>
 
+      {/* O passo seguinte, dito como facto e não como promessa. É também o
+          que explica porque é que o título ainda leva a etiqueta no rodapé:
+          o estágio profissional é a via de acesso e começa agora. */}
       <Reveal delay={0.32}>
-        <p className="text-body text-sm mt-12 max-w-2xl leading-relaxed">
-          Antes disso, equipa principal do Leça FC, no ano em que subiram à
-          Liga 3.
-        </p>
+        <div
+          className="mt-12 md:mt-14 flex flex-wrap items-center gap-x-4 gap-y-2 border-l-2 pl-5 py-1"
+          style={{ borderColor: "hsl(var(--olive))" }}
+        >
+          <span
+            className="font-display text-[10px] tracking-[0.24em] uppercase px-2 py-[3px] rounded-[2px]"
+            style={{ background: "hsl(var(--olive))", color: "hsl(var(--ivory))" }}
+          >
+            Agora
+          </span>
+          <p className="font-display text-base md:text-lg text-foreground">
+            Run4Excellence, estágio profissional de acesso à profissão, a
+            construir o serviço de nutrição de raiz.
+          </p>
+        </div>
       </Reveal>
     </div>
   </section>

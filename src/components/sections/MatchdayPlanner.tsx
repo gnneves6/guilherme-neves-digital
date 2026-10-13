@@ -26,12 +26,12 @@ const KICKOFFS = ["15:00", "17:00", "20:00"];
 
 /** Offsets in hours from kick-off, matching the published MD-1 sheet. */
 const STEPS: { offset: number; label: string; detail: string; key?: boolean }[] = [
-  { offset: -8, label: "Breakfast", detail: "High carbohydrate, moderate protein, low fibre." },
-  { offset: -4, label: "Pre-match meal", detail: "The main fuelling window. Familiar food only.", key: true },
-  { offset: -1.5, label: "Pre-game snack", detail: "Easy to digest, tops up liver glycogen." },
-  { offset: 0, label: "Kick-off", detail: "Fuelled, hydrated, nothing new tried today.", key: true },
-  { offset: 1, label: "Half-time", detail: "Fluid with sodium, carbohydrate if the load is high." },
-  { offset: 2, label: "Recovery", detail: "Protein and carbohydrate together, then rehydrate to plan." },
+  { offset: -8, label: "Pequeno-almoço", detail: "Hidratos altos, proteína moderada, pouca fibra." },
+  { offset: -4, label: "Refeição pré-jogo", detail: "A refeição que conta. Só comida já provada.", key: true },
+  { offset: -1.5, label: "Reforço", detail: "Fácil de digerir, enche o depósito do fígado." },
+  { offset: 0, label: "Apito inicial", detail: "Abastecido, hidratado, nada de novo hoje.", key: true },
+  { offset: 1, label: "Intervalo", detail: "Líquido com sódio, hidratos se a carga for alta." },
+  { offset: 2, label: "Recuperação", detail: "Proteína e hidratos juntos, e repor líquidos a sério." },
 ];
 
 const addHours = (hhmm: string, hours: number) => {
@@ -65,19 +65,19 @@ const MatchdayPlanner = () => {
       <div className="max-content">
         <Reveal>
           <div className="flex items-baseline justify-between gap-6 flex-wrap mb-6">
-            <p className="text-caption">Run the system</p>
-            <p className="text-caption text-[10px] opacity-50">Matchday Fuel · live</p>
+            <p className="text-caption">Experimenta</p>
+            <p className="text-caption text-[10px] opacity-50">Demonstração · a correr</p>
           </div>
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="text-headline max-w-2xl">
-            Set a kick-off. Watch the week resolve around it.
+            Escolhe a hora do jogo. O dia resolve-se à volta dela.
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
           <p className="text-body-lg max-w-xl mt-5 mb-12">
-            This is the matchday structure I use, running. Change the two things that
-            change everything else, and read what the athlete actually does.
+            Muda as duas coisas que mudam tudo o resto, e lê o que o atleta
+            faz mesmo.
           </p>
         </Reveal>
 
@@ -96,7 +96,7 @@ const MatchdayPlanner = () => {
             >
               <div>
                 <p className="text-[10px] tracking-[0.28em] uppercase font-display mb-4" style={{ color: "hsl(var(--ivory) / 0.4)" }}>
-                  Kick-off
+                  Hora do jogo
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {KICKOFFS.map((k) => {
@@ -123,7 +123,7 @@ const MatchdayPlanner = () => {
               <div>
                 <div className="flex items-baseline justify-between mb-4">
                   <p className="text-[10px] tracking-[0.28em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.4)" }}>
-                    Body weight
+                    Peso corporal
                   </p>
                   <span className="font-display text-lg tabular-nums" style={{ color: "hsl(var(--ivory))" }}>
                     {weight} kg
@@ -136,7 +136,7 @@ const MatchdayPlanner = () => {
                   step={1}
                   value={weight}
                   onChange={(e) => setWeight(Number(e.target.value))}
-                  aria-label="Body weight in kilograms"
+                  aria-label="Peso corporal em quilogramas"
                   className="w-full accent-white cursor-pointer"
                   style={{ accentColor: "hsl(var(--ivory))" }}
                 />
@@ -149,9 +149,9 @@ const MatchdayPlanner = () => {
               style={{ borderBottom: "1px solid hsl(var(--ivory) / 0.08)", borderColor: "hsl(var(--ivory) / 0.08)" }}
             >
               {[
-                { k: "Carbohydrate, MD-1", v: `${targets.choLow} to ${targets.choHigh} g`, s: "6 to 8 g/kg" },
-                { k: "Fluid, match day", v: `${targets.fluid.toFixed(1)} L`, s: "35 ml/kg" },
-                { k: "Sodium", v: `${targets.sodium} g`, s: "Adjusted by sweat test" },
+                { k: "Hidratos, véspera", v: `${targets.choLow} a ${targets.choHigh} g`, s: "6 a 8 g/kg" },
+                { k: "Líquidos, dia de jogo", v: `${targets.fluid.toFixed(1)} L`, s: "35 ml/kg" },
+                { k: "Sódio", v: `${targets.sodium} g`, s: "Ajustado por teste de suor" },
               ].map((t) => (
                 <div key={t.k} className="px-4 md:px-8 py-6">
                   <p className="text-[9px] tracking-[0.22em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.38)" }}>
@@ -227,15 +227,15 @@ const MatchdayPlanner = () => {
               style={{ borderTop: "1px solid hsl(var(--ivory) / 0.08)" }}
             >
               <p className="text-[12px] leading-relaxed max-w-xl" style={{ color: "hsl(var(--ivory) / 0.45)" }}>
-                A demonstration, using published ranges. Inside a real environment every
-                number moves with the athlete, the calendar and the travel.
+                Demonstração, com intervalos publicados. Dentro de uma equipa cada
+                número muda com o atleta, o calendário e as viagens.
               </p>
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-display text-[13px] font-medium shrink-0 transition-opacity duration-300 hover:opacity-85"
                 style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
               >
-                Build this for your team <span aria-hidden>→</span>
+                Quero isto na minha equipa <span aria-hidden>→</span>
               </Link>
             </div>
           </div>
