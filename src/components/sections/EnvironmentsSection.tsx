@@ -1,8 +1,9 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { lazy, Suspense, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePointer } from "@/components/journey/PointerField";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { scrollToY } from "@/components/motion/SmoothScroll";
 import Chapter from "@/components/motion/Chapter";
 import sceneEnvironments from "@/assets/scene-environments-archive.jpg";
 import type { ShowcaseKit } from "@/components/environments/EnvironmentKitShowcase";
@@ -53,44 +54,44 @@ const EnvironmentsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
 
-  /*
-   * O capítulo avança por TEMPO e por CLIQUE, nunca por scroll.
-   *
-   * Antes era conduzido por `useScroll` sobre um bloco de cinco ecrãs de
-   * altura com um filho `sticky`. Funciona no site e é invisível no único
-   * sítio onde ele vê a página: o artifact dimensiona o iframe ao conteúdo,
-   * logo o scroll interior nunca sai de zero e `100svh` resolve para a
-   * altura do documento inteiro. Medido: a página passava de 8.524 px para
-   * 49.058 px, com esta secção congelada no primeiro clube. Era por isso
-   * que ela parecia sempre errada no preview.
-   *
-   * A troca também é melhor em si. Uma sequência que só anda se alguém fizer
-   * scroll à velocidade certa não mostra nada a quem passa os olhos; esta
-   * anda sozinha e pára assim que o rato entra, que é quando alguém decidiu
-   * olhar.
-   */
-  const [paused, setPaused] = useState(false);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
 
-  useEffect(() => {
-    if (paused) return;
-    const id = window.setInterval(
-      () => setActiveIndex((i) => (i + 1) % experiences.length),
-      4200
-    );
-    return () => window.clearInterval(id);
-  }, [paused]);
+  const { scrollYProgress: mobileProgress } = useScroll({
+    target: mobileRef,
+    offset: ["start start", "end end"],
+  });
 
-  // Respeita quem pediu menos movimento: aí só muda a clicar.
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) setPaused(true);
-  }, []);
-
-  const goTo = (idx: number) => {
-    setActiveIndex(idx);
-    setPaused(true);
+  const progressToIndex = (v: number) => {
+    const adjusted = Math.max(0, Math.min(0.999, (v - 0.1) / 0.8));
+    return Math.min(experiences.length - 1, Math.floor(adjusted * experiences.length));
   };
-  const goToMobile = goTo;
+
+  // Two independent scroll trackers, one per layout. Only the visible one
+  // (matched to the breakpoint) is allowed to drive the shared active index,
+  // so the hidden layout never fights it.
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (isMobile) return;
+    setActiveIndex(progressToIndex(v));
+  });
+  useMotionValueEvent(mobileProgress, "change", (v) => {
+    if (!isMobile) return;
+    setActiveIndex(progressToIndex(v));
+  });
+
+  // Smooth-scroll dots: scroll to a target progress within a given container
+  const goToWithin = (ref: React.RefObject<HTMLDivElement>, idx: number) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const totalScrollable = rect.height - window.innerHeight;
+    const target = 0.1 + (idx + 0.5) * (0.8 / experiences.length);
+    const top = window.scrollY + rect.top + totalScrollable * target;
+    scrollToY(top);
+  };
+  const goTo = (idx: number) => goToWithin(sectionRef, idx);
+  const goToMobile = (idx: number) => goToWithin(mobileRef, idx);
 
   const activeExp = experiences[activeIndex];
   const pointer = usePointer();
@@ -110,9 +111,9 @@ const EnvironmentsSection = () => {
       <div
         ref={mobileRef}
         className="md:hidden"
-        
+        style={{ height: `${(experiences.length + 1) * 100}vh` }}
       >
-        <div className="overflow-hidden section-dark flex flex-col min-h-[620px] py-10">
+        <div className="sticky top-0 h-[100svh] overflow-hidden section-dark flex flex-col">
           {/* Cinematic top dissolve, coming from ivory (FromWithinBridge above) */}
           <div
             aria-hidden
@@ -249,7 +250,7 @@ const EnvironmentsSection = () => {
                 animate={{ opacity: [0.28, 0.55, 0.28] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Clica para mudar
+                Scroll to advance
               </motion.span>
             </div>
           </div>
@@ -260,7 +261,7 @@ const EnvironmentsSection = () => {
       <section className="md:hidden section-dark section-padding pb-16 pt-4 relative overflow-hidden">
         <div className="max-content relative z-[2]">
           <p className="text-[10px] tracking-widest uppercase font-display mb-3 text-[hsl(var(--ivory)/0.3)]">
-            Também por dentro de
+            Additional Exposure
           </p>
           {additionalExposure.map((item) => (
             <div key={item.name} className="flex justify-between py-2 text-xs" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
@@ -291,8 +292,8 @@ const EnvironmentsSection = () => {
       </section>
 
       {/* DESKTOP, pinned FIFA-style mannequin */}
-      <div ref={sectionRef} className="hidden md:block" >
-        <div className="flex items-center overflow-hidden section-dark min-h-[680px] py-16">
+      <div ref={sectionRef} className="hidden md:block" style={{ height: `${(experiences.length + 1) * 100}vh` }}>
+        <div className="sticky top-0 h-screen flex items-center overflow-hidden section-dark">
           {/* Cinematic top dissolve, coming from FromWithinBridge (ivory) */}
           <div
             aria-hidden
@@ -384,8 +385,19 @@ const EnvironmentsSection = () => {
                             <p className="font-display text-base lg:text-lg italic max-w-md leading-relaxed text-[hsl(var(--ivory)/0.7)] mt-5">
                               “{exp.chapter}”
                             </p>
+                            {/* What was actually done here. This replaced a row
+                                of subject tags: a tag says the topic was touched,
+                                a proof says what came of it.
+
+                                The scope line goes first because three sharp
+                                specifics, alone, read as everything he did in a
+                                season. Said after the breadth, they read as
+                                examples of it. */}
+                            <p className="mt-5 text-[13px] lg:text-sm leading-relaxed text-[hsl(var(--ivory)/0.55)] max-w-md">
+                              {exp.scope}
+                            </p>
                             <p className="mt-6 text-[9px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                              Na prática
+                              In practice
                             </p>
                             <ul className="mt-3 space-y-2.5 max-w-md">
                               {exp.proofs.map((proof, pi) => (
@@ -406,6 +418,11 @@ const EnvironmentsSection = () => {
                                 </motion.li>
                               ))}
                             </ul>
+                            {exp.seasonNote && (
+                              <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3 max-w-md">
+                                {exp.seasonNote}
+                              </p>
+                            )}
                             {/* The way out of the most convincing thing here.
                                 This chapter had no link in it, and neither did
                                 the five thousand pixels of home around it, so
@@ -492,7 +509,7 @@ const EnvironmentsSection = () => {
                     animate={{ opacity: [0.25, 0.55, 0.25] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
-                    Clica para mudar
+                    Scroll to advance
                   </motion.p>
                 </div>
               </div>
@@ -500,7 +517,7 @@ const EnvironmentsSection = () => {
               {/* Bottom strip */}
               <div className="mt-10 pt-6" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
                 <p className="text-[10px] tracking-widest uppercase font-display mb-4 text-[hsl(var(--ivory)/0.3)]">
-                  Também por dentro de
+                  Additional Observational Exposure
                 </p>
                 <div className="flex flex-wrap gap-x-10 gap-y-2">
                   {additionalExposure.map((item) => (
