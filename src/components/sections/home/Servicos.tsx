@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
+import fotoAnderlecht from "@/assets/photos/anderlecht-sign.webp";
+import fotoPitchside from "@/assets/photos/leca-pitchside.webp";
 
 /**
  * Serviços, em três colunas com uma luz e um ícone por coluna.
@@ -80,11 +82,12 @@ const servicos = [
     icone: <Folha />,
     luz: "150 36% 30%",
     luzClara: "148 42% 64%",
-    titulo: "Ferramentas, construídas contigo",
+    titulo: "Ferramentas construídas à tua medida",
     para: "Profissionais que trabalham com atletas",
     valor:
-      "A folha que te leva uma tarde passa a levar dez minutos. E sais com ela construída por ti, não alugada à minha.",
+      "Não te vendo a minha folha. Sento-me contigo, vejo como trabalhas, e sais com a tua: a fazer em dez minutos o que te levava uma tarde, e tua para sempre.",
     itens: ["Sessão a dois", "Revisão do teu ficheiro", "Formação de equipa"],
+    foto: null,
     href: "/contact",
   },
   {
@@ -92,11 +95,12 @@ const servicos = [
     icone: <Pentagono />,
     luz: "36 58% 40%",
     luzClara: "40 70% 68%",
-    titulo: "Auditoria e sistemas de clube",
+    titulo: "Auditoria e sistema de clube",
     para: "Clubes · Academias · Centros de alto rendimento",
     valor:
-      "Meço as cinco dimensões, mostro onde se perde tempo e dinheiro, e deixo o processo escrito a funcionar sem depender de uma pessoa.",
+      "Entro na estrutura, meço as cinco dimensões e digo onde se está a perder tempo e dinheiro. Fica um sistema escrito que a tua gente executa, e que não se desmancha quando eu saio pela porta.",
     itens: ["Relatório e plano", "Dia de jogo e viagem", "Catering e hidratação"],
+    foto: fotoAnderlecht,
     href: "#dimensoes",
   },
   {
@@ -104,11 +108,12 @@ const servicos = [
     icone: <Camisola />,
     luz: "256 28% 42%",
     luzClara: "258 48% 74%",
-    titulo: "Apoio a atletas de elite",
+    titulo: "Ao lado do atleta, a época inteira",
     para: "O atleta e a equipa privada dele",
     valor:
-      "O que existe no supermercado onde ele vive, o que ele come mesmo, e um padrão que aguenta a época. Com a equipa dele, não por cima dela.",
+      "Entro na vida real dele: o supermercado onde vive, o que come mesmo, a casa, a viagem, o calendário. Fica um padrão que aguenta a época, e alguém do lado dele quando a semana corre mal.",
     itens: ["Chegada a um clube novo", "Época acompanhada", "No sítio ou à distância"],
+    foto: fotoPitchside,
     href: "/contact",
   },
 ];
@@ -130,7 +135,21 @@ const Servicos = () => (
         {servicos.map((s, i) => {
           const interno = s.href.startsWith("#");
           const corpo = (
-            <div className="group block">
+            <div className="group relative block">
+              {/* A caixa. Sem ela não se percebe em que coluna é que o rato
+                  está, e três colunas lado a lado sem resposta lêem-se como
+                  uma grelha morta. Fica por trás do conteúdo e cresce para
+                  fora da coluna, para o realce apanhar a coluna toda e não
+                  só o painel. */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -inset-x-4 -inset-y-5 rounded-[4px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  background: `linear-gradient(to bottom, hsl(${s.luz} / 0.15), hsl(${s.luz} / 0.03) 55%, transparent)`,
+                  border: `1px solid hsl(${s.luz} / 0.32)`,
+                }}
+              />
+              <div className="relative">
               {/* O painel. A luz sobe de baixo e cresce ao passar o rato, que
                   é o que faz a coluna responder sem precisar de uma frase a
                   dizer que é clicável. */}
@@ -140,6 +159,16 @@ const Servicos = () => (
               >
                 {/* A luz. Em fundo claro isto lia como uma mancha de cor:
                     uma luz só se vê contra escuro, e era esse o pedido. */}
+                {s.foto && (
+                  <img
+                    src={s.foto}
+                    alt=""
+                    aria-hidden
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover opacity-[0.28] transition-all duration-700 group-hover:opacity-40 group-hover:scale-[1.04]"
+                    style={{ objectPosition: "center 28%" }}
+                  />
+                )}
                 <motion.div
                   aria-hidden
                   className="absolute inset-0"
@@ -194,6 +223,7 @@ const Servicos = () => (
                   </li>
                 ))}
               </ul>
+              </div>
             </div>
           );
 

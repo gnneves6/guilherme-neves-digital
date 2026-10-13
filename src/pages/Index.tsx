@@ -5,6 +5,7 @@ import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import CincoDimensoes from "@/components/sections/home/CincoDimensoes";
 import Servicos from "@/components/sections/home/Servicos";
+import Assinatura from "@/components/sections/home/Assinatura";
 import Captura from "@/components/sections/home/Captura";
 import PointerField from "@/components/journey/PointerField";
 
@@ -19,7 +20,8 @@ import PointerField from "@/components/journey/PointerField";
  *   3. EnvironmentsSection o manequim com as cores de cada clube, um de cada vez
  *   4. Servicos            três colunas, uma luz e um ícone por serviço
  *   5. CincoDimensoes      as cinco frases onde alguém reconhece o próprio clube
- *   6. Captura             a grelha, em troca do email
+ *   6. Assinatura          a cara e os números, no mesmo sítio
+ *   7. Captura             a grelha, em troca do email
  *
  * Os serviços vêm antes do diagnóstico, e a ordem é deliberada: a página
  * mostra primeiro o que há para ter e só depois como é que eu descubro o que
@@ -58,6 +60,7 @@ const Index = () => {
       <EnvironmentsSection />
       <Servicos />
       <CincoDimensoes />
+      <Assinatura />
       <Captura />
     </Layout>
     </PointerField>
