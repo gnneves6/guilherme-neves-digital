@@ -58,6 +58,50 @@ Porque é que esta posição aguenta:
   praticantes. É o comportamento natural da profissão, não é um mecanismo que
   temos de inventar.
 
+### Revisão: a audiência foi escolhida pela procura, não pela análise
+
+A proposta de mesa era apontar às academias, com base em lacunas documentadas
+no futebol inglês: 15% das academias de Categoria 1 sem nutricionista, só 64%
+das restantes a tempo inteiro, e as horas de apoio a desabar nos escalões mais
+novos. Continua a ser verdade e continua a ser um mercado real.
+
+Mas ele trouxe dados melhores: o que as pessoas já lhe pedem sem ele oferecer.
+
+- **Ferramentas** para nutricionistas, profissionais de desporto e clubes. O
+  Radar de Evidência e a ferramenta de hidratação e teste de suor foram as que
+  pegaram.
+- **O caminho.** Estudantes a perguntar-lhe sobre o estágio porque viram o
+  percurso dele. Outros a perguntar como foi para fora, como arranjou, qual foi
+  o processo.
+
+Procura não solicitada é o sinal mais forte que existe — vale mais do que uma
+lacuna documentada num país que não é este. Por isso a audiência é essa.
+
+**São a mesma pessoa em dois momentos: quem quer fazer o que ele faz.** Um quer
+a ferramenta para hoje; o outro quer o mapa para lá chegar. A promessa única:
+
+> Mostro-te o que está mesmo dentro do futebol de elite, e como lá entrar.
+
+Há imensa gente a ensinar nutrição desportiva. Não há quase ninguém a mostrar
+como se entra, pela mesma razão da secção 1: quem entrou não escreve.
+
+Duas notas que não se devem perder:
+
+**A IA é vantagem dentro deste nicho, não um tema à parte.** Ferramentas
+assistidas por IA é uma coisa que os pares dele não têm. FuelOps AI e o Atlas
+deixam de ser curiosidades em desenvolvimento e passam a ser a linha de
+produto.
+
+**Isto não resolve o dinheiro sozinho, e é preciso dizê-lo.** Foi ele que
+disse que os estudantes não pagam. Mas "como é que foste para fora e
+arranjaste isso?" é a única coisa desta lista que as pessoas costumam pagar, e
+está a ser respondida de graça, uma a uma, por mensagem. É o candidato mais
+óbvio a primeira oferta real — e é honesto, porque ele fez mesmo aquilo.
+
+O sinal fino sobre o que está a funcionar vive nas sessões do `gui-os`. Quando
+esse repositório estiver ligado, esta secção deve ser reescrita contra ele em
+vez de contra um resumo de memória.
+
 ---
 
 ## 3. O diferencial que não se copia
@@ -219,3 +263,167 @@ do que já sabe; é legal sem cédula; é a semente do ciclo de contribuição; 
 útil às três audiências ao mesmo tempo.
 
 Um artefacto entregue por inteiro vale mais do que cinco prometidos.
+
+---
+
+## 10. O que adoptamos do Hormozi, e o que não
+
+Fui às fontes em vez de trabalhar de memória. O que se segue confronta os
+frameworks dele com este caso concreto, incluindo — sobretudo — onde não
+servem.
+
+### A equação de valor
+
+    Valor = (Resultado dos sonhos × Probabilidade percebida)
+            ─────────────────────────────────────────────────
+                (Tempo até ao resultado × Esforço e sacrifício)
+
+O detalhe que decide tudo aqui: **é um produto, não uma soma.** A
+probabilidade percebida é um multiplicador, e alimenta-se de prova,
+testemunhos, credenciais e garantias. Ele não tem cédula, não tem histórico
+de trabalho pago e o site não tem **um único testemunho** — verificado, não
+existe a palavra em lado nenhum do código.
+
+Multiplicar um resultado enorme por uma probabilidade percebida perto de zero
+dá perto de zero. É por isso que a conclusão "cobra caro" está errada *para
+já*, e está errada segundo o próprio framework, não contra ele.
+
+### O que aplicamos, e onde o site falha hoje
+
+**A dor antes da solução.** "The pain is the pitch": quanto melhor
+descreveres a dor de alguém, mais essa pessoa assume que tens a cura. O site
+abre com o nome dele e "Built from within" — descreve-o a ele. A linguagem de
+dor existe (`triggers`, em `audiences.ts`) mas vive no selector de
+audiências, dentro de `/services`, e **a home não liga uma única vez para
+`/services`**. A dor está enterrada a dois cliques.
+
+**Prova.** Testemunhos no formato antes / depois / ponte. Zero no site, e ele
+tem quem os dê: professores, colegas do Leça e do Anderlecht, e um
+fisioterapeuta com empresa e atletas profissionais. É o item de maior
+alavancagem da lista inteira e não é sequer trabalho de código.
+
+**Tempo e esforço, para baixo.** O denominador. A Matchday Week acerta nisto
+— uma semana, não uma época. Os artefactos prometidos sem documento são o
+oposto: tempo de espera infinito, porque nunca chegam.
+
+**Warm outreach primeiro.** Das quatro formas de gerar procura, ele é
+explícito que se começa por quem já te conhece — e que não se vende, pergunta-
+se quem mais poderia beneficiar. É exactamente a lista que o Guilherme já
+descreveu ter e não está a trabalhar.
+
+**Regra dos 100.** Cem contactos, ou cem minutos de conteúdo, ou cem euros de
+anúncios, por dia. Dá dosagem concreta ao "focar nas redes sociais".
+
+**Camadas.** Um serviço partido em níveis explícitos, com o *pitch* sempre no
+nível mais alto e adaptação para baixo se o orçamento não chegar. Temos um
+produto único a €89 e três formatos de trabalho que não são níveis. Isto é
+construível já.
+
+**Garantias.** Ele lista quatro tipos: incondicional, condicional (ligada a
+acções do cliente), anti-garantia (venda final, por escassez), e implícita
+(pagamento por desempenho). A nossa é a incondicional e vaga. A condicional é
+mais forte aqui, porque obriga a escrever o resultado antes. E a implícita já
+foi instinto dele — "pode haver serviços cujo pagamento é com base no valor
+extra".
+
+### O que não aplicamos, e porquê
+
+**1. "Sê o mais caro."** A documentação do próprio framework exclui a fase
+pré-validação e as indústrias reguladas. Ele é as duas coisas: sem clientes
+pagantes que sirvam de prova, e sem cédula num país onde a profissão é
+regulada. Preço de topo sem prova não é posicionamento premium — é um
+desconhecido caro.
+
+**2. Value stacking com preços inventados.** "Valor total €2.250, o teu
+investimento €599". Funciona em ginásios e infoprodutos. Aqui destrói a
+posição: o diferencial dele é ser a pessoa que documenta com honestidade, e
+números de ancoragem fabricados contradizem isso à primeira leitura. Clubes e
+outros profissionais — as audiências que interessam — reconhecem o truque.
+
+**3. O teste da "multidão esfomeada" — ele falha-o, e isso é informação.**
+Os três critérios são dor, poder de compra e capacidade de alcance.
+Estudantes têm dor e alcance, não têm dinheiro. Praticantes têm dor e
+alcance, têm pouco orçamento. Clubes têm dor e dinheiro, mas o alcance é
+péssimo — é relacional e são poucos lugares. **Nenhuma audiência passa nos
+três.** É precisamente por isso que a arquitectura da secção 5 separa quem
+paga em dinheiro de quem paga em contribuição e de quem não paga: é a
+resposta a uma falha real do teste, não uma maneira de a contornar.
+
+**4. Anúncios pagos.** Um dos quatro canais, e errado agora. Não há para onde
+converter.
+
+**5. A lógica de volume.** O modelo dele pressupõe muitos clientes. O
+Guilherme quer quatro clubes e disse que a selectividade é uma premissa. São
+jogos diferentes; a selectividade aproxima-se mais da anti-garantia e da
+escassez dele do que do manual de escala.
+
+### O pré-requisito que nos falta
+
+O framework exige, antes de se construir a oferta: mercado validado, o
+resultado dos sonhos escrito **nas palavras do cliente**, validação de
+orçamento, e **cinco a dez transcrições de entrevistas a clientes**.
+
+Não temos nenhuma. Transcrever mais podcasts dele não preenche isto —
+transcrever cinco a dez conversas com praticantes e com quem decide em clubes
+preenche. É o mesmo esforço aplicado ao lado certo.
+
+---
+
+## 11. Onde estamos no roadmap dele, e o que isso obriga
+
+Ele mandou o Stage 0 do $100M Scaling Roadmap da ACQ. É a peça que resolve, com
+material do próprio Hormozi, a discussão sobre preço da secção 10.
+
+**Estágio 0: IMPROVISE.** Papel: *Researcher*. Bottom line: *"Nothing is
+happening"*. Gradua-se por: **pôr pessoas a experimentar as tuas coisas de
+graça.**
+
+Instruções textuais do estágio: não te preocupes ainda com dinheiro; foca-te em
+ajudar e em recolher feedback; mantém tudo simples; muda com base no que te
+dizem; não gastes dinheiro, usa ferramentas grátis; tecnologia é o básico,
+*nothing fancy*. E sobre vendas: *"Since you don't know how to sell yet, you're
+just asking people to try your free stuff. When they try it, you ask them what
+they think and what would make it better."*
+
+**Estágio 1: MONETIZE.** Papel: *Starter*. Gradua-se pela primeira venda. O
+desafio central é o produto: ainda não é bom o suficiente para alguém pagar, e
+faz-se uma V1 que não precisa de ser perfeita, só suficientemente boa. As
+vendas fazem-se com os resultados dos utilizadores gratuitos como prova, a
+começar por quem gostou do que era grátis.
+
+### O que isto encerra
+
+A atracção pelo "ser o mais caro" é conselho de um estágio muito à frente. O
+roadmap põe-nos no 0. Não é a nossa opinião contra a dele; é o mapa dele.
+
+E as entrevistas que pareciam impossíveis por não haver clientes são, à letra,
+a descrição do cargo actual: *Researcher*.
+
+### O que isto obriga no site
+
+1. **Tirar o preço da Matchday Week.** Um produto pago é artefacto do Estágio 1.
+   Passa a gratuito em troca de feedback; o preço volta quando houver prova.
+2. **O CTA principal deixa de ser "fala comigo"** e passa a ser "usa isto com um
+   atleta real e diz-me o que falhou".
+3. **Falta a peça central do estágio: não há recolha de feedback.** Existem
+   `contact_messages`, `resource_interest` e `page_views`, e nada que pergunte o
+   que a pessoa melhoraria. É a funcionalidade mais importante em falta — e é o
+   mesmo mecanismo do Banco de Equivalências da secção 4. A contribuição é o
+   feedback; é uma feature, não duas.
+4. **Os testemunhos são a ponte para o Estágio 1**, porque a prova vem dos
+   utilizadores gratuitos. A sequência que o site tem de percorrer é:
+   ferramenta grátis → feedback → resultado → testemunho → primeira venda V1.
+5. **Entidade e conta bancária** estão listadas no Estágio 0, não no 1.
+
+### A parte desconfortável
+
+O estágio manda entregar grátis e recolher feedback, com tecnologia básica. Nós
+temos gasto sessões a afinar recortes de fotografias e efeitos de cursor com
+dezasseis dos dezassete artefactos sem nada por trás. Pelo critério do
+documento, isso é design a substituir a única coisa que gradua o estágio.
+
+### Ressalva sobre a fonte
+
+É uma peça de marketing da ACQ, com um anúncio ao Skool a meio. O conteúdo é
+sólido e útil, mas é simplificado e existe para levar o leitor ao ecossistema
+deles. Vale como mapa, não como escritura.
