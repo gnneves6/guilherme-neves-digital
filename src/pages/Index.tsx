@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import HeroSection from "@/components/sections/HeroSection";
 import ProofMarquee from "@/components/sections/ProofMarquee";
+import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import Prova from "@/components/sections/home/Prova";
 import TresPortas from "@/components/sections/home/TresPortas";
 import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
@@ -19,12 +20,20 @@ import PointerField from "@/components/journey/PointerField";
  *
  * Cinco blocos, e a ordem é promessa, prova, oferta, demonstração, lista:
  *
- *   1. HeroSection      Arrive fuelled, not full, e o que é em duas linhas
- *   2. ProofMarquee     onde, lido num relance e a mexer
- *   3. Prova            três números, cada um atribuído, mais o passo de agora
- *   4. TresPortas       o que se compra, uma linha cada, sem preços
- *   5. MatchdayPlanner  a parte útil, que se usa em vez de se ler
- *   6. Captura          a lista
+ *   1. HeroSection         Arrive fuelled, not full, e o que é em duas linhas
+ *   2. ProofMarquee        onde, lido num relance e a mexer
+ *   3. EnvironmentsSection o manequim com as cores de cada clube, um de cada vez
+ *   4. Prova               três números atribuídos, mais o passo de agora
+ *   5. TresPortas          o que se compra, uma linha cada, sem preços
+ *   6. MatchdayPlanner     a parte útil, que se usa em vez de se ler
+ *   7. Captura             a lista
+ *
+ * Os ambientes voltaram, e o corte que eu lhes tinha feito estava errado na
+ * peça certa: o problema nunca foi a secção, foi o parágrafo de âmbito lá
+ * dentro. Tirado esse e a nota de época, o que sobra é o que a fazia valer,
+ * o manequim a mudar de cores clube a clube e três provas curtas por cada
+ * um. Mostra em vez de contar, que é a única coisa que esta página tem de
+ * fazer.
  *
  * O planeador é o bloco que mudou tudo e já existia, parado numa página
  * interior. É a única coisa aqui que entrega valor em vez de o descrever:
@@ -48,6 +57,7 @@ const Index = () => {
 
       <HeroSection />
       <ProofMarquee />
+      <EnvironmentsSection />
       <Prova />
       <TresPortas />
       <MatchdayPlanner />
