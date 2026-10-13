@@ -78,12 +78,12 @@ const Footer = () => {
               como uma anotação à mão por cima da palavra, não como parte da
               frase. O pt-3 existe para a etiqueta ter onde caber sem tocar
               no que está acima. */}
-          <p className="text-body text-xs pt-4">
+          <p className="text-body text-xs pt-3.5">
             Athlete by nature.{" "}
             <span className="relative inline-block">
               <span
                 aria-hidden
-                className="absolute -top-[18px] left-[2px] px-1.5 py-[1px] rounded-[2px] font-display text-[9px] font-medium tracking-[0.1em] uppercase whitespace-nowrap -rotate-[7deg] origin-bottom-left"
+                className="absolute -top-[15px] left-[2px] px-1 py-[0.5px] rounded-[2px] font-display text-[7px] font-medium tracking-[0.08em] uppercase whitespace-nowrap -rotate-[7deg] origin-bottom-left"
                 style={{ background: "hsl(var(--olive))", color: "hsl(var(--ivory))" }}
               >
                 soon to be

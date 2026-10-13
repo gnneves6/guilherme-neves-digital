@@ -6,15 +6,21 @@ import lecaCrest from "@/assets/logos/leca.png";
 import r4eCrest from "@/assets/logos/run4excellence.jpg";
 
 /**
- * ProofMarquee.
+ * ProofMarquee, os ambientes a passar.
  *
- * A band of the environments the work has actually been done inside, moving
- * on its own. Two things earn its place: it is the fastest credibility a
- * stranger can read, and it keeps the page alive between two static sections
- * without asking for a scroll.
+ * É a secção de que ele mais gosta e durante um tempo deixou de a encontrar
+ * na página, o que é o próprio diagnóstico: tinha 118 pixels de altura,
+ * escudos de 36, e estava encostada à dobra por baixo de um herói de ecrã
+ * inteiro. Nessa escala não se lê como uma secção, lê-se como um separador,
+ * e passa-se por ela sem reparar.
  *
- * Built as two identical tracks translated across a shared timeline, so the
- * seam never shows and the loop needs no measurement of the viewport.
+ * Agora tem o dobro da altura, escudos ao tamanho a que um emblema se
+ * reconhece, e uma etiqueta por cima que diz o que aquilo é. Continua a não
+ * ter uma linha de texto corrido, que é a razão de funcionar: é a
+ * credibilidade mais rápida que um estranho consegue ler, e lê-se sem ler.
+ *
+ * Dois carris idênticos deslocados sobre a mesma linha de tempo, para a
+ * emenda nunca aparecer e o ciclo não depender de medir o ecrã.
  */
 
 const crests: Record<string, string> = {
@@ -50,22 +56,22 @@ const Track = ({ ariaHidden }: { ariaHidden?: boolean }) => (
     aria-hidden={ariaHidden || undefined}
   >
     {entries.map((e) => (
-      <div key={e.key} className="flex items-center gap-4 px-8 md:px-12 shrink-0">
+      <div key={e.key} className="flex items-center gap-5 px-10 md:px-16 shrink-0">
         {e.crest ? (
           <img
             src={e.crest}
             alt=""
-            className="w-9 h-9 md:w-11 md:h-11 object-contain shrink-0"
+            className="w-14 h-14 md:w-16 md:h-16 object-contain shrink-0"
             draggable={false}
           />
         ) : (
-          <span className="w-1.5 h-1.5 rounded-full bg-foreground/25 shrink-0" />
+          <span className="w-2 h-2 rounded-full bg-foreground/25 shrink-0" />
         )}
         <span className="flex flex-col leading-tight">
-          <span className="font-display text-base md:text-lg font-medium text-foreground whitespace-nowrap">
+          <span className="font-display text-lg md:text-2xl font-medium tracking-tight text-foreground whitespace-nowrap">
             {e.name}
           </span>
-          <span className="text-[10px] tracking-[0.2em] uppercase font-display text-muted-foreground whitespace-nowrap">
+          <span className="text-[10px] md:text-[11px] tracking-[0.22em] uppercase font-display text-muted-foreground whitespace-nowrap mt-0.5">
             {e.meta}
           </span>
         </span>
@@ -98,9 +104,10 @@ const ProofMarquee = () => {
 
   return (
     <section
-      className="relative overflow-hidden border-y border-border/60 py-7 md:py-9"
-      aria-label="Environments the work has been done inside"
+      className="relative overflow-hidden border-y border-border/60 py-10 md:py-14"
+      aria-label="Os ambientes onde o trabalho foi feito"
     >
+      <p className="text-caption section-padding mb-7 md:mb-9">Feito por dentro de</p>
       <div ref={trackRef} className="flex w-max will-change-transform">
         <Track />
         <Track ariaHidden />
