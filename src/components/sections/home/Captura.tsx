@@ -13,6 +13,16 @@ import { supabase } from "@/integrations/supabase/client";
  * Isto não é uma secção de newsletter, é o buraco por onde saiu uma
  * audiência medida.
  *
+ * O que estava aqui antes pedia o email para dar "o que vou construindo":
+ * uma descrição dele, não uma troca. Pede-se o email em troca da grelha das
+ * cinco dimensões, que é a coisa que a secção acima acabou de mostrar a
+ * funcionar, porque o que converteu nas redes converteu sempre pela mesma
+ * razão: a peça estava incompleta sem aquilo que o portão dava.
+ *
+ * ⚠️ A grelha tem de existir antes de isto ir para o ar. Um formulário que
+ * promete um ficheiro que não é enviado queima o contacto e a lista de uma
+ * vez.
+ *
  * Insere em `resource_interest`, a tabela que já existe e já tem RLS, em vez
  * de criar outra. Um formulário que não guarda nada é pior do que não ter
  * formulário nenhum, porque a fuga continua e passa a ser invisível.
@@ -34,9 +44,9 @@ const Captura = () => {
         created_at: new Date().toISOString(),
         name: nome.trim().slice(0, 100) || "Não indicado",
         email: email.trim().slice(0, 255),
-        resource_slug: "lista-game-nutrition",
-        resource_title: "Lista, Game Nutrition",
-        interest_type: "lista",
+        resource_slug: "grelha-cinco-dimensoes",
+        resource_title: "Grelha das cinco dimensões",
+        interest_type: "grelha",
         message_optional: null,
         consent: true,
         source_page: "/",
@@ -57,17 +67,18 @@ const Captura = () => {
     <section className="section-padding section-spacing-sm border-t border-border/60">
       <div className="max-content max-w-2xl">
         <Reveal>
-          <p className="text-caption mb-6">A lista</p>
+          <p className="text-caption mb-6">Leva isto contigo</p>
         </Reveal>
         <Reveal delay={0.08}>
           <h2 className="text-headline">
-            O que vou construindo, assim que fica pronto.
+            A grelha das cinco dimensões, para aplicares à tua estrutura.
           </h2>
         </Reveal>
         <Reveal delay={0.14}>
           <p className="text-body-lg mt-5">
-            Protocolos, ferramentas e o que aprendo a construí-los. Sem
-            newsletter semanal e sem dar o teu endereço a ninguém.
+            Uma página. As cinco perguntas que faço quando entro num clube, o
+            que procurar em cada uma e o que fazer com a resposta. Usa-a
+            sozinho, hoje, sem me contratares.
           </p>
         </Reveal>
 
@@ -81,7 +92,7 @@ const Captura = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="font-display text-xl text-foreground"
                 >
-                  Estás na lista. Falamos quando houver coisa feita.
+                  Recebido. Mando-ta para esse email.
                 </motion.p>
               ) : (
                 <motion.form
@@ -120,11 +131,11 @@ const Captura = () => {
                         disabled={loading}
                         className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider disabled:opacity-50"
                       >
-                        {loading ? "A enviar" : "Entrar na lista"}
+                        {loading ? "A enviar" : "Quero a grelha"}
                       </button>
                     </Magnetic>
                     <p className="text-caption text-[10px] text-muted-foreground">
-                      Podes sair quando quiseres.{" "}
+                      Sem newsletter semanal e sem dar o teu endereço a ninguém.{" "}
                       <Link to="/privacy" className="link-underline">
                         O que faço com os dados
                       </Link>

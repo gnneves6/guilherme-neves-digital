@@ -3,47 +3,40 @@ import SEO from "@/components/SEO";
 import HeroSection from "@/components/sections/HeroSection";
 import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
-import Prova from "@/components/sections/home/Prova";
+import CincoDimensoes from "@/components/sections/home/CincoDimensoes";
 import TresPortas from "@/components/sections/home/TresPortas";
-import MatchdayPlanner from "@/components/sections/MatchdayPlanner";
 import Captura from "@/components/sections/home/Captura";
 import PointerField from "@/components/journey/PointerField";
 
 /**
- * A home mostra o valor. Não conta a história.
+ * A home mostra o valor. Não conta a história e não recita o currículo.
  *
- * A versão anterior tinha o ciclo do problema em três parágrafos e o percurso
- * em seis, e isso é um currículo com boa tipografia. Quem chega não quer
- * explicações, quer ver o que há para ter. A história continua a ser a melhor
- * coisa que ele escreveu e por isso merece uma página onde alguém a vá ler de
- * propósito, não a primeira, onde é um obstáculo entre a pessoa e a oferta.
- *
- * Cinco blocos, e a ordem é promessa, prova, oferta, demonstração, lista:
+ * Seis blocos, e a ordem é promessa, onde, prova, o problema de quem chega,
+ * o que se compra, a troca:
  *
  *   1. HeroSection         Arrive fuelled, not full, e o que é em duas linhas
  *   2. ProofMarquee        onde, lido num relance e a mexer
  *   3. EnvironmentsSection o manequim com as cores de cada clube, um de cada vez
- *   4. Prova               três números atribuídos, mais o passo de agora
+ *   4. CincoDimensoes      as cinco frases onde alguém reconhece o próprio clube
  *   5. TresPortas          o que se compra, uma linha cada, sem preços
- *   6. MatchdayPlanner     a parte útil, que se usa em vez de se ler
- *   7. Captura             a lista
+ *   6. Captura             a grelha, em troca do email
  *
- * Os ambientes voltaram, e o corte que eu lhes tinha feito estava errado na
- * peça certa: o problema nunca foi a secção, foi o parágrafo de âmbito lá
- * dentro. Tirado esse e a nota de época, o que sobra é o que a fazia valer,
- * o manequim a mudar de cores clube a clube e três provas curtas por cada
- * um. Mostra em vez de contar, que é a única coisa que esta página tem de
- * fazer.
+ * Saíram duas coisas desta página, e as duas por um motivo só: descreviam em
+ * vez de darem.
  *
- * O planeador é o bloco que mudou tudo e já existia, parado numa página
- * interior. É a única coisa aqui que entrega valor em vez de o descrever:
- * escolhe-se uma hora de jogo e o dia resolve-se à frente da pessoa. Também
- * é o único painel escuro e com cor numa página que, sem ele, é texto preto
- * sobre osso do princípio ao fim.
+ * Prova.tsx eram três números de currículo numa secção própria. Um número
+ * sozinho não é valor, é crédito; encostado a uma afirmação, passa a ser a
+ * razão de ela não ser opinião. Os três passaram para o pé das cinco
+ * dimensões, numa linha.
  *
- * Problema.tsx e Sobre.tsx continuam no repositório e não estão montados.
- * São o texto de /historia quando essa página existir, e é por isso que não
- * foram apagados.
+ * MatchdayPlanner era um planeador de dia de jogo, e era uma versão pobre de
+ * um produto que ainda não foi lançado. Uma imitação do próprio produto na
+ * primeira página desvaloriza os dois, e o sítio dela é a página do serviço,
+ * não a fachada. Fica no repositório, por montar.
+ *
+ * Problema.tsx, Sobre.tsx e Prova.tsx continuam no repositório e não estão
+ * montados. São o texto de /historia e de /trabalho quando essas páginas
+ * existirem, e é por isso que não foram apagados.
  */
 const Index = () => {
   return (
@@ -58,9 +51,8 @@ const Index = () => {
       <HeroSection />
       <ProofMarquee />
       <EnvironmentsSection />
-      <Prova />
+      <CincoDimensoes />
       <TresPortas />
-      <MatchdayPlanner />
       <Captura />
     </Layout>
     </PointerField>

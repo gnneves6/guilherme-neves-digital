@@ -3,43 +3,42 @@ import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 
 /**
- * As três portas, e as três vendem-se hoje sem cédula.
+ * As três portas, agora em três linhas.
  *
- * Nenhuma é ato próprio: são diagnóstico de uma organização, sistemas e
- * educação, não avaliação, diagnóstico nem prescrição de pessoas. A
- * restrição legal não está a limitar a oferta, está a escolhê-la, e calha
- * apontar para a mesma camada que o trabalho académico defende ser a
- * decisiva.
+ * Tinha um parágrafo por porta e a crítica a isso estava certa: quem chega
+ * não lê metade do que lá está, e três parágrafos a explicar um serviço são
+ * três parágrafos que ninguém lê. A porta 1 já foi demonstrada na secção
+ * acima, portanto não precisa de se apresentar outra vez, e as outras duas
+ * dizem-se numa linha ou não valem a página.
  *
- * Sem preços, de propósito. Publicar uma tabela de valores para clubes antes
- * de o enquadramento do estágio estar fechado cria um conflito que ainda não
- * existe, e uma primeira página não precisa deles.
+ * Sem preços, de propósito. Publicar uma tabela para clubes antes de o
+ * enquadramento do estágio estar fechado cria um conflito que ainda não
+ * existe.
  *
- * A auditoria vem primeiro porque é a única das três com um framework
- * publicado por trás, e porque é ela que diz o que falta: o sistema entrega
- * depois aquilo que ela encontrou.
+ * Nenhuma das três é ato próprio: diagnóstico de uma organização, sistemas e
+ * educação, não avaliação nem prescrição de pessoas.
  */
 const portas = [
   {
     n: "01",
     titulo: "Auditoria das cinco dimensões",
+    uma: "Entro, meço as cinco, e sais com o relatório e o plano.",
     para: "Clubes · Academias · Centros de alto rendimento",
-    corpo:
-      "Meço as cinco dimensões que decidem se a nutrição pega ou fica no papel. Sai um relatório e um plano de implementação.",
+    href: "#dimensoes",
   },
   {
     n: "02",
     titulo: "Sistema de nutrição de equipa",
+    uma: "Dia de jogo, viagem, hidratação, recuperação. Fica a funcionar sem eu lá estar.",
     para: "Clubes · Academias · Equipas técnicas",
-    corpo:
-      "Matchday, viagem, hidratação, recuperação, catering. Fica a funcionar sem eu lá estar.",
+    href: "/contact",
   },
   {
     n: "03",
     titulo: "Formação",
+    uma: "A literacia que faltou ao balneário, dada a tempo de servir para alguma coisa.",
     para: "Atletas · Pais · Equipas técnicas",
-    corpo:
-      "Hidratação, dia de jogo, suplementação, comer em viagem. A literacia que me faltou, dada a tempo.",
+    href: "/contact",
   },
 ];
 
@@ -47,7 +46,7 @@ const TresPortas = () => (
   <section id="portas" className="section-padding section-spacing-sm scroll-mt-24">
     <div className="max-content">
       <Reveal>
-        <p className="text-caption mb-6">O que faço</p>
+        <p className="text-caption mb-6">O que se compra</p>
       </Reveal>
       <Reveal delay={0.08}>
         <h2 className="text-headline max-w-3xl">
@@ -55,10 +54,11 @@ const TresPortas = () => (
         </h2>
       </Reveal>
 
-      <div className="mt-12 md:mt-16 border-t border-border/60">
-        {portas.map((p, i) => (
-          <Reveal key={p.n} delay={0.12 + i * 0.08}>
-            <div className="grid md:grid-cols-[72px,1fr] gap-3 md:gap-10 items-baseline py-8 md:py-9 border-b border-border/60">
+      <div className="mt-12 md:mt-14 border-t border-border/60">
+        {portas.map((p, i) => {
+          const interno = p.href.startsWith("#");
+          const Conteudo = (
+            <div className="grid grid-cols-[34px,1fr] md:grid-cols-[64px,1fr,auto] gap-x-4 md:gap-x-8 items-baseline py-7 md:py-8">
               <span
                 className="font-display text-[10px] tracking-[0.3em]"
                 style={{ color: "hsl(var(--olive))" }}
@@ -66,32 +66,42 @@ const TresPortas = () => (
                 {p.n}
               </span>
               <div className="min-w-0">
-                <h3 className="font-display text-xl md:text-2xl font-medium tracking-tight text-foreground">
+                <h3 className="font-display text-2xl md:text-4xl font-medium tracking-tight text-foreground leading-tight">
                   {p.titulo}
                 </h3>
-                <p className="text-body text-sm md:text-base mt-2.5 max-w-2xl leading-relaxed">
-                  {p.corpo}
+                <p className="text-body text-sm md:text-base mt-2 max-w-xl leading-relaxed">
+                  {p.uma}
                 </p>
-                <p className="text-caption text-[10px] mt-3.5">{p.para}</p>
+                <p className="text-caption text-[10px] mt-3">{p.para}</p>
               </div>
+              <motion.span
+                aria-hidden
+                className="hidden md:block font-display text-xl text-muted-foreground"
+                initial={false}
+                whileHover={{ x: 4 }}
+              >
+                →
+              </motion.span>
             </div>
-          </Reveal>
-        ))}
-      </div>
+          );
 
-      <Reveal delay={0.36}>
-        <div className="mt-10">
-          <Link
-            to="/contact"
-            className="group inline-flex items-center gap-2 font-display text-sm tracking-wide text-foreground link-underline"
-          >
-            Diz-me em que ambiente estás
-            <motion.span aria-hidden className="inline-block" initial={false} whileHover={{ x: 3 }}>
-              →
-            </motion.span>
-          </Link>
-        </div>
-      </Reveal>
+          return (
+            <Reveal key={p.n} delay={0.12 + i * 0.08}>
+              <div className="border-b border-border/60 transition-colors duration-300 hover:bg-foreground/[0.025]">
+                {interno ? (
+                  <a href={p.href} className="block">
+                    {Conteudo}
+                  </a>
+                ) : (
+                  <Link to={p.href} className="block">
+                    {Conteudo}
+                  </Link>
+                )}
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
     </div>
   </section>
 );
