@@ -335,7 +335,7 @@ const HeroSection = () => {
           </span>
           <span className="h-px w-6 bg-border" />
           <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase font-display text-muted-foreground">
-            Performance Nutrition &amp; Systems
+            Game Nutrition
           </p>
         </motion.div>
 
@@ -394,7 +394,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.95, ease: EASE_OUT }}
         >
-          Built from within.
+          Fuelled, not full.
         </motion.p>
 
         {/* The promise, which this screen did not have.
@@ -410,8 +410,9 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.05, ease: EASE_OUT }}
         >
-          I make nutrition work as a system inside football clubs, so it holds
-          through a congested week instead of living in a document nobody opens.
+          Construo o sistema de nutrição que uma equipa usa à volta da
+          competição: matchday, viagem, hidratação, recuperação. E faço-o
+          simples ao ponto de os jogadores o cumprirem.
         </motion.p>
 
         <motion.div
@@ -429,18 +430,18 @@ const HeroSection = () => {
               stranger to look at proof before they have been told what is
               being proved. Work is still one click away in the bar above. */}
           <Magnetic strength={8} as="span">
-            <Link
-              to="/fuel-laws"
+            <a
+              href="#portas"
               className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
             >
-              Take the five checks, free
-            </Link>
+              Ver o que faço
+            </a>
           </Magnetic>
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 py-4 font-display text-sm text-foreground link-underline"
           >
-            Or tell me about your environment
+            Falar comigo
             <span aria-hidden>&rarr;</span>
           </Link>
         </motion.div>

@@ -71,7 +71,11 @@ const Footer = () => {
             © {new Date().getFullYear()} Guilherme Neves. All rights reserved.
           </p>
           <p className="text-body text-xs">
-            Athlete by nature. Nutritionist by purpose.
+            {/* O título é protegido e depende de cédula da Ordem, e esta
+                linha reclamava-o em todas as páginas do site desde que
+                existe. "Atleta por natureza" é verdade e é dele; a segunda
+                metade era a única frase do site que não podia lá estar. */}
+            Atleta por natureza. É daí que isto começa.
           </p>
         </div>
       </div>

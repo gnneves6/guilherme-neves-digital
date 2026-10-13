@@ -2,74 +2,68 @@ import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import HeroSection from "@/components/sections/HeroSection";
 import ProofMarquee from "@/components/sections/ProofMarquee";
-import ThesisSection from "@/components/sections/ThesisSection";
-import RelocationCase from "@/components/sections/RelocationCase";
-import InvitationSection from "@/components/sections/InvitationSection";
+import Problema from "@/components/sections/home/Problema";
+import Prova from "@/components/sections/home/Prova";
+import TresPortas from "@/components/sections/home/TresPortas";
+import Sobre from "@/components/sections/home/Sobre";
+import Captura from "@/components/sections/home/Captura";
 import PointerField from "@/components/journey/PointerField";
 
 /**
- * The home carries four things, and the work was subtraction.
+ * A home, construída ao brief de 12 de outubro.
  *
- * This page existed for eleven weeks without being published, and in that time
- * the answer to "what is missing" was always another section. It was the wrong
- * question. The person this page has to survive is a club director who has
- * just been sent a cold message and is searching the name to decide whether to
- * reply. They want four answers and they leave as soon as they have them:
+ * Seis blocos, nesta ordem, e a ordem é o argumento: a promessa, o problema
+ * que a merece, a prova de que o problema foi resolvido por dentro, o que se
+ * pode comprar, quem ele é, e a lista. As credenciais chegam depois da ideia
+ * que estão a provar, nunca antes, porque uma credencial não faz ninguém
+ * ficar e um ciclo que a pessoa reconhece faz.
  *
- *   1. who he is          HeroSection, then the band of where
- *   2. what he argues     ThesisSection, named, with its references
- *   3. has he done it     RelocationCase, one week, method only
- *   4. how to reach him   InvitationSection
+ * Em português, porque é onde está a conversão e porque o texto todo já
+ * estava escrito em português no documento-mãe da história. O inglês serve
+ * alcance e LinkedIn, e sai daqui traduzido, nunca escrito de raiz.
  *
- * Three blocks that were here are not any more, and none of them was removed
- * for being bad:
+ * As quatro regras que esta página cumpre e que não se negoceiam: o título
+ * protegido não aparece em lado nenhum, o produto de atleta não é nomeado
+ * nem ligado, o trabalho internacional é uma linha sem nome, clube nem
+ * valor, e não há preços, porque publicá-los antes de o enquadramento do
+ * estágio estar fechado cria um conflito que ainda não existe.
  *
- * - EnvironmentsSection walked three environments in five hundred pixels each.
- *   It is a curriculum, not a case, and the band above already says where he
- *   has been in five seconds. /about carries the long version with the
- *   photographs.
- * - Reception carried reach figures dated 2026-09 and a set of quotes that
- *   render nothing until each person grants permission. Reach is the weakest
- *   thing a dataset can be asked to prove, and a figure that quietly stops
- *   being true is the same failure as a claim that never was.
- * - TheLadder sorted the offer by what it costs you, which is the job of
- *   /services. On the home it also put a second and a third ask between the
- *   argument and the only ask that matters here. The free thing it led with is
- *   still one click away, from the first screen.
- *
- * Those three files are still in the repository and are now mounted nowhere.
- * They are kept because two of them have a page they belong on and the third
- * becomes publishable the day the first permission arrives, not because the
- * home is undecided. If they are still unmounted next time somebody reads
- * this, they are dead code and should go.
+ * O que a página anterior tinha e esta não tem, com a razão: a caminhada
+ * pelos três ambientes era currículo e não caso; os números de alcance
+ * estavam datados de setembro e as citações não têm autorização; a escada de
+ * ofertas ordenava por preço, que é trabalho de outra página. Esses três
+ * ficheiros continuam no repositório e não estão montados em lado nenhum.
  */
 const Index = () => {
   return (
     <PointerField>
     <Layout>
       <SEO
-        title="Guilherme Neves, Performance Nutrition & Systems"
-        description="Nutrition fails inside clubs for reasons that are not scientific. I read the environment, translate the evidence into something that survives a congested week, and leave it running. Learned inside elite football."
+        title="Guilherme Neves, Game Nutrition"
+        description="Construo o sistema de nutrição que uma equipa usa à volta da competição: matchday, viagem, hidratação, recuperação. Simples ao ponto de os jogadores o cumprirem."
         path="/"
       />
 
-      {/* 1. Who he is, in five seconds. */}
+      {/* 1. A promessa. Fuelled, not full. */}
       <HeroSection />
 
-      {/* Where, read at a glance and moving on its own. */}
+      {/* Onde, lido num relance e a andar sozinho. */}
       <ProofMarquee />
 
-      {/* 2. What he argues, and the review that argues it. This is the only
-             intellectual property on the site and it is also the sales
-             argument, which is why it sits before the case rather than after:
-             the case is evidence for a claim, so the claim goes first. */}
-      <ThesisSection />
+      {/* 2. O problema, que é o que faz ficar. */}
+      <Problema />
 
-      {/* 3. One week, step by step, with everything identifying left out. */}
-      <RelocationCase />
+      {/* 3. A prova, com cada número atribuído a onde foi feito. */}
+      <Prova />
 
-      {/* 4. The ask. */}
-      <InvitationSection />
+      {/* 4. As três portas, sem preços. */}
+      <TresPortas />
+
+      {/* 5. Quem sou, cortado da história e não escrito de novo. */}
+      <Sobre />
+
+      {/* 6. A captura, que é a razão de a página existir. */}
+      <Captura />
     </Layout>
     </PointerField>
   );
