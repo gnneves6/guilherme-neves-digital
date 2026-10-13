@@ -40,7 +40,7 @@ const EnvironmentExit = ({ exp }: { exp: (typeof experiences)[number] }) => {
       className="group/exit inline-flex items-center gap-2.5 mt-7 py-2 font-display text-[13px] tracking-wide transition-colors duration-300 text-[hsl(var(--ivory)/0.6)] hover:text-[hsl(var(--ivory))]"
     >
       <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: accent }} />
-      See the {count} {count === 1 ? "piece" : "pieces"} this produced
+      Ver {count === 1 ? "a peça" : `as ${count} peças`} que saíram daqui
       <span aria-hidden className="inline-block transition-transform duration-300 group-hover/exit:translate-x-1">
         →
       </span>
@@ -141,12 +141,12 @@ const EnvironmentsSection = () => {
           <div className="section-padding relative z-10 flex flex-col h-full pt-[76px] pb-7">
             <Chapter
               number="02"
-              title="Real environments."
+              title="Ambientes reais."
               tone="dark"
               className="mb-0"
               meta={
                 <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.3)]">
-                  Chapter {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                  {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
                 </p>
               }
             />
@@ -175,7 +175,7 @@ const EnvironmentsSection = () => {
             </div>
 
             {/* Identity, crossfaded per active chapter */}
-            <div className="relative min-h-[188px]">
+            <div className="relative h-[196px] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
@@ -228,7 +228,7 @@ const EnvironmentsSection = () => {
                       <button
                         onClick={() => goToMobile(i)}
                         aria-current={isActive ? "true" : undefined}
-                        aria-label={`Open ${exp.name} environment`}
+                        aria-label={`Abrir o ambiente ${exp.name}`}
                         className="flex items-center justify-center py-3 px-3 -my-1"
                       >
                         <motion.span
@@ -250,7 +250,7 @@ const EnvironmentsSection = () => {
                 animate={{ opacity: [0.28, 0.55, 0.28] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Scroll to advance
+                Desliza para avançar
               </motion.span>
             </div>
           </div>
@@ -261,7 +261,7 @@ const EnvironmentsSection = () => {
       <section className="md:hidden section-dark section-padding pb-16 pt-4 relative overflow-hidden">
         <div className="max-content relative z-[2]">
           <p className="text-[10px] tracking-widest uppercase font-display mb-3 text-[hsl(var(--ivory)/0.3)]">
-            Additional Exposure
+            Observação adicional
           </p>
           {additionalExposure.map((item) => (
             <div key={item.name} className="flex justify-between py-2 text-xs" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
@@ -277,7 +277,7 @@ const EnvironmentsSection = () => {
             to="/work"
             className="group/exit inline-flex items-center gap-2.5 mt-7 py-2 font-display text-[13px] tracking-wide text-[hsl(var(--ivory)/0.62)] hover:text-[hsl(var(--ivory))] transition-colors duration-300"
           >
-            See what came out of these rooms
+            Ver o que saiu destas salas
             <span aria-hidden className="inline-block transition-transform duration-300 group-hover/exit:translate-x-1">
               →
             </span>
@@ -297,8 +297,8 @@ const EnvironmentsSection = () => {
           {/* Cinematic top dissolve, coming from FromWithinBridge (ivory) */}
           <div
             aria-hidden
-            className="absolute inset-x-0 top-0 h-48 z-[4] pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.55) 35%, transparent 100%)" }}
+            className="absolute inset-x-0 top-0 h-24 z-[4] pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, hsl(var(--background) / 0.9) 0%, hsl(var(--background) / 0.3) 45%, transparent 100%)" }}
           />
           {/* Cinematic bottom dissolve, into SelectedArtefactsSection (cinematic dark) */}
           <div
@@ -343,64 +343,74 @@ const EnvironmentsSection = () => {
 
           <div className="section-padding w-full relative z-10">
             <div className="max-content">
-              <Chapter
-                number="02"
-                title="Real environments."
-                tone="dark"
-                className="mb-6 md:mb-10"
-                meta={
-                  <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.3)]">
-                    Chapter {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
-                  </p>
-                }
-              />
+              {/* Uma barra fina, não um título de capítulo empilhado.
+                  O título ocupava noventa pixels no topo de um painel que já
+                  não cabia no ecrã, e era o primeiro a ser cortado: quem
+                  chegava via o nome do clube colado à navegação e, no
+                  capítulo mais comprido, nem isso. */}
+              <div
+                className="flex items-baseline justify-between gap-6 pb-4 mb-8"
+                style={{ borderBottom: "1px solid hsl(var(--ivory) / 0.08)" }}
+              >
+                <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.4)]">
+                  Ambientes reais
+                </p>
+                <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.3)] tabular-nums">
+                  {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
+                </p>
+              </div>
 
-              <div className="grid grid-cols-[minmax(220px,1fr)_440px_minmax(180px,0.8fr)] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-12 items-center min-h-[460px]">
+              {/* Altura fixa, e os três capítulos empilhados no mesmo sítio.
+                  Antes cada clube tinha a sua própria altura de texto, a
+                  grelha estava centrada, e o painel inteiro subia ou descia
+                  conforme o capítulo: ao chegar ao Run4Excellence o nome do
+                  clube já estava fora do ecrã. Agora o nome nasce sempre na
+                  mesma linha e o que varia é só o que vem por baixo. */}
+              <div className="grid grid-cols-[minmax(220px,1fr)_440px_minmax(180px,0.8fr)] lg:grid-cols-[1fr_520px_1fr] gap-6 lg:gap-12 items-start h-[440px] lg:h-[470px]">
                 {/* Left, identity */}
-                <div className="flex flex-col justify-center">
+                <div className="relative h-full">
                   {experiences.map((exp, i) => {
                     const isFocused = i === activeIndex;
                     return (
                       <motion.div
                         key={exp.name}
-                        className="overflow-hidden"
-                        animate={{ height: isFocused ? "auto" : 0, opacity: isFocused ? 1 : 0 }}
-                        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="absolute inset-x-0 top-0"
+                        aria-hidden={!isFocused}
+                        animate={{ opacity: isFocused ? 1 : 0, y: isFocused ? 0 : 10 }}
+                        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                        style={{ pointerEvents: isFocused ? "auto" : "none" }}
                       >
-                        <div className="py-2">
-                          <motion.div
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                          >
+                        <div>
+                          <div>
                             <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
                               {exp.period}, {exp.location}
                             </span>
                             <h3 className="font-display text-2xl lg:text-4xl xl:text-5xl font-semibold leading-[1.05] tracking-tight text-[hsl(var(--ivory))] mt-3 break-words">
                               {exp.name}
                             </h3>
-                            <p className="text-[11px] tracking-[0.18em] uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)] leading-snug max-w-sm">
+                            <p className="text-[11px] tracking-[0.12em] uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)] leading-snug max-w-md">
                               {exp.role}
                             </p>
-                            <p className="font-display text-base lg:text-lg italic max-w-md leading-relaxed text-[hsl(var(--ivory)/0.7)] mt-5">
+                            <p className="font-display text-base lg:text-lg italic max-w-md leading-relaxed text-[hsl(var(--ivory)/0.7)] mt-4">
                               “{exp.chapter}”
                             </p>
-                            {/* What was actually done here. This replaced a row
-                                of subject tags: a tag says the topic was touched,
-                                a proof says what came of it.
-
-                                The scope line goes first because three sharp
-                                specifics, alone, read as everything he did in a
-                                season. Said after the breadth, they read as
-                                examples of it. */}
-                            <p className="mt-5 text-[13px] lg:text-sm leading-relaxed text-[hsl(var(--ivory)/0.55)] max-w-md">
-                              {exp.scope}
-                            </p>
+                            {/* O parágrafo de âmbito saiu daqui, e a nota de
+                                época com ele. Os dois somavam mais de cem
+                                pixels por capítulo e eram o que empurrava o
+                                nome do clube para fora do ecrã. Continuam nos
+                                dados, para a página de percurso, onde há
+                                espaço para os ler. Aqui ficam as provas, que
+                                é o que uma fachada tem de mostrar. */}
                             <p className="mt-6 text-[9px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                              In practice
+                              Na prática
                             </p>
+                            {/* Duas provas, nunca três. A densidade certa é a
+                                do capítulo mais curto: com três bullets
+                                compridos o painel enche e desalinha, e ele
+                                reparou pelo lado de fora, que é o que conta.
+                                As restantes vivem na página de percurso. */}
                             <ul className="mt-3 space-y-2.5 max-w-md">
-                              {exp.proofs.map((proof, pi) => (
+                              {exp.proofs.slice(0, 2).map((proof, pi) => (
                                 <motion.li
                                   key={proof}
                                   className="flex items-start gap-3"
@@ -418,18 +428,13 @@ const EnvironmentsSection = () => {
                                 </motion.li>
                               ))}
                             </ul>
-                            {exp.seasonNote && (
-                              <p className="text-[11px] italic text-[hsl(var(--ivory)/0.4)] mt-3 max-w-md">
-                                {exp.seasonNote}
-                              </p>
-                            )}
                             {/* The way out of the most convincing thing here.
                                 This chapter had no link in it, and neither did
                                 the five thousand pixels of home around it, so
                                 the moment a visitor was most persuaded was the
                                 moment the page gave them nowhere to go. */}
                             <EnvironmentExit exp={exp} />
-                          </motion.div>
+                          </div>
                         </div>
                       </motion.div>
                     );
@@ -437,7 +442,7 @@ const EnvironmentsSection = () => {
                 </div>
 
                 {/* Center, Floating kit display archive */}
-                <div className="relative h-[400px] lg:h-[460px]">
+                <div className="relative h-full">
                   {!isMobile && (
                     <Suspense fallback={null}>
                       <EnvironmentKitShowcase kits={showcaseKits} activeIndex={activeIndex} />
@@ -446,7 +451,7 @@ const EnvironmentsSection = () => {
                 </div>
 
                 {/* Right, index + dots */}
-                <div className="flex flex-col justify-center items-end text-right">
+                <div className="flex flex-col justify-center items-end text-right h-full">
                   <motion.span
                     className="font-display text-[100px] lg:text-[140px] font-bold leading-none"
                     style={{
@@ -474,7 +479,7 @@ const EnvironmentsSection = () => {
                             onFocus={() => setActiveIndex(i)}
                             onMouseEnter={() => setActiveIndex(i)}
                             aria-current={isActive ? "true" : undefined}
-                            aria-label={`Open ${exp.name} environment`}
+                            aria-label={`Abrir o ambiente ${exp.name}`}
                             className="group flex items-center gap-3 px-2 py-1 -mx-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ivory)/0.4)]"
                           >
                             <span
@@ -509,7 +514,7 @@ const EnvironmentsSection = () => {
                     animate={{ opacity: [0.25, 0.55, 0.25] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
-                    Scroll to advance
+                    Desliza para avançar
                   </motion.p>
                 </div>
               </div>
@@ -517,7 +522,7 @@ const EnvironmentsSection = () => {
               {/* Bottom strip */}
               <div className="mt-10 pt-6" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
                 <p className="text-[10px] tracking-widest uppercase font-display mb-4 text-[hsl(var(--ivory)/0.3)]">
-                  Additional Observational Exposure
+                  Observação adicional
                 </p>
                 <div className="flex flex-wrap gap-x-10 gap-y-2">
                   {additionalExposure.map((item) => (
