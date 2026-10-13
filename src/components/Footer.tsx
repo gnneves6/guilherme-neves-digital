@@ -70,12 +70,28 @@ const Footer = () => {
           <p className="text-body text-xs">
             © {new Date().getFullYear()} Guilherme Neves. All rights reserved.
           </p>
-          <p className="text-body text-xs">
-            {/* O título é protegido e depende de cédula da Ordem, e esta
-                linha reclamava-o em todas as páginas do site desde que
-                existe. "Atleta por natureza" é verdade e é dele; a segunda
-                metade era a única frase do site que não podia lá estar. */}
-            Atleta por natureza. É daí que isto começa.
+          {/* O lema fica inteiro. "Nutritionist" é título protegido e
+              depende da cédula, e a etiqueta por cima é o que o torna uma
+              declaração verdadeira em vez de uma reclamada: é a formulação
+              que ficou fixada em agosto, "soon to be", e que se mantém até a
+              cédula existir. Inclinada e pequena de propósito, para se ler
+              como uma anotação à mão por cima da palavra, não como parte da
+              frase. O pt-3 existe para a etiqueta ter onde caber sem tocar
+              no que está acima. */}
+          <p className="text-body text-xs pt-3 sm:pt-0">
+            Athlete by nature.{" "}
+            <span className="relative inline-block">
+              <span
+                aria-hidden
+                className="absolute -top-2.5 left-[2px] font-display text-[9px] tracking-[0.1em] uppercase whitespace-nowrap -rotate-[7deg] origin-bottom-left"
+                style={{ color: "hsl(var(--olive))" }}
+              >
+                soon to be
+              </span>
+              Nutritionist
+            </span>{" "}
+            by purpose.
+            <span className="sr-only"> Soon to be: the title is protected and depends on registration with the Ordem dos Nutricionistas.</span>
           </p>
         </div>
       </div>
