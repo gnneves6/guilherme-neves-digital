@@ -1,76 +1,146 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 
 /**
- * O modelo, desenhado em vez de escrito.
+ * O modelo, pela figura dele e não pela minha.
  *
- * A versão anterior era uma lista de cinco frases debaixo do título "onde é
- * que isto costuma falhar", e a pergunta dele desmonta-a numa linha: isto o
- * quê? Uma lista não diz o que é que atravessa as cinco, nem porque é que
- * falhar numa chega para estragar tudo. Um modelo diz.
+ * A primeira versão disto era um percurso: a evidência entrava de um lado,
+ * atravessava cinco portões por ordem, e saía prática do outro. Estava
+ * errado, e ele apanhou-o: no diagrama do relatório as cinco dimensões
+ * apontam todas ao mesmo tempo para o centro. Não há ordem, não há montante
+ * nem jusante, e não há uma que se resolva antes da seguinte. Uma sequência
+ * sugere que se arruma uma coisa de cada vez, que é exactamente o erro que
+ * a tese dele desmonta.
  *
- * Por isso isto é um percurso: a evidência entra de um lado, atravessa cinco
- * portões, e do outro lado sai prática. Carregar num portão fecha-o, e o
- * que está a jusante apaga-se. É a tese dele numa interação de um segundo:
- * a evidência não vira prática sozinha.
+ * Por isso a forma é a dele: três em cima, duas aos lados, o centro no meio,
+ * e o resultado numa faixa por baixo. As setas apontam para dentro.
  *
- * As cinco estão pela ordem do Appendix A, e cada uma mostra o SINTOMA antes
- * do nome: um director desportivo não procura "contexto organizacional",
- * procura a razão de ter toda a gente a tratar de nutrição e ninguém
- * responsável por ela.
+ * A interação diz o que uma figura estática não diz. Desligar uma dimensão
+ * não corta um caminho, estraga o resultado: a faixa de baixo cai para "fica
+ * no papel" com uma só desligada, e as outras quatro não compensam. É a
+ * diferença entre uma lista de requisitos e um sistema.
  *
- * Abre ao clique, nunca ao scroll: o scroll está todo gasto no capítulo dos
+ * Clique, nunca scroll: o scroll está todo gasto no capítulo dos
  * equipamentos, e o que depende de scroll não existe na pré-visualização.
  */
-const portoes = [
+const dimensoes = [
   {
     n: 1,
-    curto: "Conhecimento",
     nome: "Conhecimento científico",
-    sintoma: "Faz-se assim porque era assim que o staff anterior fazia.",
-    meco: "Se há critério por trás de cada decisão, ou hábito herdado com linguagem técnica por cima.",
+    itens: ["Evidência e guidelines", "Conhecimento específico do futebol", "Formação contínua"],
+    area: "a",
   },
   {
     n: 2,
-    curto: "Organização",
     nome: "Contexto organizacional",
-    sintoma: "Toda a gente trata da nutrição e ninguém é responsável por ela.",
-    meco: "Quem decide, quem executa, e o que se perde entre os dois quando a semana aperta.",
+    itens: ["Estrutura e recursos do clube", "Clareza de funções", "Comunicação entre departamentos"],
+    area: "b",
   },
   {
     n: 3,
-    curto: "Competição",
     nome: "Contexto competitivo",
-    sintoma: "Entre jogo, viagem e jogo, a semana planeada nunca chega a existir.",
-    meco: "O que o calendário, as deslocações e a carga desfazem, e o que tem de ser desenhado já a contar com isso.",
+    itens: ["Congestionamento de calendário", "Objetivos de desempenho", "Viagens e recuperação"],
+    area: "c",
   },
   {
     n: 4,
-    curto: "Cultura",
     nome: "Dinâmicas culturais e sociais",
-    sintoma: "O plano está certo e os jogadores não o cumprem.",
-    meco: "Em quem é que o balneário confia, e se o plano passa por essa pessoa antes de chegar ao jogador.",
+    itens: ["Cultura e valores do clube", "Crenças e adesão do jogador", "Confiança e liderança"],
+    area: "d",
   },
   {
     n: 5,
-    curto: "Adaptação",
     nome: "Adaptabilidade contextual",
-    sintoma: "Funciona no papel e não sobrevive à primeira semana a sério.",
-    meco: "O que do sistema aguenta um dia mau, um autocarro atrasado e um jogador que recusa, sem ninguém de serviço.",
+    itens: ["Flexibilidade e implementação", "Individualização", "Navegar os constrangimentos reais"],
+    area: "e",
   },
 ];
 
 const OLIVE = "hsl(110 30% 62%)";
-const DIM = "hsl(var(--ivory) / 0.14)";
+
+const Cartao = ({
+  d,
+  desligada,
+  onToggle,
+}: {
+  d: (typeof dimensoes)[number];
+  desligada: boolean;
+  onToggle: () => void;
+}) => (
+  <motion.button
+    type="button"
+    onClick={onToggle}
+    aria-pressed={desligada}
+    aria-label={`Desligar a dimensão ${d.nome}`}
+    className="group text-left rounded-[3px] p-5 md:p-6 h-full w-full transition-colors duration-500"
+    animate={{
+      borderColor: desligada ? "hsl(var(--ivory) / 0.1)" : "hsl(var(--ivory) / 0.22)",
+      backgroundColor: desligada ? "hsl(var(--ivory) / 0.01)" : "hsl(var(--ivory) / 0.04)",
+      opacity: desligada ? 0.42 : 1,
+    }}
+    style={{ borderWidth: 1, borderStyle: "solid" }}
+  >
+    <span className="flex items-center gap-3">
+      <motion.span
+        className="flex items-center justify-center w-7 h-7 rounded-full font-display text-[11px] shrink-0"
+        animate={{
+          backgroundColor: desligada ? "hsl(var(--ivory) / 0.08)" : "hsl(var(--olive) / 0.75)",
+          color: desligada ? "hsl(var(--ivory) / 0.45)" : "hsl(var(--ivory))",
+        }}
+      >
+        {desligada ? "✕" : d.n}
+      </motion.span>
+      <span
+        className="font-display text-[11px] md:text-xs tracking-[0.14em] uppercase leading-tight"
+        style={{ color: "hsl(var(--ivory) / 0.9)" }}
+      >
+        {d.nome}
+      </span>
+    </span>
+    <ul className="mt-4 space-y-1.5">
+      {d.itens.map((i) => (
+        <li key={i} className="flex items-start gap-2">
+          <span
+            className="mt-[7px] w-1 h-1 rounded-full shrink-0"
+            style={{ background: desligada ? "hsl(var(--ivory) / 0.25)" : OLIVE }}
+          />
+          <span className="text-[12.5px] leading-snug" style={{ color: "hsl(var(--ivory) / 0.62)" }}>
+            {i}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </motion.button>
+);
+
+const Seta = ({
+  glifo,
+  classe,
+  activa,
+}: {
+  glifo: string;
+  classe: string;
+  activa: boolean;
+}) => (
+  <motion.span
+    aria-hidden
+    className={`hidden md:block absolute font-display text-xl pointer-events-none ${classe}`}
+    animate={{ color: activa ? OLIVE : "hsl(var(--ivory) / 0.13)" }}
+    transition={{ duration: 0.4 }}
+  >
+    {glifo}
+  </motion.span>
+);
 
 const CincoDimensoes = () => {
-  const [falha, setFalha] = useState<number | null>(null);
-  const activo = portoes.find((p) => p.n === falha) ?? null;
-  const partido = falha !== null;
+  const [desligadas, setDesligadas] = useState<number[]>([]);
+  const alternar = (n: number) =>
+    setDesligadas((d) => (d.includes(n) ? d.filter((x) => x !== n) : [...d, n]));
+  const partido = desligadas.length > 0;
+  const liga = (n: number) => !desligadas.includes(n);
 
-  /** Um troço está aceso enquanto vier antes do portão fechado. */
-  const aceso = (indice: number) => falha === null || indice < falha;
+  const porArea = (area: string) => dimensoes.find((d) => d.area === area)!;
 
   return (
     <section id="dimensoes" className="section-dark section-padding section-spacing scroll-mt-24">
@@ -80,199 +150,121 @@ const CincoDimensoes = () => {
         </Reveal>
         <Reveal delay={0.08}>
           <h2 className="text-headline max-w-4xl" style={{ color: "hsl(var(--ivory))" }}>
-            Entre o que a ciência já sabe e o que o jogador faz na segunda-feira
-            há cinco portões.
+            Cinco dimensões decidem se a nutrição pega num clube, e agem todas
+            ao mesmo tempo.
           </h2>
         </Reveal>
         <Reveal delay={0.14}>
-          <p className="text-body-lg mt-5 max-w-xl">
-            Basta um fechado para não sair nada do outro lado. Carrega num.
+          <p className="text-body-lg mt-5 max-w-2xl">
+            Não é uma sequência. Desliga uma e vê: as outras quatro não
+            compensam.
           </p>
         </Reveal>
 
-        {/* O PERCURSO */}
         <Reveal delay={0.2}>
-          <div className="mt-14 md:mt-20">
-            <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-0">
-              {/* Entrada */}
-              <div className="md:w-[124px] shrink-0 md:text-right md:pr-5 pl-0 md:pl-0">
-                <p
-                  className="font-display text-[11px] tracking-[0.2em] uppercase leading-snug"
-                  style={{ color: "hsl(var(--ivory) / 0.75)" }}
-                >
-                  A evidência
-                </p>
-                <p className="text-[11px] mt-1" style={{ color: "hsl(var(--ivory) / 0.35)" }}>
-                  o que já se sabe
-                </p>
-              </div>
+          <div className="relative mt-12 md:mt-16">
+            <div className="grid md:grid-cols-3 gap-4 md:gap-5">
+              {/* linha de cima */}
+              {["a", "b", "c"].map((a) => {
+                const d = porArea(a);
+                return (
+                  <Cartao key={d.n} d={d} desligada={!liga(d.n)} onToggle={() => alternar(d.n)} />
+                );
+              })}
 
-              {/* Portões */}
-              <div className="flex md:flex-1 flex-col md:flex-row md:items-center">
-                {portoes.map((p) => {
-                  const estaFechado = falha === p.n;
-                  const antes = aceso(p.n);
-                  return (
-                    <div
-                      key={p.n}
-                      className="flex flex-col md:flex-1 items-start md:items-center"
-                    >
-                      {/* troço que chega a este portão */}
-                      <motion.span
-                        aria-hidden
-                        className="shrink-0 md:w-full md:h-[2px] w-[2px] h-7 md:ml-0 ml-[26px]"
-                        animate={{ background: antes ? OLIVE : DIM, opacity: antes ? 0.9 : 1 }}
-                        transition={{ duration: 0.45 }}
-                        style={{ display: "block" }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setFalha(estaFechado ? null : p.n)}
-                        aria-pressed={estaFechado}
-                        aria-label={`Fechar o portão ${p.nome}`}
-                        className="group flex md:flex-col items-center gap-4 md:gap-0 md:-mt-7 md:-mb-7 w-full md:w-auto text-left md:text-center"
-                      >
-                        <motion.span
-                          className="relative flex items-center justify-center rounded-full shrink-0 font-display text-[13px]"
-                          animate={{
-                            width: 54,
-                            height: 54,
-                            borderColor: estaFechado
-                              ? "hsl(var(--ivory) / 0.7)"
-                              : antes
-                                ? OLIVE
-                                : "hsl(var(--ivory) / 0.18)",
-                            backgroundColor: estaFechado
-                              ? "hsl(var(--ivory) / 0.1)"
-                              : antes
-                                ? "hsl(var(--olive) / 0.28)"
-                                : "hsl(var(--charcoal-deep))",
-                            color: antes || estaFechado ? "hsl(var(--ivory))" : "hsl(var(--ivory) / 0.4)",
-                          }}
-                          transition={{ duration: 0.4 }}
-                          style={{
-                            borderWidth: 1,
-                            borderStyle: "solid",
-                            boxShadow: antes && !estaFechado ? "0 0 22px hsl(var(--olive) / 0.45)" : "none",
-                          }}
-                        >
-                          {estaFechado ? (
-                            <motion.span
-                              initial={{ rotate: -90, opacity: 0 }}
-                              animate={{ rotate: 0, opacity: 1 }}
-                              className="text-base"
-                            >
-                              ✕
-                            </motion.span>
-                          ) : (
-                            String(p.n).padStart(2, "0")
-                          )}
-                        </motion.span>
-                        <motion.span
-                          className="font-display text-[10px] tracking-[0.16em] uppercase md:mt-3 whitespace-nowrap"
-                          animate={{
-                            color:
-                              estaFechado || antes
-                                ? "hsl(var(--ivory) / 0.8)"
-                                : "hsl(var(--ivory) / 0.3)",
-                          }}
-                        >
-                          {p.curto}
-                        </motion.span>
-                      </button>
-                    </div>
-                  );
-                })}
-                {/* O troço final é uma coluna fantasma, com a mesma geometria
-                    de um portão. Como um troço solto, o `items-center` da
-                    linha alinhava-o pelo centro de uma coluna que inclui a
-                    etiqueta, e o carril partia-se treze pixels abaixo. */}
-                <div
-                  aria-hidden
-                  className="flex flex-col md:flex-[0.55] items-start md:items-center"
+              {/* linha do meio: 04 · centro · 05 */}
+              <Cartao
+                d={porArea("d")}
+                desligada={!liga(4)}
+                onToggle={() => alternar(4)}
+              />
+
+              <div className="relative flex items-center justify-center py-6 md:py-2">
+                <Seta glifo="↘" classe="left-[2px] top-[6px]" activa={liga(1)} />
+                <Seta glifo="↓" classe="left-1/2 -translate-x-1/2 top-[-2px]" activa={liga(2)} />
+                <Seta glifo="↙" classe="right-[2px] top-[6px]" activa={liga(3)} />
+                <Seta glifo="→" classe="left-[-6px] top-1/2 -translate-y-1/2" activa={liga(4)} />
+                <Seta glifo="←" classe="right-[-6px] top-1/2 -translate-y-1/2" activa={liga(5)} />
+
+                <motion.div
+                  className="relative flex flex-col items-center justify-center text-center rounded-full w-[232px] h-[232px] md:w-[248px] md:h-[248px] px-8"
+                  animate={{
+                    borderColor: partido ? "hsl(var(--ivory) / 0.18)" : OLIVE,
+                    boxShadow: partido ? "none" : "0 0 50px hsl(var(--olive) / 0.4)",
+                  }}
+                  transition={{ duration: 0.5 }}
+                  style={{
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    background:
+                      "radial-gradient(circle at 50% 40%, hsl(var(--olive) / 0.3), hsl(var(--charcoal-deep)) 72%)",
+                  }}
                 >
-                  <motion.span
-                    className="shrink-0 md:w-full md:h-[2px] w-[2px] h-7 ml-[26px] md:ml-0 block"
-                    animate={{ background: partido ? DIM : OLIVE, opacity: partido ? 1 : 0.9 }}
-                    transition={{ duration: 0.45 }}
+                  <p
+                    className="font-display text-sm md:text-base tracking-[0.1em] uppercase leading-snug"
+                    style={{ color: "hsl(var(--ivory))" }}
+                  >
+                    Prática de nutrição
+                    <br />
+                    no futebol
+                  </p>
+                  <span
+                    aria-hidden
+                    className="block w-10 h-px my-3.5"
+                    style={{ background: "hsl(var(--ivory) / 0.3)" }}
                   />
-                  <span className="hidden md:block md:-mt-7 md:-mb-7 h-[54px]" />
-                  <span className="hidden md:block font-display text-[10px] tracking-[0.16em] uppercase md:mt-3 opacity-0">
-                    .
-                  </span>
-                </div>
+                  <p
+                    className="font-display text-[11px] italic leading-snug"
+                    style={{ color: "hsl(var(--ivory) / 0.6)" }}
+                  >
+                    informada pela evidência, integrada e adaptada ao contexto
+                  </p>
+                </motion.div>
               </div>
 
-              {/* Saída */}
-              <div className="md:w-[168px] shrink-0 md:pl-5">
-                <motion.p
-                  className="font-display text-[11px] tracking-[0.2em] uppercase leading-snug"
-                  animate={{ color: partido ? "hsl(var(--ivory) / 0.3)" : "hsl(var(--ivory) / 0.9)" }}
-                >
-                  {partido ? "Não chega lá" : "Prática que pega"}
-                </motion.p>
-                <motion.p
-                  className="text-[11px] mt-1"
-                  animate={{ color: partido ? "hsl(var(--ivory) / 0.22)" : "hsl(var(--ivory) / 0.45)" }}
-                >
-                  {partido ? "fica no papel" : "exequível, aceite, sustentável"}
-                </motion.p>
-              </div>
+              <Cartao
+                d={porArea("e")}
+                desligada={!liga(5)}
+                onToggle={() => alternar(5)}
+              />
             </div>
+
+            {/* O RESULTADO */}
+            <motion.div
+              className="mt-5 md:mt-6 rounded-[3px] px-6 md:px-10 py-6 md:py-7 text-center"
+              animate={{
+                borderColor: partido ? "hsl(var(--ivory) / 0.14)" : "hsl(42 45% 58% / 0.5)",
+                backgroundColor: partido ? "hsl(var(--ivory) / 0.015)" : "hsl(42 45% 58% / 0.07)",
+              }}
+              transition={{ duration: 0.5 }}
+              style={{ borderWidth: 1, borderStyle: "solid" }}
+            >
+              <motion.p
+                className="font-display text-base md:text-xl tracking-[0.08em] uppercase"
+                animate={{ color: partido ? "hsl(var(--ivory) / 0.38)" : "hsl(42 55% 74%)" }}
+              >
+                {partido
+                  ? "Nem exequível, nem aceite, nem sustentável"
+                  : "Prática exequível, aceite e sustentável"}
+              </motion.p>
+              <motion.p
+                className="font-display text-[12px] md:text-sm italic mt-2.5"
+                animate={{ color: partido ? "hsl(var(--ivory) / 0.3)" : "hsl(var(--ivory) / 0.6)" }}
+              >
+                {partido
+                  ? "o plano existe, e fica no papel"
+                  : "sustenta a saúde, o rendimento e o desenvolvimento a longo prazo"}
+              </motion.p>
+            </motion.div>
           </div>
         </Reveal>
 
-        {/* O QUE ACONTECE QUANDO ESTE FALHA */}
-        <Reveal delay={0.26}>
-          <div className="mt-14 md:mt-16 min-h-[150px] md:min-h-[128px] border-t pt-8" style={{ borderColor: "hsl(var(--ivory) / 0.12)" }}>
-            <AnimatePresence mode="wait">
-              {activo ? (
-                <motion.div
-                  key={activo.n}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.32 }}
-                  className="grid md:grid-cols-[1fr_1fr] gap-6 md:gap-14"
-                >
-                  <div>
-                    <p
-                      className="font-display text-[10px] tracking-[0.24em] uppercase"
-                      style={{ color: OLIVE }}
-                    >
-                      {activo.nome}
-                    </p>
-                    <p
-                      className="font-display text-xl md:text-3xl font-medium tracking-tight leading-snug mt-3"
-                      style={{ color: "hsl(var(--ivory))" }}
-                    >
-                      “{activo.sintoma}”
-                    </p>
-                  </div>
-                  <div className="md:pt-7">
-                    <p className="text-[9px] tracking-[0.3em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.35)" }}>
-                      O que eu meço aqui
-                    </p>
-                    <p className="text-body text-sm md:text-base leading-relaxed mt-3 max-w-md">
-                      {activo.meco}
-                    </p>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.p
-                  key="parado"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-body text-sm md:text-base max-w-xl leading-relaxed"
-                >
-                  As cinco são o diagrama do meu trabalho de fim de curso, e são
-                  elas que decidem se o que se sabe chega a fazer-se. Numa
-                  auditoria eu meço as cinco e digo-te qual é a tua.
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
+        <Reveal delay={0.3}>
+          <p className="text-body text-sm mt-10 max-w-2xl leading-relaxed">
+            {partido
+              ? "Com uma dimensão em baixo, o resto do sistema não salva o resultado. É por isto que a auditoria mede as cinco, e não só a que está à vista."
+              : "É o diagrama do meu trabalho de fim de curso. Numa auditoria meço as cinco e digo-te qual é a tua."}
+          </p>
         </Reveal>
       </div>
     </section>
