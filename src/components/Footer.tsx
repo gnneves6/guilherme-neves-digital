@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Lema, { lemaFolga } from "@/components/Lema";
 import { LINKS } from "@/data/links";
 
 const Footer = () => {
@@ -70,28 +71,10 @@ const Footer = () => {
           <p className="text-body text-xs">
             © {new Date().getFullYear()} Guilherme Neves. All rights reserved.
           </p>
-          {/* O lema fica inteiro. "Nutritionist" é título protegido e
-              depende da cédula, e a etiqueta por cima é o que o torna uma
-              declaração verdadeira em vez de uma reclamada: é a formulação
-              que ficou fixada em agosto, "soon to be", e que se mantém até a
-              cédula existir. Inclinada e pequena de propósito, para se ler
-              como uma anotação à mão por cima da palavra, não como parte da
-              frase. O pt-3 existe para a etiqueta ter onde caber sem tocar
-              no que está acima. */}
-          <p className="text-body text-xs pt-3.5">
-            Athlete by nature.{" "}
-            <span className="relative inline-block">
-              <span
-                aria-hidden
-                className="absolute -top-[15px] left-[2px] px-1 py-[0.5px] rounded-[2px] font-display text-[7px] font-medium tracking-[0.08em] uppercase whitespace-nowrap -rotate-[7deg] origin-bottom-left"
-                style={{ background: "hsl(var(--olive))", color: "hsl(var(--ivory))" }}
-              >
-                soon to be
-              </span>
-              Nutritionist
-            </span>{" "}
-            by purpose.
-            <span className="sr-only"> Soon to be: the title is protected and depends on registration with the Ordem dos Nutricionistas.</span>
+          {/* O lema vive em `Lema.tsx`, porque esta mesma frase já esteve
+              errada em dois sítios ao mesmo tempo. */}
+          <p className={`text-body text-xs ${lemaFolga.cima}`}>
+            <Lema modo="cima" />
           </p>
         </div>
       </div>

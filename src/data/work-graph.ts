@@ -167,10 +167,6 @@ const curatedGraph: Record<string, WorkNode> = {
   },
 
   // ── Systems run inside environments ───────────────────────────────
-  "matchday-fuel-system": {
-    topic: "matchday", laws: [1, 5], maturity: "system", environment: "anderlecht",
-    grewFrom: ["md-1-fuel-system"],
-  },
   "hydration-sweat-testing-framework": {
     topic: "hydration", laws: [4], maturity: "system", environment: "anderlecht",
   },
@@ -185,13 +181,9 @@ const curatedGraph: Record<string, WorkNode> = {
   "evidence-radar": {
     topic: "education", laws: [1], maturity: "tool", environment: "independent",
   },
-  "matchday-fuel-planner": {
-    topic: "matchday", laws: [1, 5], maturity: "tool", environment: "independent",
-    grewFrom: ["matchday-fuel-system"],
-  },
   "fuelops-ai": {
     topic: "framework", laws: [1, 2], maturity: "tool", environment: "independent",
-    grewFrom: ["matchday-fuel-system", "hydration-sweat-testing-framework"],
+    grewFrom: ["hydration-sweat-testing-framework"],
   },
 };
 

@@ -43,7 +43,6 @@ const envLogos: Partial<Record<EnvironmentId, string>> = {
  * as a type of work, unreadable as information.
  */
 const glimpseOf: Record<string, GlimpseKind> = {
-  "matchday-fuel-system": "matchday",
   "hydration-sweat-testing-framework": "hydration",
   "food-environment-catering": "operations",
   "body-composition-monitoring": "spreadsheet",

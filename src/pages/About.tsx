@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
+import Lema from "@/components/Lema";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
 import Em from "@/components/text/Em";
@@ -44,8 +45,12 @@ const About = () => {
                 <p className="text-caption mb-6">Who I am</p>
               </Reveal>
               <Reveal delay={0.1}>
+                {/* O título protegido estava aqui sem qualificador nenhum,
+                    e num h1. O rodapé tinha sido corrigido a 13 de outubro e
+                    esta cópia ficou para trás, que é a razão de o lema ter
+                    passado a componente. */}
                 <h1 className="text-display max-w-3xl">
-                  Athlete by nature. Nutritionist by purpose.
+                  <Lema modo="antes" />
                 </h1>
               </Reveal>
               <Reveal delay={0.2}>

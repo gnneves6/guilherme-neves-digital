@@ -1,5 +1,5 @@
 import auditImage from "@/assets/work-previews/food-catering-operations-preview.webp";
-import systemsImage from "@/assets/work-previews/matchday-fuel-preview.webp";
+import systemsImage from "@/assets/work-previews/hydration-sweat-testing-preview.webp";
 import educationImage from "@/assets/work-previews/education-tools-preview.webp";
 
 /**
@@ -54,10 +54,14 @@ export const engagements: Record<EngagementId, Engagement> = {
     shape: "A season, retained",
     outcome:
       "Matchday, travel and training-week structures your staff run without me in the room.",
+    /* A imagem era o painel do produto que está sob embargo de nome e de
+       imagem até ao lançamento, e tinha o nome dele escrito no ecrã. Passa
+       a ser o protocolo de hidratação e perdas de suor, que é trabalho
+       documentado e não espera por lançamento nenhum. */
     image: systemsImage,
     imageAlt:
-      "A matchday fuelling dashboard with the timeline from breakfast to recovery, beside the printed MD-1 plan and matchday timeline sheets.",
-    imageFocus: { scale: 1.7, origin: "26% 48%" },
+      "Um painel de hidratação e testes de suor com a taxa de suor por atleta, ao lado do protocolo impresso de recolha e cálculo.",
+    imageFocus: { scale: 1.7, origin: "30% 46%" },
   },
   education: {
     id: "education",

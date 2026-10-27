@@ -1,9 +1,16 @@
+/**
+ * ⚠️ As duas peças `Matchday Fuel` saíram daqui a 27 de outubro, e não é
+ * arrumação: o produto está sob embargo de nome, link e imagem até ao
+ * lançamento, e estavam as três coisas nesta página. A `Matchday Fuel
+ * Planner` dizia ainda "Live on this site · Run it" para um painel que
+ * deixou de estar montado na home, portanto prometia uma coisa que já não
+ * existia. Voltam quando o produto for apresentado, não antes.
+ */
 export type ArtefactStatus = "Public" | "Protected" | "In Development";
 import abcA from "@/assets/previews/abc-a-athlete-fuel-performance.webp";
 import abcB from "@/assets/previews/abc-b-build-your-base.webp";
 import abcC from "@/assets/previews/abc-c-care-about-recovery.webp";
 // Premium proof-object previews for the Selected Applied Work cards.
-import matchdayFuelPreview from "@/assets/work-previews/matchday-fuel-preview.webp";
 import hydrationPreview from "@/assets/work-previews/hydration-sweat-testing-preview.webp";
 import bodyCompositionPreview from "@/assets/work-previews/body-composition-monitoring-preview.webp";
 import foodCateringPreview from "@/assets/work-previews/food-catering-operations-preview.webp";
@@ -188,20 +195,6 @@ export const artefacts: Artefact[] = [
     featured: true,
   },
   {
-    slug: "matchday-fuel-planner",
-    title: "Matchday Fuel Planner",
-    category: "Interactive Tool",
-    group: "tools",
-    type: "Live on this site",
-    status: "Public",
-    description:
-      "Set a kick-off and a body weight and the week resolves around it: carbohydrate, fluid and sodium targets, and the six moments that decide the match. Built at home after seeing the same question asked over and over inside a club.",
-    whatItProves: "A decision someone actually has to make, turned into something they can run in thirty seconds.",
-    ctaLabel: "Run it",
-    ctaType: "view-sample",
-    featured: true,
-  },
-  {
     slug: "athlete-orientation",
     title: "Individual Athlete Nutrition Orientation",
     category: "Athlete Resource",
@@ -380,39 +373,6 @@ export const accessMeta: Record<
 };
 
 export const appliedWorkObjects: AppliedWorkObject[] = [
-  {
-    slug: "matchday-fuel-system",
-    number: "01",
-    title: "Matchday Fuel System",
-    statusBadge: "Internal System",
-    accessType: "internal",
-    positioningLine:
-      "Turning matchday nutrition into clear decisions from MD-1 to recovery.",
-    category: "Matchday System",
-    group: "systems",
-    type: "Matchday nutrition · athletes & staff",
-    status: "Protected",
-    context: "Matchday nutrition · athletes & staff",
-    description:
-      "Context-aware matchday fueling decisions, from MD-1 to recovery.",
-    problem:
-      "Matchday nutrition is often reduced to generic advice, even though kick-off time, role, appetite, travel, stress and recovery context change the real decision.",
-    whatIBuilt:
-      "A practical matchday fueling system combining timelines, MD-1 planning, pre-game meal guidance, liquid strategies, recovery actions and digital planner concepts.",
-    whyItMatters:
-      "It turns matchday nutrition into clear decisions athletes and staff can actually use under pressure.",
-    whatItProves:
-      "Matchday evidence translated into a tool staff and athletes can actually run.",
-    previewNote:
-      "Digital planner mockup + layered MD-1 / timeline document preview.",
-    appliedPreview: "matchdayFuel",
-    previewImage: matchdayFuelPreview,
-    previewAlt:
-      "Matchday Fuel System preview, a dark premium matchday planner dashboard with kick-off timeline and overlapping MD-1 Plan and Matchday Timeline sheets.",
-    previewObjectPosition: "center",
-    ctaLabel: "Explore system",
-    ctaType: "view-sample",
-  },
   {
     slug: "hydration-sweat-testing-framework",
     number: "02",
