@@ -2,7 +2,7 @@ import fotoBalneario from "@/assets/photos/locker-room.webp";
 import artefactoBalneario from "@/assets/work-previews/education-tools-preview.webp";
 
 /**
- * O TERRENO — os sítios onde o trabalho acontece.
+ * O TERRENO, os sítios onde o trabalho acontece.
  *
  * O site deixou de se organizar por serviços e passou a organizar-se por
  * contextos. Não é uma escolha de layout: o trabalho de fim de curso dele
