@@ -5,6 +5,8 @@ import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import CincoDimensoes from "@/components/sections/home/CincoDimensoes";
 import Servicos from "@/components/sections/home/Servicos";
+import Sitio from "@/components/sections/terreno/Sitio";
+import { sitios } from "@/data/terreno";
 import Assinatura from "@/components/sections/home/Assinatura";
 import Captura from "@/components/sections/home/Captura";
 import PointerField from "@/components/journey/PointerField";
@@ -60,6 +62,7 @@ const Index = () => {
       <EnvironmentsSection />
       <Servicos />
       <CincoDimensoes />
+      <Sitio sitio={sitios[0]} />
       <Assinatura />
       <Captura />
     </Layout>

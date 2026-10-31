@@ -383,3 +383,18 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* A fotografia de um sítio respira: 24 s, por tempo e não por scroll, porque
+   o scroll não existe na pré-visualização por onde ele vê o site. Lento ao
+   ponto de não se notar a mexer, só de se notar que não está parado. */
+@keyframes sitio-respira {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.12); }
+}
+.sitio-respira {
+  animation: sitio-respira 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sitio-respira { animation: none; transform: scale(1.06); }
+}
