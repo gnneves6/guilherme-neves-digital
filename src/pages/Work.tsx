@@ -347,21 +347,22 @@ const Work = () => {
 
   return (
     <Layout>
-      <SEO title="Work, Guilherme Neves" description="What was built inside RSC Anderlecht, Leça FC and independent practice, and what came out of each." path="/trabalho" />
+      <SEO title="Trabalho, Guilherme Neves" description="O que foi construído dentro do RSC Anderlecht, do Leça FC e por conta própria, e o que saiu de cada um." path="/trabalho" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Work</p>
+            <p className="text-caption mb-6">Trabalho</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">
-              Three rooms, and what came out of them.
+              Três salas, e o que saiu delas.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              Built inside real environments, for people who{" "}
-              <Em>had to use it that week</Em>. What can be opened is open.
+              Construído dentro de ambientes reais, para pessoas que{" "}
+              <Em>tinham de usar aquilo nessa semana</Em>. O que pode ser aberto
+              está aberto.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
@@ -464,9 +465,9 @@ const Work = () => {
               ) : (
                 <Reveal delay={0.1}>
                   <p className="text-body text-sm md:text-base leading-relaxed mt-7 max-w-2xl">
-                    Built outside any one club, from what kept repeating inside all
-                    of them. Open to anyone, because <Em>the point is that it
-                    travels</Em>.
+                    Construído fora de qualquer clube, a partir do que se repetia
+                    dentro de todos eles. Aberto a qualquer pessoa, porque <Em>a
+                    ideia é mesmo que viaje</Em>.
                   </p>
                 </Reveal>
               )}
@@ -494,10 +495,10 @@ const Work = () => {
                   <Reveal>
                     <div className="flex items-baseline gap-3 mb-6">
                       <p className="text-caption text-[10px]">
-                        Protected, {c.protectedWork.length}
+                        Protegido, {c.protectedWork.length}
                       </p>
                       <span className="text-caption text-[10px] opacity-45">
-                        it belongs to the club, so it is named rather than opened
+                        é do clube, por isso nomeia-se em vez de se abrir
                       </span>
                     </div>
                   </Reveal>
@@ -629,14 +630,14 @@ const Work = () => {
         <div className="max-content text-center">
           <Reveal>
             <h2 className="text-headline max-w-2xl mx-auto">
-              Every one of these started with someone describing a problem.
+              Cada uma destas coisas começou com alguém a descrever um problema.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-lg mx-auto mt-5">
-              None of it was built in advance. If something here looks like{" "}
-              <Em>the thing your environment is missing</Em>, that's usually the
-              beginning of the conversation.
+              Nada disto foi construído de antemão. Se alguma coisa aqui se
+              parece com <Em>aquilo que falta ao seu ambiente</Em>, costuma ser
+              esse o início da conversa.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
@@ -646,14 +647,14 @@ const Work = () => {
                   to="/servicos"
                   className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
                 >
-                  How the work usually starts
+                  Como é que o trabalho costuma começar
                 </Link>
               </Magnetic>
               <Link
                 to="/contacto"
                 className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
-                Or just tell me the problem
+                Ou diga-me só qual é o problema
                 <span aria-hidden>→</span>
               </Link>
             </div>

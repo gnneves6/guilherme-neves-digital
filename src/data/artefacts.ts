@@ -76,14 +76,14 @@ export const artefacts: Artefact[] = [
   {
     slug: "abc-of-football-nutrition",
     title: "The ABC of Football Nutrition",
-    category: "Educational Series",
+    category: "Série de formação",
     group: "public",
-    type: "Athlete-facing Education",
+    type: "Formação para atletas",
     status: "Public",
     description:
-      "Athletes get handed the technical answer before they own the basics, so it never sticks. Three lessons, in order, that have to be in place before anything specific is worth teaching.",
-    whatItProves: "Getting the foundation in place first, so the specific work later actually lands.",
-    ctaLabel: "View Preview",
+      "Dá-se ao atleta a resposta técnica antes de ele ter as bases, por isso nunca pega. Três lições, por ordem, que têm de estar postas antes de valer a pena ensinar o que quer que seja de específico.",
+    whatItProves: "Pôr a base primeiro, para o trabalho específico de depois pegar mesmo.",
+    ctaLabel: "Ver pré-visualização",
     ctaType: "view-sample",
     notionUrl: "https://www.notion.so/Guilherme-Neves-Performance-Nutrition-23575c57c50d80928e62c585039bd8fa",
     featured: true,
@@ -93,14 +93,14 @@ export const artefacts: Artefact[] = [
   {
     slug: "md-1-fuel-system",
     title: "MD-1 Fuel System",
-    category: "Matchday System",
+    category: "Sistema de dia de jogo",
     group: "systems",
-    type: "Matchday Protocol",
+    type: "Protocolo de dia de jogo",
     status: "Public",
     description:
-      "A practical matchday-minus-one structure for carbohydrate loading, hydration and familiar meals, built to survive real match weeks.",
-    whatItProves: "Matchday evidence translated into a protocol staff and athletes can actually run.",
-    ctaLabel: "What it covers",
+      "Uma estrutura prática para o dia antes do jogo: carga de hidratos, hidratação e comida conhecida, feita para sobreviver a semanas de jogo a sério.",
+    whatItProves: "Evidência de dia de jogo traduzida num protocolo que a equipa técnica e os atletas conseguem correr.",
+    ctaLabel: "O que cobre",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -108,14 +108,14 @@ export const artefacts: Artefact[] = [
   {
     slug: "athlete-equivalent-bank",
     title: "Athlete Equivalent Bank",
-    category: "Applied Tool",
+    category: "Ferramenta aplicada",
     group: "systems",
-    type: "Practical Food System",
+    type: "Sistema alimentar prático",
     status: "Public",
     description:
-      "A food substitution system that lets athletes adapt meals on the road or at home without losing nutritional structure.",
-    whatItProves: "Flexibility designed for real life, without breaking the plan.",
-    ctaLabel: "What it covers",
+      "Um sistema de substituições que deixa o atleta adaptar as refeições em deslocação ou em casa sem perder a estrutura nutricional.",
+    whatItProves: "Flexibilidade desenhada para a vida real, sem partir o plano.",
+    ctaLabel: "O que cobre",
     ctaType: "view-sample",
     featured: true,
     previewType: "single",
@@ -123,14 +123,14 @@ export const artefacts: Artefact[] = [
   {
     slug: "supplementation-elite-football",
     title: "Supplementation in Elite Football",
-    category: "Visual Guide",
+    category: "Guia visual",
     group: "public",
-    type: "Applied Visual Guide",
+    type: "Guia visual aplicado",
     status: "Public",
     description:
-      "An evidence-led visual guide on what actually moves the needle in football supplementation, and what doesn't.",
-    whatItProves: "Evidence filtering and clear staff/athlete communication.",
-    ctaLabel: "What it covers",
+      "Um guia visual, assente na evidência, sobre o que conta mesmo na suplementação no futebol e o que não conta.",
+    whatItProves: "Filtragem de evidência e comunicação clara com equipa técnica e atletas.",
+    ctaLabel: "O que cobre",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -138,14 +138,14 @@ export const artefacts: Artefact[] = [
   {
     slug: "why-players-cramp",
     title: "Why Players Cramp at 80 Minutes?",
-    category: "Mini-Class",
+    category: "Mini-aula",
     group: "public",
-    type: "Educational Mini-Class",
+    type: "Mini-aula",
     status: "Public",
     description:
-      "A short visual lesson on the real drivers of late-game cramping, beyond the hydration cliché.",
-    whatItProves: "Sharp educational thinking on a real, recurring performance problem.",
-    ctaLabel: "What it covers",
+      "Uma lição visual curta sobre o que causa mesmo as cãibras no fim do jogo, para lá do lugar-comum da hidratação.",
+    whatItProves: "Pensamento pedagógico afiado sobre um problema de performance real e recorrente.",
+    ctaLabel: "O que cobre",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -153,14 +153,14 @@ export const artefacts: Artefact[] = [
   {
     slug: "athletes-food-pyramid",
     title: "Athlete's Food Pyramid",
-    category: "Visual Guide",
+    category: "Guia visual",
     group: "public",
-    type: "Foundational Visual Guide",
+    type: "Guia visual de base",
     status: "Public",
     description:
-      "A reframed food pyramid built around training load, recovery and athlete-specific demands.",
-    whatItProves: "Foundational education adapted to the athlete, not the average.",
-    ctaLabel: "What it covers",
+      "Uma pirâmide alimentar reescrita à volta da carga de treino, da recuperação e das exigências de cada atleta.",
+    whatItProves: "Formação de base adaptada ao atleta, não à média.",
+    ctaLabel: "O que cobre",
     ctaType: "view-sample",
     featured: false,
     previewType: "documentMockup",
@@ -168,57 +168,57 @@ export const artefacts: Artefact[] = [
   {
     slug: "fuelops-ai",
     title: "FuelOps AI",
-    category: "Product",
+    category: "Produto",
     group: "tools",
-    type: "Performance Nutrition Product · Private Beta",
+    type: "Produto de nutrição de performance · beta privado",
     status: "In Development",
     description:
-      "The next layer of this work: an AI-assisted operating system for performance nutrition staff. Currently in private development.",
-    whatItProves: "Where resources, systems and tools converge into a product.",
-    ctaLabel: "Join Early Access",
+      "A camada seguinte deste trabalho: um sistema operativo com AI para quem trata de nutrição de performance. Em desenvolvimento privado.",
+    whatItProves: "Onde os recursos, os sistemas e as ferramentas convergem num produto.",
+    ctaLabel: "Entrar no acesso antecipado",
     ctaType: "early-access",
     featured: true,
   },
   {
     slug: "evidence-radar",
     title: "The Evidence Radar",
-    category: "Applied Tool",
+    category: "Ferramenta aplicada",
     group: "tools",
-    type: "AI research routine · built and given away",
+    type: "Rotina de pesquisa com AI · construída e dada",
     status: "Public",
     description:
-      "A weekly research routine run through an AI assistant against rules I wrote, so a practitioner stays current on the literature in one sitting instead of losing an hour a day they do not have.",
+      "Uma rotina semanal de pesquisa, corrida por um assistente de AI contra regras que escrevi, para um profissional se manter a par da literatura de uma assentada em vez de perder uma hora por dia que não tem.",
     whatItProves:
-      "Built for a problem I had myself, then handed over: other practitioners asked for the prompt and the steps, and got both.",
-    ctaLabel: "How it works",
+      "Construído para um problema meu e depois entregue: outros profissionais pediram o prompt e os passos, e levaram os dois.",
+    ctaLabel: "Como funciona",
     ctaType: "view-sample",
     featured: true,
   },
   {
     slug: "athlete-orientation",
     title: "Individual Athlete Nutrition Orientation",
-    category: "Athlete Resource",
+    category: "Recurso para atleta",
     group: "protected",
-    type: "Protected Casework",
+    type: "Trabalho de caso protegido",
     status: "Protected",
     description:
-      "Real athlete-facing work translating body composition goals, training demands and daily habits into action. Confidential, preview shown on request.",
-    whatItProves: "Individual translation from context to behaviour, in real environments.",
-    ctaLabel: "Request Access",
+      "Trabalho real com um atleta, a traduzir objetivos de composição corporal, exigências de treino e hábitos diários em ação. Confidencial, pré-visualização mostrada a pedido.",
+    whatItProves: "Tradução individual do contexto em comportamento, em ambientes reais.",
+    ctaLabel: "Pedir acesso",
     ctaType: "request-access",
     featured: false,
   },
   {
     slug: "team-monitoring-report",
     title: "Protected Team Monitoring Report",
-    category: "Team Report",
+    category: "Relatório de equipa",
     group: "protected",
-    type: "Protected Team Casework",
+    type: "Trabalho de caso de equipa, protegido",
     status: "Protected",
     description:
-      "Team-level monitoring and reporting built for staff decision-making. Confidential, full document not shown publicly.",
-    whatItProves: "Staff-facing reporting and team-level performance communication.",
-    ctaLabel: "Learn More",
+      "Monitorização e relatório de equipa, feitos para a decisão da equipa técnica. Confidencial, o documento completo não se mostra publicamente.",
+    whatItProves: "Relatório para a equipa técnica e comunicação de performance ao nível da equipa.",
+    ctaLabel: "Saber mais",
     ctaType: "protected",
     featured: true,
   },
@@ -230,9 +230,9 @@ export const statusMeta: Record<
   ArtefactStatus,
   { dot: string; label: string }
 > = {
-  Public: { dot: "hsl(var(--olive-light))", label: "Public" },
-  Protected: { dot: "hsl(35, 28%, 62%)", label: "Protected" },
-  "In Development": { dot: "hsl(40, 55%, 60%)", label: "Building" },
+  Public: { dot: "hsl(var(--olive-light))", label: "Público" },
+  Protected: { dot: "hsl(35, 28%, 62%)", label: "Protegido" },
+  "In Development": { dot: "hsl(40, 55%, 60%)", label: "Em construção" },
 };
 
 export const groupMeta: Record<
@@ -240,32 +240,32 @@ export const groupMeta: Record<
   { label: string; short: string; anchor: string; dot: string; description: string }
 > = {
   public: {
-    label: "Public Resources",
+    label: "Recursos públicos",
     short: "Public",
     anchor: "public-resources",
     dot: "hsl(155, 14%, 42%)",
-    description: "Educational guides, mini-classes and open learning resources.",
+    description: "Guias, mini-aulas e recursos de aprendizagem abertos.",
   },
   systems: {
-    label: "Practical Systems",
+    label: "Sistemas práticos",
     short: "Systems",
     anchor: "practical-systems",
     dot: "hsl(35, 24%, 52%)",
-    description: "Applied frameworks and systems built for real performance environments.",
+    description: "Modelos e sistemas aplicados, feitos para ambientes de performance reais.",
   },
   tools: {
-    label: "Tools & Product Lab",
+    label: "Ferramentas e laboratório de produto",
     short: "Tools",
     anchor: "tools-product-lab",
     dot: "hsl(40, 38%, 58%)",
-    description: "The product layer this work is heading toward, starting with FuelOps.",
+    description: "A camada de produto para onde este trabalho caminha, a começar no FuelOps.",
   },
   protected: {
-    label: "Protected Casework",
+    label: "Trabalho de caso protegido",
     short: "Protected",
     anchor: "protected-casework",
     dot: "hsl(45, 8%, 52%)",
-    description: "Confidential athlete, team and staff-facing work, shown as proof.",
+    description: "Trabalho confidencial com atletas, equipas e equipas técnicas, mostrado como prova.",
   },
 };
 
@@ -319,11 +319,11 @@ export const accessMeta: Record<
   }
 > = {
   public: {
-    label: "Public Resource",
+    label: "Recurso público",
     accent: "#7EA885",
     background: "rgba(73, 115, 88, 0.12)",
     border: "rgba(126, 168, 133, 0.28)",
-    ctaLabel: "Open collection",
+    ctaLabel: "Abrir a coleção",
     accessNote:
       "Shared openly as part of the GN education library.",
     panelTitle: "Want to use this type of education?",
@@ -332,11 +332,11 @@ export const accessMeta: Record<
     icon: "globe",
   },
   internal: {
-    label: "Internal System",
+    label: "Sistema interno",
     accent: "#7E91AA",
     background: "rgba(76, 96, 120, 0.12)",
     border: "rgba(120, 145, 170, 0.25)",
-    ctaLabel: "Start a conversation",
+    ctaLabel: "Falar comigo",
     accessNote:
       "Built for applied performance environments and adaptable by context.",
     panelTitle: "Interested in applying this type of system?",
@@ -345,11 +345,11 @@ export const accessMeta: Record<
     icon: "layers",
   },
   protected: {
-    label: "Protected Casework",
+    label: "Trabalho de caso protegido",
     accent: "#C9A45C",
     background: "rgba(162, 123, 55, 0.12)",
     border: "rgba(206, 164, 83, 0.30)",
-    ctaLabel: "Request private walkthrough",
+    ctaLabel: "Pedir uma visita privada",
     accessNote:
       "This is protected casework. Details remain confidential. A private walkthrough can be requested when relevant.",
     panelTitle: "Private walkthrough available by request.",
@@ -358,11 +358,11 @@ export const accessMeta: Record<
     icon: "lock",
   },
   "in-development": {
-    label: "Building",
+    label: "Em construção",
     accent: "#D1A85A",
     background: "rgba(187, 143, 67, 0.10)",
     border: "rgba(210, 170, 90, 0.25)",
-    ctaLabel: "Register interest",
+    ctaLabel: "Registar interesse",
     accessNote:
       "Being built now. Register interest and you hear first when it opens.",
     panelTitle: "Being built right now.",
@@ -381,13 +381,13 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     accessType: "internal",
     positioningLine:
       "From sweat losses and sodium data to individualized hydration decisions.",
-    category: "Framework",
+    category: "Modelo",
     group: "systems",
-    type: "Sweat testing · sodium · hydration follow-up",
+    type: "Testes de suor · sódio · acompanhamento de hidratação",
     status: "Protected",
     context: "Sweat testing · sodium · hydration follow-up",
     description:
-      "From sweat testing data to athlete-ready hydration decisions.",
+      "Dos dados de testes de suor a decisões de hidratação prontas para o atleta.",
     problem:
       "Hydration advice often stays generic, while sweat losses, sodium losses and drinking behaviour vary widely between players.",
     whatIBuilt:
@@ -395,14 +395,14 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     whyItMatters:
       "It helps practitioners move from raw measurements to individualized hydration support.",
     whatItProves:
-      "Measurement translated into individualized hydration decisions.",
+      "Medição traduzida em decisões de hidratação individualizadas.",
     previewNote: "Dashboard mockup + protocol page preview.",
     appliedPreview: "hydrationDashboard",
     previewImage: hydrationPreview,
     previewAlt:
       "Hydration & Sweat Testing framework preview, a dark premium dashboard with squad sweat-rate and sodium metrics, a trend chart and the Sweat Testing Protocol sheet.",
     previewObjectPosition: "center right",
-    ctaLabel: "View framework",
+    ctaLabel: "Ver o modelo",
     ctaType: "view-sample",
   },
   {
@@ -413,13 +413,13 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     accessType: "protected",
     positioningLine:
       "Assessment translated into staff decisions, not rankings.",
-    category: "Team Report",
+    category: "Relatório de equipa",
     group: "protected",
     type: "Team monitoring · staff decision support",
     status: "Protected",
     context: "Team monitoring · staff decision support",
     description:
-      "Turning assessment into practical follow-up, not rankings.",
+      "Transformar a avaliação em acompanhamento prático, e não em classificações.",
     problem:
       "Body composition data can easily become isolated numbers or harmful comparisons if it is not interpreted with context.",
     whatIBuilt:
@@ -427,7 +427,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     whyItMatters:
       "It supports nutrition, training and recovery decisions while keeping the focus on individual evolution.",
     whatItProves:
-      "Staff-facing reporting that supports decisions without reducing players to rankings.",
+      "Relatório para a equipa técnica que suporta decisões sem reduzir jogadores a classificações.",
     previewNote: "Redacted report and dashboard preview.",
     confidentialityNote:
       "Protected internal work. Names and sensitive data remain redacted.",
@@ -447,13 +447,13 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     accessType: "protected",
     positioningLine:
       "Performance nutrition standards for the real food environment athletes live inside.",
-    category: "Applied Tool",
+    category: "Ferramenta aplicada",
     group: "protected",
     type: "Hotels · catering · food logistics",
     status: "Protected",
     context: "Hotels · catering · food logistics",
     description:
-      "Performance nutrition standards for real food environments.",
+      "Padrões de nutrição de performance para ambientes alimentares reais.",
     problem:
       "Even strong nutrition plans fail if the food environment, catering standards and logistics do not support the players.",
     whatIBuilt:
@@ -461,7 +461,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     whyItMatters:
       "It turns nutrition into an environment athletes can actually live inside.",
     whatItProves:
-      "Nutrition operating standards designed for real catering and hotel environments.",
+      "Padrões de operação em nutrição, desenhados para ambientes reais de catering e de hotel.",
     previewNote: "Blurred operational manual + checklist-style object.",
     confidentialityNote:
       "Protected operational work. Structure and quality only, no confidential details.",
@@ -481,13 +481,13 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     accessType: "public",
     positioningLine:
       "Evidence translated into simple, memorable decisions athletes can actually use.",
-    category: "Educational Series",
+    category: "Série de formação",
     group: "public",
     type: "Athletes · parents · staff",
     status: "Public",
     context: "Athletes · parents · staff",
     description:
-      "Visual education tools that make performance nutrition easier to understand.",
+      "Ferramentas visuais de formação que tornam a nutrição de performance mais fácil de perceber.",
     problem:
       "Athletes often receive information that is either too scientific to use or too simple to respect.",
     whatIBuilt:
@@ -495,7 +495,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     whyItMatters:
       "It turns evidence into simple, memorable decisions without losing scientific responsibility.",
     whatItProves:
-      "Translation of evidence into clear, athlete-facing behaviour.",
+      "Tradução da evidência em comportamento claro, do lado do atleta.",
     previewNote:
       "Stack of visual education pieces / infographic thumbnails.",
     appliedPreview: "educationGrid",
@@ -503,7 +503,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     previewAlt:
       "Football Nutrition Education Tools preview, a premium dark grid of six visual learning objects covering matchday nutrition, hydration, recovery and supplements.",
     previewObjectPosition: "center",
-    ctaLabel: "What is in it",
+    ctaLabel: "O que tem lá dentro",
     ctaType: "view-sample",
   },
   {
@@ -514,13 +514,13 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     accessType: "in-development",
     positioningLine:
       "A scalable atlas connecting matchday, training, recovery, hydration and food decisions.",
-    category: "Product",
+    category: "Produto",
     group: "systems",
     type: "Football food decisions · practical resource",
     status: "In Development",
     context: "Football food decisions · practical resource",
     description:
-      "A practical atlas translating science into football food decisions.",
+      "Um atlas prático que traduz ciência em decisões alimentares no futebol.",
     problem:
       "Football nutrition resources are often scattered across guidelines, recipes, isolated tips and context-free recommendations.",
     whatIBuilt:
@@ -528,7 +528,7 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     whyItMatters:
       "It creates a scalable resource that helps athletes and practitioners understand not just what to eat, but why and when.",
     whatItProves:
-      "A scalable education product built from applied performance nutrition systems.",
+      "Um produto de formação escalável, construído a partir de sistemas aplicados de nutrição de performance.",
     previewNote:
       "Premium book / atlas mockup with first pages visible and remaining pages blurred.",
     appliedPreview: "atlasBook",

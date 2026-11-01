@@ -35,14 +35,14 @@ const awards = [
 const About = () => {
   return (
     <Layout>
-      <SEO title="About Guilherme Neves, Performance Nutrition & Systems" description="Performance nutrition learned inside elite football. Guilherme Neves on the work, the environments it came from, and why systems matter more than advice." path="/sobre" />
+      <SEO title="Sobre Guilherme Neves, nutrição de performance e sistemas" description="Nutrição de performance aprendida dentro do futebol de elite. O trabalho, os ambientes de onde veio, e porque é que um sistema vale mais do que um conselho." path="/sobre" />
       {/* Who I am. The page opens on the person, not on a positioning line. */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <div className="grid md:grid-cols-[1fr,340px] lg:grid-cols-[1fr,400px] gap-12 md:gap-16 items-start">
             <div>
               <Reveal>
-                <p className="text-caption mb-6">Who I am</p>
+                <p className="text-caption mb-6">Quem sou</p>
               </Reveal>
               <Reveal delay={0.1}>
                 {/* O título protegido estava aqui sem qualificador nenhum,
@@ -55,23 +55,23 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="text-body-lg max-w-2xl mt-8">
-                  I hold a BSc in Nutrition Sciences from FCNAUP, University of Porto,
-                  and I am soon to be a registered nutritionist, with the professional
-                  licence pending. I learned the job inside <Em>elite professional
-                  football</Em> before I finished the degree: most recently at RSC
-                  Anderlecht, and before that alongside the first team at Leça FC.
+                  Sou licenciado em Ciências da Nutrição pela FCNAUP, Universidade
+                  do Porto, e estou em vias de ter a cédula profissional. Aprendi
+                  o trabalho dentro do <Em>futebol profissional de elite</Em> antes
+                  de acabar o curso: mais recentemente no RSC Anderlecht, e antes
+                  disso junto da equipa principal do Leça FC.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="text-body max-w-2xl mt-4">
-                  More than fifteen years as an athlete shape how I read a room and{" "}
-                  <Em>earn the trust of athletes and staff</Em>. The aim is
-                  international, and built to last.
+                  Mais de quinze anos como atleta decidem a forma como leio uma
+                  sala e como <Em>ganho a confiança de atletas e de equipas
+                  técnicas</Em>. O objetivo é internacional, e feito para durar.
                 </p>
               </Reveal>
               <Reveal delay={0.4}>
                 <p className="text-caption text-[10px] mt-8">
-                  21 · Porto, Brussels
+                  21 anos · Porto, Bruxelas
                 </p>
               </Reveal>
             </div>
@@ -111,7 +111,7 @@ const About = () => {
               to="/trabalho"
               className="group inline-flex items-center gap-2.5 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
-              What I actually did in those rooms
+              O que fiz de facto nessas salas
               <span
                 aria-hidden
                 className="inline-block transition-transform duration-300 group-hover:translate-x-1"
@@ -132,13 +132,13 @@ const About = () => {
         <PlanGrid />
         <div className="max-content relative">
           <Reveal>
-            <p className="text-caption mb-6">Why this work</p>
+            <p className="text-caption mb-6">Porquê este trabalho</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="text-headline max-w-3xl">
-              I have been an athlete my whole life.{" "}
+              Fui atleta a vida toda.{" "}
               <span style={{ color: "hsl(var(--olive-light))", fontStyle: "italic", fontWeight: 300 }}>
-                That is where this starts.
+                É daí que isto parte.
               </span>
             </h2>
           </Reveal>
@@ -161,7 +161,7 @@ const About = () => {
                 className="absolute bottom-4 left-5 text-[10px] tracking-[0.28em] uppercase font-display"
                 style={{ color: "hsl(var(--ivory) / 0.75)" }}
               >
-                Inside the room, before it counts
+                Dentro do balneário, antes de contar
               </figcaption>
             </figure>
           </Reveal>
@@ -173,27 +173,29 @@ const About = () => {
                 className="font-display text-xl md:text-2xl font-light leading-snug"
                 style={{ color: "hsl(var(--foreground))" }}
               >
-                I lived it from the inside. And I learned that quality and effort, on their
-                own, are <Em>never enough</Em>.
+                Vivi isto por dentro. E aprendi que qualidade e esforço, sozinhos,
+                <Em>nunca chegam</Em>.
               </p>
             </Reveal>
             <div className="space-y-5 max-w-2xl">
               <Reveal delay={0.2}>
                 <p className="text-body-lg">
-                  Talent and work took me a long way, but they kept running into the same
-                  wall. What was missing was <Em>strategy, and actually knowing what I was
-                  doing with my body</Em>. The help I needed then did not exist around me, so
-                  I decided to become it for the athletes coming up now.
+                  O talento e o trabalho levaram-me longe, mas bateram sempre na
+                  mesma parede. O que faltava era <Em>estratégia, e saber mesmo o
+                  que estava a fazer ao meu corpo</Em>. A ajuda de que precisei
+                  nessa altura não existia à minha volta, por isso decidi passar a
+                  ser essa ajuda para os atletas que vêm agora.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="text-body">
-                  Things changed for me the day I built <Em>a calm relationship with food</Em>.
-                  No pressure, nothing forbidden, enjoying it while being smart with my body.
-                  That is what I want to hand to other athletes: take it seriously, drop the
-                  taboos, and treat nutrition as quality you get to enjoy, not something to
-                  fear. The <Em>healthiest food at the wrong moment does nothing for
-                  performance</Em>, and almost nobody is told that.
+                  As coisas mudaram no dia em que construí <Em>uma relação calma
+                  com a comida</Em>. Sem pressão, sem nada proibido, a gostar
+                  daquilo e a ser inteligente com o corpo. É isso que quero passar
+                  a outros atletas: levar a sério, largar os tabus, e tratar a
+                  nutrição como qualidade de que se goza e não como coisa a temer.
+                  <Em>O alimento mais saudável no momento errado não faz nada pela
+                  performance</Em>, e quase ninguém ouve isso.
                 </p>
               </Reveal>
             </div>
@@ -209,21 +211,21 @@ const About = () => {
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Philosophy</p>
+            <p className="text-caption mb-6">Princípios</p>
           </Reveal>
           <div className="grid md:grid-cols-3 gap-10 mt-8">
             {[
               {
-                title: "Practical & Sustainable",
-                text: "If it doesn't work in a real training week, it doesn't work. And it has to keep working, week after week, or it was never a system. What I build has to survive travel, fixtures and pressure, and still make sense a month later.",
+                title: "Prático e sustentável",
+                text: "Se não resulta numa semana de treino real, não resulta. E tem de continuar a resultar, semana após semana, ou nunca foi um sistema. O que construo tem de sobreviver a deslocações, a calendários e a pressão, e ainda fazer sentido um mês depois.",
               },
               {
-                title: "Athlete-Centered",
-                text: "I care about the person, not only the performance. Health comes with the results, never traded for them. Someone's tastes, culture and life have to fit inside the plan, because a strategy that ignores who they are will not survive.",
+                title: "Centrado no atleta",
+                text: "Interessa-me a pessoa, não só a performance. A saúde vem com os resultados, nunca trocada por eles. Os gostos, a cultura e a vida de alguém têm de caber dentro do plano, porque uma estratégia que ignora quem a pessoa é não sobrevive.",
               },
               {
-                title: "Evidence-Based",
-                text: "Grounded in science, but always context dependent. Research points the direction; the athlete in front of me, their sport and the moment decide how it actually gets applied.",
+                title: "Com base na evidência",
+                text: "Assente na ciência, mas sempre dependente do contexto. A investigação aponta a direção; o atleta à minha frente, o desporto dele e o momento é que decidem como é que aquilo se aplica.",
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.1}>
@@ -322,13 +324,13 @@ const About = () => {
         <div className="max-content text-center">
           <Reveal>
             <h2 className="text-headline max-w-2xl mx-auto">
-              That's who I am. Here's what I've built.
+              Isto é quem eu sou. Agora o que construí.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-md mx-auto mt-4">
-              The systems, tools and frameworks that came out of those rooms,
-              and what each one was actually for.
+              Os sistemas, as ferramentas e os modelos que saíram dessas salas,
+              e para o que é que cada um servia de facto.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
@@ -338,14 +340,14 @@ const About = () => {
                   to="/trabalho"
                   className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
                 >
-                  See the work
+                  Ver o trabalho
                 </Link>
               </Magnetic>
               <Link
                 to="/contacto"
                 className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
-                Or start a conversation
+                Ou falar comigo
                 <span aria-hidden>→</span>
               </Link>
             </div>

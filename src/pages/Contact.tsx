@@ -62,7 +62,7 @@ const Contact = () => {
       if (dbError) throw dbError;
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError("Alguma coisa correu mal. Tente outra vez.");
     } finally {
       setLoading(false);
     }
@@ -70,20 +70,20 @@ const Contact = () => {
 
   return (
     <Layout>
-      <SEO title="Contact Guilherme Neves" description="Tell me what you are trying to solve. Every enquiry comes straight to me and I reply personally." path="/contacto" />
+      <SEO title="Falar comigo, Guilherme Neves" description="Diga-me o que está a tentar resolver. Cada contacto vem direito a mim e sou eu que respondo." path="/contacto" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Engagement</p>
+            <p className="text-caption mb-6">Contacto</p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="text-display max-w-4xl">Tell me what you're trying to solve.</h1>
+            <h1 className="text-display max-w-4xl">Diga-me o que está a tentar resolver.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-xl mt-8">
-              I work closely with a small number of environments at a time. If nutrition
-              isn't holding up the way it should, a few honest lines about what you're
-              facing are the best place to start.
+              Trabalho de perto com poucos ambientes de cada vez. Se a nutrição
+              não está a aguentar como devia, umas linhas francas sobre o que
+              tem à frente são o melhor sítio para começar.
             </p>
           </Reveal>
         </div>
@@ -106,10 +106,10 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="py-20 text-center"
               >
-                <h2 className="text-headline mb-4">Got it, it's with me now.</h2>
+                <h2 className="text-headline mb-4">Recebido, já está comigo.</h2>
                 <p className="text-body-lg max-w-md mx-auto">
-                  Thank you for the note. I read every enquiry myself and will reply
-                  personally, usually within a few working days. Talk soon.
+                  Obrigado pela mensagem. Leio todos os contactos e respondo eu,
+                  normalmente em poucos dias úteis. Até já.
                 </p>
                 {/* Someone has just written to him and now has days to wait.
                     The only thing here used to be "send another enquiry", which
@@ -120,7 +120,7 @@ const Contact = () => {
                     to="/cinco-verificacoes"
                     className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
                   >
-                    While you wait, take the five checks
+                    Enquanto espera, faça as cinco verificações
                   </Link>
                 </Magnetic>
                 <div className="mt-6">
@@ -128,7 +128,7 @@ const Contact = () => {
                     onClick={() => setSubmitted(false)}
                     className="text-body text-sm py-2 link-underline hover:text-foreground transition-colors"
                   >
-                    Send another enquiry
+                    Enviar outra mensagem
                   </button>
                 </div>
               </motion.div>
@@ -161,7 +161,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-caption text-xs">Organisation</label>
+                  <label className="text-caption text-xs">Organização</label>
                   <input
                     type="text"
                     value={formData.organisation}
@@ -169,11 +169,11 @@ const Contact = () => {
                       setFormData({ ...formData, organisation: e.target.value })
                     }
                     className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300 placeholder:text-muted-foreground/40"
-                    placeholder="Club, federation, academy, company"
+                    placeholder="Clube, federação, academia, empresa"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-caption text-xs">Type of engagement</label>
+                  <label className="text-caption text-xs">Tipo de trabalho</label>
                   <select
                     value={formData.engagementType}
                     onChange={(e) =>
@@ -181,7 +181,7 @@ const Contact = () => {
                     }
                     className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300"
                   >
-                    <option value="">Select one</option>
+                    <option value="">Escolha uma</option>
                     {/* Grouped the same way /services groups them, so someone
                         who chose a door there does not meet a flat list here
                         and wonder whether it is the same six. */}
@@ -194,11 +194,11 @@ const Contact = () => {
                         ))}
                       </optgroup>
                     ))}
-                    <option value="Other">Other</option>
+                    <option value="Outro">Outro</option>
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-caption text-xs">Context</label>
+                  <label className="text-caption text-xs">Contexto</label>
                   <textarea
                     required
                     rows={5}
@@ -207,7 +207,7 @@ const Contact = () => {
                       setFormData({ ...formData, message: e.target.value })
                     }
                     className="w-full bg-transparent border-b border-border py-3 text-foreground font-body text-base focus:outline-none focus:border-foreground transition-colors duration-300 resize-none placeholder:text-muted-foreground/40"
-                    placeholder="A few lines about the environment, the people involved, and what you'd like to solve."
+                    placeholder="Umas linhas sobre o ambiente, as pessoas envolvidas, e o que gostaria de resolver."
                   />
                 </div>
                 {error && (
@@ -222,14 +222,14 @@ const Contact = () => {
                       whileHover={loading ? {} : { y: -1 }}
                       whileTap={loading ? {} : { scale: 0.98 }}
                     >
-                      {loading ? "Sending..." : "Send it over"}
+                      {loading ? "A enviar..." : "Enviar"}
                     </motion.button>
                   </Magnetic>
                   <p className="text-caption text-[10px] text-muted-foreground max-w-[16rem] leading-relaxed">
-                    No obligation. Read personally, usually answered within a few
-                    working days.{" "}
+                    Sem compromisso. Lido por mim, normalmente respondido em
+                    poucos dias úteis.{" "}
                     <Link to="/privacidade" className="link-underline">
-                      What happens to what you send
+                      O que acontece ao que envia
                     </Link>
                     .
                   </p>
@@ -250,21 +250,21 @@ const Contact = () => {
                 />
                 <div>
                   <p className="font-display text-base font-medium text-foreground">Guilherme Neves</p>
-                  <p className="text-caption text-[10px]">Reads and replies personally</p>
+                  <p className="text-caption text-[10px]">Lê e responde pessoalmente</p>
                 </div>
               </div>
               <p className="text-body text-sm mt-5 leading-relaxed max-w-sm">
-                Every enquiry comes straight to me. No inbox to get lost in, no
-                gatekeeper, no template reply.
+                Cada contacto vem direito a mim. Não há caixa onde se perca, não
+                há intermediário, não há resposta de modelo.
               </p>
 
               <div className="mt-10">
-                <p className="text-caption mb-6">What happens next</p>
+                <p className="text-caption mb-6">O que acontece a seguir</p>
                 <ol className="space-y-5">
                   {[
-                    "You send a few lines about the environment and what you want to solve.",
-                    "I reply personally, usually within a few working days.",
-                    "If it fits, we take a short call. No pressure, no obligation.",
+                    "Manda umas linhas sobre o ambiente e sobre o que quer resolver.",
+                    "Respondo eu, normalmente em poucos dias úteis.",
+                    "Se fizer sentido, temos uma chamada curta. Sem pressão e sem compromisso.",
                   ].map((step, i) => (
                     <li key={i} className="flex gap-4">
                       <span
