@@ -28,8 +28,8 @@ import { LINKS } from "@/data/links";
 const Privacy = () => (
   <Layout>
     <SEO
-      title="Privacy, Guilherme Neves"
-      description="What this site collects, why, where it is kept, and how to have it removed."
+      title="Privacidade, Guilherme Neves"
+      description="O que este site recolhe, porquê, onde fica guardado, e como pedir que seja apagado."
       path="/privacidade"
     />
 
@@ -37,18 +37,17 @@ const Privacy = () => (
       <PlanGrid />
       <div className="max-content relative">
         <Reveal>
-          <p className="text-caption mb-6">Privacy</p>
+          <p className="text-caption mb-6">Privacidade</p>
         </Reveal>
         <Reveal delay={0.1}>
           <h1 className="text-display max-w-3xl">
-            What happens to what you type here.
+            O que acontece ao que aqui escreve.
           </h1>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="text-body-lg max-w-2xl mt-8">
-            Short, because there is not much to say. This site is run by one
-            person, it has no advertising, and it does not sell anything about
-            you to anybody.
+            Curto, porque não há muito que dizer. Este site é feito por uma
+            pessoa, não tem publicidade, e não vende nada sobre si a ninguém.
           </p>
         </Reveal>
       </div>
@@ -59,15 +58,16 @@ const Privacy = () => (
         <Reveal>
           <div>
             <h2 className="font-display text-xl font-semibold text-foreground">
-              Who is responsible
+              Quem é o responsável
             </h2>
             <p className="text-body mt-3">
-              Guilherme Neves, in Porto, Portugal. Everything below is handled
-              by me personally. If you want to ask anything about it, write to{" "}
+              Guilherme Neves, no Porto, Portugal. Tudo o que está abaixo é
+              tratado por mim. Se quiser perguntar alguma coisa sobre isto,
+              escreva para{" "}
               <a href={`mailto:${LINKS.EMAIL}`} className="link-underline">
                 {LINKS.EMAIL}
               </a>{" "}
-              and I will answer myself.
+              e sou eu que respondo.
             </p>
           </div>
         </Reveal>
@@ -75,25 +75,25 @@ const Privacy = () => (
         <Reveal>
           <div>
             <h2 className="font-display text-xl font-semibold text-foreground">
-              What is collected, and only when you send it
+              O que é recolhido, e só quando o envia
             </h2>
             <p className="text-body mt-3">
-              Nothing is collected by browsing. There are two forms on this
-              site, and both are optional.
+              Nada é recolhido por navegar. Há dois formulários neste site, e
+              os dois são opcionais.
             </p>
             <ul className="mt-4 space-y-3">
               <li className="text-body">
-                <span className="font-medium text-foreground">The enquiry form.</span>{" "}
-                Your name, email, organisation if you give one, which kind of
-                work you are asking about, and what you wrote. I use it to
-                answer you.
+                <span className="font-medium text-foreground">O formulário de contacto.</span>{" "}
+                O seu nome, o email, a organização se a indicar, o tipo de
+                trabalho sobre o qual pergunta, e o que escreveu. Uso isso para
+                lhe responder.
               </li>
               <li className="text-body">
-                <span className="font-medium text-foreground">The reference card.</span>{" "}
-                Your name and email. The card itself is a free download and
-                needs no form at all, so if you fill this one in, it is because
-                you want to hear from me when there is something new. That is a
-                mailing list, and this line is me saying so plainly.
+                <span className="font-medium text-foreground">O cartão de referência.</span>{" "}
+                O seu nome e o email. O cartão descarrega-se de graça e não
+                precisa de formulário nenhum, por isso se preencher este é
+                porque quer ter notícias minhas quando houver coisa nova. Isso é
+                uma lista de contactos, e esta linha é eu a dizê-lo sem rodeios.
               </li>
             </ul>
           </div>
@@ -102,12 +102,12 @@ const Privacy = () => (
         <Reveal>
           <div>
             <h2 className="font-display text-xl font-semibold text-foreground">
-              Where it is kept
+              Onde fica guardado
             </h2>
             <p className="text-body mt-3">
-              In a database hosted by Supabase, inside the European Union. Only
-              I have access to it. It is not shared with anyone, not used for
-              advertising, and not sold.
+              Numa base de dados alojada pela Supabase, dentro da União
+              Europeia. Só eu tenho acesso. Não é partilhada com ninguém, não é
+              usada para publicidade, e não é vendida.
             </p>
           </div>
         </Reveal>
@@ -115,13 +115,13 @@ const Privacy = () => (
         <Reveal>
           <div>
             <h2 className="font-display text-xl font-semibold text-foreground">
-              For how long
+              Durante quanto tempo
             </h2>
             <p className="text-body mt-3">
-              Enquiries are kept while a conversation is live and for a
-              reasonable period after, so I can remember what we discussed.
-              Mailing list entries are kept until you ask to come off, and one
-              email from you is enough to do that.
+              Os contactos ficam guardados enquanto a conversa estiver viva e
+              por um período razoável depois, para eu me lembrar do que falámos.
+              Os registos da lista ficam até pedir para sair, e basta um email
+              seu para isso.
             </p>
           </div>
         </Reveal>
@@ -129,17 +129,17 @@ const Privacy = () => (
         <Reveal>
           <div>
             <h2 className="font-display text-xl font-semibold text-foreground">
-              What you can ask for
+              O que pode pedir
             </h2>
             <p className="text-body mt-3">
-              A copy of what I hold about you, a correction, or deletion. Also
-              to be taken off the list at any time, without giving a reason and
-              without it affecting anything else. Write to{" "}
+              Uma cópia do que tenho sobre si, uma correção, ou que seja
+              apagado. Também sair da lista a qualquer momento, sem dar motivo e
+              sem que isso afete seja o que for. Escreva para{" "}
               <a href={`mailto:${LINKS.EMAIL}`} className="link-underline">
                 {LINKS.EMAIL}
               </a>
-              . If you think I have handled your data badly, you can complain to
-              the Comissão Nacional de Proteção de Dados in Portugal.
+              . Se achar que tratei mal os seus dados, pode apresentar queixa à
+              Comissão Nacional de Proteção de Dados.
             </p>
           </div>
         </Reveal>
@@ -147,23 +147,23 @@ const Privacy = () => (
         <Reveal>
           <div>
             <h2 className="font-display text-xl font-semibold text-foreground">
-              Cookies, and what I do count
+              Cookies, e o que eu conto
             </h2>
             <p className="text-body mt-3">
-              No cookies, no advertising, and nothing that follows you to
-              another site. I do count pages, because otherwise I am rebuilding
-              this thing blind. Each view records four things: which page, which
-              site sent you if any, whether your screen is a phone, a tablet or
-              a desktop, and a random number that lives in your tab and
-              disappears when you close it. That number exists only so I can
-              tell one person reading five pages from five people reading one.
-              No address, no name, nothing that survives the visit, and no
-              third party involved: it goes into the same database as the forms
-              above and nowhere else.
+              Sem cookies, sem publicidade, e sem nada que o siga para outro
+              site. Conto páginas, porque senão estou a reconstruir isto às
+              cegas. Cada visita regista quatro coisas: que página, que site o
+              mandou cá se algum, se o ecrã é de telemóvel, de tablet ou de
+              computador, e um número aleatório que vive no separador e
+              desaparece quando o fecha. Esse número existe só para eu
+              distinguir uma pessoa a ler cinco páginas de cinco pessoas a ler
+              uma. Sem morada, sem nome, sem nada que sobreviva à visita, e sem
+              terceiros pelo meio: vai para a mesma base de dados dos
+              formulários acima e mais nenhum sítio.
             </p>
             <p className="text-body mt-3">
-              Fonts are loaded from Google Fonts, which means your browser makes
-              a request to Google to fetch them.
+              Os tipos de letra vêm do Google Fonts, o que quer dizer que o seu
+              navegador faz um pedido à Google para os ir buscar.
             </p>
           </div>
         </Reveal>
@@ -171,7 +171,7 @@ const Privacy = () => (
         <Reveal>
           <div className="pt-2">
             <Link to="/contacto" className="text-sm font-display link-underline">
-              Back to getting in touch &rarr;
+              Voltar ao contacto &rarr;
             </Link>
           </div>
         </Reveal>

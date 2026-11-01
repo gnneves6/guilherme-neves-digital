@@ -79,18 +79,18 @@ const LawKeep = () => {
 
         <div>
           <Reveal>
-            <p className="text-caption mb-5">Take it with you</p>
+            <p className="text-caption mb-5">Leve consigo</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="text-headline max-w-lg">
-              Keep the five laws where the work actually happens.
+              Tenha as cinco verificações onde o trabalho acontece.
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="text-body-lg max-w-lg mt-5">
-              One page, the whole framework. Print it for the kitchen, the gym or the
-              staff room, or hand it to an athlete. Same five laws you just read,
-              written to survive a real week.
+              Uma página, tudo lá dentro. Imprima para a cozinha, para o ginásio
+              ou para a sala da equipa técnica, ou dê a um atleta. As mesmas cinco
+              que acabou de ler, escritas para sobreviver a uma semana real.
             </p>
           </Reveal>
 
@@ -105,11 +105,11 @@ const LawKeep = () => {
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Download the card <span aria-hidden>↓</span>
+                  Descarregar o cartão <span aria-hidden>↓</span>
                 </motion.a>
               </Magnetic>
               <p className="text-caption text-[10px] text-muted-foreground">
-                Free, and no email needed.
+                Grátis, e sem pedir email.
               </p>
             </div>
           </Reveal>
@@ -129,9 +129,9 @@ const LawKeep = () => {
                   style={{ borderTop: "1px solid hsl(var(--subtle-border))" }}
                 >
                   <p className="text-body">
-                    That one is yours to keep. I am building the applied versions of
-                    each law, the systems and tools that sit underneath them. If you
-                    want them as they are ready, leave your email.
+                    Esse fica consigo. Estou a construir as versões aplicadas de
+                    cada uma, os sistemas e as ferramentas que estão por baixo. Se
+                    as quiser à medida que ficam prontas, deixe o email.
                   </p>
                   <form onSubmit={handleSubmit} className="mt-6 space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
@@ -165,7 +165,7 @@ const LawKeep = () => {
                         className="inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85 disabled:opacity-50"
                         style={{ background: "hsl(var(--olive))", color: "hsl(var(--ivory))" }}
                       >
-                        {loading ? "Sending..." : "Send them my way"}
+                        {loading ? "A enviar..." : "Manda-me"}
                       </button>
                       {/* The consent line, which the record already claimed and
                           the page never showed. `consent: true` was being

@@ -17,20 +17,20 @@ import laws from "@/data/fuel-laws.json";
 
 const expansions = [
   {
-    title: "Athlete Education",
-    description: "Turning each law into language athletes understand, remember and act on, session by session.",
+    title: "Formação de atletas",
+    description: "Transformar cada verificação em linguagem que o atleta percebe, guarda e usa, sessão a sessão.",
   },
   {
-    title: "Team Systems",
-    description: "Embedding the framework into staff workflows so nutrition holds under the pressure of a real season.",
+    title: "Sistemas de equipa",
+    description: "Montar isto dentro do modo de trabalho da equipa técnica, para a nutrição aguentar a pressão de uma época a sério.",
   },
   {
-    title: "Applied Diagnostics",
-    description: "Reading each environment against the five laws to find where performance is quietly leaking.",
+    title: "Diagnóstico aplicado",
+    description: "Ler cada ambiente contra as cinco verificações para encontrar por onde é que a performance se perde em silêncio.",
   },
   {
-    title: "Practical Systems",
-    description: "Repeatable processes that embed the framework into weekly training cycles and competition calendars.",
+    title: "Sistemas práticos",
+    description: "Processos repetíveis que encaixam isto nos ciclos semanais de treino e no calendário de competição.",
   },
 ];
 
@@ -52,7 +52,7 @@ const FuelLaws = () => {
 
   return (
     <Layout>
-      <SEO title="The five checks, Guilherme Neves" description="The five things I check before anything else in a performance environment, free, each one with the work behind it." path="/cinco-verificacoes" />
+      <SEO title="As cinco verificações, Guilherme Neves" description="As cinco coisas que verifico antes de tudo o resto num ambiente de performance, de graça, cada uma com o trabalho por trás." path="/cinco-verificacoes" />
 
       {/* Header */}
       <section className="section-padding section-spacing relative">
@@ -66,19 +66,19 @@ const FuelLaws = () => {
               five: what changed is who owes whom. Take this, it is what I
               actually run, and here is the work behind each one. */}
           <Reveal>
-            <p className="text-caption mb-6">Free · Yours to keep</p>
+            <p className="text-caption mb-6">Grátis · Fica consigo</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-4xl">
-              The five checks I run before anything else.
+              As cinco verificações que faço antes de tudo o resto.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-body-lg max-w-2xl mt-8">
-              Whatever the environment, these five come first, and most of what
-              goes wrong is one of them being skipped. Each one has the work
-              behind it, so you can see where it came from rather than take my
-              word for it. Take them and use them.
+              Seja qual for o ambiente, estas cinco vêm primeiro, e a maior parte
+              do que corre mal é uma delas ter sido saltada. Cada uma tem o
+              trabalho por trás, para poder ver de onde veio em vez de acreditar
+              na minha palavra. Leve-as e use-as.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
@@ -130,12 +130,12 @@ const FuelLaws = () => {
                     <span className="w-2 h-2 rounded-full" style={{ background: "hsl(var(--ivory) / 0.14)" }} />
                   </span>
                   <span className="text-[10px] md:text-[11px] tracking-[0.28em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
-                    The five laws
+                    As cinco verificações
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="hidden sm:inline text-[10px] tracking-[0.24em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.35)" }}>
-                    Explored
+                    Vistas
                   </span>
                   <span className="text-[11px] font-display tracking-widest tabular-nums" style={{ color: complete ? "hsl(44 65% 60%)" : "hsl(var(--ivory) / 0.7)" }}>
                     {explored}/{laws.length}
@@ -306,10 +306,10 @@ const FuelLaws = () => {
                               >
                                 <div className="flex items-baseline justify-between gap-4 mb-4">
                                   <p className="text-[10px] tracking-[0.24em] uppercase font-display" style={{ color: "hsl(var(--ivory) / 0.4)" }}>
-                                    Proven in the work
+                                    Provado no trabalho
                                   </p>
                                   <span className="text-[10px] font-display tabular-nums" style={{ color: "hsl(var(--ivory) / 0.28)" }}>
-                                    {proof.length} {proof.length === 1 ? "piece" : "pieces"}
+                                    {proof.length} {proof.length === 1 ? "peça" : "peças"}
                                   </span>
                                 </div>
                                 <div className="flex flex-wrap gap-2">
@@ -371,7 +371,7 @@ const FuelLaws = () => {
                       className="text-[13px]"
                       style={{ color: "hsl(var(--ivory) / 0.45)" }}
                     >
-                      Open each law to see the principle and how it runs in practice.
+                      Abra cada uma para ver o princípio e como é que corre na prática.
                     </motion.p>
                   )}
                 </AnimatePresence>
@@ -397,12 +397,12 @@ const FuelLaws = () => {
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-4">How It Expands</p>
+            <p className="text-caption mb-4">Como é que isto cresce</p>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-xl mb-14">
-              The framework extends into practical applications across performance
-              environments, from individual athlete education to team-level systems.
+              Isto estende-se a aplicações práticas em ambientes de performance,
+              da formação individual de um atleta aos sistemas de equipa.
             </p>
           </Reveal>
           <div className="grid sm:grid-cols-2 gap-px bg-border/40">
@@ -450,13 +450,14 @@ const FuelLaws = () => {
         <div className="max-content text-center">
           <Reveal>
             <h2 className="text-headline max-w-2xl mx-auto">
-              Five laws are the easy half. Making them survive a season is the work.
+              As cinco são a metade fácil. O trabalho é fazê-las sobreviver a uma época.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-body-lg max-w-md mx-auto mt-5">
-              Every one of these came out of a real environment. The systems,
-              tools and casework they turned into are open on the work page.
+              Cada uma destas saiu de um ambiente real. Os sistemas, as
+              ferramentas e os casos em que se tornaram estão abertos na página
+              do trabalho.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
@@ -466,14 +467,14 @@ const FuelLaws = () => {
                   to="/trabalho"
                   className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
                 >
-                  See where they came from
+                  Ver de onde vieram
                 </Link>
               </Magnetic>
               <Link
                 to="/contacto"
                 className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
-                Or talk about applying them
+                Ou falar sobre aplicá-las
                 <span aria-hidden>→</span>
               </Link>
             </div>
