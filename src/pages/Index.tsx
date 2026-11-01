@@ -5,6 +5,7 @@ import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import CincoDimensoes from "@/components/sections/home/CincoDimensoes";
 import Servicos from "@/components/sections/home/Servicos";
+import SemanaReal from "@/components/sections/terreno/SemanaReal";
 import Sitio from "@/components/sections/terreno/Sitio";
 import { sitios } from "@/data/terreno";
 import Assinatura from "@/components/sections/home/Assinatura";
@@ -62,6 +63,7 @@ const Index = () => {
       <EnvironmentsSection />
       <Servicos />
       <CincoDimensoes />
+      <SemanaReal />
       <Sitio sitio={sitios[0]} />
       <Assinatura />
       <Captura />
