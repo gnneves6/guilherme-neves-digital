@@ -88,7 +88,7 @@ const servicos = [
       "Não te vendo a minha folha. Sento-me contigo, vejo como trabalhas, e sais com a tua: a fazer em dez minutos o que te levava uma tarde, e tua para sempre.",
     itens: ["Sessão a dois", "Revisão do teu ficheiro", "Formação de equipa"],
     foto: null,
-    href: "/contact",
+    href: "/contacto",
   },
   {
     n: "02",
@@ -114,7 +114,7 @@ const servicos = [
       "Entro na vida real dele: o supermercado onde vive, o que come mesmo, a casa, a viagem, o calendário. Fica um padrão que aguenta a época, e alguém do lado dele quando a semana corre mal.",
     itens: ["Chegada a um clube novo", "Época acompanhada", "No sítio ou à distância"],
     foto: fotoPitchside,
-    href: "/contact",
+    href: "/contacto",
   },
 ];
 

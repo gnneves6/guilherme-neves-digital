@@ -136,7 +136,7 @@ const Captura = () => {
                     </Magnetic>
                     <p className="text-caption text-[10px] text-muted-foreground">
                       Sem newsletter semanal e sem dar o teu endereço a ninguém.{" "}
-                      <Link to="/privacy" className="link-underline">
+                      <Link to="/privacidade" className="link-underline">
                         O que faço com os dados
                       </Link>
                     </p>

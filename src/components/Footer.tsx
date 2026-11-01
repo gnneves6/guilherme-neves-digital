@@ -12,11 +12,11 @@ const Footer = () => {
               Guilherme Neves
             </p>
             <p className="text-body text-sm">
-              A practice for high-performance environments. Diagnosis, translation
-              and embedded nutrition systems.
+              Trabalho para ambientes de alta competição. Diagnóstico, tradução
+              e sistemas de nutrição montados por dentro.
             </p>
             <p className="text-caption text-[10px] font-normal mt-4">
-              Porto · Brussels
+              Porto · Bruxelas
             </p>
           </div>
 
@@ -26,12 +26,12 @@ const Footer = () => {
               <div className="flex flex-col gap-1.5">
                 {[
                   { label: "Home", path: "/" },
-                  { label: "Sobre", path: "/about" },
-                  { label: "Trabalho", path: "/work" },
-                  { label: "As cinco verificações", path: "/fuel-laws" },
-                  { label: "Serviços", path: "/services" },
-                  { label: "Contacto", path: "/contact" },
-                  { label: "Privacidade", path: "/privacy" },
+                  { label: "Sobre", path: "/sobre" },
+                  { label: "Trabalho", path: "/trabalho" },
+                  { label: "As cinco verificações", path: "/cinco-verificacoes" },
+                  { label: "Serviços", path: "/servicos" },
+                  { label: "Contacto", path: "/contacto" },
+                  { label: "Privacidade", path: "/privacidade" },
                 ].map((item) => (
                   <Link
                     key={item.path}

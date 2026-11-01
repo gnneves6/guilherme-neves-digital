@@ -115,7 +115,7 @@ const WorkConnections = ({ artefact, accent, onNavigate }: Props) => {
                 {servedLaws.map((l) => (
                   <Chip
                     key={l.number}
-                    to="/fuel-laws"
+                    to="/cinco-verificacoes"
                     label={l.title}
                     meta={`Law ${l.number}`}
                     onNavigate={onNavigate}

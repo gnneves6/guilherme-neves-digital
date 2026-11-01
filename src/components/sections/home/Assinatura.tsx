@@ -139,7 +139,7 @@ const Assinatura = () => (
           </Reveal>
           <Reveal delay={0.48}>
             <p className="text-caption text-[10px] mt-5 opacity-70">
-              <Link to="/about" className="link-underline">
+              <Link to="/sobre" className="link-underline">
                 O percurso todo
               </Link>
             </p>

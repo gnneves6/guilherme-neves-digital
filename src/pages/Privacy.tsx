@@ -30,7 +30,7 @@ const Privacy = () => (
     <SEO
       title="Privacy, Guilherme Neves"
       description="What this site collects, why, where it is kept, and how to have it removed."
-      path="/privacy"
+      path="/privacidade"
     />
 
     <section className="section-padding section-spacing relative">
@@ -170,7 +170,7 @@ const Privacy = () => (
 
         <Reveal>
           <div className="pt-2">
-            <Link to="/contact" className="text-sm font-display link-underline">
+            <Link to="/contacto" className="text-sm font-display link-underline">
               Back to getting in touch &rarr;
             </Link>
           </div>

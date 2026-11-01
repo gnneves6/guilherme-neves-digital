@@ -52,8 +52,8 @@ const Lema = ({ modo = "cima" }: { modo?: Modo }) => {
       by purpose.
       <span className="sr-only">
         {" "}
-        Soon to be: the title is protected and depends on registration with the
-        Ordem dos Nutricionistas.
+        Em breve: o título é protegido e depende da inscrição na Ordem dos
+        Nutricionistas.
       </span>
     </>
   );

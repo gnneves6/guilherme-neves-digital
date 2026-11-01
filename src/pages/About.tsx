@@ -35,7 +35,7 @@ const awards = [
 const About = () => {
   return (
     <Layout>
-      <SEO title="About Guilherme Neves, Performance Nutrition & Systems" description="Performance nutrition learned inside elite football. Guilherme Neves on the work, the environments it came from, and why systems matter more than advice." path="/about" />
+      <SEO title="About Guilherme Neves, Performance Nutrition & Systems" description="Performance nutrition learned inside elite football. Guilherme Neves on the work, the environments it came from, and why systems matter more than advice." path="/sobre" />
       {/* Who I am. The page opens on the person, not on a positioning line. */}
       <section className="section-padding section-spacing">
         <div className="max-content">
@@ -108,7 +108,7 @@ const About = () => {
               the curiosity is. */}
           <Reveal delay={0.25}>
             <Link
-              to="/work"
+              to="/trabalho"
               className="group inline-flex items-center gap-2.5 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               What I actually did in those rooms
@@ -335,14 +335,14 @@ const About = () => {
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <Magnetic as="span" strength={7}>
                 <Link
-                  to="/work"
+                  to="/trabalho"
                   className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
                 >
                   See the work
                 </Link>
               </Magnetic>
               <Link
-                to="/contact"
+                to="/contacto"
                 className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 Or start a conversation

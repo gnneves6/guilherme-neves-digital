@@ -231,7 +231,7 @@ const MatchdayPlanner = () => {
                 número muda com o atleta, o calendário e as viagens.
               </p>
               <Link
-                to="/contact"
+                to="/contacto"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-display text-[13px] font-medium shrink-0 transition-opacity duration-300 hover:opacity-85"
                 style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
               >

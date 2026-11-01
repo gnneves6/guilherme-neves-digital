@@ -52,7 +52,7 @@ const FuelLaws = () => {
 
   return (
     <Layout>
-      <SEO title="The five checks, Guilherme Neves" description="The five things I check before anything else in a performance environment, free, each one with the work behind it." path="/fuel-laws" />
+      <SEO title="The five checks, Guilherme Neves" description="The five things I check before anything else in a performance environment, free, each one with the work behind it." path="/cinco-verificacoes" />
 
       {/* Header */}
       <section className="section-padding section-spacing relative">
@@ -377,7 +377,7 @@ const FuelLaws = () => {
                 </AnimatePresence>
                 <Magnetic as="span" strength={6}>
                   <Link
-                    to="/contact"
+                    to="/contacto"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-display text-[13px] font-medium tracking-wide transition-all duration-300"
                     style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
                   >
@@ -463,14 +463,14 @@ const FuelLaws = () => {
             <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <Magnetic as="span" strength={7}>
                 <Link
-                  to="/work"
+                  to="/trabalho"
                   className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
                 >
                   See where they came from
                 </Link>
               </Magnetic>
               <Link
-                to="/contact"
+                to="/contacto"
                 className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 Or talk about applying them

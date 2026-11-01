@@ -65,9 +65,9 @@ import sceneRoom from "@/assets/photos/locker-room.webp";
  * frame zero forever, real and invisible.
  */
 const struck = [
-  "Not a document that looks good in a meeting.",
-  "Not a plan that fits everyone and no one.",
-  "Not advice that dates the week after it lands.",
+  "Não é um documento que fica bem numa reunião.",
+  "Não é um plano que serve a toda a gente e a ninguém.",
+  "Não é um conselho que fica velho na semana a seguir.",
 ];
 
 const STEPS = struck.length + 1;
@@ -97,7 +97,7 @@ const ruleStyle = {
 const StaticStatement = () => (
   <div className="max-content">
     <p className="text-caption mb-8" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
-      The standard
+      O padrão
     </p>
     <ul className="space-y-3 mb-9">
       {struck.map((line) => (
@@ -109,12 +109,12 @@ const StaticStatement = () => (
       ))}
     </ul>
     <h2 className={claimClass} style={{ color: "hsl(var(--ivory))" }}>
-      A system that holds when the season gets loud, and keeps holding long
-      after I have stopped being in the room.
+      Um sistema que aguenta quando a época fica barulhenta, e que continua a
+      aguentar muito depois de eu deixar de estar na sala.
     </h2>
     <p className="text-body-lg mt-6 max-w-xl" style={{ color: "hsl(var(--ivory) / 0.6)" }}>
-      I work with few environments, closely, for a long time. That is the only
-      way any of this compounds.
+      Trabalho com poucos ambientes, de perto, durante muito tempo. É a única
+      maneira de isto acumular.
     </p>
   </div>
 );
@@ -311,7 +311,7 @@ const StandardStatement = () => {
                 {String(step + 1).padStart(2, "0")}
               </span>
               <span className="text-caption" style={{ color: "hsl(var(--ivory) / 0.5)" }}>
-                The standard
+                O padrão
               </span>
             </div>
 
@@ -334,7 +334,7 @@ const StandardStatement = () => {
                     exit={{ opacity: 0, y: -44, filter: "blur(10px)" }}
                     transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    A system that holds when the season gets loud, and{" "}
+                    Um sistema que aguenta quando a época fica barulhenta, e{" "}
                     <span className="relative whitespace-nowrap">
                       <motion.span
                         aria-hidden
@@ -344,9 +344,9 @@ const StandardStatement = () => {
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 0.55, delay: 0.45, ease: [0.4, 0, 0.2, 1] }}
                       />
-                      <span className="relative">keeps holding</span>
+                      <span className="relative">continua a aguentar</span>
                     </span>{" "}
-                    long after I have stopped being in the room.
+                    muito depois de eu deixar de estar na sala.
                   </motion.h2>
                 ) : (
                   <motion.p
@@ -407,7 +407,7 @@ const StandardStatement = () => {
                     go(i, i > step ? 1 : -1);
                   }}
                   aria-label={
-                    i === CLAIM ? "The standard" : `What it is not, ${i + 1} of ${struck.length}`
+                    i === CLAIM ? "O padrão" : `O que não é, ${i + 1} de ${struck.length}`
                   }
                   // Padded so the narrowest dot still clears a 24px target.
                   className="h-6 px-1 flex items-center"
@@ -427,7 +427,7 @@ const StandardStatement = () => {
                 className="ml-3 text-[10px] tracking-[0.2em] uppercase font-display"
                 style={{ color: "hsl(var(--ivory) / 0.3)" }}
               >
-                {isClaim ? "Again" : "Scroll or tap"}
+                {isClaim ? "Outra vez" : "Deslize ou toque"}
               </span>
             </div>
           </div>
@@ -439,8 +439,9 @@ const StandardStatement = () => {
           with the correction stated rather than drawn. The standard itself is
           not repeated: the heading in the slot is real when it is there. */}
       <p className="sr-only">
-        What this is not: a document that looks good in a meeting, a plan that
-        fits everyone and no one, or advice that dates the week after it lands.
+        O que isto não é: um documento que fica bem numa reunião, um plano que
+        serve a toda a gente e a ninguém, ou um conselho que fica velho na
+        semana a seguir.
       </p>
     </section>
   );

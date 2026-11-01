@@ -70,7 +70,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <SEO title="Contact Guilherme Neves" description="Tell me what you are trying to solve. Every enquiry comes straight to me and I reply personally." path="/contact" />
+      <SEO title="Contact Guilherme Neves" description="Tell me what you are trying to solve. Every enquiry comes straight to me and I reply personally." path="/contacto" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
@@ -117,7 +117,7 @@ const Contact = () => {
                     moment it will ever have. Hand them the free thing instead. */}
                 <Magnetic as="span" strength={7} className="inline-block mt-8">
                   <Link
-                    to="/fuel-laws"
+                    to="/cinco-verificacoes"
                     className="inline-flex items-center justify-center px-9 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
                   >
                     While you wait, take the five checks
@@ -228,7 +228,7 @@ const Contact = () => {
                   <p className="text-caption text-[10px] text-muted-foreground max-w-[16rem] leading-relaxed">
                     No obligation. Read personally, usually answered within a few
                     working days.{" "}
-                    <Link to="/privacy" className="link-underline">
+                    <Link to="/privacidade" className="link-underline">
                       What happens to what you send
                     </Link>
                     .
@@ -310,8 +310,8 @@ const Contact = () => {
                 <div className="pt-6 border-t border-border/60 space-y-3">
                   <p className="text-caption text-[10px]">Not ready yet</p>
                   {[
-                    { to: "/work", label: "See the work first" },
-                    { to: "/fuel-laws", label: "Take the five checks" },
+                    { to: "/trabalho", label: "See the work first" },
+                    { to: "/cinco-verificacoes", label: "Take the five checks" },
                   ].map((l) => (
                     <Link
                       key={l.to}

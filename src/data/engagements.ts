@@ -39,21 +39,21 @@ export interface Engagement {
 export const engagements: Record<EngagementId, Engagement> = {
   audit: {
     id: "audit",
-    title: "Diagnostic",
-    shape: "4 to 6 weeks, on site and remote",
+    title: "Diagnóstico",
+    shape: "4 a 6 semanas, no terreno e à distância",
     outcome:
-      "A read on how nutrition actually operates across performance, medical and catering, and what to fix first.",
+      "Uma leitura de como a nutrição funciona de facto entre a performance, o departamento médico e a cozinha, e o que corrigir primeiro.",
     image: auditImage,
     imageAlt:
-      "An operations review sheet showing meal service checkpoints, compliance scoring and who owns each one, beside a printed catering operations manual.",
+      "Uma folha de revisão de operações com os pontos de controlo do serviço de refeições, a pontuação de cumprimento e quem é responsável por cada um, ao lado de um manual de operações de catering impresso.",
     imageFocus: { scale: 1.75, origin: "34% 44%" },
   },
   systems: {
     id: "systems",
-    title: "System installed",
-    shape: "A season, retained",
+    title: "Sistema montado",
+    shape: "Uma época, em avença",
     outcome:
-      "Matchday, travel and training-week structures your staff run without me in the room.",
+      "Estruturas de dia de jogo, de deslocação e de semana de treino que a vossa equipa corre sem eu estar na sala.",
     /* A imagem era o painel do produto que está sob embargo de nome e de
        imagem até ao lançamento, e tinha o nome dele escrito no ecrã. Passa
        a ser o protocolo de hidratação e perdas de suor, que é trabalho
@@ -65,13 +65,13 @@ export const engagements: Record<EngagementId, Engagement> = {
   },
   education: {
     id: "education",
-    title: "Education",
-    shape: "One session, or a programme",
+    title: "Formação",
+    shape: "Uma sessão, ou um programa",
     outcome:
-      "Athletes, staff or parents sharing one applied language for the decisions they make around food.",
+      "Atletas, equipa técnica ou pais a partilhar uma linguagem aplicada para as decisões que tomam à volta da comida.",
     image: educationImage,
     imageAlt:
-      "Six football nutrition education cards laid out on a desk, covering the basics, hydration, supplements, recovery and fructose intolerance.",
+      "Seis cartões de formação em nutrição no futebol pousados numa secretária, sobre as bases, hidratação, suplementos, recuperação e intolerância à frutose.",
     imageFocus: { scale: 1.65, origin: "22% 34%" },
   },
 };

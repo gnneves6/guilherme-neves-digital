@@ -10,36 +10,37 @@ import Em from "@/components/text/Em";
 import PlanGrid from "@/components/motion/PlanGrid";
 import StandardStatement from "@/components/sections/StandardStatement";
 
-/** The shape is the message: five stages, and the last returns to the first. */
+/** A forma é a mensagem: cinco fases, e a última volta à primeira. */
 const processSteps = [
-  { label: "Discover" },
-  { label: "Audit" },
-  { label: "Design" },
-  { label: "Implementation" },
-  { label: "Review" },
+  { label: "Descobrir" },
+  { label: "Auditar" },
+  { label: "Desenhar" },
+  { label: "Implementar" },
+  { label: "Rever" },
 ];
 
 const Services = () => {
   return (
     <Layout>
-      <SEO title="Working with me, Guilherme Neves" description="Embedded engagements, diagnostics, education programmes and advisory for high-performance environments." path="/services" />
+      <SEO title="O que se compra, Guilherme Neves" description="Auditorias a clubes, ferramentas construídas à medida e apoio especializado a atletas de elite." path="/servicos" />
       {/* Hero, Why */}
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
-            <p className="text-caption mb-6">Working with me</p>
+            <p className="text-caption mb-6">O que se compra</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="text-display max-w-5xl">
-              Work built for environments that take nutrition seriously.
+              Três formas de trabalhar comigo, e a diferença entre elas não é
+              o público.
             </h1>
           </Reveal>
           <Reveal delay={0.25}>
             <p className="text-body-lg max-w-2xl mt-8">
-              Clubs, the staff inside them, the athletes they carry, and the people
-              trying to get into this work. What I do changes with who is asking,
-              but the question underneath never does:{" "}
-              <Em>is nutrition working as a system here, or only on paper?</Em>
+              É o valor: uma devolve tempo, outra devolve processo, e a
+              terceira devolve cumprimento. A pergunta por baixo das três é
+              sempre a mesma:{" "}
+              <Em>a nutrição aqui funciona como sistema, ou só no papel?</Em>
             </p>
           </Reveal>
           {/* The filter, stated before the offer.
@@ -59,30 +60,30 @@ const Services = () => {
               className="mt-10 max-w-2xl p-6 md:p-7"
               style={{ background: "hsl(41 40% 96%)", border: "1px solid hsl(var(--subtle-border))" }}
             >
-              <p className="text-caption text-[10px] mb-3">Who this works for</p>
+              <p className="text-caption text-[10px] mb-3">Para quem isto resulta</p>
               <p className="text-body">
-                People with a purpose, who read a number against what it gives
-                back rather than against what it costs, and who are willing to
-                be disciplined about the part that is theirs. Not everybody, and
-                not the people who need convincing.
+                Gente com um objetivo, que lê um número contra o que ele
+                devolve e não contra o que custa, e que aceita ser disciplinada
+                na parte que lhe toca. Não é para toda a gente, e não é para
+                quem precisa de ser convencido.
               </p>
               <p className="text-body mt-4">
-                If I do not add value, I give the money back. I would rather
-                carry that risk than have you carry it, because if I am not sure
-                I can help you, I should not be taking the work.
+                Se eu não acrescentar valor, devolvo o dinheiro. Prefiro correr
+                esse risco eu do que pô-lo do seu lado: se não tenho a certeza
+                de que consigo ajudar, não devia estar a aceitar o trabalho.
               </p>
             </div>
           </Reveal>
           <Reveal delay={0.35}>
             <div className="mt-10 flex items-center gap-6 flex-wrap">
               <Link
-                to="/work"
+                to="/trabalho"
                 className="text-sm font-display tracking-wide link-underline"
               >
-                View the applied work this is built on →
+                Ver o trabalho aplicado em que isto assenta →
               </Link>
               <span className="text-caption text-[10px] text-muted-foreground">
-                Porto / Brussels · By invitation & enquiry
+                Porto / Bruxelas · Por convite e por contacto
               </span>
             </div>
           </Reveal>
@@ -120,9 +121,9 @@ const Services = () => {
         <div className="max-content">
           <Reveal>
             <div className="flex items-baseline justify-between gap-6 flex-wrap mb-10 md:mb-12">
-              <p className="text-caption">How collaboration works</p>
+              <p className="text-caption">Como é que se trabalha</p>
               <p className="text-caption text-[10px] text-muted-foreground">
-                A loop, not a handover
+                Um ciclo, não uma entrega
               </p>
             </div>
           </Reveal>
@@ -173,7 +174,7 @@ const Services = () => {
           <div className="mt-8 flex items-center gap-2.5">
             <span className="text-base leading-none" style={{ color: "hsl(var(--olive))" }} aria-hidden>↺</span>
             <span className="text-[10px] tracking-[0.2em] uppercase font-display" style={{ color: "hsl(var(--olive))" }}>
-              Revisited, not handed over
+              Revisto, não entregue
             </span>
           </div>
         </div>
@@ -189,25 +190,25 @@ const Services = () => {
         <div className="section-padding section-spacing relative">
           <div className="max-content">
             <Reveal>
-              <p className="text-caption mb-10">Invitation</p>
+              <p className="text-caption mb-10">Convite</p>
             </Reveal>
             <Reveal delay={0.1}>
               <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight max-w-5xl text-[hsl(var(--ivory))]">
-                “Not looking for another nutrition document. Looking for a system that people actually use.”
+                «Não quero mais um documento de nutrição. Quero um sistema que as pessoas cumpram.»
               </blockquote>
             </Reveal>
             <Reveal delay={0.25}>
               <div className="mt-12 flex items-center gap-6 flex-wrap">
                 <Magnetic as="span" strength={7}>
                   <Link
-                    to="/contact"
+                    to="/contacto"
                     className="inline-flex items-center justify-center px-10 py-4 bg-[hsl(var(--ivory))] text-[hsl(var(--charcoal-deep))] font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-90"
                   >
-                    Start a conversation
+                    Falar comigo
                   </Link>
                 </Magnetic>
                 <p className="text-caption text-[10px] text-[hsl(var(--ivory)/0.5)]">
-                  Enquiries reviewed personally · Porto / Brussels
+                  Cada contacto é lido por mim · Porto / Bruxelas
                 </p>
               </div>
             </Reveal>

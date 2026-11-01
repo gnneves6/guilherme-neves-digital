@@ -18,9 +18,9 @@ const NotFound = () => {
   const { pathname } = useLocation();
 
   const routes = [
-    { to: "/work", label: "The work", note: "Systems and tools from real environments." },
-    { to: "/fuel-laws", label: "The five checks", note: "What I run first, free and yours." },
-    { to: "/about", label: "Who I am", note: "How this started, and where it goes." },
+    { to: "/trabalho", label: "The work", note: "Systems and tools from real environments." },
+    { to: "/cinco-verificacoes", label: "The five checks", note: "What I run first, free and yours." },
+    { to: "/sobre", label: "Who I am", note: "How this started, and where it goes." },
   ];
 
   return (

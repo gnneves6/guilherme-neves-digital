@@ -54,14 +54,14 @@ const InvitationSection = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12">
             <Magnetic strength={8} as="span">
               <Link
-                to="/contact"
+                to="/contacto"
                 className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
               >
                 Start a Conversation
               </Link>
             </Magnetic>
             <Link
-              to="/fuel-laws"
+              to="/cinco-verificacoes"
               className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide transition-colors duration-300 text-muted-foreground hover:text-foreground"
             >
               Not yet? Take the five checks

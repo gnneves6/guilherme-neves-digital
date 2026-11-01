@@ -130,19 +130,19 @@ const AudienceSelector = () => {
           <span key={a.anchor} id={a.anchor} aria-hidden className="block h-0" />
         ))}
         <Reveal>
-          <p className="text-caption mb-6">Who I work with</p>
+          <p className="text-caption mb-6">Com quem trabalho</p>
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="text-headline max-w-3xl">
-            Six kinds of people arrive here. Tell me which one you are.
+            Chegam aqui seis tipos de pessoas. Diga-me qual é a sua.
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
           <p className="text-body-lg max-w-xl mt-5">
-            The work looks different depending on who is asking, so rather than
-            list everything at once, pick the line that sounds like you. They
-            are grouped by what can happen now and what waits on registration,
-            so you know before you read.
+            O trabalho muda de forma consoante quem pergunta, por isso em vez
+            de listar tudo de uma vez, escolha a linha que lhe soa a si. Estão
+            agrupadas pelo que pode acontecer já e pelo que espera pela cédula,
+            para saber antes de ler.
           </p>
         </Reveal>
 
@@ -291,7 +291,7 @@ const AudienceSelector = () => {
                     this me, and what do I get. Both survive; the restating
                     does not. */}
                 <div className="mt-8 max-w-xl">
-                  <p className="text-caption text-[10px] mb-4">What you walk away with</p>
+                  <p className="text-caption text-[10px] mb-4">O que fica consigo</p>
                   <ul className="space-y-2.5">
                     {active.gains.map((g) => (
                       <li key={g} className="flex items-start gap-3 text-sm leading-snug">
@@ -397,8 +397,8 @@ const AudienceSelector = () => {
                     </p>
                     <p className="text-caption text-[10px] mt-3 text-muted-foreground">
                       {proof.artefact.status === "Protected"
-                        ? "Built inside a club, so it is named rather than opened"
-                        : "Open to read in the archive"}
+                        ? "Construído dentro de um clube, por isso nomeia-se em vez de se abrir"
+                        : "Aberto para ler no arquivo"}
                     </p>
                   </div>
                 )}

@@ -347,7 +347,7 @@ const Work = () => {
 
   return (
     <Layout>
-      <SEO title="Work, Guilherme Neves" description="What was built inside RSC Anderlecht, Leça FC and independent practice, and what came out of each." path="/work" />
+      <SEO title="Work, Guilherme Neves" description="What was built inside RSC Anderlecht, Leça FC and independent practice, and what came out of each." path="/trabalho" />
       <section className="section-padding section-spacing">
         <div className="max-content">
           <Reveal>
@@ -366,7 +366,7 @@ const Work = () => {
           </Reveal>
           <Reveal delay={0.3}>
             <Link
-              to="/fuel-laws"
+              to="/cinco-verificacoes"
               className="inline-flex items-center gap-2 mt-6 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               Start with the five checks
@@ -643,14 +643,14 @@ const Work = () => {
             <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <Magnetic as="span" strength={7}>
                 <Link
-                  to="/services"
+                  to="/servicos"
                   className="inline-flex items-center justify-center px-10 py-4 bg-foreground text-background font-display text-sm font-medium tracking-wide transition-all duration-300 hover:opacity-85"
                 >
                   How the work usually starts
                 </Link>
               </Magnetic>
               <Link
-                to="/contact"
+                to="/contacto"
                 className="inline-flex items-center gap-2 py-2 font-display text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 Or just tell me the problem

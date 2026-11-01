@@ -36,12 +36,12 @@ const App = () => (
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/work" element={<Work />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/fuel-laws" element={<FuelLaws />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/sobre" element={<About />} />
+            <Route path="/trabalho" element={<Work />} />
+            <Route path="/servicos" element={<Services />} />
+            <Route path="/cinco-verificacoes" element={<FuelLaws />} />
+            <Route path="/contacto" element={<Contact />} />
+            <Route path="/privacidade" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

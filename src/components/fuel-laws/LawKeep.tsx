@@ -39,7 +39,7 @@ const LawKeep = () => {
         interest_type: "reference-card",
         message_optional: null,
         consent: true,
-        source_page: "/fuel-laws",
+        source_page: "/cinco-verificacoes",
       });
       if (dbError) throw dbError;
       setDone(true);
@@ -175,7 +175,7 @@ const LawKeep = () => {
                       <p className="text-caption text-[10px] text-muted-foreground max-w-[19rem] leading-relaxed">
                         Your address is kept by me, used only to send you the
                         work, and dropped the moment you ask.{" "}
-                        <Link to="/privacy" className="link-underline">
+                        <Link to="/privacidade" className="link-underline">
                           What I do with it
                         </Link>
                         .

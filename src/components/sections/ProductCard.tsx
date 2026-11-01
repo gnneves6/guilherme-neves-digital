@@ -45,7 +45,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         interest_type: "product-reservation",
         message_optional: null,
         consent: true,
-        source_page: "/services",
+        source_page: "/servicos",
       });
       if (dbError) throw dbError;
       setDone(true);
@@ -147,7 +147,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                   </button>
                   <p className="text-caption text-[10px] text-muted-foreground max-w-[19rem] leading-relaxed">
                     No payment now and no charge without you saying yes again.{" "}
-                    <Link to="/privacy" className="link-underline">
+                    <Link to="/privacidade" className="link-underline">
                       What I do with your address
                     </Link>
                     .

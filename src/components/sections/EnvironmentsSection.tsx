@@ -274,7 +274,7 @@ const EnvironmentsSection = () => {
               too. On desktop each club carries its own; on mobile the panel is
               already tight against one screen, so it lands once at the end. */}
           <Link
-            to="/work"
+            to="/trabalho"
             className="group/exit inline-flex items-center gap-2.5 mt-7 py-2 font-display text-[13px] tracking-wide text-[hsl(var(--ivory)/0.62)] hover:text-[hsl(var(--ivory))] transition-colors duration-300"
           >
             Ver o que saiu destas salas

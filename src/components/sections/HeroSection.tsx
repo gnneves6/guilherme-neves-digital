@@ -437,7 +437,7 @@ const HeroSection = () => {
             </a>
           </Magnetic>
           <Link
-            to="/contact"
+            to="/contacto"
             className="inline-flex items-center gap-2 py-4 font-display text-sm text-foreground link-underline"
           >
             Falar comigo
