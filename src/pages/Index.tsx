@@ -11,6 +11,7 @@ import { sitios } from "@/data/terreno";
 import Assinatura from "@/components/sections/home/Assinatura";
 import Captura from "@/components/sections/home/Captura";
 import PointerField from "@/components/journey/PointerField";
+import Passagem from "@/components/motion/Passagem";
 
 /**
  * A home mostra o valor. Não conta a história e não recita o currículo.
@@ -62,9 +63,15 @@ const Index = () => {
       <ProofMarquee />
       <EnvironmentsSection />
       <Servicos />
-      <CincoDimensoes />
-      <SemanaReal />
-      <Sitio sitio={sitios[0]} />
+      <Passagem>
+        <CincoDimensoes />
+      </Passagem>
+      <Passagem>
+        <SemanaReal />
+      </Passagem>
+      <Passagem intensidade={0.7}>
+        <Sitio sitio={sitios[0]} />
+      </Passagem>
       <Assinatura />
       <Captura />
     </Layout>

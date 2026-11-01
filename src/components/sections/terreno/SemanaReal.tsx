@@ -33,6 +33,8 @@ const SemanaReal = () => {
   const [modo, setModo] = useState<Modo>("sem");
   const [dia, setDia] = useState(-1);
   const temporizador = useRef<number | null>(null);
+  const seccao = useRef<HTMLElement>(null);
+  const jaCorreu = useRef(false);
 
   const parar = () => {
     if (temporizador.current) window.clearInterval(temporizador.current);
@@ -75,8 +77,37 @@ const SemanaReal = () => {
 
   const avisoActual = imprevistos.find((i) => i.d === dia);
 
+  /* Arranca sozinha ao entrar no ecrã, e é a correção mais importante que
+     esta peça levou. A versão anterior esperava por um clique, e ele apanhou
+     o que isso custa: "a pessoa, se estiver só a dar scroll, passa por isto
+     e nem vê nada". Pedir um clique antes de haver interesse é pedir trabalho
+     a quem ainda não sabe porque havia de o fazer. Agora a semana começa a
+     partir-se à frente dela, e o clique passa a ser a recompensa, não a
+     entrada. */
+  useEffect(() => {
+    const el = seccao.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((e) => {
+          if (e.isIntersecting && !jaCorreu.current) {
+            jaCorreu.current = true;
+            correr("sem");
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [correr]);
+
   return (
-    <section id="semana" className="section-dark section-padding section-spacing scroll-mt-24">
+    <section
+      ref={seccao}
+      id="semana"
+      className="section-dark section-padding section-spacing scroll-mt-24"
+    >
       <div className="max-content">
         <Reveal>
           <p className="text-caption mb-6">A prova</p>
@@ -89,22 +120,29 @@ const SemanaReal = () => {
         </Reveal>
         <Reveal delay={0.14}>
           <p className="text-body-lg mt-5 max-w-xl">
-            Esta semana está impecável no papel. Carrega e vê o que a realidade
-            lhe faz.
+            Esta semana está impecável no papel. A realidade não leu o plano.
           </p>
         </Reveal>
 
         {/* COMANDOS */}
         <Reveal delay={0.2}>
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <button
-              type="button"
-              onClick={() => correr("sem")}
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
-              style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
-            >
-              {estado === "parado" ? "Correr a semana" : "Correr outra vez"}
-            </button>
+            {/* Só aparece DEPOIS de a semana ter corrido. Antes disso não há
+                nada a pedir à pessoa: ela chega e a coisa já está a acontecer. */}
+            <AnimatePresence>
+              {estado !== "parado" && (
+                <motion.button
+                  type="button"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  onClick={() => correr("sem")}
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+                  style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
+                >
+                  Correr outra vez
+                </motion.button>
+              )}
+            </AnimatePresence>
 
             <AnimatePresence>
               {estado === "fim" && modo === "sem" && (
