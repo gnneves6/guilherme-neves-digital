@@ -5,8 +5,7 @@ import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import CincoDimensoes from "@/components/sections/home/CincoDimensoes";
 import Servicos from "@/components/sections/home/Servicos";
-import SemanaReal from "@/components/sections/terreno/SemanaReal";
-import Sitio from "@/components/sections/terreno/Sitio";
+import Lugar from "@/components/sections/terreno/Lugar";
 import { sitios } from "@/data/terreno";
 import Assinatura from "@/components/sections/home/Assinatura";
 import Captura from "@/components/sections/home/Captura";
@@ -40,6 +39,12 @@ import Passagem from "@/components/motion/Passagem";
  * razão de ela não ser opinião. Os três passaram para o pé das cinco
  * dimensões, numa linha.
  *
+ * A SEMANA saiu da home a 1 nov, por crítica dele, e a crítica estava certa
+ * pelo critério que ele próprio deu. Eu tinha dito que era a peça que fazia
+ * o site deixar de ser texto. Não era: eram 21 células de texto que se
+ * animavam, e texto animado continua a ser texto. O ficheiro fica no
+ * repositório, por montar.
+ *
  * MatchdayPlanner era um planeador de dia de jogo, e era uma versão pobre de
  * um produto que ainda não foi lançado. Uma imitação do próprio produto na
  * primeira página desvaloriza os dois, e o sítio dela é a página do serviço,
@@ -66,11 +71,8 @@ const Index = () => {
       <Passagem>
         <CincoDimensoes />
       </Passagem>
-      <Passagem>
-        <SemanaReal />
-      </Passagem>
       <Passagem intensidade={0.7}>
-        <Sitio sitio={sitios[0]} />
+        <Lugar sitio={sitios[0]} />
       </Passagem>
       <Assinatura />
       <Captura />
