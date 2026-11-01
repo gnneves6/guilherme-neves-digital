@@ -27,11 +27,14 @@ const RITMO = 1150;
 
 type Estado = "parado" | "a-correr" | "fim";
 type Modo = "sem" | "com";
+/** O que o rato está a prometer sem que ninguém tenha clicado. */
+type Antevisao = null | "reiniciar" | "sistema";
 
 const SemanaReal = () => {
   const [estado, setEstado] = useState<Estado>("parado");
   const [modo, setModo] = useState<Modo>("sem");
   const [dia, setDia] = useState(-1);
+  const [antever, setAntever] = useState<Antevisao>(null);
   const temporizador = useRef<number | null>(null);
   const seccao = useRef<HTMLElement>(null);
   const jaCorreu = useRef(false);
@@ -76,6 +79,30 @@ const SemanaReal = () => {
   const deCadaVez = modo === "sem" ? total - partidas : total;
 
   const avisoActual = imprevistos.find((i) => i.d === dia);
+
+  /* A ANTEVISÃO, e é a regra de 1 nov posta a trabalhar: um hover que só
+     muda de cor é decoração, um hover que mostra a CONSEQUÊNCIA é
+     informação. Com o rato em cima de "Agora com o sistema", as quatro
+     células partidas começam a levantar-se e a trocar de texto antes de
+     haver clique. A pessoa percebe o que o botão faz sem ter de o fazer,
+     e percebe que a página está viva.
+     Vai por ponteiro e por foco, não por scroll, logo funciona também na
+     pré-visualização e no teclado. Com movimento reduzido não acontece. */
+  const reduzido = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* ⚠️ A antevisão mostra UMA célula, não as quatro, e a correção é
+     importante: ao levantar as quatro, o rato entregava a recompensa
+     inteira e tirava o motivo para clicar. Uma célula diz o GÉNERO da
+     consequência e guarda o resto para o clique. A borda a tracejado é o
+     que a marca como provisória, para não se confundir com o resultado. */
+  const primeiraQuebra = [...imprevistos].sort((a, b) => a.d - b.d)[0]?.parte[0];
+  const antevisaoDe = (a: Exclude<Antevisao, null>) => ({
+    onPointerEnter: () => !reduzido() && setAntever(a),
+    onPointerLeave: () => setAntever(null),
+    onFocus: () => !reduzido() && setAntever(a),
+    onBlur: () => setAntever(null),
+  });
 
   /* Arranca sozinha ao entrar no ecrã, e é a correção mais importante que
      esta peça levou. A versão anterior esperava por um clique, e ele apanhou
@@ -135,8 +162,9 @@ const SemanaReal = () => {
                   type="button"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  onClick={() => correr("sem")}
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 font-display text-sm font-medium tracking-wide transition-all duration-500 hover:tracking-wider"
+                  onClick={() => { setAntever(null); correr("sem"); }}
+                  {...antevisaoDe("reiniciar")}
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 font-display text-sm font-medium tracking-wide"
                   style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
                 >
                   Correr outra vez
@@ -151,7 +179,8 @@ const SemanaReal = () => {
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0 }}
-                  onClick={() => correr("com")}
+                  onClick={() => { setAntever(null); correr("com"); }}
+                  {...antevisaoDe("sistema")}
                   className="inline-flex items-center gap-2.5 px-7 py-3.5 font-display text-sm font-medium tracking-wide"
                   style={{
                     border: "1px solid hsl(var(--olive-light))",
@@ -243,28 +272,38 @@ const SemanaReal = () => {
                   const atingida = !!imp && jaAconteceu(imp);
                   const partiu = atingida && modo === "sem";
                   const salva = atingida && modo === "com";
+                  /* O que o rato está a prometer a ESTA célula. */
+                  const quaseSalva =
+                    antever === "sistema" && partiu && chave(d, l.id as Linha) === primeiraQuebra;
+                  const quaseDePe = antever === "reiniciar" && partiu;
+                  const aLevantar = quaseSalva || quaseDePe;
 
                   return (
                     <motion.div
                       key={`${d}-${l.id}`}
                       className="relative rounded-[3px] px-2.5 py-3 min-h-[62px] flex items-center"
                       animate={{
-                        opacity: partiu ? 0.3 : 1,
-                        y: partiu ? 7 : 0,
-                        rotate: partiu ? -1.1 : 0,
-                        borderColor: salva
-                          ? "hsl(var(--olive-light) / 0.75)"
-                          : "hsl(var(--ivory) / 0.14)",
-                        backgroundColor: salva
-                          ? "hsl(var(--olive) / 0.26)"
-                          : "hsl(var(--ivory) / 0.04)",
+                        opacity: partiu ? (aLevantar ? 0.78 : 0.3) : 1,
+                        y: partiu && !aLevantar ? 7 : 0,
+                        rotate: partiu && !aLevantar ? -1.1 : 0,
+                        borderColor:
+                          salva || quaseSalva
+                            ? `hsl(var(--olive-light) / ${salva ? 0.75 : 0.62})`
+                            : "hsl(var(--ivory) / 0.14)",
+                        backgroundColor:
+                          salva || quaseSalva
+                            ? `hsl(var(--olive) / ${salva ? 0.26 : 0.18})`
+                            : "hsl(var(--ivory) / 0.04)",
                       }}
-                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                      style={{ borderWidth: 1, borderStyle: "solid" }}
+                      transition={{ duration: aLevantar ? 0.32 : 0.55, ease: [0.22, 1, 0.36, 1] }}
+                      style={{
+                        borderWidth: 1,
+                        borderStyle: quaseSalva ? "dashed" : "solid",
+                      }}
                     >
                       <AnimatePresence mode="wait">
                         <motion.span
-                          key={salva ? "salva" : "base"}
+                          key={salva || quaseSalva ? "salva" : "base"}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
@@ -272,7 +311,7 @@ const SemanaReal = () => {
                           className="text-[12px] leading-snug"
                           style={{ color: "hsl(var(--ivory) / 0.82)" }}
                         >
-                          {salva ? imp!.viraEm : c.texto}
+                          {salva || quaseSalva ? imp!.viraEm : c.texto}
                         </motion.span>
                       </AnimatePresence>
 
@@ -283,8 +322,8 @@ const SemanaReal = () => {
                           className="absolute left-2 right-2 top-1/2 h-px origin-left"
                           style={{ background: "hsl(var(--ivory) / 0.55)" }}
                           initial={{ scaleX: 0 }}
-                          animate={{ scaleX: 1 }}
-                          transition={{ duration: 0.4, delay: 0.1 }}
+                          animate={{ scaleX: aLevantar ? 0 : 1 }}
+                          transition={{ duration: aLevantar ? 0.3 : 0.4, delay: aLevantar ? 0 : 0.1 }}
                         />
                       )}
                     </motion.div>

@@ -9,18 +9,26 @@ import { gsap } from "@/lib/gsap";
  * página."* Antes, mudar de secção era mudar de cor de fundo e mais nada.
  *
  * O que isto faz: a secção que chega entra por baixo de uma cortina que
- * sobe, e o conteúdo dela vem ligeiramente mais devagar do que a página.
- * São os dois gestos que o cinema usa para dizer *mudámos de sítio*: um
- * corte com peso, e paralaxe. Ligado ao scroll com `scrub`, portanto a
- * pessoa conduz a câmara ao ritmo dela em vez de ver uma animação a tocar.
+ * sobe, e depois o conteúdo dela deriva devagar durante TODA a travessia
+ * pelo ecrã. São os dois gestos que o cinema usa para dizer *mudámos de
+ * sítio*: um corte com peso, e paralaxe.
  *
- * 🚨 E o travão que isto obriga a ter: na build do artifact NÃO SE LIGA.
- * A pré-visualização é dimensionada ao conteúdo, o scroll interno fica
- * sempre a zero, e um efeito ligado ao scroll fica preso no primeiro
- * fotograma. Como o primeiro fotograma aqui é a cortina fechada, ligá-lo
- * lá dentro significaria ele abrir a pré-visualização e ver uma secção
- * invisível. Fora da build do artifact corre; dentro dela, a secção aparece
- * inteira e sem truque.
+ * 📏 A deriva longa veio de medir o deltacafes.com (1 nov): o gatilho que
+ * domina aquele site é `top bottom` até `bottom bottom` com `scrub`, ou
+ * seja, a animação dura a travessia inteira em vez de ser uma entrada de
+ * 300 ms. É essa a diferença entre parecer uma câmara e parecer um efeito.
+ * E `pin` não aparece lá uma única vez: nada prende o scroll, a pessoa
+ * nunca perde o controlo. Seguimos a mesma regra.
+ *
+ * 🚨 O travão da pré-visualização, e a saída que ele pediu ("em vez de me
+ * mandares em vídeo, eu próprio vejo"): a pré-visualização do artifact é
+ * dimensionada ao conteúdo, o scroll interno fica sempre a zero e um efeito
+ * com `scrub` ficaria preso no primeiro fotograma, que aqui é a cortina
+ * fechada. Antes disto, a solução era desligar o efeito lá dentro, e ele
+ * abria a pré-visualização e via uma página parada. Agora a MESMA cortina
+ * corre, só que disparada por o bloco entrar no ecrã em vez de pelo scroll.
+ * Ele vê o gesto; o que a pré-visualização não lhe pode dar é o controlo
+ * do ritmo, que é coisa do site a sério.
  */
 const Passagem = ({
   children,
@@ -37,27 +45,69 @@ const Passagem = ({
     const el = ref.current;
     const dentro = interior.current;
     if (!el || !dentro) return;
-    if (import.meta.env.VITE_ARTIFACT === "1") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const fechada = `inset(${18 * intensidade}% 0% 0% 0%)`;
+    const aberta = "inset(0% 0% 0% 0%)";
+
+    /* Na pré-visualização não há scroll para conduzir nada, por isso a
+       cortina toca sozinha quando o bloco entra no ecrã. `power4.out` e
+       0,9 s são os valores medidos no site da Delta, não inventados. */
+    if (import.meta.env.VITE_ARTIFACT === "1") {
+      gsap.set(el, { clipPath: fechada });
+      gsap.set(dentro, { y: 56 * intensidade, scale: 1 - 0.02 * intensidade });
+
+      let aberto = false;
+      const abrir = () => {
+        if (aberto) return;
+        aberto = true;
+        gsap.to(el, { clipPath: aberta, duration: 0.9, ease: "power4.out" });
+        gsap.to(dentro, { y: 0, scale: 1, duration: 1, ease: "power4.out", delay: 0.06 });
+      };
+
+      const obs = new IntersectionObserver(
+        (entradas) => entradas.forEach((e) => e.isIntersecting && abrir()),
+        { threshold: 0.2 }
+      );
+      obs.observe(el);
+
+      /* 🚨 E o relógio por baixo, que não é zelo a mais: medido a 1 nov, na
+         pré-visualização `100svh` resolve para a altura do DOCUMENTO, cada
+         secção de ecrã inteiro cresce com ele, e o documento passou de 10 mil
+         para 66 mil px. Com isso há blocos que nunca chegam a intersectar
+         nada e ficavam com a cortina fechada, ou seja, invisíveis. O relógio
+         garante que ele vê o gesto de qualquer maneira, em cascata de cima
+         para baixo. No site a sério este ramo não corre. */
+      const fundo = Math.max(1, document.documentElement.scrollHeight);
+      const posicao = (el.getBoundingClientRect().top + window.scrollY) / fundo;
+      const t = window.setTimeout(abrir, 500 + Math.min(1.5, posicao * 2.4) * 1000);
+
+      return () => {
+        obs.disconnect();
+        window.clearTimeout(t);
+      };
+    }
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { clipPath: `inset(${18 * intensidade}% 0% 0% 0%)` },
+        { clipPath: fechada },
         {
-          clipPath: "inset(0% 0% 0% 0%)",
+          clipPath: aberta,
           ease: "none",
           scrollTrigger: { trigger: el, start: "top bottom", end: "top 45%", scrub: 0.6 },
         }
       );
+      /* A deriva longa: começa quando o topo entra e só acaba quando o fundo
+         sai. É de propósito que é pouca, 56 px no total. Paralaxe que se dá
+         por ela deixa de ser câmara e passa a ser truque. */
       gsap.fromTo(
         dentro,
-        { y: 70 * intensidade, scale: 1 - 0.022 * intensidade },
+        { y: 34 * intensidade },
         {
-          y: 0,
-          scale: 1,
+          y: -22 * intensidade,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "top 35%", scrub: 0.6 },
+          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0.8 },
         }
       );
     }, el);
