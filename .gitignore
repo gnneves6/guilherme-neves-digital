@@ -31,3 +31,7 @@ design/planta-site-guilherme-neves.html
 gn-site-preview.html
 dist-artifact/
 fonts-inline.css
+
+# A versão de ficheiro único para ele abrir no browser: gera-se, não se versiona.
+dist-ficheiro
+gn-site-completo.html

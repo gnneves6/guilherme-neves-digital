@@ -20,6 +20,17 @@ const inlineFontsPath =
   process.env.INLINE_FONTS_CSS ??
   fileURLToPath(new URL("./fonts-inline.css", import.meta.url));
 
+/**
+ * Duas saídas a partir do MESMO código, e a diferença é só a moldura.
+ *
+ * `ARTIFACT_IFRAME=0` constrói o ficheiro que ele descarrega e abre no
+ * browser dele. Aí há scroll a sério, logo o movimento ligado ao scroll
+ * corre como no site. Por omissão constrói a pré-visualização do artifact,
+ * que vive dentro de uma moldura dimensionada ao conteúdo: lá o scroll
+ * interno fica a zero e `100svh` resolve para a altura do documento.
+ */
+const dentroDaMoldura = process.env.ARTIFACT_IFRAME !== "0";
+
 export default defineConfig({
   plugins: [
     react(),
@@ -41,9 +52,10 @@ export default defineConfig({
   },
   define: {
     "import.meta.env.VITE_ARTIFACT": JSON.stringify("1"),
+    "import.meta.env.VITE_IFRAME": JSON.stringify(dentroDaMoldura ? "1" : "0"),
   },
   build: {
-    outDir: "dist-artifact",
+    outDir: process.env.ARTIFACT_OUT ?? "dist-artifact",
     assetsInlineLimit: 100_000_000,
     chunkSizeWarningLimit: 100_000,
     cssCodeSplit: false,

@@ -20,8 +20,8 @@ import { gsap } from "@/lib/gsap";
  * E `pin` não aparece lá uma única vez: nada prende o scroll, a pessoa
  * nunca perde o controlo. Seguimos a mesma regra.
  *
- * 🚨 O travão da pré-visualização, e a saída que ele pediu ("em vez de me
- * mandares em vídeo, eu próprio vejo"): a pré-visualização do artifact é
+ * 🚨 O travão da MOLDURA, não do código. O site e a pré-visualização saem
+ * do mesmo `src/`: o que muda é a janela onde correm. A pré-visualização é
  * dimensionada ao conteúdo, o scroll interno fica sempre a zero e um efeito
  * com `scrub` ficaria preso no primeiro fotograma, que aqui é a cortina
  * fechada. Antes disto, a solução era desligar o efeito lá dentro, e ele
@@ -53,7 +53,7 @@ const Passagem = ({
     /* Na pré-visualização não há scroll para conduzir nada, por isso a
        cortina toca sozinha quando o bloco entra no ecrã. `power4.out` e
        0,9 s são os valores medidos no site da Delta, não inventados. */
-    if (import.meta.env.VITE_ARTIFACT === "1") {
+    if (import.meta.env.VITE_IFRAME === "1") {
       gsap.set(el, { clipPath: fechada });
       gsap.set(dentro, { y: 56 * intensidade, scale: 1 - 0.02 * intensidade });
 
