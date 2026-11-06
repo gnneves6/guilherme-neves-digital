@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Lema, { lemaFolga } from "@/components/Lema";
 import { LINKS } from "@/data/links";
 
 const Footer = () => {
@@ -70,11 +69,6 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row justify-between gap-2">
           <p className="text-body text-xs">
             © {new Date().getFullYear()} Guilherme Neves. All rights reserved.
-          </p>
-          {/* O lema vive em `Lema.tsx`, porque esta mesma frase já esteve
-              errada em dois sítios ao mesmo tempo. */}
-          <p className={`text-body text-xs ${lemaFolga.cima}`}>
-            <Lema modo="cima" />
           </p>
         </div>
       </div>
