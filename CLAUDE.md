@@ -42,14 +42,14 @@ week-old preview once because of this.
 
 Building it:
 
-    node scripts/inline-fonts.mjs            # writes fonts-inline.css
     npx vite build --config vite.artifact.config.ts
     node scripts/to-fragment.cjs             # writes gn-site-preview.html
 
-`vite.artifact.config.ts` looks for `fonts-inline.css` at the path in
-`INLINE_FONTS_CSS`, defaulting to the session scratchpad. The scratchpad does
-not survive the container being reclaimed, which is why the generator is a
-script rather than a sentence.
+There used to be a font step before those two. The fonts now live in
+`src/assets/fonts` and the artifact config inlines every asset, so there is
+nothing left to download. The step existed because the generated CSS was
+written to the session scratchpad, which does not survive the container being
+reclaimed, and the build then died on a missing file.
 
 ## The preview iframe has no scroll
 
