@@ -510,34 +510,34 @@ export const appliedWorkObjects: AppliedWorkObject[] = [
     slug: "football-nutrition-atlas",
     number: "06",
     title: "Football Nutrition Atlas",
-    statusBadge: "Building",
-    accessType: "in-development",
+    statusBadge: "Finished Resource",
+    accessType: "public",
     positioningLine:
       "A scalable atlas connecting matchday, training, recovery, hydration and food decisions.",
     category: "Produto",
     group: "systems",
     type: "Football food decisions · practical resource",
-    status: "In Development",
+    status: "Public",
     context: "Football food decisions · practical resource",
     description:
-      "Um atlas prático que traduz ciência em decisões alimentares no futebol.",
+      "Nine pages that turn football nutrition research into the decisions a player actually makes on the day.",
     problem:
       "Football nutrition resources are often scattered across guidelines, recipes, isolated tips and context-free recommendations.",
     whatIBuilt:
-      "A premium educational atlas connecting matchday, training day, recovery, hydration, plate structure, timing and practical food examples.",
+      "Eight chapters, finished and printable: the pre-match plate, fuel during the match, the recovery plate, the day before, the matchday flow end to end, training day fuel, a one-page cheat sheet, and the evidence the rest of it stands on.",
     whyItMatters:
       "It creates a scalable resource that helps athletes and practitioners understand not just what to eat, but why and when.",
     whatItProves:
-      "Um produto de formação escalável, construído a partir de sistemas aplicados de nutrição de performance.",
+      "That the same decisions can be handed to a player, a coach or a parent without a practitioner in the room.",
     previewNote:
-      "Premium book / atlas mockup with first pages visible and remaining pages blurred.",
+      "Three real pages from the finished atlas. The previous preview was a mockup of a book that did not exist, and it carried a claim to a protected title.",
     appliedPreview: "atlasBook",
     previewImage: atlasPreview,
     previewAlt:
-      "Football Nutrition Atlas preview, an open premium book spread showing the pre-match plate chapter, with the remaining pages held back.",
+      "Three pages of the Football Nutrition Atlas fanned out: the cover, the matchday flow from the day before to recovery, and the one-page matchday fuel cheat sheet.",
     previewObjectPosition: "top center",
-    ctaLabel: "Preview atlas",
-    ctaType: "early-access",
+    ctaLabel: "See what is inside",
+    ctaType: "view-sample",
   },
 ];
 
