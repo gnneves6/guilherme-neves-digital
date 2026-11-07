@@ -22,7 +22,7 @@ const InvitationSection = () => {
               className="font-display text-[10px] md:text-[11px] tracking-[0.4em] uppercase"
               style={{ color: "hsl(var(--olive))" }}
             >
-              07
+              08
             </span>
             <span className="h-px w-6" style={{ background: "hsl(var(--olive) / 0.45)" }} />
             <p className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase font-display opacity-60">
@@ -32,13 +32,13 @@ const InvitationSection = () => {
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="text-headline max-w-3xl mx-auto">
-            If you are building a performance environment<br className="hidden md:block" /> where clarity matters, let's talk.
+            If your environment has the knowledge<br className="hidden md:block" /> but not the system, let's talk.
           </h2>
         </Reveal>
         <Reveal delay={0.25}>
           <p className="text-body-lg max-w-xl mx-auto mt-5">
-            For clubs, academies and performance environments
-            looking for systems that hold under real conditions.
+            For clubs, academies and performance staffs who want
+            nutrition that survives the season — not just the presentation.
           </p>
         </Reveal>
         <Reveal delay={0.4}>

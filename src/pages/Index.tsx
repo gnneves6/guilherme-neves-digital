@@ -30,6 +30,7 @@ const Index = () => {
       <SystemsBridgeSection />
       <TheMethodSection />
       <SystemsArchitectureSection />
+      <TheStandardSection />
       <InvitationSection />
     </Layout>
     </PointerField>
