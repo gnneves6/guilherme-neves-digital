@@ -17,7 +17,7 @@ import atlasPreview from "@/assets/work-previews/football-nutrition-atlas-previe
  * método que já foi tirada duas vezes por soar a guru.
  */
 
-const RadarCapa = () => (
+export const RadarCapa = () => (
   <div
     className="w-full aspect-[4/3] p-6 md:p-7 flex flex-col justify-between"
     style={{ background: "hsl(var(--charcoal-deep))", color: "hsl(var(--ivory))" }}
@@ -66,7 +66,7 @@ const RadarCapa = () => (
   </div>
 );
 
-const CincoCapa = () => (
+export const CincoCapa = () => (
   <div
     className="w-full aspect-[4/3] p-6 md:p-7 flex items-end"
     style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--foreground) / 0.12)" }}

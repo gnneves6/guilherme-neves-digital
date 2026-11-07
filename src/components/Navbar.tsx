@@ -63,15 +63,22 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    // Na home o site passou a ser feito de palcos escuros (7 nov), e esta
+    // barra tinha sido desenhada para fundo claro: no túnel ficava invisível,
+    // e ao fazer scroll punha uma faixa marfim por cima de cada cena escura.
+    <header className={`fixed top-0 left-0 right-0 z-50 ${isHome ? "nav-escura" : ""}`}>
       <motion.div
         className="border-b transition-all duration-500"
         animate={{
           backgroundColor: scrolled
-            ? "hsl(var(--background) / 0.95)"
+            ? isHome
+              ? "hsl(var(--charcoal-deep) / 0.72)"
+              : "hsl(var(--background) / 0.95)"
             : "transparent",
           borderColor: scrolled
-            ? "hsl(var(--border) / 0.5)"
+            ? isHome
+              ? "hsl(var(--ivory) / 0.08)"
+              : "hsl(var(--border) / 0.5)"
             : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
         }}
@@ -138,7 +145,11 @@ const Navbar = () => {
               to={CTA.path}
               aria-current={location.pathname === CTA.path ? "page" : undefined}
               className="ml-2 inline-flex items-center px-5 py-2 rounded-full text-sm font-display tracking-wide transition-all duration-300 hover:opacity-85"
-              style={{ background: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
+              style={
+                isHome
+                  ? { background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }
+                  : { background: "hsl(var(--foreground))", color: "hsl(var(--background))" }
+              }
             >
               {CTA.label}
             </Link>

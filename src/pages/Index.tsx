@@ -1,35 +1,33 @@
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
-import Entrada from "@/components/casa/Entrada";
-import OJogador from "@/components/casa/OJogador";
-import PorDentro from "@/components/casa/PorDentro";
+import PointerField from "@/components/journey/PointerField";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
-import ODar from "@/components/casa/ODar";
-import Aberto from "@/components/casa/Aberto";
+import Tunel from "@/components/casa/Tunel";
+import Jogador from "@/components/casa/Jogador";
+import Tese from "@/components/casa/Tese";
+import Prateleira from "@/components/casa/Prateleira";
+import Pertencer from "@/components/casa/Pertencer";
 import Fecho from "@/components/casa/Fecho";
 
 /**
- * A casa. A forma está em gui-os/04-WEBSITE/visao-do-site.md, que ganha a
- * qualquer outro documento do site quando discordarem.
+ * A casa, feita de palcos. A forma está em gui-os/04-WEBSITE/visao-do-site.md.
  *
- * O site foi desenhado três vezes para três clientes (atletas, clubes,
- * profissionais) e cada versão deixou peças cá dentro. Esta não se organiza
- * por cliente: organiza-se pela história dele, e cada público encontra a sua
- * porta lá dentro.
+ * A 7 nov ele disse que a única parte do site que parecia feita a sério era
+ * a dos equipamentos, porque tinha camadas, profundidade e mexia-se quando
+ * se navegava, e que o resto era texto num fundo branco. Tinha razão, e a
+ * página passou a ser toda feita nessa linguagem (components/palco):
  *
- *   Entrada    a frase sozinha, depois a pessoa que lhe responde
- *   01         o jogador: o problema, nas palavras dele, sem botão
- *   02         por dentro: os equipamentos que rodam, um clube de cada vez,
- *              com o que lá fez; depois o que lá percebeu e a tese
- *   03         o que eu dou: o Radar, as cinco verificações, o Atlas
- *   04         o que está aberto agora, com o estado à frente
- *   Fecho      a imagem da parede, e a lista
+ *   Tunel        a frase sozinha num túnel; o scroll anda até à luz
+ *   Jogador      01, o balneário, uma frase dele de cada vez
+ *   Equipamentos 02, a peça que ele quis de volta: um clube de cada vez
+ *   Tese         o túnel até ao relvado: a evidência a tornar-se prática
+ *   Prateleira   03, as ferramentas numa fila que corre na horizontal
+ *   Pertencer    04, os 80 e tal pedidos do Radar a juntarem-se, e a lista
+ *   Fecho        a parede de casa, o que está aberto, e falar com ele
  *
- * Claro e escuro alternam e querem dizer alguma coisa: escuro é o que custou,
- * claro é o trabalho e o que se dá.
- *
- * A home anterior (Game Nutrition, os três serviços, o terreno) fica no
- * repositório por montar, como sempre se fez aqui.
+ * O PointerField só embrulha os equipamentos: faz setState a cada fotograma,
+ * e à volta da página inteira re-desenhava tudo sessenta vezes por segundo.
+ * Os palcos novos leem o rato sem re-render (usePonteiro).
  */
 const Index = () => (
   <Layout>
@@ -38,12 +36,14 @@ const Index = () => (
       description="Twelve years as a player, then RSC Anderlecht and Leça FC from the inside. I build the systems that carry the science to the athlete, and give most of them away."
       path="/"
     />
-    <Entrada />
-    <OJogador />
-    <EnvironmentsSection />
-    <PorDentro />
-    <ODar />
-    <Aberto />
+    <Tunel />
+    <Jogador />
+    <PointerField>
+      <EnvironmentsSection />
+    </PointerField>
+    <Tese />
+    <Prateleira />
+    <Pertencer />
     <Fecho />
   </Layout>
 );

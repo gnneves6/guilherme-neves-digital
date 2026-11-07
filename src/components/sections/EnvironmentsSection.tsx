@@ -118,7 +118,7 @@ const EnvironmentsSection = () => {
           <div
             aria-hidden
             className="absolute inset-x-0 top-0 h-32 z-[4] pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--background) / 0.55) 35%, transparent 100%)" }}
+            style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep)) 0%, hsl(var(--charcoal-deep) / 0.55) 35%, transparent 100%)" }}
           />
           {/* Atmosphere, performance archive corridor */}
           <div
@@ -298,7 +298,7 @@ const EnvironmentsSection = () => {
           <div
             aria-hidden
             className="absolute inset-x-0 top-0 h-24 z-[4] pointer-events-none"
-            style={{ background: "linear-gradient(to bottom, hsl(var(--background) / 0.9) 0%, hsl(var(--background) / 0.3) 45%, transparent 100%)" }}
+            style={{ background: "linear-gradient(to bottom, hsl(var(--charcoal-deep) / 0.9) 0%, hsl(var(--charcoal-deep) / 0.3) 45%, transparent 100%)" }}
           />
           {/* Cinematic bottom dissolve, into SelectedArtefactsSection (cinematic dark) */}
           <div

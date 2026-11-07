@@ -1,118 +1,89 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, useTransform } from "framer-motion";
 import Reveal from "@/components/Reveal";
-import { supabase } from "@/integrations/supabase/client";
+import { usePonteiro } from "@/components/palco/palco";
 import retrato from "@/assets/guilherme-portrait.webp";
 
 /**
  * O fecho. Fecha-se com imagem e nunca com slogan (historia.md, regra 3), e a
  * imagem é dele: os toques na parede de casa. As maiúsculas e o ";)" ficam,
- * porque são a aresta imperfeita que faz isto soar a uma pessoa.
+ * são a aresta que faz isto soar a uma pessoa.
  *
- * Por baixo, a lista, e só aqui: o email pede-se depois de haver valor, nunca
- * à entrada. Um campo. O nome é opcional porque a tabela exige um e pedir dois
- * campos a quem só quer ficar a saber é pedir trabalho.
+ * O que está aberto agora vem aqui, curto e com o estado à frente, em vez de
+ * uma secção inteira: depois de ter visto tudo o resto, quem chega aqui só
+ * precisa de saber a que porta bater.
+ *
+ * A lista passou para o palco anterior, onde a comunidade é mostrada.
  */
-const Fecho = () => {
-  const [email, setEmail] = useState("");
-  const [estado, setEstado] = useState<"parado" | "a-enviar" | "feito" | "erro">("parado");
+const aberto = [
+  { estado: "Open", o: "Talks and workshops", nota: "Run4Excellence talks, Oct 2026 · MedUBI, 24 Nov 2026" },
+  { estado: "2027", o: "Tools and training for professionals", nota: "The list hears first" },
+  { estado: "With the licence", o: "Individual athletes", nota: "In Portugal. Anywhere else, ask" },
+];
 
-  const enviar = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const limpo = email.trim();
-    if (!limpo) return;
-    setEstado("a-enviar");
-    try {
-      const { error } = await supabase.from("resource_interest").insert({
-        created_at: new Date().toISOString(),
-        name: "Not given",
-        email: limpo.slice(0, 255),
-        resource_slug: "the-list",
-        resource_title: "The list",
-        interest_type: "list",
-        message_optional: null,
-        consent: true,
-        source_page: "/",
-      });
-      if (error) throw error;
-      setEstado("feito");
-    } catch {
-      setEstado("erro");
-    }
-  };
+const Fecho = () => {
+  const rato = usePonteiro();
+  const fotoX = useTransform(rato.x, [-1, 1], [-14, 14]);
+  const fotoY = useTransform(rato.y, [-1, 1], [-10, 10]);
 
   return (
-    <section className="section-padding section-spacing">
-      <div className="max-content grid md:grid-cols-12 gap-x-8 gap-y-14 items-end">
-        <div className="md:col-span-8">
-          <Reveal>
-            <p className="t-quote">And here I am, still kicking a ball against the wall at home.</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-body-lg mt-8 max-w-xl">
-              Because the passion and the joy can (AND SHOULD) live on inside us ;)
-            </p>
-          </Reveal>
-        </div>
-        <Reveal className="md:col-span-3 md:col-start-10" delay={0.1}>
-          <img
-            src={retrato}
-            alt="Guilherme Neves, smiling."
-            className="w-full aspect-square object-cover"
-            loading="lazy"
-          />
-        </Reveal>
-      </div>
-
-      <div className="max-content mt-24 md:mt-32 border-t pt-10" style={{ borderColor: "hsl(var(--foreground) / 0.15)" }}>
-        <div className="grid md:grid-cols-12 gap-x-8 gap-y-6 items-end">
-          <div className="md:col-span-5">
-            <p className="t-kicker" style={{ color: "hsl(var(--graphite))" }}>
-              The list
-            </p>
-            <p className="font-display font-bold text-2xl md:text-3xl tracking-tight mt-3">
-              One email when something new is finished.
-            </p>
+    <section className="relative overflow-hidden section-padding pt-32 pb-24 md:pt-40" style={{ background: "hsl(var(--charcoal-deep))" }}>
+      <div className="max-content relative">
+        <div className="grid md:grid-cols-12 gap-x-8 gap-y-14 items-center">
+          <div className="md:col-span-8 relative z-10">
+            <Reveal>
+              <p className="t-quote" style={{ color: "hsl(var(--ivory))" }}>
+                And here I am, still kicking a ball against the wall at home.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="text-body-lg mt-8 max-w-xl" style={{ color: "hsl(var(--ivory) / 0.65)" }}>
+                Because the passion and the joy can (AND SHOULD) live on inside us ;)
+              </p>
+            </Reveal>
           </div>
-          <div className="md:col-span-6 md:col-start-7">
-            {estado === "feito" ? (
-              <p className="text-body-lg">Done. The next thing I finish goes to you first.</p>
-            ) : (
-              <form onSubmit={enviar} className="flex flex-col sm:flex-row gap-3">
-                <label htmlFor="lista-email" className="sr-only">
-                  Email
-                </label>
-                <input
-                  id="lista-email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  className="flex-1 bg-transparent border-b py-3 font-body text-base focus:outline-none"
-                  style={{ borderColor: "hsl(var(--foreground) / 0.35)" }}
-                />
-                <button
-                  type="submit"
-                  disabled={estado === "a-enviar"}
-                  className="font-body text-sm font-semibold px-7 py-4 disabled:opacity-60"
-                  style={{ background: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
-                >
-                  {estado === "a-enviar" ? "Sending" : "Send"}
-                </button>
-              </form>
-            )}
-            {estado === "erro" && (
-              <p className="text-body mt-3">That didn’t go through. Try again in a moment.</p>
-            )}
-            <p className="text-body mt-4" style={{ fontSize: "0.8rem" }}>
-              Nothing else, and you can leave whenever you want.{" "}
-              <Link to="/privacidade" className="underline">
-                How this is kept
-              </Link>
-              .
-            </p>
+          <motion.div className="md:col-span-4 relative" style={{ x: fotoX, y: fotoY }}>
+            <img
+              src={retrato}
+              alt="Guilherme Neves, smiling."
+              className="w-full aspect-[4/5] object-cover shadow-[0_50px_90px_-30px_rgba(0,0,0,0.9)]"
+              style={{ objectPosition: "50% 30%" }}
+              loading="lazy"
+            />
+          </motion.div>
+        </div>
+
+        <div className="mt-28 md:mt-36">
+          <p className="t-kicker mb-2" style={{ color: "hsl(var(--ivory) / 0.45)" }}>
+            What’s open now
+          </p>
+          <ul>
+            {aberto.map((l) => (
+              <li
+                key={l.o}
+                className="grid grid-cols-[7.5rem,1fr] md:grid-cols-[10rem,1fr,1fr] gap-x-6 gap-y-1 py-5 border-t items-baseline"
+                style={{ borderColor: "hsl(var(--ivory) / 0.12)" }}
+              >
+                <span className="t-kicker" style={{ color: "hsl(110 22% 66%)" }}>
+                  {l.estado}
+                </span>
+                <span className="font-display font-bold text-xl md:text-2xl tracking-tight" style={{ color: "hsl(var(--ivory))" }}>
+                  {l.o}
+                </span>
+                <span className="col-start-2 md:col-start-3 text-body" style={{ color: "hsl(var(--ivory) / 0.55)" }}>
+                  {l.nota}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="border-t pt-10" style={{ borderColor: "hsl(var(--ivory) / 0.12)" }}>
+            <Link
+              to="/contacto"
+              className="inline-block font-body text-sm font-semibold px-7 py-4"
+              style={{ background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }}
+            >
+              Talk to me
+            </Link>
           </div>
         </div>
       </div>

@@ -482,3 +482,15 @@
 @media (prefers-reduced-motion: reduce) {
   .sitio-respira { animation: none; transform: scale(1.06); }
 }
+
+@keyframes descer {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+
+/* A barra sobre os palcos escuros da home (Navbar.tsx explica porquê). */
+.nav-escura .text-foreground { color: hsl(var(--ivory)); }
+.nav-escura .text-muted-foreground { color: hsl(var(--ivory) / 0.55); }
+.nav-escura .text-muted-foreground:hover { color: hsl(var(--ivory)); }
+.nav-escura .bg-foreground { background-color: hsl(var(--ivory)); }
+.nav-escura #mobile-menu { background-color: hsl(var(--charcoal-deep) / 0.97); border-color: hsl(var(--ivory) / 0.08); }
