@@ -218,6 +218,49 @@
     color: hsl(var(--muted-foreground));
   }
 
+  /* A letra da casa (visao-do-site.md §5). Peso nos extremos e espacejamento
+     apertado, que é o mecanismo comum às cinco referências que ele mandou: a
+     classe antiga .text-display ficava a 600 com tracking-tight, que em Outfit
+     lê-se como título de blog e não como marca. */
+  .t-mega {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 6.4vw, 6.75rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+  .t-title {
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-size: clamp(2.1rem, 4.4vw, 4.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+  .t-quote {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 6.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+  .t-kicker {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Enquanto a entrada corre, o cabeçalho não existe: a primeira coisa a
+     aparecer é a frase, sozinha. Volta quando a cortina sobe. */
+  html[data-entrada="on"] header {
+    opacity: 0;
+    pointer-events: none;
+  }
+  header {
+    transition: opacity 0.6s ease;
+  }
+
   .link-underline {
     @apply relative inline-block;
   }

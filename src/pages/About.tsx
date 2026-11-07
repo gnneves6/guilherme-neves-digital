@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/Reveal";
-import Lema from "@/components/Lema";
 import PortraitPlaceholder from "@/components/PortraitPlaceholder";
 import Magnetic from "@/components/motion/Magnetic";
 import Em from "@/components/text/Em";
@@ -45,12 +44,13 @@ const About = () => {
                 <p className="text-caption mb-6">Quem sou</p>
               </Reveal>
               <Reveal delay={0.1}>
-                {/* O título protegido estava aqui sem qualificador nenhum,
-                    e num h1. O rodapé tinha sido corrigido a 13 de outubro e
-                    esta cópia ficou para trás, que é a razão de o lema ter
-                    passado a componente. */}
-                <h1 className="text-display max-w-3xl">
-                  <Lema modo="antes" />
+                {/* O lema morreu a 6 nov, por decisão dele: "não precisamos
+                    de nos intitular nutricionista em lado nenhum". O que
+                    ficou no lugar é a frase com que a história dele abre
+                    (historia.md, versão ④), ditada por ele a 11 out. */}
+                <h1 className="t-title max-w-3xl">
+                  There was a day I had to accept I wasn’t going to be a
+                  professional player.
                 </h1>
               </Reveal>
               <Reveal delay={0.2}>
@@ -71,7 +71,7 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.4}>
                 <p className="text-caption text-[10px] mt-8">
-                  21 anos · Porto, Bruxelas
+                  22 anos · Porto
                 </p>
               </Reveal>
             </div>

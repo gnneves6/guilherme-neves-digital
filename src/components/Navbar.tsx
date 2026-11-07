@@ -23,13 +23,15 @@ import gnMark from "@/assets/logos/gn-mark.png";
  * offered nothing. That is better distribution than a fifth tab, and it stops
  * the navigation announcing a methodology before there is one to announce.
  */
+// Serviços saiu do menu a 6 nov (visao-do-site.md §4): não há serviço à
+// venda, e um menu que o promete mente na primeira linha do site. A rota
+// continua viva. Em inglês, como o resto, decidido a 5 nov.
 const navItems = [
-  { label: "Trabalho", path: "/trabalho" },
-  { label: "Serviços", path: "/servicos" },
-  { label: "Sobre", path: "/sobre" },
+  { label: "Story", path: "/sobre" },
+  { label: "Work", path: "/trabalho" },
 ];
 
-const CTA = { label: "Falar comigo", path: "/contacto" };
+const CTA = { label: "Talk to me", path: "/contacto" };
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
