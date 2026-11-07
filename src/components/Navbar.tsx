@@ -23,15 +23,13 @@ import gnMark from "@/assets/logos/gn-mark.png";
  * offered nothing. That is better distribution than a fifth tab, and it stops
  * the navigation announcing a methodology before there is one to announce.
  */
-// Serviços saiu do menu a 6 nov (visao-do-site.md §4): não há serviço à
-// venda, e um menu que o promete mente na primeira linha do site. A rota
-// continua viva. Em inglês, como o resto, decidido a 5 nov.
 const navItems = [
-  { label: "Story", path: "/sobre" },
-  { label: "Work", path: "/trabalho" },
+  { label: "Trabalho", path: "/trabalho" },
+  { label: "Serviços", path: "/servicos" },
+  { label: "Sobre", path: "/sobre" },
 ];
 
-const CTA = { label: "Talk to me", path: "/contacto" };
+const CTA = { label: "Falar comigo", path: "/contacto" };
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,22 +61,15 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    // Na home o site passou a ser feito de palcos escuros (7 nov), e esta
-    // barra tinha sido desenhada para fundo claro: no túnel ficava invisível,
-    // e ao fazer scroll punha uma faixa marfim por cima de cada cena escura.
-    <header className={`fixed top-0 left-0 right-0 z-50 ${isHome ? "nav-escura" : ""}`}>
+    <header className="fixed top-0 left-0 right-0 z-50">
       <motion.div
         className="border-b transition-all duration-500"
         animate={{
           backgroundColor: scrolled
-            ? isHome
-              ? "hsl(var(--charcoal-deep) / 0.72)"
-              : "hsl(var(--background) / 0.95)"
+            ? "hsl(var(--background) / 0.95)"
             : "transparent",
           borderColor: scrolled
-            ? isHome
-              ? "hsl(var(--ivory) / 0.08)"
-              : "hsl(var(--border) / 0.5)"
+            ? "hsl(var(--border) / 0.5)"
             : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
         }}
@@ -145,11 +136,7 @@ const Navbar = () => {
               to={CTA.path}
               aria-current={location.pathname === CTA.path ? "page" : undefined}
               className="ml-2 inline-flex items-center px-5 py-2 rounded-full text-sm font-display tracking-wide transition-all duration-300 hover:opacity-85"
-              style={
-                isHome
-                  ? { background: "hsl(var(--ivory))", color: "hsl(var(--charcoal-deep))" }
-                  : { background: "hsl(var(--foreground))", color: "hsl(var(--background))" }
-              }
+              style={{ background: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
             >
               {CTA.label}
             </Link>

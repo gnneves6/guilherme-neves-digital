@@ -10,16 +10,12 @@ const Footer = () => {
             <p className="font-display text-lg font-semibold text-foreground">
               Guilherme Neves
             </p>
-            {/* Era a frase da versão "clubes" (diagnóstico, tradução e
-                sistemas), em português, a vender o que ainda não se pode
-                vender e a contradizer a capa a dois palmos dela. Passou a
-                dizer o que ele é, como a capa (visao-do-site.md). */}
             <p className="text-body text-sm">
-              Performance nutrition, from inside elite football. I build the
-              systems that carry the science to the athlete.
+              Trabalho para ambientes de alta competição. Diagnóstico, tradução
+              e sistemas de nutrição montados por dentro.
             </p>
             <p className="text-caption text-[10px] font-normal mt-4">
-              Porto
+              Porto · Bruxelas
             </p>
           </div>
 
@@ -29,11 +25,12 @@ const Footer = () => {
               <div className="flex flex-col gap-1.5">
                 {[
                   { label: "Home", path: "/" },
-                  { label: "Story", path: "/sobre" },
-                  { label: "Work", path: "/trabalho" },
-                  { label: "The five checks", path: "/cinco-verificacoes" },
-                  { label: "Contact", path: "/contacto" },
-                  { label: "Privacy", path: "/privacidade" },
+                  { label: "Sobre", path: "/sobre" },
+                  { label: "Trabalho", path: "/trabalho" },
+                  { label: "As cinco verificações", path: "/cinco-verificacoes" },
+                  { label: "Serviços", path: "/servicos" },
+                  { label: "Contacto", path: "/contacto" },
+                  { label: "Privacidade", path: "/privacidade" },
                 ].map((item) => (
                   <Link
                     key={item.path}

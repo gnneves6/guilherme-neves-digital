@@ -1,51 +1,84 @@
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
-import PointerField from "@/components/journey/PointerField";
+import HeroSection from "@/components/sections/HeroSection";
+import ProofMarquee from "@/components/sections/ProofMarquee";
 import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
-import Tunel from "@/components/casa/Tunel";
-import Jogador from "@/components/casa/Jogador";
-import Tese from "@/components/casa/Tese";
-import Prateleira from "@/components/casa/Prateleira";
-import Pertencer from "@/components/casa/Pertencer";
-import Fecho from "@/components/casa/Fecho";
+import CincoDimensoes from "@/components/sections/home/CincoDimensoes";
+import Servicos from "@/components/sections/home/Servicos";
+import Lugar from "@/components/sections/terreno/Lugar";
+import { sitios } from "@/data/terreno";
+import Assinatura from "@/components/sections/home/Assinatura";
+import Captura from "@/components/sections/home/Captura";
+import PointerField from "@/components/journey/PointerField";
+import Passagem from "@/components/motion/Passagem";
 
 /**
- * A casa, feita de palcos. A forma está em gui-os/04-WEBSITE/visao-do-site.md.
+ * A home mostra o valor. Não conta a história e não recita o currículo.
  *
- * A 7 nov ele disse que a única parte do site que parecia feita a sério era
- * a dos equipamentos, porque tinha camadas, profundidade e mexia-se quando
- * se navegava, e que o resto era texto num fundo branco. Tinha razão, e a
- * página passou a ser toda feita nessa linguagem (components/palco):
+ * Seis blocos, e a ordem é promessa, onde, prova, o problema de quem chega,
+ * o que se compra, a troca:
  *
- *   Tunel        a frase sozinha num túnel; o scroll anda até à luz
- *   Jogador      01, o balneário, uma frase dele de cada vez
- *   Equipamentos 02, a peça que ele quis de volta: um clube de cada vez
- *   Tese         o túnel até ao relvado: a evidência a tornar-se prática
- *   Prateleira   03, as ferramentas numa fila que corre na horizontal
- *   Pertencer    04, os 80 e tal pedidos do Radar a juntarem-se, e a lista
- *   Fecho        a parede de casa, o que está aberto, e falar com ele
+ *   1. HeroSection         Arrive fuelled, not full, e o que é em duas linhas
+ *   2. ProofMarquee        onde, lido num relance e a mexer
+ *   3. EnvironmentsSection o manequim com as cores de cada clube, um de cada vez
+ *   4. Servicos            três colunas, uma luz e um ícone por serviço
+ *   5. CincoDimensoes      as cinco frases onde alguém reconhece o próprio clube
+ *   6. Assinatura          a cara e os números, no mesmo sítio
+ *   7. Captura             a grelha, em troca do email
  *
- * O PointerField só embrulha os equipamentos: faz setState a cada fotograma,
- * e à volta da página inteira re-desenhava tudo sessenta vezes por segundo.
- * Os palcos novos leem o rato sem re-render (usePonteiro).
+ * Os serviços vêm antes do diagnóstico, e a ordem é deliberada: a página
+ * mostra primeiro o que há para ter e só depois como é que eu descubro o que
+ * falta. A secção das cinco dimensões passa a ser a demonstração da coluna
+ * 02, e é para lá que ela aponta.
+ *
+ * Saíram duas coisas desta página, e as duas por um motivo só: descreviam em
+ * vez de darem.
+ *
+ * Prova.tsx eram três números de currículo numa secção própria. Um número
+ * sozinho não é valor, é crédito; encostado a uma afirmação, passa a ser a
+ * razão de ela não ser opinião. Os três passaram para o pé das cinco
+ * dimensões, numa linha.
+ *
+ * A SEMANA saiu da home a 1 nov, por crítica dele, e a crítica estava certa
+ * pelo critério que ele próprio deu. Eu tinha dito que era a peça que fazia
+ * o site deixar de ser texto. Não era: eram 21 células de texto que se
+ * animavam, e texto animado continua a ser texto. O ficheiro fica no
+ * repositório, por montar.
+ *
+ * MatchdayPlanner era um planeador de dia de jogo, e era uma versão pobre de
+ * um produto que ainda não foi lançado. Uma imitação do próprio produto na
+ * primeira página desvaloriza os dois, e o sítio dela é a página do serviço,
+ * não a fachada. Fica no repositório, por montar.
+ *
+ * Problema.tsx, Sobre.tsx e Prova.tsx continuam no repositório e não estão
+ * montados. São o texto de /historia e de /trabalho quando essas páginas
+ * existirem, e é por isso que não foram apagados.
  */
-const Index = () => (
-  <Layout>
-    <SEO
-      title="Guilherme Neves · Performance nutrition, from inside elite football"
-      description="Twelve years as a player, then RSC Anderlecht and Leça FC from the inside. I build the systems that carry the science to the athlete, and give most of them away."
-      path="/"
-    />
-    <Tunel />
-    <Jogador />
+const Index = () => {
+  return (
     <PointerField>
+    <Layout>
+      <SEO
+        title="Guilherme Neves, Game Nutrition"
+        description="O sistema de nutrição que uma equipa usa à volta da competição. Simples ao ponto de os jogadores o cumprirem."
+        path="/"
+      />
+
+      <HeroSection />
+      <ProofMarquee />
       <EnvironmentsSection />
+      <Servicos />
+      <Passagem>
+        <CincoDimensoes />
+      </Passagem>
+      <Passagem intensidade={0.7}>
+        <Lugar sitio={sitios[0]} />
+      </Passagem>
+      <Assinatura />
+      <Captura />
+    </Layout>
     </PointerField>
-    <Tese />
-    <Prateleira />
-    <Pertencer />
-    <Fecho />
-  </Layout>
-);
+  );
+};
 
 export default Index;
