@@ -36,11 +36,11 @@ const EnvironmentExit = ({ exp }: { exp: (typeof experiences)[number] }) => {
 
   return (
     <Link
-      to={`/work?env=${exp.id}`}
+      to={`/trabalho?env=${exp.id}`}
       className="group/exit inline-flex items-center gap-2.5 mt-7 py-2 font-display text-[13px] tracking-wide transition-colors duration-300 text-[hsl(var(--ivory)/0.6)] hover:text-[hsl(var(--ivory))]"
     >
       <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: accent }} />
-      Ver {count === 1 ? "a peça" : `as ${count} peças`} que saíram daqui
+      See {count === 1 ? "the piece" : `the ${count} pieces`} that came out of here
       <span aria-hidden className="inline-block transition-transform duration-300 group-hover/exit:translate-x-1">
         →
       </span>
@@ -141,7 +141,7 @@ const EnvironmentsSection = () => {
           <div className="section-padding relative z-10 flex flex-col h-full pt-[76px] pb-7">
             <Chapter
               number="02"
-              title="Ambientes reais."
+              title="From the inside."
               tone="dark"
               className="mb-0"
               meta={
@@ -250,7 +250,7 @@ const EnvironmentsSection = () => {
                 animate={{ opacity: [0.28, 0.55, 0.28] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Desliza para avançar
+                Scroll to move on
               </motion.span>
             </div>
           </div>
@@ -261,7 +261,7 @@ const EnvironmentsSection = () => {
       <section className="md:hidden section-dark section-padding pb-16 pt-4 relative overflow-hidden">
         <div className="max-content relative z-[2]">
           <p className="text-[10px] tracking-widest uppercase font-display mb-3 text-[hsl(var(--ivory)/0.3)]">
-            Observação adicional
+            Also worked with
           </p>
           {additionalExposure.map((item) => (
             <div key={item.name} className="flex justify-between py-2 text-xs" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
@@ -277,7 +277,7 @@ const EnvironmentsSection = () => {
             to="/trabalho"
             className="group/exit inline-flex items-center gap-2.5 mt-7 py-2 font-display text-[13px] tracking-wide text-[hsl(var(--ivory)/0.62)] hover:text-[hsl(var(--ivory))] transition-colors duration-300"
           >
-            Ver o que saiu destas salas
+            See what came out of these rooms
             <span aria-hidden className="inline-block transition-transform duration-300 group-hover/exit:translate-x-1">
               →
             </span>
@@ -353,7 +353,7 @@ const EnvironmentsSection = () => {
                 style={{ borderBottom: "1px solid hsl(var(--ivory) / 0.08)" }}
               >
                 <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.4)]">
-                  Ambientes reais
+                  02 · From the inside
                 </p>
                 <p className="text-[10px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.3)] tabular-nums">
                   {String(activeIndex + 1).padStart(2, "0")} / {String(experiences.length).padStart(2, "0")}
@@ -385,7 +385,7 @@ const EnvironmentsSection = () => {
                             <span className="text-[10px] tracking-widest uppercase font-display text-[hsl(var(--ivory)/0.35)]">
                               {exp.period}, {exp.location}
                             </span>
-                            <h3 className="font-display text-2xl lg:text-4xl xl:text-5xl font-semibold leading-[1.05] tracking-tight text-[hsl(var(--ivory))] mt-3 break-words">
+                            <h3 className="font-display text-2xl lg:text-[2.1rem] xl:text-[2.6rem] font-semibold leading-[1.05] tracking-tight text-[hsl(var(--ivory))] mt-3 [overflow-wrap:normal] hyphens-none">
                               {exp.name}
                             </h3>
                             <p className="text-[11px] tracking-[0.12em] uppercase font-display mt-3 text-[hsl(var(--ivory)/0.45)] leading-snug max-w-md">
@@ -402,7 +402,7 @@ const EnvironmentsSection = () => {
                                 espaço para os ler. Aqui ficam as provas, que
                                 é o que uma fachada tem de mostrar. */}
                             <p className="mt-6 text-[9px] tracking-[0.3em] uppercase font-display text-[hsl(var(--ivory)/0.35)]">
-                              Na prática
+                              In practice
                             </p>
                             {/* Duas provas, nunca três. A densidade certa é a
                                 do capítulo mais curto: com três bullets
@@ -514,7 +514,7 @@ const EnvironmentsSection = () => {
                     animate={{ opacity: [0.25, 0.55, 0.25] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
-                    Desliza para avançar
+                    Scroll to move on
                   </motion.p>
                 </div>
               </div>
@@ -522,7 +522,7 @@ const EnvironmentsSection = () => {
               {/* Bottom strip */}
               <div className="mt-10 pt-6" style={{ borderTop: "1px solid hsl(var(--ivory) / 0.06)" }}>
                 <p className="text-[10px] tracking-widest uppercase font-display mb-4 text-[hsl(var(--ivory)/0.3)]">
-                  Observação adicional
+                  Also worked with
                 </p>
                 <div className="flex flex-wrap gap-x-10 gap-y-2">
                   {additionalExposure.map((item) => (

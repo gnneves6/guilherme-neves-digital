@@ -117,17 +117,20 @@ const ODar = () => (
     <div className="max-content">
       <Reveal>
         <p className="t-kicker" style={{ color: "hsl(var(--graphite))" }}>
-          03 · Take what I use
+          03 · Given away
         </p>
       </Reveal>
       <div className="grid md:grid-cols-12 gap-x-8 gap-y-6 mt-8 items-end">
         <Reveal className="md:col-span-6" delay={0.05}>
-          <h2 className="t-title">Made for me first.</h2>
+          {/* Era "Made for me first.", tirado do guia do Radar. Lá funciona
+              porque a frase continua ("e partilho porque não faz sentido
+              guardar"); cortada num título, lia-se como egoísmo. Travão
+              dele a 7 nov. */}
+          <h2 className="t-title">Take what I use.</h2>
         </Reveal>
         <Reveal className="md:col-span-5 md:col-start-8" delay={0.1}>
           <p className="text-body-lg">
-            I share it because it makes no sense to keep something like this to myself. Free, and
-            no email to see any of it.
+            The same tools I work with, given whole. Free, and no email to see any of it.
           </p>
         </Reveal>
       </div>

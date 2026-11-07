@@ -3,6 +3,7 @@ import SEO from "@/components/SEO";
 import Entrada from "@/components/casa/Entrada";
 import OJogador from "@/components/casa/OJogador";
 import PorDentro from "@/components/casa/PorDentro";
+import EnvironmentsSection from "@/components/sections/EnvironmentsSection";
 import ODar from "@/components/casa/ODar";
 import Aberto from "@/components/casa/Aberto";
 import Fecho from "@/components/casa/Fecho";
@@ -18,7 +19,8 @@ import Fecho from "@/components/casa/Fecho";
  *
  *   Entrada    a frase sozinha, depois a pessoa que lhe responde
  *   01         o jogador: o problema, nas palavras dele, sem botão
- *   02         por dentro: os sítios, e a tese defendida
+ *   02         por dentro: os equipamentos que rodam, um clube de cada vez,
+ *              com o que lá fez; depois o que lá percebeu e a tese
  *   03         o que eu dou: o Radar, as cinco verificações, o Atlas
  *   04         o que está aberto agora, com o estado à frente
  *   Fecho      a imagem da parede, e a lista
@@ -38,6 +40,7 @@ const Index = () => (
     />
     <Entrada />
     <OJogador />
+    <EnvironmentsSection />
     <PorDentro />
     <ODar />
     <Aberto />
