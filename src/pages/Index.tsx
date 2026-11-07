@@ -7,6 +7,7 @@ import SelectedArtefactsSection from "@/components/sections/SelectedArtefactsSec
 import SystemsBridgeSection from "@/components/sections/SystemsBridgeSection";
 import TheMethodSection from "@/components/sections/TheMethodSection";
 import SystemsArchitectureSection from "@/components/sections/SystemsArchitectureSection";
+import TheStandardSection from "@/components/sections/TheStandardSection";
 import InvitationSection from "@/components/sections/InvitationSection";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import PointerField from "@/components/journey/PointerField";
@@ -29,6 +30,7 @@ const Index = () => {
       <SystemsBridgeSection />
       <TheMethodSection />
       <SystemsArchitectureSection />
+      <TheStandardSection />
       <InvitationSection />
     </Layout>
     </PointerField>

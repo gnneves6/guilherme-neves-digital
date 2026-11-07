@@ -89,17 +89,18 @@ const About = () => {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="text-body-lg max-w-2xl mt-6">
-                  A final-year Nutrition Sciences student at FCNAUP — University
-                  of Porto, currently embedded in Performance Nutrition at
-                  RSC Anderlecht as part of his curricular internship.
+                  His path runs through sport before it runs through science.
+                  Years inside competitive environments came first; then a BSc in
+                  Nutrition Sciences at FCNAUP — University of Porto; then a
+                  season embedded in Performance Nutrition at RSC Anderlecht.
                 </p>
               </Reveal>
               <Reveal delay={0.3}>
                 <p className="text-body max-w-2xl mt-4">
-                  His perspective comes from inside sport. Years lived across
-                  competitive disciplines shape how he reads environments,
-                  designs interventions and earns the trust of athletes and staff.
-                  The practice carries that perspective into every engagement.
+                  That order matters. He reads a dressing room before he reads a
+                  spreadsheet, and designs for the athlete as a user — not as a
+                  case study. The practice exists to carry that perspective into
+                  environments that want nutrition to actually hold.
                 </p>
               </Reveal>
               <Reveal delay={0.4}>
